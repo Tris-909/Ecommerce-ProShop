@@ -16,14 +16,14 @@ const Header = () => {
                   <Nav className="ml-auto">
                       <LinkContainer to="/cart">
                         <Nav.Link href="/cart">
-                            <i className='fas fa-shopping-cart'></i>
+                            <i className='fas fa-shopping-cart' style={{ marginRight: 8 }}></i>
                             Cart
                         </Nav.Link>
                       </LinkContainer>
 
                     <LinkContainer to="/login">
                         <Nav.Link href="/login">
-                            <i className='fas fa-user'></i>
+                            <i className='fas fa-user' style={{ marginRight: 8 }}></i>
                             Sign In
                         </Nav.Link>
                     </LinkContainer>
