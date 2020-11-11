@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Tris-909/Ecommerce-BradTraversy#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
