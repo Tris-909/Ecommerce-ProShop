@@ -1,34 +1,46 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import Product from '../components/Product';
-import { Col, Row} from 'react-bootstrap';
-import axios from 'axios';
+import { Col, Row, Spinner, Alert} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import {getProductsList} from '../redux/actions/productActions';
 
-function HomeScreen() {
-    const [products, setProducts] = useState(null);
-    
+const HomeScreen = () => {
+    const dispatch = useDispatch()
+    const productsList = useSelector(state => state.productsList);
+    const { products, loading, error } = productsList;
+
     useEffect(() => {
-        const fetchProducts = async () => {
-            const { data } = await axios.get('api/products');
-            setProducts(data);
+        dispatch(getProductsList());
+    }, [dispatch])
+
+    const checkIfErrorExisted = () => {
+        if (error) {
+            return (
+                <Alert variant="danger" dismissible>
+                    <Alert.Heading>Something went wrong :(</Alert.Heading>
+                    <p> {error.message} </p>
+                </Alert>
+            );
+        } else {
+            return(
+                <>
+                <h1>Latest Product : </h1>
+                <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
+                   { !loading ? products.map((product) => {
+                        return(
+                            <Col sm={12} md={6} lg={6} xl={4} key={product._id}>
+                               <Product product={product}/>
+                            </Col>
+                        );
+                    }) : <Spinner animation="border" size="lg" style={{ width: '100px', height: '100px' }} /> 
+                   }
+                </Row>   
+                </>
+            )
         }
+    }
 
-        fetchProducts();
-    }, [])
-
-    return (
-        <>
-         <h1>Latest Product : </h1>
-         <Row>
-             {products ? products.map((product) => {
-                 return(
-                     <Col sm={12} md={6} lg={6} xl={4} key={product._id}>
-                        <Product product={product}/>
-                     </Col>
-                 );
-             }) : null}
-         </Row>   
-        </>
-    )
+    return(checkIfErrorExisted());
 }
 
-export default HomeScreen
+export default HomeScreen;
