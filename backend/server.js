@@ -1,5 +1,4 @@
 import express from 'express';
-import products from './data/products.js';
 
 //? This is for setting up environment variables
 import dotenv from 'dotenv';
@@ -16,6 +15,9 @@ colors.setTheme({
     fail: ['black', 'bgred', 'underline', 'bold']
 });
 
+//? Express Router amd Middlewares
+import productRoutes from './routes/productRoutes.js'; 
+import { notFound, errorHandler } from './middlewares/error.js';
 
 //!--------------------- EXPRESS START -----------------------------------------------------//
 const app = express();
@@ -24,14 +26,11 @@ app.get('/', (req, res) => {
     res.send('Your API is running');
 });
 
-app.get('/api/products', (req, res) => {
-    res.send(products);
-});
+app.use('/api/products', productRoutes);
 
-app.get('/api/products/:id', (req, res) => {
-    const product = products.find(p => p._id === req.params.id);
-    res.send(product);
-});
+app.use(notFound);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
