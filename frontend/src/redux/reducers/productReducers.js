@@ -54,6 +54,7 @@ export const SingleProductReducer = (state = initlaStateSingleProduct, action) =
             return {
                 ...state,
                 loading: false,
+                error: null,
                 singleProduct: action.payload
             }
         case GET_SINGLE_PRODUCT_FAIL:
