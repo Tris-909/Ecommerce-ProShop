@@ -1,11 +1,17 @@
 import React, {useState} from 'react';
 import {Col, Row, Card, ListGroup, Form, Button } from 'react-bootstrap'
+import { addItemToCart } from '../../redux/actions/cartActions';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
-const ProductCard = (props, history) => {
+const ProductCard = ( props ) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [quantity, setQuantity] = useState(0);
     const {price, countInStock, id} = props;
 
     const addToCartHandler = () => {
+        dispatch(addItemToCart(id));
         history.push(`/cart/${id}?qty=${quantity}`);
     }
 
