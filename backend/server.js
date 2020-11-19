@@ -16,17 +16,20 @@ colors.setTheme({
 });
 
 //? Express Router amd Middlewares
-import productRoutes from './routes/productRoutes.js'; 
+import productRoutes from './routes/productRoutes.js';
+import usersRoutes from './routes/userRoute.js'; 
 import { notFound, errorHandler } from './middlewares/error.js';
 
 //!--------------------- EXPRESS START -----------------------------------------------------//
 const app = express();
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send('Your API is running');
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', usersRoutes);
 
 app.use(notFound);
 
