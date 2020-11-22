@@ -4,7 +4,8 @@ import {
     LOGIN_USER_FAIL,
     CREATE_USER_PENDING,
     CREATE_USER_SUCCESS,
-    CREATE_USER_FAIL
+    CREATE_USER_FAIL,
+    LOGOUT_USER
 } from './actionTypes';
 import axios from 'axios';
 
@@ -35,6 +36,13 @@ export const loginUser = (email, password) => async (dispatch) => {
         });
     }
 }
+
+export const logOut = () => (dispatch) => {
+    localStorage.removeItem('userInfo');
+    dispatch({
+        type: LOGOUT_USER
+    });
+} 
 
 export const createUser = (name, email, password) => async (dispatch) => {
     try {
