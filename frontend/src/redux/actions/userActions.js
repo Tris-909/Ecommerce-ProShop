@@ -5,7 +5,8 @@ import {
     CREATE_USER_PENDING,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAIL,
-    LOGOUT_USER
+    LOGOUT_USER,
+    CLEAR_ERROR_SUBMIT
 } from './actionTypes';
 import axios from 'axios';
 
@@ -28,7 +29,7 @@ export const loginUser = (email, password) => async (dispatch) => {
             payload: user.data
         });
 
-        localStorage.setItem('userInfo', JSON.stringify(user));
+        localStorage.setItem('userInfo', JSON.stringify(user.data));
     } catch(error) {
         dispatch({
             type: LOGIN_USER_FAIL,
@@ -44,10 +45,36 @@ export const logOut = () => (dispatch) => {
     });
 } 
 
+export const clearError = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_ERROR_SUBMIT
+    })
+}
+
 export const createUser = (name, email, password) => async (dispatch) => {
     try {
+        dispatch({
+            type: CREATE_USER_PENDING
+        });
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const user = await axios.post('api/users', { name, email, password }, config);
+        localStorage.setItem('userInfo', JSON.stringify(user.data));
+
+        dispatch({
+            type: CREATE_USER_SUCCESS,
+            payload: user.data
+        });
 
     } catch(error) {
-
+        dispatch({
+            type: CREATE_USER_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
     }
 }

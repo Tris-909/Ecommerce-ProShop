@@ -29,7 +29,6 @@ const login = AsyncHandler(async (req, res) => {
 //?   @access : private 
 const getUserProfile = AsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    console.log(user);    
 
     if (user) {
         res.json({
@@ -49,7 +48,6 @@ const getUserProfile = AsyncHandler(async (req, res) => {
 //?   @access : public 
 const createUser = AsyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
-
     const userExists = await User.findOne({ email });
 
     if (userExists) {
