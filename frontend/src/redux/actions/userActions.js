@@ -6,7 +6,14 @@ import {
     CREATE_USER_SUCCESS,
     CREATE_USER_FAIL,
     LOGOUT_USER,
-    CLEAR_ERROR_SUBMIT
+    CLEAR_ERROR_SUBMIT,
+    GET_USER_DETAILS_PENDING,
+    GET_USER_DETAILS_SUCCESS,
+    GET_USER_DETAILS_FAIL,
+    UPDATE_USER_DETAIL_PENDING,
+    UPDATE_USER_DETAIL_SUCCESS,
+    UPDATE_USER_DETAIL_FAIL,
+    UPDATE_USER_DETAIL_RESET
 } from './actionTypes';
 import axios from 'axios';
 
@@ -76,5 +83,67 @@ export const createUser = (name, email, password) => async (dispatch) => {
             type: CREATE_USER_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
+    }
+}
+
+export const getUserDetails = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: GET_USER_DETAILS_PENDING
+        });
+
+        const { user: { user } } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}` 
+            }
+        }
+
+        const { data } = await axios.get(`/api/users/${id}`, config);
+
+        dispatch({
+            type: GET_USER_DETAILS_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: GET_USER_DETAILS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+export const updateUserDetails = (userSubmitted) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: UPDATE_USER_DETAIL_PENDING
+        });
+
+        const { user: {user} } = getState();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}` 
+            }
+        }
+
+        const { data } = await axios.put(`/api/users/profile`, userSubmitted, config);
+        dispatch({
+            type: UPDATE_USER_DETAIL_SUCCESS,
+            payload: data
+        });
+
+        dispatch({
+            type: UPDATE_USER_DETAIL_RESET,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: UPDATE_USER_DETAIL_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
     }
 }

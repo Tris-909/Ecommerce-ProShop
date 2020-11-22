@@ -28,7 +28,7 @@ const LoginScreen = ({ location, history }) => {
     return (
         <FormContainer>
             <h1>Sign In</h1>
-            { error ? <Message content={error} /> : null }
+            { error ? <Message variant="danger" content={error} /> : null }
             { loading ? <Loading /> : null }
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>

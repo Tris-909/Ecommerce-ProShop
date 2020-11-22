@@ -2,11 +2,23 @@ import {
     LOGIN_USER_PENDING,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
+
     LOGOUT_USER,
+
     CREATE_USER_PENDING,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAIL,
-    CLEAR_ERROR_SUBMIT
+
+    CLEAR_ERROR_SUBMIT,
+
+    GET_USER_DETAILS_PENDING,
+    GET_USER_DETAILS_SUCCESS,
+    GET_USER_DETAILS_FAIL,
+
+    UPDATE_USER_DETAIL_PENDING,
+    UPDATE_USER_DETAIL_SUCCESS,
+    UPDATE_USER_DETAIL_FAIL,
+    UPDATE_USER_DETAIL_RESET
 } from '../actions/actionTypes';
 
 const initialUserState = {
@@ -61,6 +73,11 @@ const userReducer = (state = initialUserState, action) => {
                 ...state,
                 error: null
             }
+        case UPDATE_USER_DETAIL_RESET: 
+            return {
+                ...state,
+                user: action.payload
+            }
         default:
             return {
                 ...state
@@ -68,6 +85,57 @@ const userReducer = (state = initialUserState, action) => {
     }
 }
 
+const initialDetailState = {
+    details: {},
+    loading: false,
+    detailError: null,
+    success: false
+}
+
+const userDetailsReducer = (state = initialDetailState, action) => {
+    switch(action.type) {
+        case GET_USER_DETAILS_PENDING :
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_USER_DETAILS_SUCCESS :
+            return {
+                ...state,
+                loading: false,
+                details: action.payload
+            }
+        case GET_USER_DETAILS_FAIL :
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case UPDATE_USER_DETAIL_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
+        case UPDATE_USER_DETAIL_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                details: action.payload
+            }
+        case UPDATE_USER_DETAIL_FAIL:
+            return {
+                ...state,
+                detailError: action.payload
+            }    
+        default : 
+            return {
+                ...state
+            }
+    }
+}
+
 export {
-    userReducer
+    userReducer,
+    userDetailsReducer
 }

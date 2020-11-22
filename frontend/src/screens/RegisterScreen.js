@@ -41,7 +41,7 @@ const RegisterScreen = ({ location, history }) => {
         <FormContainer>
             <h1>Sign Up With Us</h1>
             { formError ? <Message content={formError} /> : null }
-            { error ? <Message content={error} /> : null }
+            { error ? <Message variant="danger" content={error} /> : null }
             { loading ? <Loading /> : null }
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
