@@ -8,6 +8,7 @@ import { getSingleProduct } from '../redux/actions/productActions';
 import ProductImage from '../components/ProductDetail/ProductImage';
 import ProductInfo from '../components/ProductDetail/ProductInfo';
 import ProductCard from '../components/ProductDetail/ProductCard';
+import Loading from '../components/Loading';
 
 const ProductScreen = ({ match }) => {
 
@@ -51,9 +52,7 @@ const ProductScreen = ({ match }) => {
                     </>
                 );
             } else {
-                return(
-                    <Spinner animation="border" size="lg" style={{ width: '100px', height: '100px' }} /> 
-                )
+                return( <Loading /> );                
             }
         }
     }
