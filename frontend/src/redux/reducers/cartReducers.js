@@ -1,7 +1,13 @@
-import { ADD_PRODUCT_TO_CART, REMOVE_PRODUCT_TO_CART } from '../actions/actionTypes';
+import { ADD_PRODUCT_TO_CART, REMOVE_PRODUCT_TO_CART, SAVE_SHIPPING_ADDRESS_CART } from '../actions/actionTypes';
 
 const initialState = {
-    cartItems: []
+    cartItems: [],
+    shippingAddress: {
+        address: '',
+        city: '',
+        postalCode: '',
+        country: ''
+    }
 }
 
 export const cartReducer = (state = initialState, action) => {
@@ -27,6 +33,11 @@ export const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cartItems: state.cartItems.filter(x => x.product !== action.payload)
+            }
+        case SAVE_SHIPPING_ADDRESS_CART: 
+            return {
+                ...state,
+                shippingAddress: action.payload
             }
         default:
             return state;
