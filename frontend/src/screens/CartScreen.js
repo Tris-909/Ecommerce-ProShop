@@ -12,6 +12,8 @@ const CartScreen = ({ match, location, history }) => {
 
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
+    const { user } = useSelector(state => state.user);
+
 
     useEffect(() => {
         if (productId) {
@@ -24,7 +26,11 @@ const CartScreen = ({ match, location, history }) => {
     }
 
     const checkOutHandler = () => {
-        console.log('checkout');
+        if (user) {
+            history.push('/shipping');
+        } else {
+            history.push('/login');
+        }
     }
 
     return (

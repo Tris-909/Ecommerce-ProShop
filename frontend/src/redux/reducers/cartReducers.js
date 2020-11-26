@@ -1,4 +1,9 @@
-import { ADD_PRODUCT_TO_CART, REMOVE_PRODUCT_TO_CART, SAVE_SHIPPING_ADDRESS_CART } from '../actions/actionTypes';
+import { 
+    ADD_PRODUCT_TO_CART, 
+    REMOVE_PRODUCT_TO_CART, 
+    SAVE_SHIPPING_ADDRESS_CART, 
+    SAVE_PAYMENT_METHOD
+} from '../actions/actionTypes';
 
 const initialState = {
     cartItems: [],
@@ -7,7 +12,8 @@ const initialState = {
         city: '',
         postalCode: '',
         country: ''
-    }
+    },
+    paymentMethod: ''
 }
 
 export const cartReducer = (state = initialState, action) => {
@@ -38,6 +44,11 @@ export const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 shippingAddress: action.payload
+            }
+        case SAVE_PAYMENT_METHOD: 
+            return {
+                ...state,
+                paymentMethod: action.payload
             }
         default:
             return state;
