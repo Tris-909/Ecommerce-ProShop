@@ -18,6 +18,7 @@ colors.setTheme({
 //? Express Router amd Middlewares
 import productRoutes from './routes/productRoutes.js';
 import usersRoutes from './routes/userRoute.js'; 
+import ordersRoutes from './routes/orderRoutes.js';
 import { notFound, errorHandler } from './middlewares/error.js';
 
 //!--------------------- EXPRESS START -----------------------------------------------------//
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/orders', ordersRoutes);
 
 app.use(notFound);
 
