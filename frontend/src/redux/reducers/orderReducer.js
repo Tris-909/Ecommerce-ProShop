@@ -40,8 +40,7 @@ const ordersReducer = (state = orderInitialState, action) => {
 }
 
 const loadedOrdersState = {
-    orderItems: [],
-    shippingAddress: {},
+    orderItem: {},
     loading: false,
     error: null, 
     success: false
@@ -57,7 +56,7 @@ const loadedOrderFromDatabasesReducer = (state = loadedOrdersState, action) => {
         case GET_ORDER_BY_ID_SUCCESS: 
             return {
                 ...state,
-                order: action.payload,
+                orderItem: action.payload,
                 loading: false,
                 success: true
             }

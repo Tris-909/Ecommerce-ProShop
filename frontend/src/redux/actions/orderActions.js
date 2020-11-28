@@ -53,20 +53,22 @@ export const getOrderById = (id) => async(dispatch, getState) => {
 
         const { user: {user} } = getState();
         const config = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${user.token}`
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}` 
+            }
         }
 
-        const order = await axios.get(`/${id}`, config);
+        const order = await axios.get(`/api/orders/${id}`,config);
 
         dispatch({
             type: GET_ORDER_BY_ID_SUCCESS,
-            payload: order
+            payload: order.data
         });
     } catch(error) {
         dispatch({
             type: GET_ORDER_BY_ID_FAIL,
-            payload: error
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }
 }
