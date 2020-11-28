@@ -2,7 +2,8 @@ import {
     ADD_PRODUCT_TO_CART, 
     REMOVE_PRODUCT_TO_CART, 
     SAVE_SHIPPING_ADDRESS_CART, 
-    SAVE_PAYMENT_METHOD
+    SAVE_PAYMENT_METHOD,
+    REMOVE_PRODUCTS_FROM_CART_AFTERBUY
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -49,6 +50,11 @@ export const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 paymentMethod: action.payload
+            }
+        case REMOVE_PRODUCTS_FROM_CART_AFTERBUY: 
+            return {
+                ...state,
+                cartItems: []
             }
         default:
             return state;

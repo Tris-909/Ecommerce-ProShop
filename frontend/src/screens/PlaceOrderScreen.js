@@ -1,13 +1,23 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { createOrder } from '../redux/actions/orderActions';
+import { removeProductsInCartAfterBuy } from '../redux/actions/cartActions';
 import Message from '../components/Message';
 import CheckOutStep from '../components/CheckOutStep';
 import {Link} from 'react-router-dom';
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }) => {
     const dispatch = useDispatch();
     const { shippingAddress, cartItems, paymentMethod } = useSelector(state => state.cart);
+    const { orders, success, error } = useSelector(state => state.orders);
+
+    useEffect(() => {
+        if (success) {
+            history.push(`orders/${orders._id}`);
+        }
+        //enable-disable-next-line
+    }, [history, success]);
 
     const addDecimals = (num) => {
         return (Math.round(num*100)/100).toFixed(2);
@@ -19,9 +29,17 @@ const PlaceOrderScreen = () => {
     let totalPrice = Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice);
 
     const onPlaceOrderHandler = () => {
-        console.log(typeof(itemsPrice));
-        console.log(typeof(taxPrice));
-        console.log(totalPrice);
+        dispatch(createOrder(
+            cartItems,
+            shippingAddress,
+            paymentMethod,
+            itemsPrice,
+            taxPrice,
+            shippingPrice,
+            totalPrice
+        ));
+
+        dispatch(removeProductsInCartAfterBuy());
     }
 
     return (
@@ -87,7 +105,7 @@ const PlaceOrderScreen = () => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col> ShippingPrice </Col>
-                                    <Col> {shippingPrice == 0 ? "Free" : `$${shippingPrice}`} </Col>
+                                    <Col> {shippingPrice === 0 ? "Free" : `$${shippingPrice}`} </Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
@@ -102,6 +120,13 @@ const PlaceOrderScreen = () => {
                                     <Col> ${totalPrice} </Col>
                                 </Row>
                             </ListGroup.Item>
+                            {
+                                error ? (
+                                    <ListGroup.Item>
+                                        <Message content="unable to proceed, please try again" variant="danger" />
+                                    </ListGroup.Item>
+                                ) : null 
+                            }
                             <ListGroup.Item>
                                 <Button 
                                     type="button" 

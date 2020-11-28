@@ -2,7 +2,8 @@ import {
     ADD_PRODUCT_TO_CART,
     REMOVE_PRODUCT_TO_CART,
     SAVE_SHIPPING_ADDRESS_CART,
-    SAVE_PAYMENT_METHOD
+    SAVE_PAYMENT_METHOD,
+    REMOVE_PRODUCTS_FROM_CART_AFTERBUY
 } from './actionTypes';
 import axios from 'axios';
 
@@ -53,4 +54,12 @@ export const savePaymentMethod = (paymentMethod) => async (dispatch) => {
     });
 
     localStorage.setItem('paymentMethod', JSON.stringify(paymentMethod));
+}
+
+export const removeProductsInCartAfterBuy = () => async (dispatch) => {
+    dispatch({
+        type: REMOVE_PRODUCTS_FROM_CART_AFTERBUY
+    });
+
+    localStorage.setItem('cartItems', []);
 }
