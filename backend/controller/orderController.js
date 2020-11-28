@@ -34,6 +34,24 @@ const addOrder = AsyncHandler(async (req, res) => {
     }
 }) 
 
+//?   GET an order by ID
+//?   /api/orders/:id
+//?   Private Route
+const getOrderById = AsyncHandler(async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    const fetchedOrder = await Order.findById(id).populate('user', 'name email');
+    console.log(fetchedOrder);
+
+    if (fetchedOrder) {
+        res.status(200).json(fetchedOrder);
+    } else {    
+        res.status(404);
+        throw new Error('Can\'t find the Order, please try again');
+    }
+});
+
 export {
-    addOrder
+    addOrder,
+    getOrderById
 }
