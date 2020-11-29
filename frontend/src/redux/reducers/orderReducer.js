@@ -102,9 +102,8 @@ const orderPayReducer = (state = orderPayInitialState, action) => {
                 error: action.payload
             }
         case PUT_ISPAID_STATUS_ORDER_RESET:
-            return {
-                ...state
-            }
+            const newState = {}
+            return newState
         default: 
             return state
     }
