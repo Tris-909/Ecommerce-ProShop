@@ -4,7 +4,11 @@ import {
     ORDER_CREATE_REQUEST_FAIL,
     GET_ORDER_BY_ID,
     GET_ORDER_BY_ID_SUCCESS,
-    GET_ORDER_BY_ID_FAIL
+    GET_ORDER_BY_ID_FAIL,
+    PUT_ISPAID_STATUS_ORDER_REQUEST,
+    PUT_ISPAID_STATUS_ORDER_REQUEST_SUCCESS,
+    PUT_ISPAID_STATUS_ORDER_REQUEST_FAIL,
+    PUT_ISPAID_STATUS_ORDER_RESET
 } from '../actions/actionTypes';
 
 const orderInitialState = {
@@ -71,7 +75,43 @@ const loadedOrderFromDatabasesReducer = (state = loadedOrdersState, action) => {
     }
 }
 
+const orderPayInitialState = {
+
+    loading: false,
+    success: false,
+    error: null
+}
+
+const orderPayReducer = (state = orderPayInitialState, action) => {
+    switch(action.type) {
+        case PUT_ISPAID_STATUS_ORDER_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case PUT_ISPAID_STATUS_ORDER_REQUEST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true                
+            }
+        case PUT_ISPAID_STATUS_ORDER_REQUEST_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case PUT_ISPAID_STATUS_ORDER_RESET:
+            return {
+                ...state
+            }
+        default: 
+            return state
+    }
+}
+
 export { 
     ordersReducer,
-    loadedOrderFromDatabasesReducer 
+    loadedOrderFromDatabasesReducer,
+    orderPayReducer 
 };

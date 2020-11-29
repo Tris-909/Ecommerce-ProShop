@@ -4,7 +4,11 @@ import {
     ORDER_CREATE_REQUEST_FAIL,
     GET_ORDER_BY_ID,
     GET_ORDER_BY_ID_SUCCESS,
-    GET_ORDER_BY_ID_FAIL
+    GET_ORDER_BY_ID_FAIL,
+    PUT_ISPAID_STATUS_ORDER_REQUEST,
+    PUT_ISPAID_STATUS_ORDER_REQUEST_SUCCESS,
+    PUT_ISPAID_STATUS_ORDER_REQUEST_FAIL,
+    PUT_ISPAID_STATUS_ORDER_RESET
 } from './actionTypes';
 import axios from 'axios';
 
@@ -70,5 +74,32 @@ export const getOrderById = (id) => async(dispatch, getState) => {
             type: GET_ORDER_BY_ID_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         });
+    }
+}
+
+export const payOrder = (orderID, paymentResult) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: PUT_ISPAID_STATUS_ORDER_REQUEST
+        });
+
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}` 
+            }
+        }
+
+        const { data } = await axios.put(`/api/orders/${orderID}/pay`, paymentResult ,config)
+        dispatch({
+            type: PUT_ISPAID_STATUS_ORDER_REQUEST_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: PUT_ISPAID_STATUS_ORDER_REQUEST_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
     }
 }
