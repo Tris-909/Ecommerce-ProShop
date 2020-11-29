@@ -8,9 +8,13 @@ import {
     PUT_ISPAID_STATUS_ORDER_REQUEST,
     PUT_ISPAID_STATUS_ORDER_REQUEST_SUCCESS,
     PUT_ISPAID_STATUS_ORDER_REQUEST_FAIL,
-    PUT_ISPAID_STATUS_ORDER_RESET
+    PUT_ISPAID_STATUS_ORDER_RESET,
+    GET_ORDERS_OF_USERS,
+    GET_ORDERS_OF_USERS_SUCCESS,
+    GET_ORDERS_OF_USERS_FAIL
 } from '../actions/actionTypes';
 
+//TODO: First Loaded Order
 const orderInitialState = {
     orders: {},
     loading: false,
@@ -43,6 +47,7 @@ const ordersReducer = (state = orderInitialState, action) => {
     }
 }
 
+//TODO: Loading an order based on it ID
 const loadedOrdersState = {
     orderItem: {},
     loading: false,
@@ -75,6 +80,7 @@ const loadedOrderFromDatabasesReducer = (state = loadedOrdersState, action) => {
     }
 }
 
+//TODO: Updating Order.isPaid status
 const orderPayInitialState = {
 
     loading: false,
@@ -109,8 +115,44 @@ const orderPayReducer = (state = orderPayInitialState, action) => {
     }
 }
 
+//TODO: Get all orders related to the user
+const userOrdersInitialState = {
+    orders: [],
+    loading: false,
+    success: false,
+    error: null
+}
+
+const getOrdersBasedOnUserId = (state = userOrdersInitialState, action) => {
+    switch(action.type) {
+        case GET_ORDERS_OF_USERS:
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_ORDERS_OF_USERS_SUCCESS:
+            return {
+                ...state,
+                orders: [...action.payload],
+                loading: false,
+                success: true
+            }
+        case GET_ORDERS_OF_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        default: 
+            return {
+                ...state
+            }
+    }
+}
+
 export { 
     ordersReducer,
     loadedOrderFromDatabasesReducer,
-    orderPayReducer 
+    orderPayReducer,
+    getOrdersBasedOnUserId 
 };

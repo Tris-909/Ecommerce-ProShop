@@ -75,8 +75,19 @@ const updateOrderIsPaidStatus = AsyncHandler(async (req, res) => {
     }
 });
 
+//?   GET orders based on one userID
+//?   /api/orders/myorders
+//?   Private Route
+const getOrdersByUserId = AsyncHandler(async (req, res) => {
+    const orders = await Order.find({
+        user: req.user._id
+    });
+    res.json(orders);
+});
+
 export {
     addOrder,
     getOrderById,
-    updateOrderIsPaidStatus
+    updateOrderIsPaidStatus,
+    getOrdersByUserId
 }
