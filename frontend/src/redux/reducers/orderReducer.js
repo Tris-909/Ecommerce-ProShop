@@ -2,16 +2,20 @@ import {
     ORDER_CREATE_REQUEST,
     ORDER_CREATE_REQUEST_SUCCESS,
     ORDER_CREATE_REQUEST_FAIL,
+
     GET_ORDER_BY_ID,
     GET_ORDER_BY_ID_SUCCESS,
     GET_ORDER_BY_ID_FAIL,
+
     PUT_ISPAID_STATUS_ORDER_REQUEST,
     PUT_ISPAID_STATUS_ORDER_REQUEST_SUCCESS,
     PUT_ISPAID_STATUS_ORDER_REQUEST_FAIL,
     PUT_ISPAID_STATUS_ORDER_RESET,
+
     GET_ORDERS_OF_USERS,
     GET_ORDERS_OF_USERS_SUCCESS,
-    GET_ORDERS_OF_USERS_FAIL
+    GET_ORDERS_OF_USERS_FAIL,
+    GET_ORDER_OF_USER_RESET
 } from '../actions/actionTypes';
 
 //TODO: First Loaded Order
@@ -143,6 +147,14 @@ const getOrdersBasedOnUserId = (state = userOrdersInitialState, action) => {
                 loading: false,
                 error: action.payload
             }
+        case GET_ORDER_OF_USER_RESET:
+            const nullState = {
+                orders: [],
+                loading: false,
+                success: false,
+                error: null
+            };
+            return nullState;
         default: 
             return {
                 ...state

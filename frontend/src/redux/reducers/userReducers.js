@@ -14,6 +14,7 @@ import {
     GET_USER_DETAILS_PENDING,
     GET_USER_DETAILS_SUCCESS,
     GET_USER_DETAILS_FAIL,
+    GET_USER_DETAILS_RESET,
 
     UPDATE_USER_DETAIL_PENDING,
     UPDATE_USER_DETAIL_SUCCESS,
@@ -127,7 +128,14 @@ const userDetailsReducer = (state = initialDetailState, action) => {
             return {
                 ...state,
                 detailError: action.payload
-            }    
+            }   
+        case GET_USER_DETAILS_RESET: 
+            return {
+                details: {},
+                loading: false,
+                detailError: null,
+                success: false   
+            }
         default : 
             return {
                 ...state

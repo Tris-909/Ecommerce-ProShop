@@ -3,12 +3,15 @@ import {Navbar, Nav, Container, NavDropdown} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {logOut} from '../redux/actions/userActions';
+import {GET_ORDER_OF_USER_RESET, GET_USER_DETAILS_RESET} from '../redux/actions/actionTypes';
 
 const Header = () => {
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.user);
 
     const logOutHandler = () => {
+        dispatch({ type: GET_ORDER_OF_USER_RESET });
+        dispatch({ type: GET_USER_DETAILS_RESET });
         dispatch(logOut());
     }
 
