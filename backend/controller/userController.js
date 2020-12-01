@@ -118,7 +118,7 @@ const getAllUsers = AsyncHandler(async (req, res) => {
     res.status(200).send(users);
 }); 
 
-//?   @description : Delete a user based on their ID
+//?   @description : Delete a user based on it ID
 //?   @method : DELETE /api/users/delete/:id
 //?   @access : private/admin 
 const deleteUserAdmin = AsyncHandler(async (req, res) => {
@@ -134,11 +134,57 @@ const deleteUserAdmin = AsyncHandler(async (req, res) => {
     res.status(200).send('User deleted successfully');
 }); 
 
+//?   @description : Get a user based on it ID
+//?   @method : GET /api/users/:id
+//?   @access : private/admin 
+const getSingleUserAdmin = AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id).select('-password');
+
+    if (!user) {
+        res.status(400);
+        throw new Error("This User is not existed.");
+    }
+
+    res.status(200).send(user);
+}); 
+
+//?   @description : Update a user based on it ID
+//?   @method : PUT /api/users/:id
+//?   @access : private/admin 
+const updateSingleUserAdmin = AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.isAdmin = req.body.isAdmin || user.isAdmin;
+
+        if ( req.body.password ) {
+            user.password = req.body.password;
+        }
+
+        const updatedUser = await user.save();
+
+        res.json({
+            _id: updatedUser._id, 
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin:  updatedUser.isAdmin,
+            token: generateToken(updatedUser._id)
+        })
+    } else {
+        res.status(404);
+        throw new Error('This is not supposed to be happening');
+    }   
+}); 
+
 export {
     login,
     getUserProfile,
     createUser,
     changeUserProfile,
     getAllUsers,
-    deleteUserAdmin
+    deleteUserAdmin,
+    getSingleUserAdmin,
+    updateSingleUserAdmin
 }

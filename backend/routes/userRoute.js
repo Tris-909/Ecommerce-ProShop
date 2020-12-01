@@ -6,14 +6,17 @@ import {
     createUser, 
     changeUserProfile, 
     getAllUsers,
-    deleteUserAdmin 
+    deleteUserAdmin,
+    getSingleUserAdmin,
+    updateSingleUserAdmin
 } from '../controller/userController.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
 router.route('/delete/:id').delete(protect, admin, deleteUserAdmin);
-console.log('wtf');
 router.route('/login').post(login);
+router.route('/:id').get(protect, admin, getSingleUserAdmin);
+router.route('/:id').put(protect, admin, updateSingleUserAdmin);
 router.route('/').post(createUser).get(protect, admin, getAllUsers);
 router.route('/profile').get(protect, getUserProfile).put(protect, changeUserProfile);
 
