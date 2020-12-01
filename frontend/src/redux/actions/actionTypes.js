@@ -68,3 +68,10 @@ export const GET_ORDERS_OF_USERS_FAIL = 'GET_ORDERS_OF_USERS_FAIL';
 
 //? return a null "state" when user logout, clear all the state of the current app 
 export const GET_ORDER_OF_USER_RESET = 'GET_ORDER_OF_USER_RESET';
+
+//! ADMIN
+//TODO: GET ALL USERS FROM DATABASES 
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const GET_ALL_USERS_SUCCESS = 'GET_ALL_USERS_SUCCESS';
+export const GET_ALL_USERS_FAIL = 'GET_ALL_USERS_FAIL';
+export const GET_ALL_USERS_RESET = 'GET_ALL_USERS_RESET';

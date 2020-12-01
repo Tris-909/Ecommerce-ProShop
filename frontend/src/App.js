@@ -11,11 +11,16 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import AdminScreen from './screens/AdminScreen';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function App() {
+
+  const { user } = useSelector(state => state.user);
+
   return (
     <Router>
       <Header/>
@@ -31,6 +36,7 @@ function App() {
           <Route path="/payment" component={PaymentScreen} exact />
           <Route path="/placeorder" component={PlaceOrderScreen} exact />
           <Route path="/orders/:id" component={OrderScreen} />
+          <Route path="/admin/usersList" component={AdminScreen} exact />
         </Container>
       </main>
       <Footer/>
