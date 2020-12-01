@@ -104,9 +104,24 @@ const createUser = AsyncHandler(async (req, res) => {
     }
 }); 
 
+//?   @description : Get all users for Admin Screen
+//?   @method : GET /api/users
+//?   @access : private/admin 
+const getAllUsers = AsyncHandler(async (req, res) => {
+    const users = await User.find();
+
+    if (!users) {
+        res.status(400);
+        throw new Error("There are no users in the databases");
+    }
+
+    res.status(200).send(users);
+}); 
+
 export {
     login,
     getUserProfile,
     createUser,
-    changeUserProfile
+    changeUserProfile,
+    getAllUsers
 }
