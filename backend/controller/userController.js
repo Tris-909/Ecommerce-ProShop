@@ -118,10 +118,27 @@ const getAllUsers = AsyncHandler(async (req, res) => {
     res.status(200).send(users);
 }); 
 
+//?   @description : Delete a user based on their ID
+//?   @method : DELETE /api/users/delete/:id
+//?   @access : private/admin 
+const deleteUserAdmin = AsyncHandler(async (req, res) => {
+    console.log(req.params.id);
+    const deletedUser = await User.findById(req.params.id);
+
+    if (!deletedUser) {
+        res.status(400);
+        throw new Error("Failed to delete a user. Something is wrong, please try again.");
+    }
+
+    await deletedUser.remove();
+    res.status(200).send('User deleted successfully');
+}); 
+
 export {
     login,
     getUserProfile,
     createUser,
     changeUserProfile,
-    getAllUsers
+    getAllUsers,
+    deleteUserAdmin
 }

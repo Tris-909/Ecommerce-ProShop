@@ -2,14 +2,19 @@ import {
     LOGIN_USER_PENDING,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
+
     CREATE_USER_PENDING,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAIL,
+
     LOGOUT_USER,
+
     CLEAR_ERROR_SUBMIT,
+
     GET_USER_DETAILS_PENDING,
     GET_USER_DETAILS_SUCCESS,
     GET_USER_DETAILS_FAIL,
+
     UPDATE_USER_DETAIL_PENDING,
     UPDATE_USER_DETAIL_SUCCESS,
     UPDATE_USER_DETAIL_FAIL,
@@ -147,3 +152,4 @@ export const updateUserDetails = (userSubmitted) => async (dispatch, getState) =
         });
     }
 }
+
