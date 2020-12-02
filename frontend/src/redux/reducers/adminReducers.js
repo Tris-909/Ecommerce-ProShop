@@ -182,6 +182,7 @@ export const created_Product_Admin_Reducer = (state = create_Product_Admin_Reduc
             }
         case CREATE_SAMPLE_PRODUCT_RESET: 
             return {
+                ...state,
                 loading: false,
                 error: null,
                 success: false
