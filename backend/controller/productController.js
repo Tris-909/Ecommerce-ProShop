@@ -23,7 +23,7 @@ const getProductById = AsyncHandler(async (req, res) => {
 })
 
 //? Delete a product based on it ID
-//? DELETE /api/product/:id
+//? DELETE /api/products/:id
 //? private/admin
 const deleteProductByIdAsAdmin = AsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
@@ -37,9 +37,54 @@ const deleteProductByIdAsAdmin = AsyncHandler(async (req, res) => {
     res.status(200).send('Delete product successfully'); 
 });
 
+//? Create a product 
+//? POST /api/products
+//? private/admin
+const createProduct = AsyncHandler(async (req, res) => {
+    const product = new Product({
+        name: 'Sample Name',
+        price: 0,
+        user: req.user._id,
+        image: '/images/sample.jpg',
+        brand: 'sample brand',
+        category: 'Text',
+        countInStock: 0,
+        numReviews: 0,
+        description: 'text'
+    });
+
+    await product.save();
+    res.status(201).send(product);
+});
+
+//? Update a product
+//? PUT /api/product/:id
+//? private/admin
+const updateProduct = AsyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+
+    if (product) {
+        product.name = req.body.name || product.name;
+        product.price = req.body.price || product.price;
+        product.image = req.body.image || product.image;
+        product.brand = req.body.brand || product.brand;
+        product.category = req.body.category || product.category;
+        product.countInStock = req.body.countInStock || product.countInStock;
+        product.numReviews = req.body.numReviews || product.numReviews;
+        product.description = req.body.description || product.description;
+
+        const updatedProduct = await product.save();
+        res.status(201).send(updatedProduct);
+    } else {
+        res.status(404);
+        throw new Error('This product is not existed');
+    }
+});
 
 export {
     getProducts,
     getProductById,
-    deleteProductByIdAsAdmin
+    deleteProductByIdAsAdmin,
+    createProduct,
+    updateProduct
 }
