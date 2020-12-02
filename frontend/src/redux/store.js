@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 //! REDUCERS
-import { productListReducer, SingleProductReducer } from './reducers/productReducers';
+import { productListReducer, SingleProductReducer, deleteProductAsAdmin } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userReducer, userDetailsReducer } from './reducers/userReducers';
 import { ordersReducer, loadedOrderFromDatabasesReducer, orderPayReducer, getOrdersBasedOnUserId } from './reducers/orderReducer.js';
@@ -12,6 +12,7 @@ import { users_List_Admin_Reducer, deleted_user_admin_Reducer, get_userInfo_admi
 const reducer = combineReducers({
     productsList: productListReducer,
     singleProduct: SingleProductReducer,
+    deleteProduct: deleteProductAsAdmin,
     cart: cartReducer,
     user: userReducer,
     userDetails: userDetailsReducer,

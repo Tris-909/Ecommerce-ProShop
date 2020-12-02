@@ -13,7 +13,11 @@ import {
 
     UPDATE_USER_AS_ADMIN_REQUEST,
     UPDATE_USER_AS_ADMIN_SUCCESS,
-    UPDATE_USER_AS_ADMIN_FAIL
+    UPDATE_USER_AS_ADMIN_FAIL,
+
+    DELETE_PRODUCT_AS_ADMIN_REQUEST,
+    DELETE_PRODUCT_AS_ADMIN_SUCCESS,
+    DELETE_PRODUCT_AS_ADMIN_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -74,7 +78,6 @@ export const deleteUserAsAdmin = (id) => async(dispatch, getState) => {
     }
 }
 
-
 export const loadUserInfo = (id) => async(dispatch, getState) => {
     try {
         dispatch({
@@ -128,5 +131,32 @@ export const updateUserInfo = (name, email, isAdmin, id) => async(dispatch, getS
             type: UPDATE_USER_AS_ADMIN_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
+    }
+}
+
+export const deleteProductAsAdmin = (id) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: DELETE_PRODUCT_AS_ADMIN_REQUEST
+        });
+
+        const {user: {user}} = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.delete(`/api/products/${id}`, config);
+
+        dispatch({
+            type: DELETE_PRODUCT_AS_ADMIN_SUCCESS
+        });
+    } catch(error) {
+        dispatch({
+            type: DELETE_PRODUCT_AS_ADMIN_FAIL,
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
     }
 }

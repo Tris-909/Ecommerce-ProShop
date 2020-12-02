@@ -22,7 +22,24 @@ const getProductById = AsyncHandler(async (req, res) => {
     }
 })
 
+//? Delete a product based on it ID
+//? DELETE /api/product/:id
+//? private/admin
+const deleteProductByIdAsAdmin = AsyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+        res.status(404);
+        throw new Error('The Product Is Not Existed');
+    }
+
+    await product.remove(); 
+    res.status(200).send('Delete product successfully'); 
+});
+
+
 export {
     getProducts,
-    getProductById
+    getProductById,
+    deleteProductByIdAsAdmin
 }

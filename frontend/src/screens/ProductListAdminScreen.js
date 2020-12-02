@@ -5,20 +5,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
 import { getProductsList } from '../redux/actions/productActions';
+import { deleteProductAsAdmin } from '../redux/actions/adminActions';
 import {Link} from 'react-router-dom';
+import { DELETE_PRODUCT_AS_ADMIN_RESET } from '../redux/actions/actionTypes';
 
-const ProductListAdminScreen = () => {
+const ProductListAdminScreen = ({ history }) => {
     const dispatch = useDispatch();
     const { products, loading, error } = useSelector(state => state.productsList);
+    const { user } = useSelector(state => state.user);
+    const { success } = useSelector(state => state.deleteProduct);
 
     useEffect(() => {
-        if (!products) {
+        if (user && user.isAdmin) {
             dispatch(getProductsList());
+            dispatch({ type: DELETE_PRODUCT_AS_ADMIN_RESET });
+        } else {
+            history.push('/');
         }
-    }, [products, dispatch]);
+        // eslint-disable-next-line
+    }, [history, dispatch, success]);
     
-    const deleteHandler = () => {
-        console.log('clicked');
+    const deleteHandler = (id) => {
+        if (window.confirm('Are you sure you want to delete this product ?')) {
+            dispatch(deleteProductAsAdmin(id));
+        }
     }
 
     return (
