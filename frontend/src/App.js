@@ -13,15 +13,12 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import AdminScreen from './screens/AdminScreen';
 import AdminUserInfoScreen from './screens/AdminUserInfoScreen';
+import ProductListAdminScreen from './screens/ProductListAdminScreen';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 function App() {
-
-  const { user } = useSelector(state => state.user);
-
   return (
     <Router>
       <Header/>
@@ -39,6 +36,7 @@ function App() {
           <Route path="/orders/:id" component={OrderScreen} />
           <Route path="/admin/usersList" component={AdminScreen} exact />
           <Route path="/admin/users/:id/edit" component={AdminUserInfoScreen} />
+          <Route path="/admin/productsList" component={ProductListAdminScreen} />
         </Container>
       </main>
       <Footer/>
