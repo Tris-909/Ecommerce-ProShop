@@ -6,11 +6,14 @@ import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
 import { getSingleProduct } from '../redux/actions/productActions';
+import { updateProductAsAdmin } from '../redux/actions/adminActions';
+import { UPDATE_PRODUCT_AS_ADMIN_RESET } from '../redux/actions/actionTypes';
 
 const ProductEditScreen = ({ history, match }) => {
     const dispatch = useDispatch();
     const productID = match.params.id;
     const { singleProduct, loading, error } = useSelector(state => state.singleProduct);
+    const { success: updatedSuccess, loading: updatedLoading, error: updatedError } = useSelector(state => state.updatedProduct);
     const { user } = useSelector(state => state.user);
 
     const [name, setName] = useState('');
@@ -25,7 +28,7 @@ const ProductEditScreen = ({ history, match }) => {
         if (user && user.isAdmin) {
             dispatch(getSingleProduct(productID));
         }
-    }, [productID]);
+    }, [productID, updatedSuccess]);
 
     useEffect(() => {
         if (singleProduct) {
@@ -40,7 +43,8 @@ const ProductEditScreen = ({ history, match }) => {
     }, [singleProduct])
 
     const submitHandler = () => {
-
+        dispatch({ type: UPDATE_PRODUCT_AS_ADMIN_RESET });
+        dispatch(updateProductAsAdmin(name, price, image, brand, category, countInStock, description, productID));
     }
 
     return (

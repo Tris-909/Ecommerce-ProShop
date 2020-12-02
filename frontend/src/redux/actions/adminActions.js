@@ -21,7 +21,11 @@ import {
 
     CREATE_SAMPLE_PRODUCT_AS_ADMIN_REQUEST,
     CREATE_SAMPLE_PRODUCT_AS_ADMIN_SUCCESS,
-    CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL
+    CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL,
+
+    UPDATE_PRODUCT_AS_ADMIN_REQUEST,
+    UPDATE_PRODUCT_AS_ADMIN_SUCCESS,
+    UPDATE_PRODUCT_AS_ADMIN_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -186,6 +190,39 @@ export const createProductAsAdmin = () => async(dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL,
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+export const updateProductAsAdmin = (name, price, image, brand, category, countInStock, description, id) => async(dispatch, getState) => {
+    try {
+        dispatch({ type:  UPDATE_PRODUCT_AS_ADMIN_REQUEST });
+
+        const {user: {user}} = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.put(`/api/products/${id}`, {
+            name, 
+            price,
+            image,
+            brand,
+            category,
+            countInStock, 
+            description
+        }, config);
+
+        dispatch({
+            type: UPDATE_PRODUCT_AS_ADMIN_SUCCESS
+        });
+    } catch(error) {
+        dispatch({
+            type: UPDATE_PRODUCT_AS_ADMIN_FAIL,
             error: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }

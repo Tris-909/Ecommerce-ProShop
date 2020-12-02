@@ -12,7 +12,8 @@ import {
     deleted_user_admin_Reducer, 
     get_userInfo_admin_Reducer, 
     update_userInfo_Admin_Reducer,
-    created_Product_Admin_Reducer 
+    created_Product_Admin_Reducer,
+    update_Product_Admin_Reducer 
 } from './reducers/adminReducers';
 
 const reducer = combineReducers({
@@ -30,7 +31,8 @@ const reducer = combineReducers({
     deletedAdmin: deleted_user_admin_Reducer,
     userInfoAdmin: get_userInfo_admin_Reducer,
     updateUserInfo: update_userInfo_Admin_Reducer,
-    createdProduct: created_Product_Admin_Reducer
+    createdProduct: created_Product_Admin_Reducer,
+    updatedProduct: update_Product_Admin_Reducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
