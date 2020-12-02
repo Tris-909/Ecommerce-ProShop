@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
 import { getProductsList } from '../redux/actions/productActions';
-import { deleteProductAsAdmin } from '../redux/actions/adminActions';
-import {Link} from 'react-router-dom';
-import { DELETE_PRODUCT_AS_ADMIN_RESET } from '../redux/actions/actionTypes';
+import { deleteProductAsAdmin, createProductAsAdmin } from '../redux/actions/adminActions';
+import { DELETE_PRODUCT_AS_ADMIN_RESET, CREATE_SAMPLE_PRODUCT_RESET } from '../redux/actions/actionTypes';
 
 const ProductListAdminScreen = ({ history }) => {
     const dispatch = useDispatch();
     const { products, loading, error } = useSelector(state => state.productsList);
+    const { createdProduct, success: createSuccess } = useSelector(state => state.createdProduct);
     const { user } = useSelector(state => state.user);
     const { success } = useSelector(state => state.deleteProduct);
 
@@ -24,11 +24,23 @@ const ProductListAdminScreen = ({ history }) => {
         }
         // eslint-disable-next-line
     }, [history, dispatch, success]);
+
+    useEffect(() => {
+        dispatch({ type: CREATE_SAMPLE_PRODUCT_RESET });
+
+        if (createSuccess) { 
+            history.push(`/admin/products/${createdProduct._id}/edit`);
+        }
+    }, [createSuccess, history, dispatch, createdProduct]);
     
     const deleteHandler = (id) => {
         if (window.confirm('Are you sure you want to delete this product ?')) {
             dispatch(deleteProductAsAdmin(id));
         }
+    }
+
+    const createHandler = () => {
+        dispatch(createProductAsAdmin());
     }
 
     return (
@@ -38,9 +50,9 @@ const ProductListAdminScreen = ({ history }) => {
                     <h1>Products</h1>
                 </Col>
                 <Col className="text-right">
-                    <Link to='/admin/createProduct' className="btn btn-dark my-3" style={{ 'right': 0 }}>
+                    <Button onClick={createHandler} className="btn btn-dark my-3" style={{ 'right': 0 }}>
                         + Create Product 
-                    </Link>
+                    </Button>
                 </Col>
             </Row>
             {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please try again" /> : (

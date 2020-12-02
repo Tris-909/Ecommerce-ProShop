@@ -17,7 +17,11 @@ import {
 
     DELETE_PRODUCT_AS_ADMIN_REQUEST,
     DELETE_PRODUCT_AS_ADMIN_SUCCESS,
-    DELETE_PRODUCT_AS_ADMIN_FAIL
+    DELETE_PRODUCT_AS_ADMIN_FAIL,
+
+    CREATE_SAMPLE_PRODUCT_AS_ADMIN_REQUEST,
+    CREATE_SAMPLE_PRODUCT_AS_ADMIN_SUCCESS,
+    CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -156,6 +160,32 @@ export const deleteProductAsAdmin = (id) => async(dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: DELETE_PRODUCT_AS_ADMIN_FAIL,
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+export const createProductAsAdmin = () => async(dispatch, getState) => {
+    try {
+        dispatch({ type: CREATE_SAMPLE_PRODUCT_AS_ADMIN_REQUEST });
+
+        const {user: {user}} = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        const {data} = await axios.post(`/api/products`, {}, config);
+
+        dispatch({
+            type: CREATE_SAMPLE_PRODUCT_AS_ADMIN_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL,
             error: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }

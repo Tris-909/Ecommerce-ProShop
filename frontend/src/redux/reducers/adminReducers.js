@@ -14,7 +14,12 @@ import {
 
     UPDATE_USER_AS_ADMIN_REQUEST,
     UPDATE_USER_AS_ADMIN_SUCCESS,
-    UPDATE_USER_AS_ADMIN_FAIL
+    UPDATE_USER_AS_ADMIN_FAIL,
+
+    CREATE_SAMPLE_PRODUCT_AS_ADMIN_REQUEST,
+    CREATE_SAMPLE_PRODUCT_AS_ADMIN_SUCCESS,
+    CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL,
+    CREATE_SAMPLE_PRODUCT_RESET
 } from '../actions/actionTypes';
 
 const users_List_Admin_Initial_State = {
@@ -144,6 +149,44 @@ export const update_userInfo_Admin_Reducer = (state = update_User_Admin_Reducer_
                 error: action.payload
             }
         default:
+            return state;
+    }
+}
+
+const create_Product_Admin_Reducer_InitialState = {
+    createdProduct: null,
+    loading: false,
+    error: null,
+    success: false
+}
+
+export const created_Product_Admin_Reducer = (state = create_Product_Admin_Reducer_InitialState, action) => {
+    switch(action.type) {
+        case CREATE_SAMPLE_PRODUCT_AS_ADMIN_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case CREATE_SAMPLE_PRODUCT_AS_ADMIN_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                createdProduct: action.payload,
+                success: true
+            }
+        case CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case CREATE_SAMPLE_PRODUCT_RESET: 
+            return {
+                loading: false,
+                error: null,
+                success: false
+            }
+        default: 
             return state;
     }
 }
