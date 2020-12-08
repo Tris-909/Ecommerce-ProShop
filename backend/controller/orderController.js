@@ -85,9 +85,24 @@ const getOrdersByUserId = AsyncHandler(async (req, res) => {
     res.json(orders);
 });
 
+//?   GET all orders
+//?   /api/orders/allorders
+//?   Private Route /Admin Route
+const getAllOrders = AsyncHandler(async (req, res) => {
+    const orders = await Order.find();
+
+    if (orders) {
+        res.status(200).send(orders);
+    } else {
+        res.status(400);
+        throw new Error('Something is wrong, please try again');
+    }
+});
+
 export {
     addOrder,
     getOrderById,
     updateOrderIsPaidStatus,
-    getOrdersByUserId
+    getOrdersByUserId,
+    getAllOrders
 }

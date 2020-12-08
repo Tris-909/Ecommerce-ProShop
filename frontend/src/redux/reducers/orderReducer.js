@@ -15,7 +15,11 @@ import {
     GET_ORDERS_OF_USERS,
     GET_ORDERS_OF_USERS_SUCCESS,
     GET_ORDERS_OF_USERS_FAIL,
-    GET_ORDER_OF_USER_RESET
+    GET_ORDER_OF_USER_RESET,
+
+    GET_ALL_ORDERS_AS_ADMIN_REQUEST,
+    GET_ALL_ORDERS_AS_ADMIN_SUCCESS,
+    GET_ALL_ORDERS_AS_ADMIN_FAIL
 } from '../actions/actionTypes';
 
 //TODO: First Loaded Order
@@ -162,9 +166,45 @@ const getOrdersBasedOnUserId = (state = userOrdersInitialState, action) => {
     }
 }
 
+//TODO: Get all orders as admin
+const ordersAdminInitialState = { 
+    orders: [],
+    loading: false,
+    success: false,
+    error: null
+} 
+
+const getOrdersAsAdmin = (state = ordersAdminInitialState, action) => {
+    switch(action.type) {
+        case GET_ALL_ORDERS_AS_ADMIN_REQUEST: 
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_ALL_ORDERS_AS_ADMIN_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                orders: action.payload
+            }
+        case GET_ALL_ORDERS_AS_ADMIN_FAIL: 
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        default:
+            return {
+                ...state
+            }
+    }
+}
+
 export { 
     ordersReducer,
     loadedOrderFromDatabasesReducer,
     orderPayReducer,
-    getOrdersBasedOnUserId 
+    getOrdersBasedOnUserId,
+    getOrdersAsAdmin
 };

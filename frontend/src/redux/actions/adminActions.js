@@ -25,7 +25,11 @@ import {
 
     UPDATE_PRODUCT_AS_ADMIN_REQUEST,
     UPDATE_PRODUCT_AS_ADMIN_SUCCESS,
-    UPDATE_PRODUCT_AS_ADMIN_FAIL
+    UPDATE_PRODUCT_AS_ADMIN_FAIL,
+
+    GET_ALL_ORDERS_AS_ADMIN_REQUEST,
+    GET_ALL_ORDERS_AS_ADMIN_SUCCESS,
+    GET_ALL_ORDERS_AS_ADMIN_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -224,6 +228,35 @@ export const updateProductAsAdmin = (name, price, image, brand, category, countI
         dispatch({
             type: UPDATE_PRODUCT_AS_ADMIN_FAIL,
             error: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+export const getAllOrdersAsAdmin = () => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: GET_ALL_ORDERS_AS_ADMIN_REQUEST
+        });
+
+        const { user: {user} } = getState();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        const { data } = await axios.get('/api/orders/allorders', config);
+
+        dispatch({
+            type: GET_ALL_ORDERS_AS_ADMIN_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: GET_ALL_ORDERS_AS_ADMIN_FAIL,
+            error: 'Something is wrong, please try again'
         });
     }
 }

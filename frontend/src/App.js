@@ -15,6 +15,7 @@ import AdminScreen from './screens/AdminScreen';
 import AdminUserInfoScreen from './screens/AdminUserInfoScreen';
 import ProductListAdminScreen from './screens/ProductListAdminScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
+import AdminOrdersScreen from './screens/AdminOrdersScreen';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -39,6 +40,7 @@ function App() {
           <Route path="/admin/users/:id/edit" component={AdminUserInfoScreen} />
           <Route path="/admin/productsList" component={ProductListAdminScreen} />
           <Route path="/admin/products/:id/edit" component={ProductEditScreen} />
+          <Route path="/admin/ordersList" component={AdminOrdersScreen} exact />
         </Container>
       </main>
       <Footer/>

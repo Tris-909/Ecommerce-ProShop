@@ -6,7 +6,13 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import { productListReducer, SingleProductReducer, deleteProductAsAdmin } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userReducer, userDetailsReducer } from './reducers/userReducers';
-import { ordersReducer, loadedOrderFromDatabasesReducer, orderPayReducer, getOrdersBasedOnUserId } from './reducers/orderReducer.js';
+import { 
+    ordersReducer, 
+    loadedOrderFromDatabasesReducer, 
+    orderPayReducer, 
+    getOrdersBasedOnUserId,
+    getOrdersAsAdmin 
+} from './reducers/orderReducer.js';
 import { 
     users_List_Admin_Reducer, 
     deleted_user_admin_Reducer, 
@@ -32,7 +38,8 @@ const reducer = combineReducers({
     userInfoAdmin: get_userInfo_admin_Reducer,
     updateUserInfo: update_userInfo_Admin_Reducer,
     createdProduct: created_Product_Admin_Reducer,
-    updatedProduct: update_Product_Admin_Reducer
+    updatedProduct: update_Product_Admin_Reducer,
+    adminOrders: getOrdersAsAdmin
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
