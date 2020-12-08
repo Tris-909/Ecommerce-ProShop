@@ -99,10 +99,31 @@ const getAllOrders = AsyncHandler(async (req, res) => {
     }
 });
 
+//? PUT orders isDelivered based on that Order ID
+//? /api/orders/toggleIsDelivered
+//? Private Route /Admin Route
+const changeIsDeliveredStatus = AsyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    const fetchedOrder = await Order.findById(id);
+
+    if (fetchedOrder) {
+        fetchedOrder.isDelivered = !fetchedOrder.isDelivered;
+        fetchedOrder.isDeliveredAt = Date.now();
+
+        const updatedOrder = await fetchedOrder.save();
+        res.status(200).send(updatedOrder);
+    } else {
+        res.status(400);
+        throw new Error('This Order is not existed !');
+    }
+});
+
 export {
     addOrder,
     getOrderById,
     updateOrderIsPaidStatus,
     getOrdersByUserId,
-    getAllOrders
+    getAllOrders,
+    changeIsDeliveredStatus
 }
