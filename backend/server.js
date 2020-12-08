@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 
 //? This is for setting up environment variables
 import dotenv from 'dotenv';
@@ -19,6 +20,7 @@ colors.setTheme({
 import productRoutes from './routes/productRoutes.js';
 import usersRoutes from './routes/userRoute.js'; 
 import ordersRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 import { notFound, errorHandler } from './middlewares/error.js';
 
 //!--------------------- EXPRESS START -----------------------------------------------------//
@@ -32,11 +34,14 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/orders', ordersRoutes);
+app.use('/api/upload', uploadRoutes);
 
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENTID));
 
-app.use(notFound);
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname)));
 
+app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
