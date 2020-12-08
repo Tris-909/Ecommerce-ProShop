@@ -1,18 +1,20 @@
 import React, {useState, useEffect} from 'react'
-import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderById, payOrder } from '../redux/actions/orderActions';
+import { putIsDeliveredStatusAsAdmin } from '../redux/actions/adminActions';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
-import { PUT_ISPAID_STATUS_ORDER_RESET } from '../redux/actions/actionTypes';
+import { PUT_ISPAID_STATUS_ORDER_RESET, PUT_IS_DELIVERED_AS_ADMIN_RESET } from '../redux/actions/actionTypes';
 
 const OrderScreen = ({ match }) => {
     const id = match.params.id;  
     const { orderItem, loading, success, error } = useSelector(state => state.loadedOrder);
     const { loading: loadingPay, success: successPay, error: errorPay } = useSelector(state => state.updatedIsPaidOrder);
+    const { loading: updateIsDeliveredLoading, success: successIsDeliveredStatus, error:  errorIsDeliveredStatus} = useSelector(state => state.isDeliveredOrderAdmin);
     const dispatch = useDispatch();
 
     const [sdkReady, setSdkReady] = useState(false);
@@ -49,13 +51,24 @@ const OrderScreen = ({ match }) => {
                 setSdkReady(true);
             }
         }
-
-
     }, [id, successPay, dispatch, orderItem])
+
+    useEffect(() => {
+        if (!orderItem || successIsDeliveredStatus) {
+            dispatch({
+                type: PUT_IS_DELIVERED_AS_ADMIN_RESET
+            });
+            dispatch(getOrderById(id));
+        }
+    }, [dispatch, id, successIsDeliveredStatus, orderItem]);
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);
         dispatch(payOrder(id, paymentResult));
+    }
+
+    const changeDeliveryStatus = () => {
+        dispatch(putIsDeliveredStatusAsAdmin(id));
     }
 
     const date = String(orderItem.createdAt).split('T')[0];
@@ -127,7 +140,9 @@ const OrderScreen = ({ match }) => {
                     <ListGroup.Item>
                         <Row>
                             <Col> Delivery Status:  </Col>
-                            <Col> {orderItem.isDelivered ? 'Is Delivering...' : 'Not Shipping'} </Col>
+                            { updateIsDeliveredLoading ? <Loading size="sm" /> : errorIsDeliveredStatus ? <Message variant="danger" content="ERROR please try again" /> : (
+                                <Col> {orderItem.isDelivered ? 'Is Delivering...' : 'Not Shipping'} </Col>
+                            ) }
                         </Row>
                     </ListGroup.Item>
                     <ListGroup.Item>
@@ -143,6 +158,15 @@ const OrderScreen = ({ match }) => {
                             </ListGroup.Item>
                         ) : null 
                     }
+                    <ListGroup.Item>
+                        <Button 
+                            onClick={changeDeliveryStatus}
+                            className="btn-block" 
+                            type="button"
+                            >
+                                CHANGE DELIVERY STATUS
+                        </Button>
+                    </ListGroup.Item>
                     {
                         !orderItem.isPaid && (
                             <ListGroup.Item>

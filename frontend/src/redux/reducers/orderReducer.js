@@ -19,7 +19,12 @@ import {
 
     GET_ALL_ORDERS_AS_ADMIN_REQUEST,
     GET_ALL_ORDERS_AS_ADMIN_SUCCESS,
-    GET_ALL_ORDERS_AS_ADMIN_FAIL
+    GET_ALL_ORDERS_AS_ADMIN_FAIL,
+
+    PUT_IS_DELIVERED_AS_ADMIN_REQUEST,
+    PUT_IS_DELIVERED_AS_ADMIN_SUCCESS,
+    PUT_IS_DELIVERED_AS_ADMIN_FAIL,
+    PUT_IS_DELIVERED_AS_ADMIN_RESET
 } from '../actions/actionTypes';
 
 //TODO: First Loaded Order
@@ -201,10 +206,48 @@ const getOrdersAsAdmin = (state = ordersAdminInitialState, action) => {
     }
 }
 
+//TODO: PUT isDelivered Status as Admin 
+const putIsDeliveredInitialState = {
+    success: false,
+    loading: false,
+    error: null
+}
+
+const putIsDeliveredStatus = (state = putIsDeliveredInitialState, action) => {
+    switch(action.type) {
+        case PUT_IS_DELIVERED_AS_ADMIN_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case PUT_IS_DELIVERED_AS_ADMIN_SUCCESS: 
+            return {
+                ...state,
+                loading: false,
+                success: true
+            }
+        case PUT_IS_DELIVERED_AS_ADMIN_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case PUT_IS_DELIVERED_AS_ADMIN_RESET:
+            return {
+                success: false,
+                loading: false,
+                error: null
+            }
+        default:
+            return state;
+    }
+}
+
 export { 
     ordersReducer,
     loadedOrderFromDatabasesReducer,
     orderPayReducer,
     getOrdersBasedOnUserId,
-    getOrdersAsAdmin
+    getOrdersAsAdmin,
+    putIsDeliveredStatus
 };

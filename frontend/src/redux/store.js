@@ -11,7 +11,8 @@ import {
     loadedOrderFromDatabasesReducer, 
     orderPayReducer, 
     getOrdersBasedOnUserId,
-    getOrdersAsAdmin 
+    getOrdersAsAdmin,
+    putIsDeliveredStatus 
 } from './reducers/orderReducer.js';
 import { 
     users_List_Admin_Reducer, 
@@ -39,7 +40,8 @@ const reducer = combineReducers({
     updateUserInfo: update_userInfo_Admin_Reducer,
     createdProduct: created_Product_Admin_Reducer,
     updatedProduct: update_Product_Admin_Reducer,
-    adminOrders: getOrdersAsAdmin
+    adminOrders: getOrdersAsAdmin,
+    isDeliveredOrderAdmin: putIsDeliveredStatus
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];

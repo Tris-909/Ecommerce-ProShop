@@ -45,7 +45,6 @@ const AdminOrdersScreen = ({ history }) => {
                             <th>PRICE</th>
                             <th>IS PAID</th>
                             <th>IS DELIVERED</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,11 +55,6 @@ const AdminOrdersScreen = ({ history }) => {
                                 <td>{order.totalPrice}</td>
                                 <td>{order.isPaid ? <i className="fas fa-check" style={{color: 'green'}}></i> :  <i className='fas fa-times' style={{color: 'red'}}></i> }</td>
                                 <td>{order.isDelivered ? <i className="fas fa-check" style={{color: 'green'}}></i> :  <i className='fas fa-times' style={{color: 'red'}}></i> }</td>
-                                <td>
-                                    <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(order._id)}>
-                                        <i className="fas fa-trash"></i>
-                                    </Button>
-                                </td>
                             </tr>
                         ))}
                     </tbody>

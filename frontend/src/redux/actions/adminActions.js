@@ -29,7 +29,11 @@ import {
 
     GET_ALL_ORDERS_AS_ADMIN_REQUEST,
     GET_ALL_ORDERS_AS_ADMIN_SUCCESS,
-    GET_ALL_ORDERS_AS_ADMIN_FAIL
+    GET_ALL_ORDERS_AS_ADMIN_FAIL,
+
+    PUT_IS_DELIVERED_AS_ADMIN_REQUEST,
+    PUT_IS_DELIVERED_AS_ADMIN_SUCCESS,
+    PUT_IS_DELIVERED_AS_ADMIN_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -257,6 +261,33 @@ export const getAllOrdersAsAdmin = () => async(dispatch, getState) => {
         dispatch({
             type: GET_ALL_ORDERS_AS_ADMIN_FAIL,
             error: 'Something is wrong, please try again'
+        });
+    }
+}
+
+export const putIsDeliveredStatusAsAdmin = (id) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: PUT_IS_DELIVERED_AS_ADMIN_REQUEST
+        });
+
+        const { user: { user } } = getState();
+        console.log(user.token);
+        const config = {
+            headers: {
+                'Content-Type': 'applicaiton/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.put(`/api/orders/${id}/delivery`, {}, config);
+        dispatch({
+            type: PUT_IS_DELIVERED_AS_ADMIN_SUCCESS
+        });
+    } catch(error) {
+        dispatch({
+            type: PUT_IS_DELIVERED_AS_ADMIN_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }
 }
