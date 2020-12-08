@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
+import axios from 'axios';
 import Loading from '../components/Loading';
 import { getSingleProduct } from '../redux/actions/productActions';
 import { updateProductAsAdmin } from '../redux/actions/adminActions';
@@ -23,6 +24,7 @@ const ProductEditScreen = ({ history, match }) => {
     const [countInStock, setCountInStock] = useState(0);
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
+    const [uploading, setUploading] = useState(false);
 
     useEffect(() => {
         if (user && user.isAdmin) {
@@ -47,6 +49,29 @@ const ProductEditScreen = ({ history, match }) => {
         dispatch(updateProductAsAdmin(name, price, image, brand, category, countInStock, description, productID));
     }
 
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        setUploading(true);
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            const { data } = await axios.post('/api/upload', formData, config);
+
+            setImage(data);
+            setUploading(false);
+        } catch(error) {
+            console.log(error);
+            setUploading(false);
+        }
+    }
+
     return (
     <>
         <Link to='/admin/productsList' className="btn btn-light my-3">
@@ -56,7 +81,7 @@ const ProductEditScreen = ({ history, match }) => {
             <h1>Edit User :</h1>
             { error ? <Message variant="danger" content={error} /> : null }
             { loading ? <Loading /> : (
-                <Form onSubmit={submitHandler}>
+            <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
                     <Form.Label>Name :</Form.Label>
                     <Form.Control 
@@ -79,9 +104,12 @@ const ProductEditScreen = ({ history, match }) => {
                     <Form.Label>Image :</Form.Label>
                     <Form.Control 
                         type="text" 
-                        placeholder="" 
+                        placeholder="Enter Your Image URL" 
                         value={image} 
                         onChange={(e) => setImage(e.target.value)} />
+                    <Form.File id="image-file" label="Choose File" custom 
+                    onChange={uploadFileHandler}></Form.File>
+                    {uploading ? <Loading /> : null}
                 </Form.Group>
 
                 <Form.Group controlId='brand'>
