@@ -6,12 +6,14 @@ import {
     deleteProductByIdAsAdmin, 
     createProduct, 
     updateProduct,
-    createReview 
+    createReview ,
+    getTopRatedProducts
 } from '../controller/productController.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
 router.route('/').get(getProducts).post(protect, admin, createProduct);
+router.route('/carousel').get(getTopRatedProducts);
 router.route('/:id')
 .get(getProductById)
 .delete(protect, admin, deleteProductByIdAsAdmin)

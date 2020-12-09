@@ -3,7 +3,12 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 //! REDUCERS
-import { productListReducer, SingleProductReducer, deleteProductAsAdmin } from './reducers/productReducers';
+import { 
+    productListReducer, 
+    SingleProductReducer, 
+    deleteProductAsAdmin,
+    carouselProductReducer 
+} from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { 
     userReducer, 
@@ -46,7 +51,8 @@ const reducer = combineReducers({
     updatedProduct: update_Product_Admin_Reducer,
     adminOrders: getOrdersAsAdmin,
     isDeliveredOrderAdmin: putIsDeliveredStatus,
-    userReview: userReviewReducer
+    userReview: userReviewReducer,
+    carouselProducts: carouselProductReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
