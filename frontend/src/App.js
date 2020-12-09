@@ -40,7 +40,9 @@ function App() {
           <Route path="/admin/productsList" component={ProductListAdminScreen} />
           <Route path="/admin/products/:id/edit" component={ProductEditScreen} />
           <Route path="/admin/ordersList" component={AdminOrdersScreen} exact />
-          <Route path="/search/:keyword" component={HomeScreen} />
+          <Route path="/search/:keyword" component={HomeScreen} exact />
+          <Route path="/page/:pageNumber" component={HomeScreen} />
+          <Route path="/search/:keyword/page/:pageNumber" component={HomeScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

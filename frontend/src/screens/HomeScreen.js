@@ -4,16 +4,18 @@ import { Col, Row, Spinner, Alert} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {getProductsList} from '../redux/actions/productActions';
 import Message from '../components/Message';
+import Paginate from '../components/Paginate';
 
 const HomeScreen = ({ match }) => {
     const keyword = match.params.keyword;   
+    const pageNumber = match.params.pageNumber || 1;
     const dispatch = useDispatch()
     const productsList = useSelector(state => state.productsList);
-    const { products, loading, error } = productsList;
+    const { products, page, pages, loading, error } = productsList;
 
     useEffect(() => {
-        dispatch(getProductsList(keyword));
-    }, [dispatch, keyword])
+        dispatch(getProductsList(keyword, pageNumber));
+    }, [dispatch, keyword, pageNumber])
 
     const checkIfErrorExisted = () => {
         if (error) {
@@ -38,7 +40,8 @@ const HomeScreen = ({ match }) => {
                         <Message variant="danger" content="Can't find your product, please try something else"/>
                     ) : <Spinner animation="border" size="lg" style={{ width: '100px', height: '100px' }} /> 
                    }
-                </Row>   
+                </Row>
+                <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />   
                 </>
             )
         }

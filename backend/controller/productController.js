@@ -5,6 +5,11 @@ import Product from '../models/product.js';
 //?   /api/products
 //?   Public Route
 const getProducts = AsyncHandler(async (req, res) => {
+    //TODO: Pagination Size 
+    const pageSize = 3;
+    const page = Number(req.query.pageNumber) || 1;
+    
+    //TODO: search function for search bar
     const keyword = req.query.keyword ? {
         name: {
             $regex: req.query.keyword,
@@ -12,8 +17,9 @@ const getProducts = AsyncHandler(async (req, res) => {
         }
     } : {};
     
-    const products = await Product.find({ ...keyword });
-    res.send(products);
+    const count = await Product.countDocuments({ ...keyword });
+    const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1));
+    res.send({ products, page, pages: Math.ceil(count / pageSize) });
 }) 
 
 //? Get a single product based on ID

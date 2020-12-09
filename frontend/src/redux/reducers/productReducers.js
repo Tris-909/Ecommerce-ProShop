@@ -15,6 +15,8 @@ import {
 
 const initialState = {
     products: [],
+    pages: null,
+    page: null,
     loading: false,
     error: null
 }
@@ -30,7 +32,9 @@ export const productListReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                products: action.payload
+                products: action.payload.products,
+                pages: action.payload.pages,
+                page: action.payload.page
             }
         case GET_ALL_PRODUCTS_FAIL: 
             return {
