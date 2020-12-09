@@ -8,11 +8,11 @@ import {
 } from './actionTypes';
 import axios from 'axios';
 
-export const getProductsList = () => async (dispatch) => {
+export const getProductsList = (keyword = '') => async (dispatch) => {
     try {
         dispatch({ type: GET_ALL_PRODUCTS_PENDING });
         
-        const { data } = await axios.get('/api/products');
+        const { data } = await axios.get(`/api/products?keyword=${keyword}`);
         
         dispatch({
             type: GET_ALL_PRODUCTS_SUCCESS,
