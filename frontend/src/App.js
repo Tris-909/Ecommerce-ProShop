@@ -37,7 +37,8 @@ function App() {
           <Route path="/orders/:id" component={OrderScreen} />
           <Route path="/admin/usersList" component={AdminScreen} exact />
           <Route path="/admin/users/:id/edit" component={AdminUserInfoScreen} />
-          <Route path="/admin/productsList" component={ProductListAdminScreen} />
+          <Route path="/admin/productsList" component={ProductListAdminScreen} exact />
+          <Route path="/admin/productsList/:pageNumber" component={ProductListAdminScreen} />
           <Route path="/admin/products/:id/edit" component={ProductEditScreen} />
           <Route path="/admin/ordersList" component={AdminOrdersScreen} exact />
           <Route path="/search/:keyword" component={HomeScreen} exact />

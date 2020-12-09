@@ -4,26 +4,28 @@ import { Row, Col, Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
+import Paginate from '../components/Paginate';
 import { getProductsList } from '../redux/actions/productActions';
 import { deleteProductAsAdmin, createProductAsAdmin } from '../redux/actions/adminActions';
 import { DELETE_PRODUCT_AS_ADMIN_RESET, CREATE_SAMPLE_PRODUCT_RESET } from '../redux/actions/actionTypes';
 
-const ProductListAdminScreen = ({ history }) => {
+const ProductListAdminScreen = ({ history, match }) => {
+    const pageNumber = match.params.pageNumber || 1;
     const dispatch = useDispatch();
-    const { products, loading, error } = useSelector(state => state.productsList);
+    const { products, loading, error, pages, page } = useSelector(state => state.productsList);
     const { createdProduct, success: createSuccess } = useSelector(state => state.createdProduct);
     const { user } = useSelector(state => state.user);
     const { success } = useSelector(state => state.deleteProduct);
 
     useEffect(() => {
         if (user && user.isAdmin) {
-            dispatch(getProductsList());
+            dispatch(getProductsList('', pageNumber));
             dispatch({ type: DELETE_PRODUCT_AS_ADMIN_RESET });
         } else {
             history.push('/');
         }
         // eslint-disable-next-line
-    }, [history, dispatch, success]);
+    }, [history, dispatch, success, pageNumber]);
 
     useEffect(() => {
         dispatch({ type: CREATE_SAMPLE_PRODUCT_RESET });
@@ -56,6 +58,7 @@ const ProductListAdminScreen = ({ history }) => {
                 </Col>
             </Row>
             {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please try again" /> : (
+                <>
                 <Table striped bordered hover responsive className="table-sm">
                     <thead>
                         <tr>
@@ -89,6 +92,8 @@ const ProductListAdminScreen = ({ history }) => {
                         ))}
                     </tbody>
                 </Table>
+                <Paginate pages={pages} page={page} isAdmin={true}/> 
+                </>
             )}   
         </>
     )
