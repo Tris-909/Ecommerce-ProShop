@@ -5,7 +5,11 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 //! REDUCERS
 import { productListReducer, SingleProductReducer, deleteProductAsAdmin } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
-import { userReducer, userDetailsReducer } from './reducers/userReducers';
+import { 
+    userReducer, 
+    userDetailsReducer,
+    userReviewReducer 
+} from './reducers/userReducers';
 import { 
     ordersReducer, 
     loadedOrderFromDatabasesReducer, 
@@ -41,7 +45,8 @@ const reducer = combineReducers({
     createdProduct: created_Product_Admin_Reducer,
     updatedProduct: update_Product_Admin_Reducer,
     adminOrders: getOrdersAsAdmin,
-    isDeliveredOrderAdmin: putIsDeliveredStatus
+    isDeliveredOrderAdmin: putIsDeliveredStatus,
+    userReview: userReviewReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];

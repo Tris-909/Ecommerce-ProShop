@@ -19,7 +19,12 @@ import {
     UPDATE_USER_DETAIL_PENDING,
     UPDATE_USER_DETAIL_SUCCESS,
     UPDATE_USER_DETAIL_FAIL,
-    UPDATE_USER_DETAIL_RESET
+    UPDATE_USER_DETAIL_RESET,
+
+    CREATE_REVIEW_PENDING,
+    CREATE_REVIEW_SUCCESS,
+    CREATE_REVIEW_FAIL,
+    CREATE_REVIEW_RESET
 } from '../actions/actionTypes';
 
 const initialUserState = {
@@ -143,7 +148,44 @@ const userDetailsReducer = (state = initialDetailState, action) => {
     }
 }
 
+const initialReviewState = {
+    loading: false,
+    success: false,
+    error: null
+}
+
+const userReviewReducer = (state = initialReviewState, action) => {
+    switch(action.type) {
+        case CREATE_REVIEW_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
+        case CREATE_REVIEW_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true
+            }
+        case CREATE_REVIEW_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case CREATE_REVIEW_RESET: 
+            return {
+                loading: false,
+                success: false,
+                error: null
+            }
+        default:
+            return state;
+    }
+}
+
 export {
     userReducer,
-    userDetailsReducer
+    userDetailsReducer,
+    userReviewReducer
 }

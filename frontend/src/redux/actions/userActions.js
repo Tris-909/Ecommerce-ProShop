@@ -18,7 +18,11 @@ import {
     UPDATE_USER_DETAIL_PENDING,
     UPDATE_USER_DETAIL_SUCCESS,
     UPDATE_USER_DETAIL_FAIL,
-    UPDATE_USER_DETAIL_RESET
+    UPDATE_USER_DETAIL_RESET,
+
+    CREATE_REVIEW_PENDING,
+    CREATE_REVIEW_SUCCESS,
+    CREATE_REVIEW_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -153,3 +157,29 @@ export const updateUserDetails = (userSubmitted) => async (dispatch, getState) =
     }
 }
 
+export const createReview = (rating, comment, productID) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: CREATE_REVIEW_PENDING
+        });
+
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.post(`/api/products/${productID}/review`, { rating, comment }, config);
+
+        dispatch({
+            type: CREATE_REVIEW_SUCCESS
+        });
+    } catch (error) {
+        dispatch({
+            type: CREATE_REVIEW_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
