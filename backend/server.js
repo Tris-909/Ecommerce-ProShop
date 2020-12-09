@@ -16,6 +16,9 @@ colors.setTheme({
     fail: ['black', 'bgred', 'underline', 'bold']
 });
 
+//? Morgan npm package to console.log information about the route on the server
+import morgan from 'morgan';
+
 //? Express Router amd Middlewares
 import productRoutes from './routes/productRoutes.js';
 import usersRoutes from './routes/userRoute.js'; 
@@ -25,6 +28,12 @@ import { notFound, errorHandler } from './middlewares/error.js';
 
 //!--------------------- EXPRESS START -----------------------------------------------------//
 const app = express();
+
+//? Morgan
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
+
 app.use(express.json())
 
 app.get('/', (req, res) => {
