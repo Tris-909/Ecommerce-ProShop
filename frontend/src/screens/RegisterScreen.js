@@ -6,6 +6,7 @@ import {createUser, clearError} from '../redux/actions/userActions';
 import Loading from '../components/Loading';
 import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
+import Helmet from '../components/Helmet';
 
 const RegisterScreen = ({ location, history }) => {
     const [name, setName] = useState('');
@@ -39,6 +40,7 @@ const RegisterScreen = ({ location, history }) => {
 
     return (
         <FormContainer>
+            <Helmet title="Register | Proshop" />
             <h1>Sign Up With Us</h1>
             { formError ? <Message content={formError} /> : null }
             { error ? <Message variant="danger" content={error} /> : null }

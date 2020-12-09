@@ -15,7 +15,7 @@ const SearchBox = ({ history }) => {
     }
 
     return (
-        <Form onSubmit={submitHandler} inline autocomplete="off">
+        <Form onSubmit={submitHandler} inline autoComplete="off">
             <Form.Control 
                 type='text' 
                 name="q" 

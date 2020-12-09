@@ -6,6 +6,7 @@ import {getProductsList, getCarouselProducts} from '../redux/actions/productActi
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import CarouselSection from '../components/Carousel';
+import Helmet from '../components/Helmet';
 
 const HomeScreen = ({ match }) => {
     const keyword = match.params.keyword;   
@@ -36,6 +37,7 @@ const HomeScreen = ({ match }) => {
         } else {
             return(
                 <>
+                <Helmet title="Welcome to Proshop" href="" />
                 <CarouselSection carouselProducts={carouselProducts} loading={carouselLoading} error={carouselError} />
                 <h1>Products : </h1>
                 <Row style={{ justifyContent: 'center', alignItems: 'center'}}>

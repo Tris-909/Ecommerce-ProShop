@@ -95,7 +95,7 @@ export const createUser = (name, email, password) => async (dispatch) => {
     }
 }
 
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserDetails = () => async (dispatch, getState) => {
     try {
         dispatch({
             type: GET_USER_DETAILS_PENDING
@@ -110,7 +110,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(`/api/users/${id}`, config);
+        const { data } = await axios.get(`api/users/profile` ,config);
 
         dispatch({
             type: GET_USER_DETAILS_SUCCESS,

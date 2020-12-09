@@ -6,6 +6,7 @@ import { getUserDetails, updateUserDetails } from '../redux/actions/userActions'
 import { getOrdersByUserId } from '../redux/actions/orderActions';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
+import Helmet from '../components/Helmet';
 
 const ProfileScreen = ({ location, history }) => {
     const [name, setName] = useState('');
@@ -24,7 +25,7 @@ const ProfileScreen = ({ location, history }) => {
             history.push('/login');
         } else {
             if(!details.name) {
-                dispatch(getUserDetails('profile'));
+                dispatch(getUserDetails());
             } else {
                 setName(details.name);
                 setEmail(details.email);
@@ -56,6 +57,7 @@ const ProfileScreen = ({ location, history }) => {
 
     return (
         <Row>
+            <Helmet title={`${name} Profile`} href="/profile" />
             <Col md={4}>
                 <h1>Your Profile :</h1>
                 { formError ? <Message variant="danger" content={formError} /> : null }
@@ -126,7 +128,7 @@ const ProfileScreen = ({ location, history }) => {
                                         <i className='fas fa-times' style={{color: 'red'}}></i>
                                     )}</td>
                                     <td style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                        { order.isDelivered ? order.deliveredAt.substring(0,10) : 
+                                        { order.isDelivered ? order.isDeliveredAt.substring(0,10) : 
                                         <i className='fas fa-times' style={{color: 'red'}}></i>
                                     }</td>
                                     <td>

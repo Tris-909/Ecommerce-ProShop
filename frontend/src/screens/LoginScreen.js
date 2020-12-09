@@ -6,6 +6,7 @@ import Loading from '../components/Loading';
 import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import { loginUser } from '../redux/actions/userActions';
+import Helmet from '../components/Helmet';
 
 const LoginScreen = ({ location, history }) => {
     const dispatch = useDispatch(); 
@@ -27,6 +28,7 @@ const LoginScreen = ({ location, history }) => {
 
     return (
         <FormContainer>
+            <Helmet title="Log In | ProShop" href="/login" />
             <h1>Sign In</h1>
             { error ? <Message variant="danger" content={error} /> : null }
             { loading ? <Loading /> : null }

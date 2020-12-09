@@ -13,6 +13,7 @@ import ProductCard from '../components/ProductDetail/ProductCard';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
 import Rating from '../components/Rating';
+import Helmet from '../components/Helmet';
 
 const ProductScreen = ({ match }) => {
     const [rating, setRating] = useState(0);
@@ -46,6 +47,7 @@ const ProductScreen = ({ match }) => {
             if (!loading && singleProduct) {
                 return(
                     <>
+                        <Helmet title={singleProduct.name} href={singleProduct._id} />
                         <Link className="btn btn-dark my-3" to="/">Go Back</Link>
                         <Row>   
                             <ProductImage 

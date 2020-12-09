@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, removeItemFromCart } from '../redux/actions/cartActions';
+import Helmet from '../components/Helmet';
 
 const CartScreen = ({ match, location, history }) => {
     const productId = match.params.id;
@@ -35,6 +36,7 @@ const CartScreen = ({ match, location, history }) => {
 
     return (
         <Row>
+            <Helmet title='Your Shopping Cart' href='/cart' />
             <Col md={8}>
                 <h1>Shopping Cart</h1>
                 {cartItems.length === 0 ? <h2>Your Cart is empty <Link to="/">Go Back</Link></h2> : (
