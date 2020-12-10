@@ -272,7 +272,6 @@ export const putIsDeliveredStatusAsAdmin = (id) => async(dispatch, getState) => 
         });
 
         const { user: { user } } = getState();
-        console.log(user.token);
         const config = {
             headers: {
                 'Content-Type': 'applicaiton/json',

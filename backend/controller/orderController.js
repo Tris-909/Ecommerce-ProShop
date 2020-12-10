@@ -109,7 +109,7 @@ const changeIsDeliveredStatus = AsyncHandler(async (req, res) => {
 
     if (fetchedOrder) {
         fetchedOrder.isDelivered = !fetchedOrder.isDelivered;
-        fetchedOrder.isDeliveredAt = Date.now();
+        fetchedOrder.deliveredAt = Date.now();
 
         const updatedOrder = await fetchedOrder.save();
         res.status(200).send(updatedOrder);

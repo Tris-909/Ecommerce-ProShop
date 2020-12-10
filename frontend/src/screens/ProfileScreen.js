@@ -128,7 +128,7 @@ const ProfileScreen = ({ location, history }) => {
                                         <i className='fas fa-times' style={{color: 'red'}}></i>
                                     )}</td>
                                     <td style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                        { order.isDelivered ? order.isDeliveredAt.substring(0,10) : 
+                                        { order.isDelivered ? order.deliveredAt.substring(0,10) : 
                                         <i className='fas fa-times' style={{color: 'red'}}></i>
                                     }</td>
                                     <td>
