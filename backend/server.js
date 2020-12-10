@@ -36,10 +36,6 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
-    res.send('Your API is running');
-});
-
 app.use('/api/products', productRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/orders', ordersRoutes);
@@ -48,6 +44,17 @@ app.use('/api/upload', uploadRoutes);
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENTID));
 
 const folder = path.resolve()
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(folder, '/frontend/build')));
+
+    app.get('*', (req, res) => res.sendFile(path.resolve(folder, 'frontend', 'build', 'index.html')));
+} else {
+    app.get('/', (req, res) => {
+        res.send('Your API is running');
+    });
+}
+
 app.use('/uploads', express.static(path.join(folder, '/uploads')));
 
 app.use(notFound);
