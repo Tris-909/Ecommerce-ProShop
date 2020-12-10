@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
 import { getAllUsers, deleteUserAsAdmin } from '../redux/actions/adminActions'; 
+import Helmet from '../components/Helmet';
 
 const AdminScreen = ({ history }) => {
     const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const AdminScreen = ({ history }) => {
 
     return (
         <>
+            <Helmet title={`Admin Users List | ProShop`} href="/admin/usersList" />
             <h1>Users</h1>
             {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please try again" /> : (
                 <Table striped bordered hover responsive className="table-sm">

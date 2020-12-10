@@ -6,6 +6,7 @@ import { loadUserInfo, updateUserInfo } from '../redux/actions/adminActions';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
 import FormContainer from '../components/FormContainer';
+import Helmet from '../components/Helmet';
 
 const AdminUserInfoScreen = ({ match }) => {
     const [name, setName] = useState('');
@@ -41,6 +42,7 @@ const AdminUserInfoScreen = ({ match }) => {
 
     return (
         <>
+        <Helmet title={`Admin Edit User | ProShop`} href="/admin/usersList" />
         <Link to='/admin/usersList' className="btn btn-light my-3">
             Go Back
         </Link>

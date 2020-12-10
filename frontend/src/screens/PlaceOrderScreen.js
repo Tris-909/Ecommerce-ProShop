@@ -6,6 +6,7 @@ import { removeProductsInCartAfterBuy } from '../redux/actions/cartActions';
 import Message from '../components/Message';
 import CheckOutStep from '../components/CheckOutStep';
 import {Link} from 'react-router-dom';
+import Helmet from '../components/Helmet'; 
 
 const PlaceOrderScreen = ({ history }) => {
     const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const PlaceOrderScreen = ({ history }) => {
     return (
         <>
             <CheckOutStep step1 step2 step3 step4 />
+            <Helmet title={`PlaceOrder | ProShop`} href="/placeorder" />
             <Row>
                 <Col md={9}>
                     <ListGroup variant="flush">

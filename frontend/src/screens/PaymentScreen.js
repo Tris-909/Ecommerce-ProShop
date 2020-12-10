@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import CheckOutStep from '../components/CheckOutStep';
 import { savePaymentMethod } from '../redux/actions/cartActions';
+import Helmet from '../components/Helmet';
 
 const PaymentScreen = ({ history }) => {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const PaymentScreen = ({ history }) => {
 
     return (
         <FormContainer>
+            <Helmet title={`Payment Selection | ProShop`} href="/payment" />
             <CheckOutStep step1 step2 step3/>
             <h1>Payment Methods :</h1>
             <Form onSubmit={onSubmitHandler}>
