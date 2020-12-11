@@ -33,7 +33,8 @@ import {
 } from './reducers/adminReducers';
 import {
     topLaptopReducer,
-    allLaptopsReducer
+    allLaptopsReducer,
+    getALaptopReducer
 } from './reducers/laptopReducer';
 
 const reducer = combineReducers({
@@ -58,7 +59,8 @@ const reducer = combineReducers({
     userReview: userReviewReducer,
     carouselProducts: carouselProductReducer,
     topLaptops: topLaptopReducer,
-    allLaptops: allLaptopsReducer
+    allLaptops: allLaptopsReducer,
+    singleLaptop: getALaptopReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];

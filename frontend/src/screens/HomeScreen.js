@@ -74,9 +74,12 @@ const HomeScreen = ({ match }) => {
                     ) : <Spinner animation="border" size="lg" style={{ width: '100px', height: '100px' }} /> 
                    }
                 </Row>
+                <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
                 <Link to="/laptops">
                     <Button variant="outline-dark">See More</Button>
                 </Link>
+                </Row>
+
                 <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />   
                 </>
             )
