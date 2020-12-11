@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react'
 import Product from '../components/Product';
-import { Col, Row, Spinner, Alert} from 'react-bootstrap';
+import { Col, Row, Spinner, Alert, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {getProductsList, getCarouselProducts} from '../redux/actions/productActions';
 import {getTopTiersLaptop} from '../redux/actions/laptopActions';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import CarouselSection from '../components/Carousel';
+import {Link} from 'react-router-dom';
 import Helmet from '../components/Helmet';
 
 const HomeScreen = ({ match }) => {
@@ -60,12 +61,12 @@ const HomeScreen = ({ match }) => {
                     ) : <Spinner animation="border" size="lg" style={{ width: '100px', height: '100px' }} /> 
                    }
                 </Row>
-                <h1>Best Laptops : </h1>
+                <h1 style={{textDecoration: 'underline'}}>Our Top Tiers Laptops : </h1>
                 <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
                    { !topLaptopLoading ? topLaptops.length > 0 ? topLaptops.map((laptop) => {
                         return(
                             <Col sm={12} md={6} lg={6} xl={4} key={laptop._id}>
-                               <Product product={laptop}/>
+                               <Product product={laptop} link={`/laptops`}/>
                             </Col>
                         );
                     }) : (
@@ -73,6 +74,9 @@ const HomeScreen = ({ match }) => {
                     ) : <Spinner animation="border" size="lg" style={{ width: '100px', height: '100px' }} /> 
                    }
                 </Row>
+                <Link to="/laptops">
+                    <Button variant="outline-dark">See More</Button>
+                </Link>
                 <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />   
                 </>
             )

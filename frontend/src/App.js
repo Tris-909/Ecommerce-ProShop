@@ -16,6 +16,7 @@ import AdminUserInfoScreen from './screens/AdminUserInfoScreen';
 import ProductListAdminScreen from './screens/ProductListAdminScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import AdminOrdersScreen from './screens/AdminOrdersScreen';
+import LaptopScreen from './screens/LaptopScreen';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -27,6 +28,7 @@ function App() {
       <main className='py-3'>
         <Container>
           <Route path="/product/:id" component={ProductScreen} />
+          <Route path="/laptops" component={LaptopScreen} exact />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/login" component={LoginScreen} exact /> 
           <Route path="/register" component={RegisterScreen} exact />

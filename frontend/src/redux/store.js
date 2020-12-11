@@ -32,7 +32,8 @@ import {
     update_Product_Admin_Reducer 
 } from './reducers/adminReducers';
 import {
-    topLaptopReducer
+    topLaptopReducer,
+    allLaptopsReducer
 } from './reducers/laptopReducer';
 
 const reducer = combineReducers({
@@ -56,7 +57,8 @@ const reducer = combineReducers({
     isDeliveredOrderAdmin: putIsDeliveredStatus,
     userReview: userReviewReducer,
     carouselProducts: carouselProductReducer,
-    topLaptops: topLaptopReducer
+    topLaptops: topLaptopReducer,
+    allLaptops: allLaptopsReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
