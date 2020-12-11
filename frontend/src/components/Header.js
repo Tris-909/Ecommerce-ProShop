@@ -23,7 +23,7 @@ const Header = ({ history }) => {
         <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
             <Container>
                 <LinkContainer to="/">
-                    <Navbar.Brand>MERN Shops</Navbar.Brand>
+                    <Navbar.Brand>ProShop</Navbar.Brand>
                 </LinkContainer>
                 
                 <SearchBox />
@@ -34,14 +34,14 @@ const Header = ({ history }) => {
                   <Nav className="ml-auto">
                     <LinkContainer to="/cart">
                       <Nav.Link href="/cart">
-                          <i className='fas fa-shopping-cart' style={{ marginRight: 8 }}></i>
+                          <i className='fas fa-shopping-cart' style={{ marginRight: 8, fontSize: '1.2rem' }}></i>
                           Cart
                       </Nav.Link>
                     </LinkContainer>
 
                     {
                         user && user.isAdmin ? (
-                            <NavDropdown title="Admin" id="adminuser" style={{marginRight: '0rem'}}>
+                            <NavDropdown title={<i class="fas fa-crown" style={{ fontSize: '1.2rem' }}></i>} id="adminuser" style={{marginRight: '0rem'}}>
                                 <LinkContainer to="/admin/usersList">
                                     <NavDropdown.Item>Users</NavDropdown.Item>
                                 </LinkContainer>
@@ -57,7 +57,7 @@ const Header = ({ history }) => {
 
                     {
                         user ? (
-                            <NavDropdown title={user.name} id='username'>
+                            <NavDropdown title={<i class="fas fa-cog" style={{ marginRight: 8, fontSize: '1.2rem' }}></i>} id='username'>
                                 <LinkContainer to="/profile">
                                     <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>

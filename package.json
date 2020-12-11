@@ -9,6 +9,7 @@
     "dev": "concurrently \"npm run start\" \"npm run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
+    "laptop:import": "node backend/seeder -l",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --predix frontend"
   },
   "repository": {

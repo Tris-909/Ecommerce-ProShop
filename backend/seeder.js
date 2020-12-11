@@ -4,11 +4,13 @@ dotenv.config();
 import colors from 'colors';
 
 import users from './data/users.js';
+import laptops from './data/laptops.js';
 import products from './data/products.js';
 
 import Order from './models/order.js';
 import Product from './models/product.js';
 import User from './models/user.js';
+import Laptop from './models/laptops.js';
 
 import connectDB from './config/db.js';
 connectDB();
@@ -53,8 +55,21 @@ const destroyData = async () => {
     }
 }
 
+const uploadLaptopsData = async()  => {
+    try {
+        await Laptop.insertMany(laptops);
+        console.log('Laptops imported successfully !'.green.inverse); 
+        process.exit();
+    } catch (error) {
+        console.log(`error: ${error.message}`.red.inverse);
+        process.exit(1);
+    }
+}
+
 if (process.argv[2] === '-d') {
     destroyData();
+} else if (process.argv[2] === '-l') {
+    uploadLaptopsData();
 } else {
     importData();
 }

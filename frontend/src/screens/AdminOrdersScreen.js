@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
-import { Row, Col, Table, Button } from 'react-bootstrap';
+import { Row, Col, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
 import { getAllOrdersAsAdmin } from '../redux/actions/adminActions';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router-dom';
 
 const AdminOrdersScreen = ({ history }) => {
     const dispatch = useDispatch();
-    const { orders, loading, success, error } = useSelector(state => state.adminOrders);
+    const { orders, loading, error } = useSelector(state => state.adminOrders);
     const { user } = useSelector(state => state.user);
 
     useEffect(() => {
@@ -21,10 +19,6 @@ const AdminOrdersScreen = ({ history }) => {
         // eslint-disable-next-line
     }, [history, dispatch]);
     
-    const deleteHandler = (id) => {
-
-    }
-
     const direct = (id) => {
         history.push(`/orders/${id}`);
     }
