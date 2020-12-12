@@ -81,79 +81,79 @@ const SingleLaptopScreen = ({ match }) => {
                                   <tbody>
                                     <tr>
                                       <td>Display Size (inches)</td>
-                                      <td>{singleLaptop.details[0].displaySizeInches}</td>
+                                      <td>{singleLaptop.details.displaySizeInches}</td>
                                     </tr>
                                     <tr>
                                       <td>Resolution (Pixels)</td>
-                                      <td>{singleLaptop.details[0].resolutionPixels}</td>
+                                      <td>{singleLaptop.details.resolutionPixels}</td>
                                     </tr>
                                     <tr>
                                       <td>Screen Resolution</td>
-                                      <td>{singleLaptop.details[0].screenResolution}</td>
+                                      <td>{singleLaptop.details.screenResolution}</td>
                                     </tr>
                                     <tr>
                                       <td>Display type</td>
-                                      <td>{singleLaptop.details[0].displayType}</td>
+                                      <td>{singleLaptop.details.displayType}</td>
                                     </tr>
                                     <tr>
                                       <td>Processor Type</td>
-                                      <td>{singleLaptop.details[0].proccessorType}</td>
+                                      <td>{singleLaptop.details.proccessorType}</td>
                                     </tr>
                                     <tr>
                                       <td>Processor Cores</td>
-                                      <td>{singleLaptop.details[0].proccessorCores}</td>
+                                      <td>{singleLaptop.details.proccessorCores}</td>
                                     </tr>
                                     <tr>
                                       <td>Processor Memory Cache</td>
-                                      <td>{singleLaptop.details[0].processorMemoryCache}</td>
+                                      <td>{singleLaptop.details.processorMemoryCache}</td>
                                     </tr>
                                     <tr>
                                       <td>Processor Clock Speed (GHz)</td>
-                                      <td>{singleLaptop.details[0].processorClockSpeed}</td>
+                                      <td>{singleLaptop.details.processorClockSpeed}</td>
                                     </tr>
                                     <tr>
                                       <td>Processor Max. Clock Speed (GHz)</td>
-                                      <td>{singleLaptop.details[0].processorMaxClockSpeed}</td>
+                                      <td>{singleLaptop.details.processorMaxClockSpeed}</td>
                                     </tr>
                                     <tr>
                                       <td>Graphics processor</td>
-                                      <td>{singleLaptop.details[0].graphicsProcessor}</td>
+                                      <td>{singleLaptop.details.graphicsProcessor}</td>
                                     </tr>
                                     <tr>
                                       <td>RAM (GB)</td>
-                                      <td>{singleLaptop.details[0].ram}</td>
+                                      <td>{singleLaptop.details.ram}</td>
                                     </tr>
                                     <tr>
                                       <td>SSD Storage</td>
-                                      <td>{singleLaptop.details[0].ssdStorage}</td>
+                                      <td>{singleLaptop.details.ssdStorage}</td>
                                     </tr>
                                     <tr>
                                       <td>USB 2.0 Ports</td>
-                                      <td>{singleLaptop.details[0].usbTwoPointOPorts}</td>
+                                      <td>{singleLaptop.details.usbTwoPointOPorts}</td>
                                     </tr>
                                     <tr>
                                       <td>USB C Ports</td>
-                                      <td>{singleLaptop.details[0].usbCPorts}</td>
+                                      <td>{singleLaptop.details.usbCPorts}</td>
                                     </tr>
                                     <tr>
                                       <td>Card Reader</td>
-                                      <td>{singleLaptop.details[0].cardReader}</td>
+                                      <td>{singleLaptop.details.cardReader}</td>
                                     </tr>
                                     <tr>
                                       <td>Web Cam</td>
-                                      <td>{singleLaptop.details[0].webCam}</td>
+                                      <td>{singleLaptop.details.webCam}</td>
                                     </tr>
                                     <tr>
                                       <td>Wi-Fi</td>
-                                      <td>{singleLaptop.details[0].wifi}</td>
+                                      <td>{singleLaptop.details.wifi}</td>
                                     </tr>
                                     <tr>
                                       <td>Operating system</td>
-                                      <td>{singleLaptop.details[0].operatingSystem}</td>
+                                      <td>{singleLaptop.details.operatingSystem}</td>
                                     </tr>
                                     <tr>
                                       <td>Manufacturer's warranty</td>
-                                      <td>{singleLaptop.details[0].manufacturersWarantty}</td>
+                                      <td>{singleLaptop.details.manufacturersWarantty}</td>
                                     </tr>
                                   </tbody>
                                 </Table>

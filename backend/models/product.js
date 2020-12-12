@@ -22,9 +22,7 @@ const reviewSchema = mongoose.Schema({
 });
 
 const laptopDetailSchema = mongoose.Schema({
-    displaySizeInches: {
-        type: String
-    },
+    displaySizeInches: String,
     resolutionPixels: {
         type: String
     },
@@ -108,7 +106,10 @@ const productSchema = mongoose.Schema({
         required: true
     },
     reviews: [reviewSchema],
-    laptopDetails: [laptopDetailSchema],
+    details: {
+        type: Object,
+        required: true
+    },
     rating: {
         type: Number,
         required: true,

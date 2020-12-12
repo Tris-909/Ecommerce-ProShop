@@ -125,8 +125,10 @@ const Header = ({ history }) => {
                         ) : (
                         <LinkContainer to="/login">
                             <Nav.Link href="/login">
-                                <i className='fas fa-user' style={{ marginRight: 8 }}></i>
+                            <AddBlackColor>
+                                <i className='fas fa-user' style={{ marginRight: 8, fontSize: '1.2rem'}}></i>
                                 Sign In
+                            </AddBlackColor>
                             </Nav.Link>
                         </LinkContainer>
                         )
