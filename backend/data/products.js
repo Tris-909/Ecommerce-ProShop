@@ -10,7 +10,8 @@ const products = [
     countInStock: 10,
     rating: 4.5,
     numReviews: 12,
-    details: {}
+    details: {},
+    tvsDetail: {}
 
   },
   {
@@ -24,8 +25,8 @@ const products = [
     countInStock: 7,
     rating: 4.0,
     numReviews: 8,
-    details: {}
-
+    details: {},
+    tvsDetail: {}
   },
   {
     name: 'Cannon EOS 80D DSLR Camera',
@@ -38,7 +39,8 @@ const products = [
     countInStock: 5,
     rating: 3,
     numReviews: 12,
-    details: {}
+    details: {},
+    tvsDetail: {}
 
   },
   {
@@ -52,7 +54,8 @@ const products = [
     countInStock: 11,
     rating: 5,
     numReviews: 12,
-    details: {}
+    details: {},
+    tvsDetail: {}
 
   },
   {
@@ -66,7 +69,8 @@ const products = [
     countInStock: 7,
     rating: 3.5,
     numReviews: 10,
-    details: {}
+    details: {},
+    tvsDetail: {}
 
   },
   {
@@ -80,7 +84,8 @@ const products = [
     countInStock: 0,
     rating: 4,
     numReviews: 12,
-    details: {}
+    details: {},
+    tvsDetail: {}
   },
   {
     name: 'MSI Prestige 14Evo 14" Full HD Laptop (512GB)',
@@ -113,7 +118,8 @@ const products = [
         wifi: 'yes',
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
-    }
+    },
+    tvsDetail: {}
 },
 {
     name: 'MSI GF63 15.6" Full HD 144Hz Gaming Laptop (512GB)',
@@ -146,7 +152,8 @@ const products = [
         wifi: 'yes',
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
-    }
+    },
+    tvsDetail: {}
 },
 {
     name: 'MSI GT76 Titan DT 17.3" Full HD 300Hz Gaming Laptop (RTX 2080 Super)',
@@ -179,7 +186,8 @@ const products = [
         wifi: 'yes',
         operatingSystem: 'Windows 10 Pro',
         manufacturersWarantty: '3 years'
-    }
+    },
+    tvsDetail: {}
 },
 {
     name: 'MSI GE66 Dragonshield 15.6" Full HD 240Hz Gaming Laptop (1TB) [RTX 2070]',
@@ -212,7 +220,8 @@ const products = [
         wifi: 'yes',
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
-    }
+    },
+    tvsDetail: {}
 },
 {
     name: 'MSI GP65 Leopard 15.6" Full HD 144Hz Gaming Laptop (512GB)[GTX 1660 Ti]',
@@ -245,7 +254,8 @@ const products = [
         wifi: 'yes',
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
-    }
+    },
+    tvsDetail: {}
 },
 {
     name: 'MSI Bravo 15 15.6" Full HD 144Hz Gaming Laptop (512GB) [Ryzen 5]',
@@ -256,8 +266,8 @@ const products = [
     category: 'laptops',
     price: 2400,
     countInStock: 7,
-    rating: 4.5,
-    numReviews: 2,
+    rating: 0,
+    numReviews: 0,
     details: {
         displaySizeInches: '15.6"',
         resolutionPixels: '1920x1080',
@@ -278,7 +288,152 @@ const products = [
         wifi: 'yes',
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
-    }
+    },
+    tvsDetail: {}
+},
+{
+  name: 'Samsung Q60T 75" QLED Ultra HD 4K Smart TV [2020]',
+  image: '/images/tvs-1.jpg',
+  description:
+    'Enter a world saturated with colour and sharpened to refreshing clarity, all of it made possible through the power of Quantum Dot technology. An intuitive Smart TV interface learns what you like and suggests exciting new content. And if you’re into gaming, Game Enhancer automatically neutralizes annoyances like tearing and stuttering.',
+  brand: 'Samsung',
+  category: 'tvs',
+  price: 2895,
+  countInStock: 3,
+  rating: 0,
+  numReviews: 0,
+  details: {},
+  tvsDetail: {
+    screenSizes: '75 Inches',
+    screenType: 'QLED-Flat',
+    screenResolution: '4K Ultra HD',
+    resolutionInPixel: '3840 x 2160',
+    refreshRate: '100 Hz',
+    wifi: 'yes',
+    usbPorts: '3',
+    sizeHeightWidthDepth: '956.9mm x 1675.5mm x 60.4mm',
+    warranty: '1 year'
+  }
+},
+{
+  name: 'LG CX 48" Self-Lit OLED Smart 4K TV with AI ThinQ',
+  image: '/images/tvs-2.jpg',
+  description:
+    'Enjoy professionally mastered visual and sound at home. Watch Dolby enhanced movies the way they should be absolutely breathtakingly1. With Dolby Vision IQ, the screen brightness, colour and contrast are intelligently adjusted for content and lighting conditions. Plus, Dolby Atmos delivers an immersive audio experience, for maximum enjoyment.',
+  brand: 'LG',
+  category: 'tvs',
+  price: 2795,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {},
+  tvsDetail: {
+    screenSizes: '48 Inches',
+    screenType: 'QLED-Flat',
+    screenResolution: '4K Ultra HD',
+    resolutionInPixel: '3840 x 2160',
+    refreshRate: '80 Hz',
+    wifi: 'yes',
+    usbPorts: '3',
+    sizeHeightWidthDepth: '618mm x 1071mm x 47mm',
+    warranty: '1 year'
+  }
+},
+{
+  name: 'Hisense 70S5 Series 5 70" 4K UHD Smart TV [2020]',
+  image: '/images/tvs-3.jpg',
+  description:
+    'Get straight to the content you love with a touch of button with the Series 5 Smart TV by Hisense. Easily navigate through the VIDAA U Smart UI and stream the latest movies and TV series in stunning 4K Ultra HD.  Now you can share your favourite pictures and videos via the Hisense RemoteNow app.',
+  brand: 'Hisense',
+  category: 'tvs',
+  price: 1095,
+  countInStock: 6,
+  rating: 4,
+  numReviews: 8,
+  details: {},
+  tvsDetail: {
+    screenSizes: '70 Inches',
+    screenType: 'LED LCD-Flat',
+    screenResolution: '4K Ultra HD',
+    resolutionInPixel: '3840 x 2160',
+    refreshRate: '100 Hz',
+    wifi: 'yes',
+    usbPorts: '2',
+    sizeHeightWidthDepth: '961mm x 1676mm x 85mm',
+    warranty: '1 year'
+  }
+},
+{
+  name: 'LG CX 55" Self-Lit OLED Smart 4K TV with AI ThinQ',
+  image: '/images/tvs-4.jpg',
+  description:
+    'Self-Lit OLED: Perfect Black, Billion Rich Colours, OLED Eye Comfort',
+  brand: 'LG',
+  category: 'tvs',
+  price: 3295,
+  countInStock: 2,
+  rating: 0,
+  numReviews: 0,
+  details: {},
+  tvsDetail: {
+    screenSizes: '55 Inches',
+    screenType: 'QLED-Flat',
+    screenResolution: '4K Ultra HD',
+    resolutionInPixel: '3840 x 2160',
+    refreshRate: '120 Hz',
+    wifi: 'yes',
+    usbPorts: '3',
+    sizeHeightWidthDepth: '706mm x 1228mm x 47mm',
+    warranty: '1 year'
+  }
+},
+{
+  name: 'Samsung Q80T 75" QLED Ultra HD 4K Smart TV [2020]',
+  image: '/images/tvs-5.jpg',
+  description:
+    'Step up to a whole new world of color. Quantum Dot technology lets you experience images bursting with a dazzling range of over one billion colors, each upscaled to incredible clarity in a revolutionary new way thanks to Samsung’s intelligent 4K processor.',
+  brand: 'Samsung',
+  category: 'tvs',
+  price: 4495,
+  countInStock: 2,
+  rating: 0,
+  numReviews: 0,
+  details: {},
+  tvsDetail: {
+    screenSizes: '75 Inches',
+    screenType: 'QLED-Flat',
+    screenResolution: '4K Ultra HD',
+    resolutionInPixel: '3840 x 2160',
+    refreshRate: '200 Hz',
+    wifi: 'yes',
+    usbPorts: '4',
+    sizeHeightWidthDepth: '958.7mm x 1670.6mm x 53.9mm',
+    warranty: '1 year'
+  }
+},
+{
+  name: 'Sony X7000G 65" 4k Ultra HD HDR Smart TV',
+  image: '/images/tvs-6.jpg',
+  description:
+    "Enjoy an immersive soundstage that pulls you into the heart of the action. S-Force Front Surround mimics the way the brain correlates sound sources to create proper volume, time lag, and sound wave spectrum - using only left and right speaker channels. By naturally emulating three-dimensional sound fields, you'll enjoy rich, high-fidelity audio across a wider listening area.",
+  brand: 'Sony',
+  category: 'tvs',
+  price: 1395,
+  countInStock: 2,
+  rating: 0,
+  numReviews: 0,
+  details: {},
+  tvsDetail: {
+    screenSizes: '65 Inches',
+    screenType: 'LED LCD-Flat',
+    screenResolution: '4K Ultra HD',
+    resolutionInPixel: '3840 x 2160',
+    refreshRate: '100 Hz',
+    wifi: 'yes',
+    usbPorts: '3',
+    sizeHeightWidthDepth: '845mm x 1463mm x 80mm',
+    warranty: '1 year'
+  }
 }
 ]
 

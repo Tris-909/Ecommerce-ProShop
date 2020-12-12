@@ -10,7 +10,10 @@ import {
     getTopRatedProducts,
     getAllLaptops,
     getSingleLaptop,
-    getTopTierLaptops
+    getTopTierLaptops,
+    getAllTVs,
+    getTopTierTVs,
+    getSingleTVs
 } from '../controller/productController.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
@@ -20,6 +23,9 @@ router.route('/carousel').get(getTopRatedProducts);
 router.route('/laptops').get(getAllLaptops);
 router.route('/laptops/toptier').get(getTopTierLaptops);
 router.route('/laptops/:id').get(getSingleLaptop);
+router.route('/tvs').get(getAllTVs);
+router.route('/tvs/toptier').get(getTopTierTVs);
+router.route('/tvs/:id').get(getSingleTVs);
 router.route('/:id')
 .get(getProductById)
 .delete(protect, admin, deleteProductByIdAsAdmin)

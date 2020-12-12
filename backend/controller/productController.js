@@ -176,6 +176,45 @@ const getTopTierLaptops = AsyncHandler(async (req, res) => {
     res.send(topLaptops);
 });
 
+//? GET All TVs from databases 
+//? GET /api/products/tvs
+//? Public Route
+const getAllTVs = AsyncHandler(async(req, res) => {
+    const AllTVs = await Product.find({
+        category: 'tvs'
+    });
+
+    res.status(200).json(AllTVs);
+});
+
+//? GET Top 3 Most Expensive TVs from databases 
+//? GET /api/products/tvs/toptier
+//? Public Route
+const getTopTierTVs = AsyncHandler(async(req, res) => {
+    const TopTierTVs = await Product.find({
+        category: 'tvs'
+    }).sort({ price: -1 }).limit(3);
+
+    res.status(200).json(TopTierTVs);
+});
+
+//? GET A Single TV from databases based on it ID
+//? GET /api/products/tvs/:id
+//? Public Route
+const getSingleTVs = AsyncHandler(async(req, res) => {
+    const singleTV = await Product.findOne({
+        category: 'tvs',
+        _id: req.params.id
+    });
+
+    if (singleTV) {
+        res.status(200).json(singleTV);
+    } else {
+        res.status(404);
+        throw new Error('Cant find your TVs based on this ID')
+    }
+});
+
 export {
     getProducts,
     getProductById,
@@ -186,5 +225,8 @@ export {
     getTopRatedProducts,
     getAllLaptops,
     getSingleLaptop,
-    getTopTierLaptops
+    getTopTierLaptops,
+    getAllTVs,
+    getTopTierTVs,
+    getSingleTVs
 }
