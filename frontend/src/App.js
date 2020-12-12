@@ -19,6 +19,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import AdminOrdersScreen from './screens/AdminOrdersScreen';
 import LaptopScreen from './screens/LaptopScreen';
 import SingleLaptopScreen from './screens/SingleLaptopScreen';
+import SearchScreen from './screens/SearchScreen';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -49,9 +50,9 @@ function App() {
           <Route path="/admin/productsList/:pageNumber" component={ProductListAdminScreen} />
           <Route path="/admin/products/:id/edit" component={ProductEditScreen} />
           <Route path="/admin/ordersList" component={AdminOrdersScreen} exact />
-          <Route path="/search/:keyword" component={HomeScreen} exact />
-          <Route path="/page/:pageNumber" component={HomeScreen} />
-          <Route path="/search/:keyword/page/:pageNumber" component={HomeScreen} />
+          <Route path="/search/:keyword" component={SearchScreen} exact />
+          <Route path="/page/:pageNumber" component={SearchScreen} />
+          <Route path="/search/:keyword/page/:pageNumber" component={SearchScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

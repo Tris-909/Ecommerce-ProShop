@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import Product from '../components/Product';
 import { Col, Row, Spinner, Alert, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,20 +9,10 @@ import CarouselSection from '../components/Carousel';
 import {Link} from 'react-router-dom';
 import Helmet from '../components/Helmet';
 
-const HomeScreen = ({ match }) => {
+const HomeScreen = () => {
     const dispatch = useDispatch();
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth < 950);
     const { carouselProducts, loading: carouselLoading, error: carouselError } = useSelector(state => state.carouselProducts);
     const { topLaptops, loading: topLaptopLoading, error: topLaptopError } = useSelector(state => state.topLaptops);
-
-    const updateMedia = () => {
-        setScreenWidth(window.innerWidth < 950);
-    };
-    useEffect(() => {
-        window.addEventListener("resize", updateMedia);
-        return () => window.removeEventListener("resize", updateMedia);
-    });
-
 
     useEffect(() => {
         if (carouselProducts.length === 0) {
