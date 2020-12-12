@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './components/Header';
+import SubNavbar from './components/SubNavbar';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -28,6 +29,7 @@ function App() {
     <Router>
       <ScrollToTop>
       <Header/>
+      <SubNavbar />
       <main className='py-3'>
         <Container>
           <Route path="/product/:id" component={ProductScreen} />

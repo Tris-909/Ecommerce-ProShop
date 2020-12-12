@@ -1,27 +1,28 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import Product from '../components/Product';
 import { Col, Row, Spinner, Alert, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {getProductsList, getCarouselProducts} from '../redux/actions/productActions';
+import {getCarouselProducts} from '../redux/actions/productActions';
 import {getTopTiersLaptop} from '../redux/actions/laptopActions';
 import Message from '../components/Message';
-import Paginate from '../components/Paginate';
 import CarouselSection from '../components/Carousel';
 import {Link} from 'react-router-dom';
 import Helmet from '../components/Helmet';
 
 const HomeScreen = ({ match }) => {
-    const keyword = match.params.keyword;   
-    const pageNumber = match.params.pageNumber || 1;
-    const dispatch = useDispatch()
-    const productsList = useSelector(state => state.productsList);
-    const { products, page, pages, loading, error } = productsList;
+    const dispatch = useDispatch();
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth < 950);
     const { carouselProducts, loading: carouselLoading, error: carouselError } = useSelector(state => state.carouselProducts);
     const { topLaptops, loading: topLaptopLoading, error: topLaptopError } = useSelector(state => state.topLaptops);
 
+    const updateMedia = () => {
+        setScreenWidth(window.innerWidth < 950);
+    };
     useEffect(() => {
-        dispatch(getProductsList(keyword, pageNumber));
-    }, [dispatch, keyword, pageNumber])
+        window.addEventListener("resize", updateMedia);
+        return () => window.removeEventListener("resize", updateMedia);
+    });
+
 
     useEffect(() => {
         if (carouselProducts.length === 0) {
@@ -36,31 +37,20 @@ const HomeScreen = ({ match }) => {
     }, [dispatch, topLaptops]);
 
     const checkIfErrorExisted = () => {
-        if (error) {
+        if (topLaptopError) {
             return (
                 <Alert variant="danger" dismissible>
                     <Alert.Heading>Something went wrong :(</Alert.Heading>
-                    <p> {error.message} </p>
+                    <p> {topLaptopError.message} </p>
                 </Alert>
             );
         } else {
             return(
                 <>
                 <Helmet title="Welcome to Proshop" href="" />
+                
                 <CarouselSection carouselProducts={carouselProducts} loading={carouselLoading} error={carouselError} />
-                <h1>Products : </h1>
-                <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
-                   { !loading ? products.length > 0 ? products.map((product) => {
-                        return(
-                            <Col sm={12} md={6} lg={6} xl={4} key={product._id}>
-                               <Product product={product}/>
-                            </Col>
-                        );
-                    }) : (
-                        <Message variant="danger" content="Can't find your product, please try something else"/>
-                    ) : <Spinner animation="border" size="lg" style={{ width: '100px', height: '100px' }} /> 
-                   }
-                </Row>
+                
                 <h1 style={{textDecoration: 'underline', fontFamily: 'Rokkitt'}}>Our Top Tiers MSI Laptops : </h1>
                 <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
                    { !topLaptopLoading ? topLaptops.length > 0 ? topLaptops.map((laptop) => {
@@ -80,7 +70,6 @@ const HomeScreen = ({ match }) => {
                 </Link>
                 </Row>
 
-                <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />   
                 </>
             )
         }

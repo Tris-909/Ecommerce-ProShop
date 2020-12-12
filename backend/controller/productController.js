@@ -168,7 +168,7 @@ const getSingleLaptop = AsyncHandler(async (req, res) => {
 });
 
 //? Fetch 3 most expensive laptops from databases to render to HomeScreen
-//? GET /api/products/laptops/toptiers
+//? GET /api/products/laptops/toptier
 //? public routes
 const getTopTierLaptops = AsyncHandler(async (req, res) => {
     const topLaptops = await Product.find({category: 'laptops'}).sort({price: -1}).limit(3);

@@ -19,7 +19,7 @@ export const getTopTiersLaptop = () => async(dispatch) => {
             type: GET_TOP_LAPTOPS_REQUEST
         });
 
-        const { data } = await axios.get('/api/laptops/toptiers');
+        const { data } = await axios.get('/api/products/laptops/toptier');
         dispatch({
             type: GET_TOP_LAPTOPS_SUCCESS,
             payload: data
@@ -38,7 +38,7 @@ export const getAllLaptops = () => async(dispatch) => {
             type: GET_ALL_LAPTOPS_REQUEST
         });
 
-        const { data } = await axios.get('/api/laptops');
+        const { data } = await axios.get('/api/products/laptops');
 
         dispatch({
             type: GET_ALL_LAPTOPS_SUCCESS,
@@ -58,7 +58,7 @@ export const getSingleLaptopBasedOnId = (id) => async(dispatch) => {
             type: GET_A_LAPTOP_REQUEST
         });
 
-        const { data } = await axios.get(`/api/laptops/${id}`);
+        const { data } = await axios.get(`/api/products/laptops/${id}`);
 
         dispatch({
             type: GET_A_LAPTOP_SUCCESS,
