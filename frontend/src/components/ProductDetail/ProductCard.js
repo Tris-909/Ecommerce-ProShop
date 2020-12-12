@@ -13,7 +13,7 @@ const ProductCard = ( props ) => {
     }
 
     return (
-        <Col md={props.laptop ? 4 : 3}>
+        <Col md={4}>
             <Card>
                 <ListGroup variant="flush">
                     <ListGroup.Item>

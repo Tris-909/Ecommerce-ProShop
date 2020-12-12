@@ -24,7 +24,7 @@ const TVScreen = () => {
             {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please reload the webpage" /> : tvs.map((tv) => {
                 return(
                     <Col sm={12} md={6} lg={6} xl={4} key={tv._id}>
-                        <Product product={tv} link={`/laptops`}/>
+                        <Product product={tv} link={`/tvs`}/>
                     </Col>
                 );
             })}

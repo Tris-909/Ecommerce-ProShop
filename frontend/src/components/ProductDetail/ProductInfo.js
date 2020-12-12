@@ -3,10 +3,10 @@ import {Col, ListGroup} from 'react-bootstrap';
 import Rating from '../Rating';
 
 const ProductInfo = (props) => {
-    const { name, price, rating, numReviews, description, laptop = false } = props;
+    const { name, price, rating, numReviews, description} = props;
 
     return (
-        <Col md={laptop ? 12 : 4}>
+        <Col md={12}>
             <ListGroup variant="flush">
                 <ListGroup.Item>
                     <h3>{name}</h3>

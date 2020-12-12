@@ -1,9 +1,9 @@
 import React from 'react'
 import {Col, Image} from 'react-bootstrap';
 
-const ProductImage = ({ name, image, laptop = false }) => {
+const ProductImage = ({ name, image}) => {
     return (
-        <Col md={laptop ? 8 : 5}>
+        <Col md={8}>
             <Image src={image} alt={name} fluid />
         </Col>
     );

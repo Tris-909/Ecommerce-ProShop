@@ -18,7 +18,6 @@ import ProductListAdminScreen from './screens/ProductListAdminScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import AdminOrdersScreen from './screens/AdminOrdersScreen';
 import LaptopScreen from './screens/LaptopScreen';
-import SingleLaptopScreen from './screens/SingleLaptopScreen';
 import SearchScreen from './screens/SearchScreen';
 import TVScreen from './screens/TVScreen';
 
@@ -37,7 +36,6 @@ function App() {
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/laptops" component={LaptopScreen} exact />
           <Route path="/tvs" component={TVScreen} exact />
-          <Route path="/laptops/:id" component={SingleLaptopScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/login" component={LoginScreen} exact /> 
           <Route path="/register" component={RegisterScreen} exact />

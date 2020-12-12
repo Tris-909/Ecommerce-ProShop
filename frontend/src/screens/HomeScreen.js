@@ -60,7 +60,7 @@ const HomeScreen = () => {
                                 loading={topLaptopLoading} 
                                 itemArray={topLaptops} 
                                 title="Our Top Tiers MSI Laptops :" 
-                                itemLink="/laptops"
+                                itemLink="/product"
                             />
                         ) : null
                     }

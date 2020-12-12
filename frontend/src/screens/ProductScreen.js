@@ -11,6 +11,7 @@ import ProductCard from '../components/ProductDetail/ProductCard';
 import ReviewSection from '../components/ReviewSection/ReviewSection';
 import Loading from '../components/Loading';
 import Helmet from '../components/Helmet';
+import LapTopTable from '../components/ProductDetail/LaptopTable/LapTopTable';
 
 const ProductScreen = ({ match }) => {
     const dispatch = useDispatch();
@@ -40,7 +41,14 @@ const ProductScreen = ({ match }) => {
                             <ProductImage 
                                 image={singleProduct.image} 
                                 name={singleProduct.name} 
+                            />                            
+                            <ProductCard 
+                                price={singleProduct.price}
+                                countInStock={singleProduct.countInStock}
+                                id={match.params.id}
                             />
+                        </Row>
+                        <Row>
                             <ProductInfo 
                                 name={singleProduct.name}
                                 price={singleProduct.price}
@@ -48,12 +56,12 @@ const ProductScreen = ({ match }) => {
                                 description={singleProduct.description}
                                 numReviews={singleProduct.numReviews}
                             />
-                            <ProductCard 
-                                price={singleProduct.price}
-                                countInStock={singleProduct.countInStock}
-                                id={match.params.id}
-                            />
                         </Row>
+                        {
+                            singleProduct.details.proccessorCores ? (
+                                <LapTopTable singleLaptop={singleProduct} />
+                            ) : null
+                        }
                         {
                             singleProduct && user  ? (
                                 <ReviewSection singleProduct={singleProduct} user={user} userReviewError={userReviewError} />
