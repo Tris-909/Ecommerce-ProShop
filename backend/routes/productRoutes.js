@@ -26,10 +26,10 @@ router.route('/laptops/:id').get(getSingleLaptop);
 router.route('/tvs').get(getAllTVs);
 router.route('/tvs/toptier').get(getTopTierTVs);
 router.route('/tvs/:id').get(getSingleTVs);
+router.route('/createReview').post(protect, createReview);
 router.route('/:id')
 .get(getProductById)
 .delete(protect, admin, deleteProductByIdAsAdmin)
 .put(protect, admin, updateProduct);
-router.route('/:id/review').post(protect, createReview);
 
 export default router;

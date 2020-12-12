@@ -170,8 +170,7 @@ export const createReview = (rating, comment, productID) => async(dispatch, getS
                 'Authorization': `Bearer ${user.token}`
             }
         }
-
-        await axios.post(`/api/products/${productID}/review`, { rating, comment }, config);
+        await axios.post(`/api/products/createreview`, { rating, comment, productID }, config);
 
         dispatch({
             type: CREATE_REVIEW_SUCCESS

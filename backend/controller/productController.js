@@ -71,7 +71,7 @@ const createProduct = AsyncHandler(async (req, res) => {
 });
 
 //? Update a product
-//? PUT /api/product/:id
+//? PUT /api/products/:id
 //? private/admin
 const updateProduct = AsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
@@ -95,11 +95,11 @@ const updateProduct = AsyncHandler(async (req, res) => {
 });
 
 //? Create A review
-//? POST /api/product/:id/review
+//? POST /api/products/createreview
 //? private
 const createReview = AsyncHandler(async(req, res) => {
-    const { rating, comment } = req.body;
-    const product = await Product.findById(req.params.id);
+    const { rating, comment, productID } = req.body;
+    const product = await Product.findById(productID);
 
     if (product) {
         const alreadyReviewed = product.reviews.find(review => review.user.toString() === req.user._id.toString());
@@ -119,7 +119,6 @@ const createReview = AsyncHandler(async(req, res) => {
         product.reviews.push(review);
         product.numReviews = product.numReviews++;
         product.rating = product.reviews.reduce((acc, cur) => cur.rating + acc, 0) / product.numReviews;
-
         await product.save();
 
         res.status(200);

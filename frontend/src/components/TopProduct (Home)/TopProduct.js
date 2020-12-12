@@ -15,7 +15,7 @@ const Container = styled.div`
     margin-bottom: 1.5rem;
 `;
 
-const TopProduct = ({ loading, itemArray, title }) => {
+const TopProduct = ({ loading, itemArray, title, itemLink }) => {
     return (
         <Container>
             <TopProductTitle>{title}</TopProductTitle>
@@ -23,7 +23,7 @@ const TopProduct = ({ loading, itemArray, title }) => {
                { !loading ? itemArray.length > 0 ? itemArray.map((tv) => {
                     return(
                         <Col sm={12} md={6} lg={6} xl={4} key={tv._id}>
-                           <Product product={tv} link={`/tvs`}/>
+                           <Product product={tv} link={itemLink}/>
                         </Col>
                     );
                 }) : (

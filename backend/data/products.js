@@ -10,9 +10,8 @@ const products = [
     countInStock: 10,
     rating: 4.5,
     numReviews: 12,
-    details: {},
-    tvsDetail: {}
-
+    details: {exist: true},
+    tvsDetail: {exist: true}
   },
   {
     name: 'iPhone 11 Pro 256GB Memory',
@@ -25,8 +24,8 @@ const products = [
     countInStock: 7,
     rating: 4.0,
     numReviews: 8,
-    details: {},
-    tvsDetail: {}
+    details: {exist: true},
+    tvsDetail: {exist: true}
   },
   {
     name: 'Cannon EOS 80D DSLR Camera',
@@ -39,8 +38,8 @@ const products = [
     countInStock: 5,
     rating: 3,
     numReviews: 12,
-    details: {},
-    tvsDetail: {}
+    details: {exist: true},
+    tvsDetail: {exist: true}
 
   },
   {
@@ -54,8 +53,8 @@ const products = [
     countInStock: 11,
     rating: 5,
     numReviews: 12,
-    details: {},
-    tvsDetail: {}
+    details: {exist: true},
+    tvsDetail: {exist: true}
 
   },
   {
@@ -69,8 +68,8 @@ const products = [
     countInStock: 7,
     rating: 3.5,
     numReviews: 10,
-    details: {},
-    tvsDetail: {}
+    details: {exist: true},
+    tvsDetail: {exist: true}
 
   },
   {
@@ -84,8 +83,8 @@ const products = [
     countInStock: 0,
     rating: 4,
     numReviews: 12,
-    details: {},
-    tvsDetail: {}
+    details: {exist: true},
+    tvsDetail: {exist: true}
   },
   {
     name: 'MSI Prestige 14Evo 14" Full HD Laptop (512GB)',
@@ -119,7 +118,7 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {}
+    tvsDetail: {exist: true}
 },
 {
     name: 'MSI GF63 15.6" Full HD 144Hz Gaming Laptop (512GB)',
@@ -153,7 +152,7 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {}
+    tvsDetail: {exist: true}
 },
 {
     name: 'MSI GT76 Titan DT 17.3" Full HD 300Hz Gaming Laptop (RTX 2080 Super)',
@@ -187,7 +186,7 @@ const products = [
         operatingSystem: 'Windows 10 Pro',
         manufacturersWarantty: '3 years'
     },
-    tvsDetail: {}
+    tvsDetail: {exist: true}
 },
 {
     name: 'MSI GE66 Dragonshield 15.6" Full HD 240Hz Gaming Laptop (1TB) [RTX 2070]',
@@ -221,7 +220,7 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {}
+    tvsDetail: {exist: true}
 },
 {
     name: 'MSI GP65 Leopard 15.6" Full HD 144Hz Gaming Laptop (512GB)[GTX 1660 Ti]',
@@ -255,7 +254,7 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {}
+    tvsDetail: {exist: true}
 },
 {
     name: 'MSI Bravo 15 15.6" Full HD 144Hz Gaming Laptop (512GB) [Ryzen 5]',
@@ -289,7 +288,7 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {}
+    tvsDetail: {exist: true}
 },
 {
   name: 'Samsung Q60T 75" QLED Ultra HD 4K Smart TV [2020]',
@@ -302,7 +301,7 @@ const products = [
   countInStock: 3,
   rating: 0,
   numReviews: 0,
-  details: {},
+  details: {exist: true},
   tvsDetail: {
     screenSizes: '75 Inches',
     screenType: 'QLED-Flat',
@@ -326,7 +325,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
-  details: {},
+  details: {exist: true},
   tvsDetail: {
     screenSizes: '48 Inches',
     screenType: 'QLED-Flat',
@@ -350,7 +349,7 @@ const products = [
   countInStock: 6,
   rating: 4,
   numReviews: 8,
-  details: {},
+  details: {exist: true},
   tvsDetail: {
     screenSizes: '70 Inches',
     screenType: 'LED LCD-Flat',
@@ -374,7 +373,7 @@ const products = [
   countInStock: 2,
   rating: 0,
   numReviews: 0,
-  details: {},
+  details: {exist: true},
   tvsDetail: {
     screenSizes: '55 Inches',
     screenType: 'QLED-Flat',
@@ -398,7 +397,7 @@ const products = [
   countInStock: 2,
   rating: 0,
   numReviews: 0,
-  details: {},
+  details: {exist: true},
   tvsDetail: {
     screenSizes: '75 Inches',
     screenType: 'QLED-Flat',
@@ -422,7 +421,7 @@ const products = [
   countInStock: 2,
   rating: 0,
   numReviews: 0,
-  details: {},
+  details: {exist: true},
   tvsDetail: {
     screenSizes: '65 Inches',
     screenType: 'LED LCD-Flat',
