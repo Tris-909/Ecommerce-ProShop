@@ -20,6 +20,7 @@ import AdminOrdersScreen from './screens/AdminOrdersScreen';
 import LaptopScreen from './screens/LaptopScreen';
 import SingleLaptopScreen from './screens/SingleLaptopScreen';
 import SearchScreen from './screens/SearchScreen';
+import TVScreen from './screens/TVScreen';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -35,6 +36,7 @@ function App() {
         <Container>
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/laptops" component={LaptopScreen} exact />
+          <Route path="/tvs" component={TVScreen} exact />
           <Route path="/laptops/:id" component={SingleLaptopScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/login" component={LoginScreen} exact /> 

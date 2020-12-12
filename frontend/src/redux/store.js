@@ -37,7 +37,8 @@ import {
     getALaptopReducer
 } from './reducers/laptopReducer';
 import {
-    getTopTVs
+    getTopTVs,
+    getALLTVs
 } from './reducers/tvReducers';
 
 const reducer = combineReducers({
@@ -64,7 +65,8 @@ const reducer = combineReducers({
     topLaptops: topLaptopReducer,
     allLaptops: allLaptopsReducer,
     singleLaptop: getALaptopReducer,
-    topTVs: getTopTVs
+    topTVs: getTopTVs,
+    allTVs: getALLTVs
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
