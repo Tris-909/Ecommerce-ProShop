@@ -1,6 +1,7 @@
 import AsyncHandler from 'express-async-handler';
 import Laptop from '../models/laptops.js';
 
+
 //?   Fetch All Laptops from databases
 //?   GET /api/laptops
 //?   Public Route

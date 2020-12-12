@@ -61,7 +61,7 @@ const HomeScreen = ({ match }) => {
                     ) : <Spinner animation="border" size="lg" style={{ width: '100px', height: '100px' }} /> 
                    }
                 </Row>
-                <h1 style={{textDecoration: 'underline'}}>Our Top Tiers Laptops : </h1>
+                <h1 style={{textDecoration: 'underline', fontFamily: 'Rokkitt'}}>Our Top Tiers MSI Laptops : </h1>
                 <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
                    { !topLaptopLoading ? topLaptops.length > 0 ? topLaptops.map((laptop) => {
                         return(

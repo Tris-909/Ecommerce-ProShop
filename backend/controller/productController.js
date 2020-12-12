@@ -139,6 +139,43 @@ const getTopRatedProducts = AsyncHandler(async(req, res) => {
     res.json(products);
 });
 
+//?   Fetch All Laptops from databases
+//?   GET /api/products/laptops
+//?   Public Route
+const getAllLaptops = AsyncHandler(async(req, res) => {
+    const laptops = await Product.find({
+        category: 'laptops'
+    });
+    res.json(laptops);
+});
+
+//?   Fetch Laptops from databases based on ID
+//?   GET /api/products/laptops/:id
+//?   Public Route
+const getSingleLaptop = AsyncHandler(async (req, res) => {
+    const laptop = await Product.findOne({
+        _id: req.params.id,
+        category: 'laptops'
+    });
+
+    if (laptop) {
+        res.status(200);
+        res.send(laptop);
+    } else {
+        res.status(404);
+        throw new Error("No data about this laptop is found !");
+    }
+});
+
+//? Fetch 3 most expensive laptops from databases to render to HomeScreen
+//? GET /api/products/laptops/toptiers
+//? public routes
+const getTopTierLaptops = AsyncHandler(async (req, res) => {
+    const topLaptops = await Product.find({category: 'laptops'}).sort({price: -1}).limit(3);
+
+    res.send(topLaptops);
+});
+
 export {
     getProducts,
     getProductById,
@@ -146,5 +183,8 @@ export {
     createProduct,
     updateProduct,
     createReview,
-    getTopRatedProducts
+    getTopRatedProducts,
+    getAllLaptops,
+    getSingleLaptop,
+    getTopTierLaptops
 }

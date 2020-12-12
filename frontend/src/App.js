@@ -21,10 +21,12 @@ import SingleLaptopScreen from './screens/SingleLaptopScreen';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop>
       <Header/>
       <main className='py-3'>
         <Container>
@@ -52,6 +54,7 @@ function App() {
         </Container>
       </main>
       <Footer/>
+      </ScrollToTop>
     </Router>
   );
 }

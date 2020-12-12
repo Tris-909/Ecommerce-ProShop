@@ -7,13 +7,19 @@ import {
     createProduct, 
     updateProduct,
     createReview ,
-    getTopRatedProducts
+    getTopRatedProducts,
+    getAllLaptops,
+    getSingleLaptop,
+    getTopTierLaptops
 } from '../controller/productController.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/carousel').get(getTopRatedProducts);
+router.route('/laptops').get(getAllLaptops);
+router.route('/laptops/toptier').get(getTopTierLaptops);
+router.route('/laptops/:id').get(getSingleLaptop);
 router.route('/:id')
 .get(getProductById)
 .delete(protect, admin, deleteProductByIdAsAdmin)
