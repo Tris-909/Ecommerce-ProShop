@@ -246,6 +246,38 @@ const getAllPhones = AsyncHandler(async(req, res) => {
     }
 });
 
+//? GET Top 3 Headphones
+//? /api/products/headphones/toptier
+//? public
+const getTopHeadphone = AsyncHandler(async(req, res) => {
+    const topHeadphones = await Product.find({
+        category: 'headphone'
+    }).sort({ price: -1 }).limit(3);
+
+    if (topHeadphones) {
+        res.status(200);
+        res.send(topHeadphones);
+    } else {
+        res.status(404);
+        throw new Error("Can't find top headphones");
+    }
+});
+
+//? GET All Headphones
+//? /api/products/headphones
+//? public 
+const getAllHeadphones = AsyncHandler(async(req, res) => {
+    const allHeadphones = await Product.find({ category: 'headphone' });
+
+    if (allHeadphones) {
+        res.status(200);
+        res.send(allHeadphones);
+    } else {
+        res.status(404);
+        throw new Error("Can't fetch all headphones");
+    }
+});
+
 export {
     getProducts,
     getProductById,
@@ -261,5 +293,7 @@ export {
     getTopTierTVs,
     getSingleTVs,
     getTopPhones,
-    getAllPhones
+    getAllPhones,
+    getTopHeadphone,
+    getAllHeadphones
 }
