@@ -13,6 +13,7 @@ import Loading from '../components/Loading';
 import Helmet from '../components/Helmet';
 import LapTopTable from '../components/ProductDetail/LaptopTable/LapTopTable';
 import TVTable from '../components/ProductDetail/TvTable/TVTable';
+import PhoneTable from '../components/ProductDetail/PhoneTable/PhoneTable';
 
 const ProductScreen = ({ match }) => {
     const dispatch = useDispatch();
@@ -66,6 +67,11 @@ const ProductScreen = ({ match }) => {
                         {
                             singleProduct.tvsDetail.sizeHeightWidthDepth ? (
                                 <TVTable tvsDetail={singleProduct.tvsDetail} />
+                            ) : null
+                        }
+                        {
+                            singleProduct.phoneDetail.DualSim ? (
+                                <PhoneTable singlePhone={singleProduct} />
                             ) : null
                         }
                         {

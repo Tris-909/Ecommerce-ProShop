@@ -41,7 +41,7 @@ const TopProduct = ({ loading, itemArray, title, itemLink, listItemLink }) => {
             </Row>
 
             <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
-                <Link to={itemLink}>
+                <Link to={listItemLink}>
                     <Button variant="outline-dark">See More</Button>
                 </Link>
             </Row>       

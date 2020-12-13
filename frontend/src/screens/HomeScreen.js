@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getCarouselProducts} from '../redux/actions/productActions';
 import {getTopTiersLaptop} from '../redux/actions/laptopActions';
 import {getTopTVs} from '../redux/actions/tvActions';
+import {getTopPhones} from '../redux/actions/phoneActions';
 
 //TODO: Components
 import TopProduct from '../components/TopProduct (Home)/TopProduct';
@@ -17,6 +18,7 @@ const HomeScreen = () => {
     const { carouselProducts, loading: carouselLoading, error: carouselError } = useSelector(state => state.carouselProducts);
     const { topLaptops, loading: topLaptopLoading, error: topLaptopError } = useSelector(state => state.topLaptops);
     const { topTV, loading: topTVLoading } = useSelector(state => state.topTVs);
+    const { topPhones, loading: topPhonesLoading } = useSelector(state => state.topPhones);
 
     useEffect(() => {
         //TODO: Get carousel products for the first time 
@@ -38,6 +40,13 @@ const HomeScreen = () => {
             dispatch(getTopTVs());
         }
     }, [dispatch, topTV]);
+
+    useEffect(() => {
+        //TODO: Fetch top-phone for the first time
+        if (topPhones.length === 0) {
+            dispatch(getTopPhones());
+        }
+    }, [dispatch, topPhones]);
 
     const checkIfErrorExisted = () => {
         if (topLaptopError) {
@@ -74,6 +83,18 @@ const HomeScreen = () => {
                                 title="Best TVs for 2020" 
                                 itemLink="/product"
                                 listItemLink="/tvs"
+                            />
+                        ) : null
+                    }
+
+                    {
+                        topPhones.length !== 0 ? (
+                            <TopProduct 
+                                loading={topPhonesLoading}
+                                itemArray={topPhones}
+                                title="New Phones 2020"
+                                itemLink="/product"
+                                listItemLink="/phones"
                             />
                         ) : null
                     }
