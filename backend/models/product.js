@@ -60,6 +60,10 @@ const productSchema = mongoose.Schema({
         type: Object,
         required: true
     },
+    headphoneDetail: {
+        type: Object,
+        required: true
+    },
     rating: {
         type: Number,
         required: true,

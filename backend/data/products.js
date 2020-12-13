@@ -8,11 +8,12 @@ const products = [
     category: 'Electronics',
     price: 89.99,
     countInStock: 10,
-    rating: 4.5,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
     details: {exist: true},
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
   },
   {
     name: 'iPhone 11 Pro 256GB Memory',
@@ -23,11 +24,12 @@ const products = [
     category: 'Electronics',
     price: 599.99,
     countInStock: 7,
-    rating: 4.0,
-    numReviews: 8,
+    rating: 0,
+    numReviews: 0,
     details: {exist: true},
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
   },
   {
     name: 'Cannon EOS 80D DSLR Camera',
@@ -38,12 +40,12 @@ const products = [
     category: 'Electronics',
     price: 929.99,
     countInStock: 5,
-    rating: 3,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
     details: {exist: true},
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
-
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
   },
   {
     name: 'Sony Playstation 4 Pro White Version',
@@ -58,7 +60,8 @@ const products = [
     numReviews: 12,
     details: {exist: true},
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
 
   },
   {
@@ -74,7 +77,8 @@ const products = [
     numReviews: 10,
     details: {exist: true},
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
   },
   {
     name: 'Amazon Echo Dot 3rd Generation',
@@ -89,7 +93,8 @@ const products = [
     numReviews: 12,
     details: {exist: true},
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
   },
   {
     name: 'MSI Prestige 14Evo 14" Full HD Laptop (512GB)',
@@ -124,7 +129,8 @@ const products = [
         manufacturersWarantty: '1 year'
     },
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
 },
 {
     name: 'MSI GF63 15.6" Full HD 144Hz Gaming Laptop (512GB)',
@@ -159,7 +165,8 @@ const products = [
         manufacturersWarantty: '1 year'
     },
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
 },
 {
     name: 'MSI GT76 Titan DT 17.3" Full HD 300Hz Gaming Laptop (RTX 2080 Super)',
@@ -194,7 +201,8 @@ const products = [
         manufacturersWarantty: '3 years'
     },
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
 },
 {
     name: 'MSI GE66 Dragonshield 15.6" Full HD 240Hz Gaming Laptop (1TB) [RTX 2070]',
@@ -229,7 +237,8 @@ const products = [
         manufacturersWarantty: '1 year'
     },
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
 },
 {
     name: 'MSI GP65 Leopard 15.6" Full HD 144Hz Gaming Laptop (512GB)[GTX 1660 Ti]',
@@ -264,7 +273,8 @@ const products = [
         manufacturersWarantty: '1 year'
     },
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
 },
 {
     name: 'MSI Bravo 15 15.6" Full HD 144Hz Gaming Laptop (512GB) [Ryzen 5]',
@@ -299,7 +309,8 @@ const products = [
         manufacturersWarantty: '1 year'
     },
     tvsDetail: {exist: true},
-    phoneDetail: {exist: true}
+    phoneDetail: {exist: true},
+    headphoneDetail: {exist: true}
 },
 {
   name: 'Samsung Q60T 75" QLED Ultra HD 4K Smart TV [2020]',
@@ -324,7 +335,8 @@ const products = [
     sizeHeightWidthDepth: '956.9mm x 1675.5mm x 60.4mm',
     warranty: '1 year'
   },
-  phoneDetail: {exist: true}
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true}
 },
 {
   name: 'LG CX 48" Self-Lit OLED Smart 4K TV with AI ThinQ',
@@ -349,7 +361,8 @@ const products = [
     sizeHeightWidthDepth: '618mm x 1071mm x 47mm',
     warranty: '1 year'
   },
-  phoneDetail: {exist: true}
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Hisense 70S5 Series 5 70" 4K UHD Smart TV [2020]',
@@ -374,7 +387,8 @@ const products = [
     sizeHeightWidthDepth: '961mm x 1676mm x 85mm',
     warranty: '1 year'
   },
-  phoneDetail: {exist: true}
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true}
 },
 {
   name: 'LG CX 55" Self-Lit OLED Smart 4K TV with AI ThinQ',
@@ -399,7 +413,8 @@ const products = [
     sizeHeightWidthDepth: '706mm x 1228mm x 47mm',
     warranty: '1 year'
   },
-  phoneDetail: {exist: true}
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Samsung Q80T 75" QLED Ultra HD 4K Smart TV [2020]',
@@ -424,7 +439,8 @@ const products = [
     sizeHeightWidthDepth: '958.7mm x 1670.6mm x 53.9mm',
     warranty: '1 year'
   },
-  phoneDetail: {exist: true}
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Sony X7000G 65" 4k Ultra HD HDR Smart TV',
@@ -449,7 +465,8 @@ const products = [
     sizeHeightWidthDepth: '845mm x 1463mm x 80mm',
     warranty: '1 year'
   },
-  phoneDetail: {exist: true}
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Apple iPhone 12 Pro Max 256GB (Pacific Blue)',
@@ -477,7 +494,8 @@ const products = [
     Processor: 'A14 Bionic chip',
     Wifi: 'yes',
     Warranty: '1 Year'
-  }
+  },
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Samsung Galaxy S20 FE 5G 128GB (Cloud Navy)',
@@ -505,7 +523,8 @@ const products = [
     Processor: 'Snapdragon 865',
     Wifi: 'yes',
     Warranty: '2 Years'
-  }
+  },
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Samsung Galaxy S10 5G 256GB (Majestic Black)',
@@ -533,7 +552,8 @@ const products = [
     Processor: 'Snapdragon 850',
     Wifi: 'yes',
     Warranty: '2 Years'
-  }
+  },
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Google Pixel 4a 128GB (Just Black)',
@@ -561,7 +581,8 @@ const products = [
     Processor: 'Qualcomm® Snapdragon™ 730',
     Wifi: 'yes',
     Warranty: '2 Years'
-  }
+  },
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Samsung Galaxy Z Fold2 5G 256GB (Black)',
@@ -589,7 +610,8 @@ const products = [
     Processor: 'Snapdragon 865+',
     Wifi: 'yes',
     Warranty: '2 Years'
-  }
+  },
+  headphoneDetail: {exist: true}
 },
 {
   name: 'Asus ROG 3 Gaming Phone (512GB)',
@@ -616,6 +638,145 @@ const products = [
     RearCamera: '64MP + 13MP (Ultra-wide) + 5MP (Macro)',
     Processor: 'Qualcomm Snapdragon 865 PLUS SM8250, Qcta-core CPUs, 3.1GHz',
     Wifi: 'yes',
+    Warranty: '1 Year'
+  },
+  headphoneDetail: {exist: true}
+},
+{
+  name: 'Sony WH-1000XM4 Wireless Noise Cancelling Over-Ear Headphones (Black)',
+  image: '/images/headphone-1.jpg',
+  description:
+    "Featuring Sony’s industry-leading Noise Cancelling technology, the WH-1000XM4 pushes the boundaries of wireless headphone technology, to deliver an exceptional audio experience. A refined design promises even better wearing comfort, whilst premium sound is assured, thanks to Sony’s HD Noise Cancelling Processor QN1 and suite of other Sony audio technologies.",
+  brand: 'Sony',
+  category: 'headphone',
+  price: 395,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: { exist: true },
+  headphoneDetail: {
+    HeadphoneType: 'Over-ear wireless',
+    Colour: 'Black',
+    VoiceControl: 'Yes',
+    NoiseReductionType: 'Noise cancellation',
+    BuiltInMicrophone: 'Yes',
+    Warranty: '1 Year'
+  }
+},
+{
+  name: 'Beats Studio3 Wireless Noise Cancelling Over-Ear Headphones (Midnight Black)',
+  image: '/images/headphone-2.jpg',
+  description:
+    "Hear the music. Not the noise. Introducing the Beats Studio3 Wireless, featuring Beats Pure Adaptive Noise Canceling (Beats Pure ANC) and the Apple W1 chip.",
+  brand: 'beats',
+  category: 'headphone',
+  price: 449,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: { exist: true },
+  headphoneDetail: {
+    HeadphoneType: 'Over-ear wireless',
+    Colour: 'Black',
+    VoiceControl: 'Yes',
+    NoiseReductionType: 'Noise cancellation',
+    BuiltInMicrophone: 'Yes',
+    Warranty: '1 Year'
+  }
+},
+{
+  name: 'Sennheiser HD 458BT Over-Ear Wireless Noise Cancelling Headphones (Black/Red)',
+  image: '/images/headphone-3.jpg',
+  description:
+    "Great wireless sound gets a stunning new look: Sennheiser’s new HD 458BT remixes its exceptional HD 450BT wireless headset with a bold new red and black style. Whether at home or on the move, their captivating sound quality, advanced Bluetooth technology, and excellent 30-hour battery life make them perfect for audio lovers seeking a better wireless listening experience.",
+  brand: 'Sennheiser',
+  category: 'headphone',
+  price: 300,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: { exist: true },
+  headphoneDetail: {
+    HeadphoneType: 'Over-ear wireless',
+    Colour: 'Black',
+    VoiceControl: 'Yes',
+    NoiseReductionType: 'Noise cancellation',
+    BuiltInMicrophone: 'Yes',
+    Warranty: '2 Years'
+  }
+},
+{
+  name: 'Samsung Galaxy Buds+ (Black)',
+  image: '/images/headphone-4.jpg',
+  description:
+    "Introducing Galaxy Buds+. Wireless earbuds[1] with 2-way speakers delivering sound by AKG with rich treble and bass, an adaptive 3-mic system for crystal clear calls, and long-lasting battery power — all for a premium listening experience.",
+  brand: 'Samsung',
+  category: 'headphone',
+  price: 229,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: { exist: true },
+  headphoneDetail: {
+    HeadphoneType: 'In-ear wireless',
+    Colour: 'Black',
+    VoiceControl: 'Yes',
+    NoiseReductionType: 'No',
+    BuiltInMicrophone: 'Yes',
+    Warranty: '1 Year'
+  }
+},
+{
+  name: 'Jabra Elite 75t True Wireless In-Ear Headphones (Titanium Black)',
+  image: '/images/headphone-5.jpg',
+  description:
+    "Designed and tested for secure fit, so you can be confident that your earbuds will stay put. A new smaller design makes them the ideal fit for every type of ear while the ergonomic shape makes them exceptionally comfortable.",
+  brand: 'Jabra',
+  category: 'headphone',
+  price: 249,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: { exist: true },
+  headphoneDetail: {
+    HeadphoneType: 'In-ear wireless',
+    Colour: 'Grey',
+    VoiceControl: 'Yes',
+    NoiseReductionType: 'No',
+    BuiltInMicrophone: 'Yes',
+    Warranty: '1 Year'
+  }
+},
+{
+  name: 'Apple Airpods with Charging Case (2nd Gen)',
+  image: '/images/headphone-6.jpg',
+  description:
+    "The new AirPods combine intelligent design with breakthrough technology and crystal-clear sound. Powered by the new Apple H1 headphone chip, AirPods now feature hands-free access to Siri using just your voice. And up to three hours of talk time on a single charge.1",
+  brand: 'Apple',
+  category: 'headphone',
+  price: 199,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: { exist: true },
+  headphoneDetail: {
+    HeadphoneType: 'In-ear wireless',
+    Colour: 'White',
+    VoiceControl: 'Yes',
+    NoiseReductionType: 'Noise cancellation',
+    BuiltInMicrophone: 'Yes',
     Warranty: '1 Year'
   }
 }
