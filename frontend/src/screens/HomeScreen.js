@@ -7,6 +7,7 @@ import {getCarouselProducts} from '../redux/actions/productActions';
 import {getTopTiersLaptop} from '../redux/actions/laptopActions';
 import {getTopTVs} from '../redux/actions/tvActions';
 import {getTopPhones} from '../redux/actions/phoneActions';
+import {getTopHeadphone} from '../redux/actions/headphoneActions';
 
 //TODO: Components
 import TopProduct from '../components/TopProduct (Home)/TopProduct';
@@ -19,6 +20,7 @@ const HomeScreen = () => {
     const { topLaptops, loading: topLaptopLoading, error: topLaptopError } = useSelector(state => state.topLaptops);
     const { topTV, loading: topTVLoading } = useSelector(state => state.topTVs);
     const { topPhones, loading: topPhonesLoading } = useSelector(state => state.topPhones);
+    const { topHeadphone, loading: topHeadphoneLoading } = useSelector(state => state.topHeadphone);
 
     useEffect(() => {
         //TODO: Get carousel products for the first time 
@@ -47,6 +49,13 @@ const HomeScreen = () => {
             dispatch(getTopPhones());
         }
     }, [dispatch, topPhones]);
+
+    useEffect(() => {
+        //TODO: Fetch top-headphone for the first time
+        if (topHeadphone.length === 0) {
+            dispatch(getTopHeadphone());
+        }
+    }, [dispatch, topHeadphone]);
 
     const checkIfErrorExisted = () => {
         if (topLaptopError) {
@@ -97,6 +106,18 @@ const HomeScreen = () => {
                                 listItemLink="/phones"
                             />
                         ) : null
+                    }
+
+                    {
+                        topHeadphone.length !== 0 ? (
+                            <TopProduct 
+                                loading={topHeadphoneLoading}
+                                itemArray={topHeadphone}
+                                title="Great Headphones for You"
+                                itemLink="/product"
+                                listItemLink="/headphones"
+                            />
+                        ) : null  
                     }
                 </>
             )

@@ -14,6 +14,7 @@ import Helmet from '../components/Helmet';
 import LapTopTable from '../components/ProductDetail/LaptopTable/LapTopTable';
 import TVTable from '../components/ProductDetail/TvTable/TVTable';
 import PhoneTable from '../components/ProductDetail/PhoneTable/PhoneTable';
+import HeadphoneTable from '../components/ProductDetail/HeadphoneTable/HeadphoneTable';
 
 const ProductScreen = ({ match }) => {
     const dispatch = useDispatch();
@@ -72,6 +73,11 @@ const ProductScreen = ({ match }) => {
                         {
                             singleProduct.phoneDetail.DualSim ? (
                                 <PhoneTable singlePhone={singleProduct} />
+                            ) : null
+                        }
+                        {
+                            singleProduct.headphoneDetail.HeadphoneType ? (
+                                <HeadphoneTable singleHeadphonePhone={singleProduct} />
                             ) : null
                         }
                         {
