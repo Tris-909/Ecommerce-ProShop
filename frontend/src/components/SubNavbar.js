@@ -17,7 +17,6 @@ const SubNavBar = styled.nav`
 const NavItem = styled.div`
     font-size: 1.25rem;
     padding: 0rem 1rem;
-    border-right: 1px solid white;
     font-weight: 600;
     color: white;
     display: flex;
