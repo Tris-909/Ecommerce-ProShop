@@ -5,9 +5,17 @@ import Message from '../Message';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const TopProductTitle = styled.h1`
-    text-decoration: underline; 
-    font-family: 'Rokkitt;'
+const TopProductTitle = styled.p`
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0rem;
+    font-family: Rokkit;
+
+    & a:hover {
+        text-decoration: none;
+    }
 `;
 
 const Container = styled.div`
@@ -15,10 +23,10 @@ const Container = styled.div`
     margin-bottom: 1.5rem;
 `;
 
-const TopProduct = ({ loading, itemArray, title, itemLink }) => {
+const TopProduct = ({ loading, itemArray, title, itemLink, listItemLink }) => {
     return (
         <Container>
-            <TopProductTitle>{title}</TopProductTitle>
+            <TopProductTitle><Link to={listItemLink}>{title}</Link></TopProductTitle>
             <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
                { !loading ? itemArray.length > 0 ? itemArray.map((tv) => {
                     return(

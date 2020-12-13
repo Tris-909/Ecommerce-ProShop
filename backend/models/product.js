@@ -56,6 +56,10 @@ const productSchema = mongoose.Schema({
         type: Object,
         required: true
     },
+    phoneDetail: {
+        type: Object,
+        required: true
+    },
     rating: {
         type: Number,
         required: true,

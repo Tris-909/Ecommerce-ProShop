@@ -59,8 +59,9 @@ const HomeScreen = () => {
                             <TopProduct 
                                 loading={topLaptopLoading} 
                                 itemArray={topLaptops} 
-                                title="Our Top Tiers MSI Laptops :" 
+                                title="Our Top Tier MSI Laptops" 
                                 itemLink="/product"
+                                listItemLink="/laptops"
                             />
                         ) : null
                     }
@@ -70,8 +71,9 @@ const HomeScreen = () => {
                             <TopProduct 
                                 loading={topTVLoading} 
                                 itemArray={topTV} 
-                                title="Best TVs for 2020 :" 
+                                title="Best TVs for 2020" 
                                 itemLink="/product"
+                                listItemLink="/tvs"
                             />
                         ) : null
                     }

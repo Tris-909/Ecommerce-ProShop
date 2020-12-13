@@ -11,7 +11,8 @@ const products = [
     rating: 4.5,
     numReviews: 12,
     details: {exist: true},
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
   },
   {
     name: 'iPhone 11 Pro 256GB Memory',
@@ -25,7 +26,8 @@ const products = [
     rating: 4.0,
     numReviews: 8,
     details: {exist: true},
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
   },
   {
     name: 'Cannon EOS 80D DSLR Camera',
@@ -39,7 +41,8 @@ const products = [
     rating: 3,
     numReviews: 12,
     details: {exist: true},
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
 
   },
   {
@@ -54,7 +57,8 @@ const products = [
     rating: 5,
     numReviews: 12,
     details: {exist: true},
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
 
   },
   {
@@ -69,8 +73,8 @@ const products = [
     rating: 3.5,
     numReviews: 10,
     details: {exist: true},
-    tvsDetail: {exist: true}
-
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
   },
   {
     name: 'Amazon Echo Dot 3rd Generation',
@@ -84,7 +88,8 @@ const products = [
     rating: 4,
     numReviews: 12,
     details: {exist: true},
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
   },
   {
     name: 'MSI Prestige 14Evo 14" Full HD Laptop (512GB)',
@@ -118,7 +123,8 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
 },
 {
     name: 'MSI GF63 15.6" Full HD 144Hz Gaming Laptop (512GB)',
@@ -152,7 +158,8 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
 },
 {
     name: 'MSI GT76 Titan DT 17.3" Full HD 300Hz Gaming Laptop (RTX 2080 Super)',
@@ -186,7 +193,8 @@ const products = [
         operatingSystem: 'Windows 10 Pro',
         manufacturersWarantty: '3 years'
     },
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
 },
 {
     name: 'MSI GE66 Dragonshield 15.6" Full HD 240Hz Gaming Laptop (1TB) [RTX 2070]',
@@ -220,7 +228,8 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
 },
 {
     name: 'MSI GP65 Leopard 15.6" Full HD 144Hz Gaming Laptop (512GB)[GTX 1660 Ti]',
@@ -254,7 +263,8 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
 },
 {
     name: 'MSI Bravo 15 15.6" Full HD 144Hz Gaming Laptop (512GB) [Ryzen 5]',
@@ -288,7 +298,8 @@ const products = [
         operatingSystem: 'Windows 10 Home',
         manufacturersWarantty: '1 year'
     },
-    tvsDetail: {exist: true}
+    tvsDetail: {exist: true},
+    phoneDetail: {exist: true}
 },
 {
   name: 'Samsung Q60T 75" QLED Ultra HD 4K Smart TV [2020]',
@@ -312,7 +323,8 @@ const products = [
     usbPorts: '3',
     sizeHeightWidthDepth: '956.9mm x 1675.5mm x 60.4mm',
     warranty: '1 year'
-  }
+  },
+  phoneDetail: {exist: true}
 },
 {
   name: 'LG CX 48" Self-Lit OLED Smart 4K TV with AI ThinQ',
@@ -336,7 +348,8 @@ const products = [
     usbPorts: '3',
     sizeHeightWidthDepth: '618mm x 1071mm x 47mm',
     warranty: '1 year'
-  }
+  },
+  phoneDetail: {exist: true}
 },
 {
   name: 'Hisense 70S5 Series 5 70" 4K UHD Smart TV [2020]',
@@ -360,7 +373,8 @@ const products = [
     usbPorts: '2',
     sizeHeightWidthDepth: '961mm x 1676mm x 85mm',
     warranty: '1 year'
-  }
+  },
+  phoneDetail: {exist: true}
 },
 {
   name: 'LG CX 55" Self-Lit OLED Smart 4K TV with AI ThinQ',
@@ -384,7 +398,8 @@ const products = [
     usbPorts: '3',
     sizeHeightWidthDepth: '706mm x 1228mm x 47mm',
     warranty: '1 year'
-  }
+  },
+  phoneDetail: {exist: true}
 },
 {
   name: 'Samsung Q80T 75" QLED Ultra HD 4K Smart TV [2020]',
@@ -408,7 +423,8 @@ const products = [
     usbPorts: '4',
     sizeHeightWidthDepth: '958.7mm x 1670.6mm x 53.9mm',
     warranty: '1 year'
-  }
+  },
+  phoneDetail: {exist: true}
 },
 {
   name: 'Sony X7000G 65" 4k Ultra HD HDR Smart TV',
@@ -432,6 +448,175 @@ const products = [
     usbPorts: '3',
     sizeHeightWidthDepth: '845mm x 1463mm x 80mm',
     warranty: '1 year'
+  },
+  phoneDetail: {exist: true}
+},
+{
+  name: 'Apple iPhone 12 Pro Max 256GB (Pacific Blue)',
+  image: '/images/phones-1.jpg',
+  description:
+    "iPhone 12 Pro Max. 5G to download huge files on the go and stream HDR video.1 Larger 6.7-inch Super Retina XDR display.2 Ceramic Shield with four times better drop performance.3 Incredible low-light photography with the best Pro camera system on an iPhone, and 5× optical zoom range. Cinema-grade Dolby Vision video recording, editing and playback. Night mode portraits and next-level AR experiences with the LiDAR Scanner. Powerful A14 Bionic chip. And new MagSafe accessories for easy attachment and faster wireless charging.4 For infinitely spectacular possibilities.",
+  brand: 'Apple',
+  category: 'phones',
+  price: 2019,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {
+    phoneOperatingSystem: 'iOS',
+    networkCompability: '5G',
+    DualSim: 'Yes',
+    Colour: 'Blue',
+    DeviceScreen: '6.7 Inches',
+    Resolution: '2778 x 1284 pixels',
+    InternalMemory: '256 GB',
+    FrontCamera: 'YesDepth 12-megapixel camera',
+    RearCamera: 'Pro 12-megapixel camera system (Ultra Wide, Wide and Telephoto)',
+    Processor: 'A14 Bionic chip',
+    Wifi: 'yes',
+    Warranty: '1 Year'
+  }
+},
+{
+  name: 'Samsung Galaxy S20 FE 5G 128GB (Cloud Navy)',
+  image: '/images/phones-2.jpg',
+  description:
+    "This is unexpected. Galaxy S20 FE features a colourful design, next level photography, and pro-grade performance, without the pro-grade price tag.",
+  brand: 'Samsung',
+  category: 'phones',
+  price: 999,
+  countInStock: 4,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {
+    phoneOperatingSystem: 'Android',
+    networkCompability: '5G',
+    DualSim: 'No',
+    Colour: 'Blue',
+    DeviceScreen: '6.5 Inches',
+    Resolution: '2400 x 1080 pixels',
+    InternalMemory: '1 TB',
+    FrontCamera: '32MP',
+    RearCamera: '12MP (Wide) + 8MP (Telephoto) + 12MP (Ultra Wide)',
+    Processor: 'Snapdragon 865',
+    Wifi: 'yes',
+    Warranty: '2 Years'
+  }
+},
+{
+  name: 'Samsung Galaxy S10 5G 256GB (Majestic Black)',
+  image: '/images/phones-3.jpg',
+  description:
+    "Tired of waiting? The Galaxy S10 5G is here and its bringing access to fast 5G connectivity with it. Satisfy your need for speed in every part of your life. Download the latest season of that show you love in minutes, stream movies and sports without constant buffering , catch up with friends and family over 4K video calls without the lag, and open up a new world of possibilities in gaming, AR and VR. And with our best camera yet, you'll be able to share epic shots in a flash then watch it all come to life on our stunning 6.7 inch Infinity-O Display [1]Available on selected plans on the Telstra network. 5G network is progressively being rolled out across Australia. Current availability is limited to major capital city CBDs and other select high traffic areas. Actual speeds achieved will vary depending on service availability and other factors. For more details, visit Telstra's website at https://www.telstra.com.au/coveragenetworks/5G .",
+  brand: 'Samsung',
+  category: 'phones',
+  price: 899,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {
+    phoneOperatingSystem: 'Android',
+    networkCompability: '5G',
+    DualSim: 'No',
+    Colour: 'Black',
+    DeviceScreen: '6.7 Inches',
+    Resolution: '3040 x 1440 pixels',
+    InternalMemory: '256 GB',
+    FrontCamera: 'Dual Pixel 10MP (F1.9) with Auto Focus',
+    RearCamera: '16MP (Ultra Wide/F2.2), Dual Pixel 12MP OIS (Wide/F1.5/F2.4), 12MP OIS (Tele/F2.4)',
+    Processor: 'Snapdragon 850',
+    Wifi: 'yes',
+    Warranty: '2 Years'
+  }
+},
+{
+  name: 'Google Pixel 4a 128GB (Just Black)',
+  image: '/images/phones-4.jpg',
+  description:
+    "Meet Pixel 4a, the helpful Google phone at a helpful price. It comes packed with all the things that you want in a phone, for a lot less than you’d expect.",
+  brand: 'Google',
+  category: 'phones',
+  price: 599,
+  countInStock: 4,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {
+    phoneOperatingSystem: 'Android',
+    networkCompability: '4G',
+    DualSim: 'Yes',
+    Colour: 'Black',
+    DeviceScreen: '5.8 Inches',
+    Resolution: '1080 x 2340 pixels',
+    InternalMemory: '128 GB',
+    FrontCamera: '	8MB',
+    RearCamera: '12.2MP',
+    Processor: 'Qualcomm® Snapdragon™ 730',
+    Wifi: 'yes',
+    Warranty: '2 Years'
+  }
+},
+{
+  name: 'Samsung Galaxy Z Fold2 5G 256GB (Black)',
+  image: '/images/phones-5.jpg',
+  description:
+    "Meet the phone that’s changing the shape of the future. It puts a powerful hinge, foldable screen, an all-day battery, and the power of seriously fast 5G* all in the palm of your hand.",
+  brand: 'Samsung',
+  category: 'phones',
+  price: 2999,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {
+    phoneOperatingSystem: 'Android',
+    networkCompability: '5G',
+    DualSim: 'Yes',
+    Colour: 'Black',
+    DeviceScreen: '7.6 Inches',
+    Resolution: '2208 x 1768 pixels',
+    InternalMemory: '256 GB',
+    FrontCamera: '	10MB',
+    RearCamera: '12MP (Ultra Wide) + 12MP (Wide) + 12MP (Telephoto)',
+    Processor: 'Snapdragon 865+',
+    Wifi: 'yes',
+    Warranty: '2 Years'
+  }
+},
+{
+  name: 'Asus ROG 3 Gaming Phone (512GB)',
+  image: '/images/phones-6.jpg',
+  description:
+    "In the third generation of ROG Phone, we have taken everything you loved about the previous generations, all the learnings from customer and media feedback and continued to improve. These are the five core considerations we consider when making “The ultimate gaming smartphone”.",
+  brand: 'ASUS',
+  category: 'phones',
+  price: 1699,
+  countInStock: 8,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {
+    phoneOperatingSystem: 'Android',
+    networkCompability: '5G',
+    DualSim: 'Yes',
+    Colour: 'Multi - Color',
+    DeviceScreen: '6.6 Inches',
+    Resolution: '2340 x 1080 pixels',
+    InternalMemory: '512 GB',
+    FrontCamera: '24MP',
+    RearCamera: '64MP + 13MP (Ultra-wide) + 5MP (Macro)',
+    Processor: 'Qualcomm Snapdragon 865 PLUS SM8250, Qcta-core CPUs, 3.1GHz',
+    Wifi: 'yes',
+    Warranty: '1 Year'
   }
 }
 ]

@@ -214,6 +214,38 @@ const getSingleTVs = AsyncHandler(async(req, res) => {
     }
 });
 
+//? GET Top 3 Most Expensive Phones from databases
+//? GET /api/products/phones/toptier
+//? Public Route
+const getTopPhones = AsyncHandler(async(req, res) => {
+    const topPhones = await Product.find({
+        category: 'phones'
+    }).sort({ price: -1 }).limit(3);
+
+    if (topPhones) {
+        res.status(200);
+        res.send(topPhones);
+    } else {
+        res.status(404);
+        throw new Error("Can't find top phones");
+    }
+});
+
+//? GET All Phones from databases
+//? GET /api/products/phones
+//? Public Route
+const getAllPhones = AsyncHandler(async(req, res) => {
+    const allPhones = await Product.find({ category: 'phones' });
+
+    if (allPhones) {
+        res.status(200);
+        res.send(allPhones);
+    } else {
+        res.status(404);
+        throw new Error('Something is wrong, cant fetch phones from databases');
+    }
+});
+
 export {
     getProducts,
     getProductById,
@@ -227,5 +259,7 @@ export {
     getTopTierLaptops,
     getAllTVs,
     getTopTierTVs,
-    getSingleTVs
+    getSingleTVs,
+    getTopPhones,
+    getAllPhones
 }
