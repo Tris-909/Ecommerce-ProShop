@@ -71,7 +71,7 @@ const HomeScreen = () => {
                                 loading={topTVLoading} 
                                 itemArray={topTV} 
                                 title="Best TVs for 2020 :" 
-                                itemLink="/tvs"
+                                itemLink="/product"
                             />
                         ) : null
                     }

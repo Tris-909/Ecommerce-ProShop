@@ -12,6 +12,7 @@ import ReviewSection from '../components/ReviewSection/ReviewSection';
 import Loading from '../components/Loading';
 import Helmet from '../components/Helmet';
 import LapTopTable from '../components/ProductDetail/LaptopTable/LapTopTable';
+import TVTable from '../components/ProductDetail/TvTable/TVTable';
 
 const ProductScreen = ({ match }) => {
     const dispatch = useDispatch();
@@ -60,6 +61,11 @@ const ProductScreen = ({ match }) => {
                         {
                             singleProduct.details.proccessorCores ? (
                                 <LapTopTable singleLaptop={singleProduct} />
+                            ) : null
+                        }
+                        {
+                            singleProduct.tvsDetail.sizeHeightWidthDepth ? (
+                                <TVTable tvsDetail={singleProduct.tvsDetail} />
                             ) : null
                         }
                         {
