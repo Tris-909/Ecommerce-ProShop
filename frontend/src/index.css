@@ -14,18 +14,19 @@ h3 {
 .carousel-item-prev,
 .carousel-item.active {
   display: flex;
+
 }
+
 .carousel-caption {
   position: absolute;
   top: 0;
+  font-size: 2rem;
+  font-weight: 700px;
+  color: black;
 }
- 
-.carousel-caption h4 {
-  color: #fff;
-}
- 
+
 .carousel img {
-  height: 300px;
+  height: 400px;
   padding: 30px;
   margin: 40px;
   border-radius: 50%;
@@ -34,10 +35,50 @@ h3 {
   margin: 0 auto;
 }
 
+.carousel-indicators li {
+  background-color: black;
+}
+
 #adminuser {
   color: black;
 }
 
 #username {
   color: black;
+}
+
+@media (max-width: 1300px) {
+  .carousel-caption {
+    font-size: 1.5rem;
+  }
+}
+ 
+@media (max-width: 1000px) {
+  .carousel-caption {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .carousel-caption {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 520px) {
+  .carousel img {
+    height: 300px;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 400px) {
+  .carousel img {
+    height: 250px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 50%;
+  }
 }

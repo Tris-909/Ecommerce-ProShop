@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Navbar, Nav, Container, NavDropdown} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {logOut} from '../redux/actions/userActions';
@@ -77,8 +77,8 @@ const Header = ({ history }) => {
                                 <LinkContainer to="/headphones">
                                     <NavDropdown.Item>Headphones</NavDropdown.Item>
                                 </LinkContainer>                                
-                                <LinkContainer to="/accessories">
-                                    <NavDropdown.Item>Accessories</NavDropdown.Item>
+                                <LinkContainer to="/gaming">
+                                    <NavDropdown.Item>Gaming</NavDropdown.Item>
                                 </LinkContainer>
                         </NavDropdown>
                       ) : null
@@ -98,7 +98,7 @@ const Header = ({ history }) => {
 
                     {
                         user && user.isAdmin ? (
-                            <NavDropdown title={<i class="fas fa-crown" style={{ fontSize: '1.2rem', marginRight: '0rem', color: 'black'}}></i>} id="adminuser">
+                            <NavDropdown title={<i className="fas fa-crown" style={{ fontSize: '1.2rem', marginRight: '0rem', color: 'black'}}></i>} id="adminuser">
                                 <LinkContainer to="/admin/usersList">
                                     <NavDropdown.Item>Users</NavDropdown.Item>
                                 </LinkContainer>
@@ -114,7 +114,7 @@ const Header = ({ history }) => {
 
                     {
                         user ? (
-                            <NavDropdown title={<i class="fas fa-cog" style={{ marginRight: 8, fontSize: '1.2rem', color: 'black' }}></i>} id='username'>
+                            <NavDropdown title={<i className="fas fa-cog" style={{ marginRight: 8, fontSize: '1.2rem', color: 'black' }}></i>} id='username'>
                                 <LinkContainer to="/profile">
                                     <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>

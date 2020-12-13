@@ -26,15 +26,22 @@ import HeadphonesScreen from './screens/HeadphoneScreen';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
+import styled from 'styled-components';
+
+const MarginContainer = styled.div`
+margin-top: 0%;  
+margin-left: 5%;
+margin-right: 5%;
+`;
 
 function App() {
   return (
     <Router>
       <ScrollToTop>
-      <Header/>
-      <SubNavbar />
+        <Header/>
+        <SubNavbar />
       <main className='py-3'>
-        <Container>
+        <MarginContainer>  
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/laptops" component={LaptopScreen} exact />
           <Route path="/tvs" component={TVScreen} exact />
@@ -58,7 +65,7 @@ function App() {
           <Route path="/page/:pageNumber" component={SearchScreen} />
           <Route path="/search/:keyword/page/:pageNumber" component={SearchScreen} />
           <Route path="/" component={HomeScreen} exact />
-        </Container>
+        </MarginContainer>
       </main>
       <Footer/>
       </ScrollToTop>

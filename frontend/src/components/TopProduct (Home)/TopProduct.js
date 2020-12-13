@@ -16,6 +16,10 @@ const TopProductTitle = styled.p`
     & a:hover {
         text-decoration: none;
     }
+
+    @media only screen and (max-width: 450px) {
+        font-size: 2rem;
+    }
 `;
 
 const Container = styled.div`

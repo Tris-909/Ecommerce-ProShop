@@ -133,7 +133,7 @@ const createReview = AsyncHandler(async(req, res) => {
 //? GET /api/products/carousel
 //? public 
 const getTopRatedProducts = AsyncHandler(async(req, res) => {
-    const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+    const products = await Product.find({}).sort({ price: -1 }).limit(3);
 
     res.json(products);
 });

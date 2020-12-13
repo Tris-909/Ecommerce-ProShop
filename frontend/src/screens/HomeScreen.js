@@ -70,7 +70,11 @@ const HomeScreen = () => {
                 <>
                     <Helmet title="Welcome to Proshop" href="/" />
                 
-                    <CarouselSection carouselProducts={carouselProducts} loading={carouselLoading} error={carouselError} />
+                    <CarouselSection 
+                        carouselProducts={carouselProducts} 
+                        loading={carouselLoading} 
+                        error={carouselError} 
+                    />
 
                     {
                         topLaptops.length !== 0 ? (

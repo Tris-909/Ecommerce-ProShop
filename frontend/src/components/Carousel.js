@@ -16,9 +16,13 @@ const CarouselSection = ({ carouselProducts, loading, error }) => {
     }, [dispatch, carouselProducts]);
 
     return loading ? <Loading /> : error ? <Message variant="danger" content={error} /> : (
-        <Carousel pause='hover' className='bg-dark' style={{ marginBottom: '2rem' }}>
+        <Carousel 
+            pause='hover' 
+            style={{ marginBottom: '2rem', backgroundColor: 'yellow'}}
+            nextIcon={<i className="fas fa-arrow-right" style={{color: 'black', fontSize: '2rem'}}></i>}
+            prevIcon={<i className="fas fa-arrow-left" style={{color: 'black', fontSize: '2rem'}}></i>}>
           {carouselProducts.map((product) => (
-            <Carousel.Item key={product._id}>
+            <Carousel.Item key={product._id} interval={5000}>
                 <Link to={`/product/${product._id}`}> 
                     <Image
                       src={product.image}
@@ -26,8 +30,8 @@ const CarouselSection = ({ carouselProducts, loading, error }) => {
                       fluid
                     />
                     <Carousel.Caption>
-                        <h4>{product.name} ({product.price})</h4>
-                    </Carousel.Caption>            
+                        {product.name} ({product.price})
+                    </Carousel.Caption> 
                 </Link>
             </Carousel.Item>
           ))}
