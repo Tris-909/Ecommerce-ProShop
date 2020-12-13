@@ -40,6 +40,10 @@ import {
     getTopTVs,
     getALLTVs
 } from './reducers/tvReducers';
+import {
+    topPhonesReducer,
+    allPhonesReducer
+} from './reducers/phoneReducers';
 
 const reducer = combineReducers({
     productsList: productListReducer,
@@ -66,7 +70,9 @@ const reducer = combineReducers({
     allLaptops: allLaptopsReducer,
     singleLaptop: getALaptopReducer,
     topTVs: getTopTVs,
-    allTVs: getALLTVs
+    allTVs: getALLTVs,
+    topPhones: topPhonesReducer,
+    allPhones: allPhonesReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
