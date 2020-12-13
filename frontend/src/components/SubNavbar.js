@@ -25,10 +25,10 @@ const NavItem = styled.div`
 `;
 
 const SubNavbar = () => {
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth < 950);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth < 990);
 
     const updateMedia = () => {
-        setScreenWidth(window.innerWidth < 950);
+        setScreenWidth(window.innerWidth <= 990);
     };
     useEffect(() => {
         window.addEventListener("resize", updateMedia);

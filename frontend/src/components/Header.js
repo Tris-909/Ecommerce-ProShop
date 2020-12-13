@@ -21,18 +21,29 @@ const AddBlackColor = styled.div`
     display: flex;
 `;
 
-const WidthExpand = styled.div`
+const YourCartText = styled.div`
+    font-size: 1rem;
+    font-weight: 700;
+    margin-left: 8px;
+    
+    @media (max-width: 1250px) {
+        display: none;
+    }
+
+    @media (max-width: 990px) {
+        display: inline;
+    }
 `;
 
 
 const Header = ({ history }) => {
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth < 1000);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.user);
 
-    //TODO: Hide or Show the sub nav-bar when screenSize < 950
+    //TODO: Hide or Show the sub nav-bar when screenSize < 990
     const updateMedia = () => {
-        setScreenWidth(window.innerWidth < 1000);
+        setScreenWidth(window.innerWidth);
       };
     useEffect(() => {
         window.addEventListener("resize", updateMedia);
@@ -60,10 +71,10 @@ const Header = ({ history }) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" style={{backgroundColor: 'black'}} />
             
             <Navbar.Collapse id="basic-navbar-nav" style={{color: 'black'}}>
-                  { !screenWidth ? <SearchBox /> : null }
+                  { !screenWidth  < 991 ? <SearchBox /> : null }
 
                   {
-                      screenWidth ? (
+                      screenWidth  < 991 ? (
                         <NavDropdown title={`Products`} style={{ fontSize: '1.2rem',marginRight: '1rem 0rem' ,color: 'black', padding: '0rem'}} id="adminuser">
                                 <LinkContainer to="/laptops">
                                     <NavDropdown.Item>Laptops</NavDropdown.Item>
@@ -88,10 +99,10 @@ const Header = ({ history }) => {
                     <LinkContainer to="/cart">
                       <Nav.Link href="/cart">
                           <AddBlackColor>
-                            <i className='fas fa-shopping-cart' style={{ marginRight: 8, fontSize: '1.2rem' }}></i>
-                            <div>
+                            <i className='fas fa-shopping-cart' style={{ marginRight: screenWidth < 1250 && screenWidth > 990 ? '2rem' : '0rem', fontSize: '1.2rem' }}></i>
+                            <YourCartText>
                                 Your Cart
-                            </div>
+                            </YourCartText>
                           </AddBlackColor>
                       </Nav.Link>
                     </LinkContainer>
@@ -136,9 +147,9 @@ const Header = ({ history }) => {
                   </Nav>
                 </Navbar.Collapse>
             
-            <WidthExpand style={{width: screenWidth ? '100%' : '0%'}}>
-                {screenWidth ? (<SearchBox />) : null}
-            </WidthExpand>
+            <div style={{width: screenWidth  < 991 ? '100%' : '0%'}}>
+                {screenWidth  < 991 ? (<SearchBox />) : null}
+            </div>
         </Navbar>
     );
 }

@@ -13,11 +13,11 @@ const Container = styled.div`
 
 const SearchBox = ({ history }) => {
     const [keyword, setKeyword] = useState('');
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth < 1000);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth < 990);
     
     //TODO: Hide or Show the sub nav-bar when screenSize < 950
     const updateMedia = () => {
-        setScreenWidth(window.innerWidth < 1000);
+        setScreenWidth(window.innerWidth <= 991);
       };
     useEffect(() => {
         window.addEventListener("resize", updateMedia);

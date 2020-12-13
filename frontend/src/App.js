@@ -23,7 +23,6 @@ import TVScreen from './screens/TVScreen';
 import PhonesScreen from './screens/phonesScreen';
 import HeadphonesScreen from './screens/HeadphoneScreen';
 
-import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import styled from 'styled-components';
