@@ -10,6 +10,11 @@ import {
     carouselProductReducer 
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
+import {
+    getWishListReducer,
+    addItemToWishListReducer,
+    removeItemFromWishListReducer
+} from './reducers/wishListReducer';
 import { 
     userReducer, 
     userDetailsReducer,
@@ -86,7 +91,10 @@ const reducer = combineReducers({
     topHeadphone: topHeadphoneReducer,
     allHeadphone: allHeadphonesReducer,
     topGames: topGameReducer,
-    allGames: allGamesReducer
+    allGames: allGamesReducer,
+    wishList: getWishListReducer,
+    addItemToWishList: addItemToWishListReducer,
+    removeItemFromWishList: removeItemFromWishListReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];

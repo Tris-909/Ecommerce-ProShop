@@ -9,6 +9,7 @@ import {
     deleteUserAdmin,
     getSingleUserAdmin,
     updateSingleUserAdmin,
+    getWishListItems,
     addItemToUserWishList,
     deleteAnItemFromWishList
 } from '../controller/userController.js';
@@ -20,6 +21,7 @@ router.route('/login').post(login);
 router.route('/profile').get(protect, getUserProfile).put(protect, changeUserProfile);
 router.route('/wishlist/additem').post(protect, addItemToUserWishList);
 router.route('/wishlist/deleteitem/:id').delete(protect, deleteAnItemFromWishList);
+router.route('/wishlist').get(protect, getWishListItems);
 router.route('/:id').get(protect, admin, getSingleUserAdmin);
 router.route('/:id').put(protect, admin, updateSingleUserAdmin);
 router.route('/').post(createUser).get(protect, admin, getAllUsers);

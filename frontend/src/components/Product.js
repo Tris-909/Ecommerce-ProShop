@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
@@ -32,8 +32,17 @@ const ButtonContainer = styled.div`
 `;
 
 const Product = ({ product, link = '/product' }) => {
+    const [isLoved, setIsLoved] = useState(false);
     const dispatch = useDispatch();
     const { cartItems, addItemSuccess } = useSelector(state => state.cart);
+
+    // useEffect(() => {
+    //     wishListItems.map((item) => {
+    //         if (item.itemId === product._id) {
+    //             setIsLoved(true);
+    //         }
+    //     })
+    // }, []);
 
     const onAddItemToCartHandler = (e, id) => {
         e.preventDefault();
@@ -74,7 +83,12 @@ const Product = ({ product, link = '/product' }) => {
                         <i className="fas fa-cart-plus" 
                             style={{ fontSize: '1.5rem', marginRight: '1.5rem', cursor: 'pointer' }}
                             onClick={(e) => onAddItemToCartHandler(e, product._id)}></i>
-                        <i className="far fa-heart" style={{ fontSize: '1.5rem', cursor: 'pointer' }} ></i>
+                        {
+
+                        }
+                        <span style={{color: '#f01838'}}>
+                            <i className="far fa-heart" style={{ fontSize: '1.5rem', cursor: 'pointer' }} ></i>
+                        </span>
                     </ButtonContainer>
                 </FootProductContainer>
             </Card.Body>

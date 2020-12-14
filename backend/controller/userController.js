@@ -15,6 +15,7 @@ const login = AsyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmin:  user.isAdmin,
+            wishList: user.wishList,
             token: generateToken(user._id)
         })
     } else {
@@ -174,6 +175,22 @@ const updateSingleUserAdmin = AsyncHandler(async (req, res) => {
     }   
 }); 
 
+//?   @description : Get users wishList based on there ID
+//?   @method : GET /api/users/wishlist
+//?   @access : private
+const getWishListItems = AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        const theWishList = [...user.wishList];
+        res.status(200);
+        res.send(theWishList);
+    } else {
+        res.status(404);
+        throw new Error('User is not existed');
+    }
+})
+
 //?   @description : Add an Item to the wishList
 //?   @method : POST /api/users/wishlist/additem
 //?   @access : private
@@ -227,10 +244,13 @@ export {
     getUserProfile,
     createUser,
     changeUserProfile,
+    
     getAllUsers,
     deleteUserAdmin,
     getSingleUserAdmin,
     updateSingleUserAdmin,
+
+    getWishListItems,
     addItemToUserWishList,
     deleteAnItemFromWishList
 }
