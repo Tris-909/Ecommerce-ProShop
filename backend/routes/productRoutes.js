@@ -7,6 +7,7 @@ import {
     createProduct, 
     updateProduct,
     createReview ,
+    deleteReviewProduct,
     getTopRatedProducts,
     getAllLaptops,
     getSingleLaptop,
@@ -39,6 +40,7 @@ router.route('/games/toptier').get(getTopGames);
 router.route('/games').get(getAllGames);
 router.route('/tvs/:id').get(getSingleTVs);
 router.route('/createReview').post(protect, createReview);
+router.route('/deletereview').delete(protect, deleteReviewProduct);
 router.route('/:id')
 .get(getProductById)
 .delete(protect, admin, deleteProductByIdAsAdmin)

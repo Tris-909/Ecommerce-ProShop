@@ -129,6 +129,43 @@ const createReview = AsyncHandler(async(req, res) => {
     }
 });
 
+//? Delete A Review of A Product based on UserID and ProductID and ReviewID
+//? DELETE /api/products/deletereview
+//? Private
+const deleteReviewProduct = AsyncHandler(async(req, res) => {
+    const { reviewID, productID } = req.body;
+    const choosenProduct = await Product.find({ _id: productID });
+
+    if (choosenProduct) {
+        //TODO: FIND THE POSITION OF THE DELETED REVIEWS AND DELETE THE REVIEW
+        let deletedReviewIndex;
+        for (let i = 0; i < choosenProduct[0].reviews.length; i++) {
+            if (reviewID == choosenProduct[0].reviews[i]._id) {
+                deletedReviewIndex = i;
+                break;
+            }
+        }
+        
+        if (deletedReviewIndex !== undefined) {
+            choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
+
+            //TODO: RE-CALCULATE THE RATINGS AND NUM-REVIEWS OF THE PRODUCT
+            choosenProduct[0].numReviews--;
+            choosenProduct[0].rating =  choosenProduct[0].reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct[0].numReviews;
+    
+            await choosenProduct[0].save();
+            res.status(200).send('Review has been deleted');
+        } else {
+            res.status(404);
+            throw new Error("Can't find the review based on reviewID thus no review is deleted");
+        }
+        
+    } else {
+        res.status(404);
+        throw new Error("Can't find the product you want to delete review from");
+    }
+});
+
 //? Get 3 top rated products 
 //? GET /api/products/carousel
 //? public 
@@ -313,6 +350,7 @@ export {
     createProduct,
     updateProduct,
     createReview,
+    deleteReviewProduct,
     getTopRatedProducts,
     getAllLaptops,
     getSingleLaptop,
