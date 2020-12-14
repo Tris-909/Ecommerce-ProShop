@@ -64,6 +64,10 @@ const productSchema = mongoose.Schema({
         type: Object,
         required: true
     },
+    gameDetail: {
+        type: Object,
+        required: true
+    },
     rating: {
         type: Number,
         required: true,

@@ -17,7 +17,9 @@ import {
     getTopPhones,
     getAllPhones,
     getTopHeadphone,
-    getAllHeadphones
+    getAllHeadphones,
+    getTopGames,
+    getAllGames
 } from '../controller/productController.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
@@ -33,6 +35,8 @@ router.route('/phones').get(getAllPhones);
 router.route('/phones/toptier').get(getTopPhones);
 router.route('/headphones').get(getAllHeadphones);
 router.route('/headphones/toptier').get(getTopHeadphone);
+router.route('/games/toptier').get(getTopGames);
+router.route('/games').get(getAllGames);
 router.route('/tvs/:id').get(getSingleTVs);
 router.route('/createReview').post(protect, createReview);
 router.route('/:id')

@@ -13,7 +13,8 @@ const products = [
     details: {exist: true},
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
   },
   {
     name: 'iPhone 11 Pro 256GB Memory',
@@ -29,7 +30,8 @@ const products = [
     details: {exist: true},
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
   },
   {
     name: 'Cannon EOS 80D DSLR Camera',
@@ -45,7 +47,8 @@ const products = [
     details: {exist: true},
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
   },
   {
     name: 'Sony Playstation 4 Pro White Version',
@@ -56,13 +59,13 @@ const products = [
     category: 'Electronics',
     price: 399.99,
     countInStock: 11,
-    rating: 5,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
     details: {exist: true},
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
-
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
   },
   {
     name: 'Logitech G-Series Gaming Mouse',
@@ -73,12 +76,13 @@ const products = [
     category: 'Electronics',
     price: 49.99,
     countInStock: 7,
-    rating: 3.5,
-    numReviews: 10,
+    rating: 0,
+    numReviews: 0,
     details: {exist: true},
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
   },
   {
     name: 'Amazon Echo Dot 3rd Generation',
@@ -89,12 +93,13 @@ const products = [
     category: 'Electronics',
     price: 29.99,
     countInStock: 0,
-    rating: 4,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
     details: {exist: true},
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
   },
   {
     name: 'MSI Prestige 14Evo 14" Full HD Laptop (512GB)',
@@ -105,8 +110,8 @@ const products = [
     category: 'laptops',
     price: 2399,
     countInStock: 5,
-    rating: 4,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
     details: {
         displaySizeInches: '14"',
         resolutionPixels: '1920x1080',
@@ -130,7 +135,8 @@ const products = [
     },
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
 },
 {
     name: 'MSI GF63 15.6" Full HD 144Hz Gaming Laptop (512GB)',
@@ -141,8 +147,8 @@ const products = [
     category: 'laptops',
     price: 1999,
     countInStock: 2,
-    rating: 4.5,
-    numReviews: 8,
+    rating: 0,
+    numReviews: 0,
     details: {
         displaySizeInches: '15.6"',
         resolutionPixels: '1920x1080',
@@ -166,7 +172,8 @@ const products = [
     },
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
 },
 {
     name: 'MSI GT76 Titan DT 17.3" Full HD 300Hz Gaming Laptop (RTX 2080 Super)',
@@ -177,8 +184,8 @@ const products = [
     category: 'laptops',
     price: 7500,
     countInStock: 3,
-    rating: 5,
-    numReviews: 2,
+    rating: 0,
+    numReviews: 0,
     details: {
         displaySizeInches: '17.3"',
         resolutionPixels: '1920x1080',
@@ -202,7 +209,8 @@ const products = [
     },
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
 },
 {
     name: 'MSI GE66 Dragonshield 15.6" Full HD 240Hz Gaming Laptop (1TB) [RTX 2070]',
@@ -213,8 +221,8 @@ const products = [
     category: 'laptops',
     price: 4698,
     countInStock: 8,
-    rating: 4.5,
-    numReviews: 11,
+    rating: 0,
+    numReviews: 0,
     details: {
         displaySizeInches: '15.6"',
         resolutionPixels: '1920x1080',
@@ -238,7 +246,8 @@ const products = [
     },
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
 },
 {
     name: 'MSI GP65 Leopard 15.6" Full HD 144Hz Gaming Laptop (512GB)[GTX 1660 Ti]',
@@ -249,8 +258,8 @@ const products = [
     category: 'laptops',
     price: 2998,
     countInStock: 4,
-    rating: 4,
-    numReviews: 5,
+    rating: 0,
+    numReviews: 0,
     details: {
         displaySizeInches: '15.6"',
         resolutionPixels: '1920x1080',
@@ -274,7 +283,8 @@ const products = [
     },
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
 },
 {
     name: 'MSI Bravo 15 15.6" Full HD 144Hz Gaming Laptop (512GB) [Ryzen 5]',
@@ -310,7 +320,8 @@ const products = [
     },
     tvsDetail: {exist: true},
     phoneDetail: {exist: true},
-    headphoneDetail: {exist: true}
+    headphoneDetail: {exist: true},
+    gameDetail: {exist: true}
 },
 {
   name: 'Samsung Q60T 75" QLED Ultra HD 4K Smart TV [2020]',
@@ -336,7 +347,8 @@ const products = [
     warranty: '1 year'
   },
   phoneDetail: {exist: true},
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'LG CX 48" Self-Lit OLED Smart 4K TV with AI ThinQ',
@@ -362,7 +374,8 @@ const products = [
     warranty: '1 year'
   },
   phoneDetail: {exist: true},
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Hisense 70S5 Series 5 70" 4K UHD Smart TV [2020]',
@@ -388,7 +401,8 @@ const products = [
     warranty: '1 year'
   },
   phoneDetail: {exist: true},
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'LG CX 55" Self-Lit OLED Smart 4K TV with AI ThinQ',
@@ -414,7 +428,8 @@ const products = [
     warranty: '1 year'
   },
   phoneDetail: {exist: true},
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Samsung Q80T 75" QLED Ultra HD 4K Smart TV [2020]',
@@ -440,7 +455,8 @@ const products = [
     warranty: '1 year'
   },
   phoneDetail: {exist: true},
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Sony X7000G 65" 4k Ultra HD HDR Smart TV',
@@ -466,7 +482,8 @@ const products = [
     warranty: '1 year'
   },
   phoneDetail: {exist: true},
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Apple iPhone 12 Pro Max 256GB (Pacific Blue)',
@@ -495,7 +512,8 @@ const products = [
     Wifi: 'yes',
     Warranty: '1 Year'
   },
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Samsung Galaxy S20 FE 5G 128GB (Cloud Navy)',
@@ -524,7 +542,8 @@ const products = [
     Wifi: 'yes',
     Warranty: '2 Years'
   },
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Samsung Galaxy S10 5G 256GB (Majestic Black)',
@@ -553,7 +572,8 @@ const products = [
     Wifi: 'yes',
     Warranty: '2 Years'
   },
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Google Pixel 4a 128GB (Just Black)',
@@ -582,7 +602,8 @@ const products = [
     Wifi: 'yes',
     Warranty: '2 Years'
   },
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Samsung Galaxy Z Fold2 5G 256GB (Black)',
@@ -611,7 +632,8 @@ const products = [
     Wifi: 'yes',
     Warranty: '2 Years'
   },
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Asus ROG 3 Gaming Phone (512GB)',
@@ -640,7 +662,8 @@ const products = [
     Wifi: 'yes',
     Warranty: '1 Year'
   },
-  headphoneDetail: {exist: true}
+  headphoneDetail: {exist: true},
+  gameDetail: {exist: true}
 },
 {
   name: 'Sony WH-1000XM4 Wireless Noise Cancelling Over-Ear Headphones (Black)',
@@ -663,7 +686,8 @@ const products = [
     NoiseReductionType: 'Noise cancellation',
     BuiltInMicrophone: 'Yes',
     Warranty: '1 Year'
-  }
+  },
+  gameDetail: {exist: true}
 },
 {
   name: 'Beats Studio3 Wireless Noise Cancelling Over-Ear Headphones (Midnight Black)',
@@ -686,7 +710,8 @@ const products = [
     NoiseReductionType: 'Noise cancellation',
     BuiltInMicrophone: 'Yes',
     Warranty: '1 Year'
-  }
+  },
+  gameDetail: {exist: true}
 },
 {
   name: 'Sennheiser HD 458BT Over-Ear Wireless Noise Cancelling Headphones (Black/Red)',
@@ -709,7 +734,8 @@ const products = [
     NoiseReductionType: 'Noise cancellation',
     BuiltInMicrophone: 'Yes',
     Warranty: '2 Years'
-  }
+  },
+  gameDetail: {exist: true}
 },
 {
   name: 'Samsung Galaxy Buds+ (Black)',
@@ -732,7 +758,8 @@ const products = [
     NoiseReductionType: 'No',
     BuiltInMicrophone: 'Yes',
     Warranty: '1 Year'
-  }
+  },
+  gameDetail: {exist: true}
 },
 {
   name: 'Jabra Elite 75t True Wireless In-Ear Headphones (Titanium Black)',
@@ -755,7 +782,8 @@ const products = [
     NoiseReductionType: 'No',
     BuiltInMicrophone: 'Yes',
     Warranty: '1 Year'
-  }
+  },
+  gameDetail: {exist: true}
 },
 {
   name: 'Apple Airpods with Charging Case (2nd Gen)',
@@ -778,8 +806,225 @@ const products = [
     NoiseReductionType: 'Noise cancellation',
     BuiltInMicrophone: 'Yes',
     Warranty: '1 Year'
+  },
+  gameDetail: {exist: true}
+},
+{
+  name: 'Cyberpunk 2077 Day One Edition',
+  image: '/images/game-1.jpg',
+  description:
+    "Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality. You can customize your character’s cyberware, skillset and playstyle, and explore a vast city where the choices you make shape the story and the world around you.",
+  brand: 'CD Projekt',
+  category: 'game',
+  price: 89,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'PS4',
+    GamingGerne: 'Role Playing Game',
+    Rating: 'R18+',
+    ConsumerAdvice: "High impact themes, sex, violence and references to sexual violence",
+    GameDeveloper: 'CD Projekt RED',
+    GamePublisher: 'CD Projekt'
   }
-}
+},
+{
+  name: 'The Nioh Collection',
+  image: '/images/game-2.jpg',
+  description:
+    "In this expansive collection, journey through Sengoku-era Japan to face nightmarish foes and legendary warriors in blisteringly fast hardcore combat. Master the way of the samurai in Nioh, then unleash your inner darkness in Nioh 2 – each expertly remastered and enhanced for PS5™.",
+  brand: 'Team Ninja',
+  category: 'game',
+  price: 109,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'PS5',
+    GamingGerne: 'Action & Adventure',
+    Rating: 'MA15+',
+    ConsumerAdvice: "Strong fantasy themes and violence, online interactivity",
+    GameDeveloper: 'Team Ninja',
+    GamePublisher: 'Sony Computer Interactive'
+  }
+},
+{
+  name: 'HITMAN 3',
+  image: '/images/game-3.jpg',
+  description:
+    "HITMAN 3 is the dramatic conclusion to the World of Assassination trilogy and takes players around the world on a globetrotting adventure to sprawling sandbox locations. Agent 47 returns as a ruthless professional for the most important contracts of his entire career. Death Awaits.",
+  brand: 'IO Interactive',
+  category: 'game',
+  price: 99,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'PS5',
+    GamingGerne: 'Action & Adventure',
+    Rating: 'MA15+',
+    ConsumerAdvice: "Strong violence, online interactivity and in-game purchases",
+    GameDeveloper: 'IO Interactive',
+    GamePublisher: 'IO Interactive'
+  }
+},
+{
+  name: "Marvel's Spider-Man: Miles Morales",
+  image: '/images/game-4.jpg',
+  description:
+    "In the latest adventure in the Marvel’s Spider-Man universe, teenager Miles Morales is adjusting to his new home while following in the footsteps of his mentor, Peter Parker, as a new Spider-Man. But when a fierce power struggle threatens to destroy his new home, the aspiring hero realizes that with great power, there must also come great responsibility. To save all of Marvel’s New York, Miles must take up the mantle of Spider-Man and own it.",
+  brand: 'Insomniac Games',
+  category: 'game',
+  price: 79,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'PS4',
+    GamingGerne: 'Action & Adventure',
+    Rating: 'M',
+    ConsumerAdvice: "Violence",
+    GameDeveloper: 'Insomniac Games',
+    GamePublisher: 'Sony Interactive Entertainment'
+  }
+},
+{
+  name: "Call of Duty: Black Ops Cold War",
+  image: '/images/game-5.jpg',
+  description:
+    "Black Ops Cold War will drop fans into the depths of the Cold War’s volatile geopolitical battle of the early 1980s. Nothing is ever as it seems in a gripping single-player Campaign, where players will come face-to-face with historical figures and hard truths, as they battle around the globe through iconic locales like East Berlin, Vietnam, Turkey, Soviet KGB headquarters and more.",
+  brand: 'Activision',
+  category: 'game',
+  price: 109,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'PS5',
+    GamingGerne: 'Shooter',
+    Rating: 'MA15+',
+    ConsumerAdvice: "Strong violence, online interactivity, in-game purchases",
+    GameDeveloper: 'Treyarch',
+    GamePublisher: 'Activision'
+  }
+},
+{
+  name: "Assassin's Creed Valhalla",
+  image: '/images/game-6.jpg',
+  description:
+    "Ninth century AD. Driven from Norway by endless wars and dwindling resources, a Viking raider, Eivor, leads a clan of Norsemen across the icy North Sea to the rich lands of England’s broken kingdoms. Their mission: establish a new permanent home, no matter the cost. In Assassin’s Creed® Valhalla, you are Eivor, a fierce Viking warrior raised on tales of battle and glory. Explore a mysterious and beautiful open world set against the brutal backdrop of England’s Dark Ages. Raid your enemies, grow your settlement, and build your political power in the quest to earn a place among the gods in Valhalla. Wars will rage. Kingdoms will fall. This is the age of the Vikings.",
+  brand: 'Ubisoft',
+  category: 'game',
+  price: 79,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'PS5',
+    GamingGerne: 'Action & Adventure',
+    Rating: 'MA15+',
+    ConsumerAdvice: "Strong themes, violence and coarse language, online interactivity and in-game purchases",
+    GameDeveloper: 'Ubisoft Montreal',
+    GamePublisher: 'Ubisoft'
+  }
+},
+{
+  name: "Immortals Fenyx Rising",
+  image: '/images/game-7.jpg',
+  description:
+    "Immortals Fenyx Rising™ brings grand mythological adventure to life. Play as Fenyx, a new winged demigod on a quest to save the Greek gods and their home from a dark curse. Take on mythological beasts, master the legendary powers of the gods and defeat Typhon, the deadliest Titan in Greek mythology, in an epic fight for the ages.",
+  brand: 'Ubisoft',
+  category: 'game',
+  price: 79,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'Nintendo Switch',
+    GamingGerne: 'Action & Adventure',
+    Rating: 'M',
+    ConsumerAdvice: "Fantasy themes, violence, online interactivity and in-game purchases",
+    GameDeveloper: 'Ubisoft Quebec',
+    GamePublisher: 'Ubisoft'
+  }
+},
+{
+  name: "Watch Dogs Legion",
+  image: '/images/game-8.jpg',
+  description:
+    "It is time to take back London, and anyone you see in this iconic city can be recruited to your resistance. Corrupt opportunists have taken over and it’s up to you to build a resistance to give the city back to the people. With an entire population of potential recruits and the city’s technology at your fingertips, you’ll need to hack, infiltrate, and fight your way to liberate London. Welcome to the Resistance.",
+  brand: 'Ubisoft',
+  category: 'game',
+  price: 79,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'PS4',
+    GamingGerne: 'Action & Adventure',
+    Rating: 'MA15+',
+    ConsumerAdvice: "Strong themes, violence and coarse language, online interactivity and in-game purchases",
+    GameDeveloper: 'Ubisoft Toronto',
+    GamePublisher: 'Ubisoft'
+  }
+},
+{
+  name: "NBA 2K21",
+  image: '/images/game-9.jpg',
+  description:
+    "NBA 2K21 is the latest title in the world-renowned, best-selling NBA 2K series, delivering an industry-leading sports video game experience. With extensive improvements upon its best-in-class graphics and gameplay, competitive and community online features, and deep, varied game modes, NBA 2K21 offers one-of-a-kind immersion into all facets of NBA basketball and culture - where Everything is Game.",
+  brand: '2k',
+  category: 'game',
+  price: 89,
+  countInStock: 5,
+  rating: 0,
+  numReviews: 0,
+  details: {exist: true},
+  tvsDetail: {exist: true },
+  phoneDetail: {exist: true},
+  headphoneDetail: {exist: true},
+  gameDetail: {
+    Platform: 'PS5',
+    GamingGerne: 'Sport',
+    Rating: 'PG',
+    ConsumerAdvice: "Mild gambling references, online interactivity and in-game purchases",
+    GameDeveloper: '2K',
+    GamePublisher: '2K'
+  }
+},
 ]
 
 export default products;

@@ -278,6 +278,34 @@ const getAllHeadphones = AsyncHandler(async(req, res) => {
     }
 });
 
+//? GET Top Games
+//? /api/products/games/toptier
+//? public
+const getTopGames = AsyncHandler(async(req, res) => {
+    const topGames = await Product.find({ category: 'game' }).sort({ price: -1 }).limit(3);
+
+    if (topGames) {
+        res.status(200).send(topGames);
+    } else {
+        res.status(404);
+        throw new Error('Something is wrong, cant fetch top Games');
+    }
+});
+
+//? GET All Games
+//? /api/products/games
+//? public
+const getAllGames = AsyncHandler(async(req, res) => {
+    const allGames = await Product.find({ category: 'game' });
+
+    if (allGames) {
+        res.status(200).send(allGames);
+    } else {
+        res.status(404);
+        throw new Error('Something is wrong, cant fetch top Games');
+    }
+});
+
 export {
     getProducts,
     getProductById,
@@ -295,5 +323,7 @@ export {
     getTopPhones,
     getAllPhones,
     getTopHeadphone,
-    getAllHeadphones
+    getAllHeadphones,
+    getTopGames,
+    getAllGames
 }
