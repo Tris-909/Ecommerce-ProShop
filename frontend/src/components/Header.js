@@ -27,13 +27,11 @@ const AddBlackColor = styled.div`
 `;
 
 const YourCartText = styled.div`
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-weight: 700;
     margin-left: 8px;
     
-    @media (max-width: 1250px) {
-        display: none;
-    }
+
 
     @media (max-width: 990px) {
         display: inline;
@@ -77,7 +75,7 @@ const Header = ({ history }) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" style={{backgroundColor: 'black'}} />
             
             <Navbar.Collapse id="basic-navbar-nav" style={{color: 'black'}}>
-                  { !screenWidth  < 991 ? <SearchBox /> : null }
+                  { screenWidth  > 991 ? <SearchBox /> : null }
 
                   {
                       screenWidth  < 991 ? (
@@ -101,11 +99,13 @@ const Header = ({ history }) => {
                       ) : null
                   }
 
+                  
+
                   <Nav className="ml-auto">
                     <LinkContainer to="/cart">
                       <Nav.Link href="/cart">
                           <AddBlackColor>
-                            <i className='fas fa-shopping-cart' style={{ marginRight: screenWidth < 1250 && screenWidth > 990 ? '2rem' : '0rem', fontSize: '1.2rem' }}></i>
+                            <i className='fas fa-shopping-cart' style={{ marginRight: screenWidth < 1250 && screenWidth > 990 ? '0rem' : '0rem', fontSize: '1.2rem' }}></i>
                             <YourCartText>
                                 Your Cart
                             </YourCartText>
@@ -113,21 +113,16 @@ const Header = ({ history }) => {
                       </Nav.Link>
                     </LinkContainer>
 
-                    {
-                        user && user.isAdmin ? (
-                            <NavDropdown title={<i className="fas fa-crown" style={{ fontSize: '1.2rem', marginRight: '0rem', color: 'black'}}></i>} id="adminuser">
-                                <LinkContainer to="/admin/usersList">
-                                    <NavDropdown.Item>Users</NavDropdown.Item>
-                                </LinkContainer>
-                                <LinkContainer to="/admin/productsList">
-                                    <NavDropdown.Item>Products</NavDropdown.Item>
-                                </LinkContainer>
-                                <LinkContainer to="/admin/ordersList">
-                                    <NavDropdown.Item>Orders</NavDropdown.Item>
-                                </LinkContainer>
-                            </NavDropdown>
-                        ) : null
-                    }
+                    <LinkContainer to={user ? "/wishlist" : "/login"}>
+                      <Nav.Link href="/wishlist">
+                          <AddBlackColor>
+                            <i className='fas fa-heart' style={{ marginRight: screenWidth < 1250 && screenWidth > 990 ? '0rem' : '0rem', fontSize: '1.2rem' }}></i>
+                            <YourCartText>
+                                Wish List
+                            </YourCartText>
+                          </AddBlackColor>
+                      </Nav.Link>
+                    </LinkContainer>
 
                     {
                         user ? (
@@ -135,6 +130,21 @@ const Header = ({ history }) => {
                                 <LinkContainer to="/profile">
                                     <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>
+                                {
+                                    user && user.isAdmin ? (
+                                        <NavDropdown title={<span style={{ marginLeft: '1rem'}}>Admin</span>} id="adminuser">
+                                            <LinkContainer to="/admin/usersList">
+                                                <NavDropdown.Item>Users</NavDropdown.Item>
+                                            </LinkContainer>
+                                            <LinkContainer to="/admin/productsList">
+                                                <NavDropdown.Item>Products</NavDropdown.Item>
+                                            </LinkContainer>
+                                            <LinkContainer to="/admin/ordersList">
+                                                <NavDropdown.Item>Orders</NavDropdown.Item>
+                                            </LinkContainer>
+                                        </NavDropdown>
+                                    ) : null
+                                }
                                 <NavDropdown.Item onClick={logOutHandler}>
                                     Log Out
                                 </NavDropdown.Item>

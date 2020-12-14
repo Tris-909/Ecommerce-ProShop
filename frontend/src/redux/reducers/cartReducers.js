@@ -1,5 +1,7 @@
 import { 
     ADD_PRODUCT_TO_CART, 
+    ADD_PRODUCT_TO_CART_SUCCES,
+    ADD_PRODUCT_TO_CART_RESET,
     REMOVE_PRODUCT_TO_CART, 
     SAVE_SHIPPING_ADDRESS_CART, 
     SAVE_PAYMENT_METHOD,
@@ -8,6 +10,7 @@ import {
 
 const initialState = {
     cartItems: [],
+    addItemSuccess: false,
     shippingAddress: {
         address: '',
         city: '',
@@ -35,7 +38,16 @@ export const cartReducer = (state = initialState, action) => {
                     cartItems: [...state.cartItems, item]
                 }
             }
-
+        case ADD_PRODUCT_TO_CART_SUCCES:
+            return {
+                ...state,
+                addItemSuccess: true
+            }
+        case ADD_PRODUCT_TO_CART_RESET:
+            return {
+                ...state,
+                addItemSuccess: false
+            }
         case REMOVE_PRODUCT_TO_CART:
             return {
                 ...state,

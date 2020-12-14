@@ -178,13 +178,15 @@ const updateSingleUserAdmin = AsyncHandler(async (req, res) => {
 //?   @method : POST /api/users/wishlist/additem
 //?   @access : private
 const addItemToUserWishList = AsyncHandler(async (req, res) => {
-    const { itemId, productName, productPrice, productImage } = req.body;
+    const { itemId, productName, productPrice, productImage, productRating, productNumReviews } = req.body;
     const user = await User.findById(req.user._id);
     const theItem = {
         itemId, 
         productName, 
         productPrice, 
-        productImage
+        productImage,
+        productRating,
+        productNumReviews
     }    
 
     user.wishList.push(theItem);

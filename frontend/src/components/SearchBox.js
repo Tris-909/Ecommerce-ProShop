@@ -34,7 +34,7 @@ const SearchBox = ({ history }) => {
     }
 
     return (
-        <Form onSubmit={submitHandler} inline autoComplete="off" style={{ width: screenWidth ? '100%' : '60%', marginTop: screenWidth ? '1rem' : '0rem'}}>
+        <Form onSubmit={submitHandler} inline autoComplete="off" style={{ width: screenWidth ? '100%' : '40%', marginTop: screenWidth ? '1rem' : '0rem'}}>
             <Container>
                 <Form.Control 
                     type='text' 
@@ -42,7 +42,7 @@ const SearchBox = ({ history }) => {
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder="Search for Product"
                     className="mr-sm-2"
-                    style={{width: '60%'}}>
+                    style={{width: '100%'}}>
                 </Form.Control>
                 <Button type="submit" variant="outline-dark" className="p-2">Search</Button>
             </Container>

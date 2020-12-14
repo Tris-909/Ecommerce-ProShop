@@ -38,6 +38,14 @@ const userSchema = mongoose.Schema({
             productImage: {
                 type: String,
                 required: true
+            },
+            productRating: {
+                type: Number,
+                required: true
+            },
+            productNumReviews: {
+                type: Number,
+                required: true
             }
         }
     ]

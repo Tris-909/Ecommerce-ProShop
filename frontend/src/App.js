@@ -23,6 +23,7 @@ import TVScreen from './screens/TVScreen';
 import PhonesScreen from './screens/phonesScreen';
 import HeadphonesScreen from './screens/HeadphoneScreen';
 import GamesScreen from './screens/GamesScreen';
+import WishListScreen from './screens/WishListScreen';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -32,6 +33,8 @@ const MarginContainer = styled.div`
 margin-top: 0%;  
 margin-left: 5%;
 margin-right: 5%;
+padding-left: 2%;
+padding-right: 2%;
 `;
 
 function App() {
@@ -55,6 +58,7 @@ function App() {
           <Route path="/shipping" component={ShippingScreen} exact />
           <Route path="/payment" component={PaymentScreen} exact />
           <Route path="/placeorder" component={PlaceOrderScreen} exact />
+          <Route path="/wishlist" component={WishListScreen} exact />
           <Route path="/orders/:id" component={OrderScreen} />
           <Route path="/admin/usersList" component={AdminScreen} exact />
           <Route path="/admin/users/:id/edit" component={AdminUserInfoScreen} />

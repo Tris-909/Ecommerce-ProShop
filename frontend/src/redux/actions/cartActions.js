@@ -1,5 +1,6 @@
 import {
     ADD_PRODUCT_TO_CART,
+    ADD_PRODUCT_TO_CART_SUCCES,
     REMOVE_PRODUCT_TO_CART,
     SAVE_SHIPPING_ADDRESS_CART,
     SAVE_PAYMENT_METHOD,
@@ -24,6 +25,10 @@ export const addItemToCart = (id, qty) => async (dispatch, getState) => {
         });
 
         localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+
+        dispatch({
+            type: ADD_PRODUCT_TO_CART_SUCCES
+        });
     } catch(error) {
         console.log(error);
     } 
