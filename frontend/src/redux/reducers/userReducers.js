@@ -24,7 +24,12 @@ import {
     CREATE_REVIEW_PENDING,
     CREATE_REVIEW_SUCCESS,
     CREATE_REVIEW_FAIL,
-    CREATE_REVIEW_RESET
+    CREATE_REVIEW_RESET,
+
+    DELETE_REVIEW_REQUEST,
+    DELETE_REVIEW_SUCCESS,
+    DELETE_REVIEW_FAIL,
+    DELETE_REVIEW_RESET
 } from '../actions/actionTypes';
 
 const initialUserState = {
@@ -184,8 +189,45 @@ const userReviewReducer = (state = initialReviewState, action) => {
     }
 }
 
+const deleteReviewInitalState = {
+    loading: false,
+    error: null,
+    success: false
+}
+
+const deleteReviewReducer = (state = deleteReviewInitalState, action) => {
+    switch(action.type) {
+        case DELETE_REVIEW_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case DELETE_REVIEW_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true
+            }
+        case DELETE_REVIEW_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case DELETE_REVIEW_RESET:
+            return {
+                loading: false,
+                error: null,
+                success: false  
+            }
+        default: 
+            return state;
+    }
+}
+
 export {
     userReducer,
     userDetailsReducer,
-    userReviewReducer
+    userReviewReducer,
+    deleteReviewReducer
 }

@@ -1,12 +1,20 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Row, Col, Form, Button, ListGroup } from 'react-bootstrap';
-import { createReview } from '../../redux/actions/userActions';
-import { CREATE_REVIEW_RESET } from '../../redux/actions/actionTypes';
+import { createReview, deleteReview } from '../../redux/actions/userActions';
+import { CREATE_REVIEW_RESET, DELETE_REVIEW_RESET } from '../../redux/actions/actionTypes';
 import Message from '../Message';
 import Rating from '../../components/Rating';
+import styled from 'styled-components';
 
-const ReviewSection = ({ singleProduct, user, userReviewError }) => {
+const ReviewContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+`;
+
+const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError }) => {
     const dispatch = useDispatch();
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
@@ -19,10 +27,22 @@ const ReviewSection = ({ singleProduct, user, userReviewError }) => {
         setComment('');
     }
 
+    const onDeleteReviewHandler = (e, reviewId) => {
+        e.preventDefault();
+        dispatch({ type: DELETE_REVIEW_RESET });
+        dispatch(deleteReview(singleProduct._id, reviewId));
+    }
+
     return (
         <Row>
             <Col md={6}>
                 <h2>Reviews</h2>
+                {
+                    deleteReviewError ? (
+                        <Message content="Delete Review Failed, Please Try Again :(" variant="danger" />
+                    ) : null
+                }
+
                 { singleProduct.reviews.length === 0 ? (
                     <>
                         <Message content="No Review" variant="secondary" />
@@ -59,7 +79,14 @@ const ReviewSection = ({ singleProduct, user, userReviewError }) => {
                     <ListGroup variant="flush">
                         { singleProduct.reviews.map((review) => (
                             <ListGroup.Item key={review._id}>
-                                <strong>{review.name}</strong>
+                                <ReviewContainer>
+                                    <strong>{review.name}</strong>
+                                    <i 
+                                        className="fas fa-trash" 
+                                        style={{ cursor: 'pointer' }}
+                                        onClick={(e) => onDeleteReviewHandler(e, review._id)}></i>
+                                </ReviewContainer>
+
                                 <Rating rating={review.rating} />
                                 <p>{ review.createdAt.substring(0,10) }</p>
                                 <p>{ review.comment }</p>

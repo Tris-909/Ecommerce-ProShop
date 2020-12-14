@@ -13,7 +13,8 @@ import { cartReducer } from './reducers/cartReducers';
 import { 
     userReducer, 
     userDetailsReducer,
-    userReviewReducer 
+    userReviewReducer,
+    deleteReviewReducer 
 } from './reducers/userReducers';
 import { 
     ordersReducer, 
@@ -73,6 +74,7 @@ const reducer = combineReducers({
     adminOrders: getOrdersAsAdmin,
     isDeliveredOrderAdmin: putIsDeliveredStatus,
     userReview: userReviewReducer,
+    deleteReview: deleteReviewReducer,
     carouselProducts: carouselProductReducer,
     topLaptops: topLaptopReducer,
     allLaptops: allLaptopsReducer,

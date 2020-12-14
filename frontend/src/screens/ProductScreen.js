@@ -22,11 +22,12 @@ const ProductScreen = ({ match }) => {
 
     const {singleProduct, loading, error} = useSelector(state => state.singleProduct);
     const {success: userReviewSuccess, error: userReviewError } = useSelector(state => state.userReview);
+    const {success: deleteReviewSuccess, error:  deleteReviewError } = useSelector(state => state.deleteReview);
     const { user } = useSelector(state => state.user);
 
     useEffect(() => {
         dispatch(getSingleProduct(match.params.id));
-    }, [dispatch, match.params.id, userReviewSuccess]);
+    }, [dispatch, match.params.id, userReviewSuccess, deleteReviewSuccess]);
 
     const checkIfErrorExisted = () => {
         if (error) {
@@ -88,7 +89,12 @@ const ProductScreen = ({ match }) => {
                         }
                         {
                             singleProduct && user  ? (
-                                <ReviewSection singleProduct={singleProduct} user={user} userReviewError={userReviewError} />
+                                <ReviewSection 
+                                    singleProduct={singleProduct} 
+                                    user={user} 
+                                    userReviewError={userReviewError} 
+                                    deleteReviewError={deleteReviewError} 
+                                />
                             ) : null
                         }
                     </>

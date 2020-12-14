@@ -133,14 +133,14 @@ const createReview = AsyncHandler(async(req, res) => {
 //? DELETE /api/products/deletereview
 //? Private
 const deleteReviewProduct = AsyncHandler(async(req, res) => {
-    const { reviewID, productID } = req.body;
-    const choosenProduct = await Product.find({ _id: productID });
+    const { reviewid, productid } = req.params;
+    const choosenProduct = await Product.find({ _id: productid });
 
     if (choosenProduct) {
         //TODO: FIND THE POSITION OF THE DELETED REVIEWS AND DELETE THE REVIEW
         let deletedReviewIndex;
         for (let i = 0; i < choosenProduct[0].reviews.length; i++) {
-            if (reviewID == choosenProduct[0].reviews[i]._id) {
+            if (reviewid == choosenProduct[0].reviews[i]._id) {
                 deletedReviewIndex = i;
                 break;
             }

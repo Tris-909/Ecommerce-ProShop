@@ -22,7 +22,11 @@ import {
 
     CREATE_REVIEW_PENDING,
     CREATE_REVIEW_SUCCESS,
-    CREATE_REVIEW_FAIL
+    CREATE_REVIEW_FAIL,
+
+    DELETE_REVIEW_REQUEST,
+    DELETE_REVIEW_SUCCESS,
+    DELETE_REVIEW_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -178,6 +182,33 @@ export const createReview = (rating, comment, productID) => async(dispatch, getS
     } catch (error) {
         dispatch({
             type: CREATE_REVIEW_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+export const deleteReview = (productID, reviewID) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: DELETE_REVIEW_REQUEST
+        });
+
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.delete(`/api/products/deletereview/${productID}/${reviewID}`, config);
+
+        dispatch({
+            type: DELETE_REVIEW_SUCCESS
+        });
+    } catch(error) {
+        dispatch({
+            type: DELETE_REVIEW_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }
