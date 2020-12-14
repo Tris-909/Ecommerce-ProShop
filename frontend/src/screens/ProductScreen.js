@@ -15,6 +15,7 @@ import LapTopTable from '../components/ProductDetail/LaptopTable/LapTopTable';
 import TVTable from '../components/ProductDetail/TvTable/TVTable';
 import PhoneTable from '../components/ProductDetail/PhoneTable/PhoneTable';
 import HeadphoneTable from '../components/ProductDetail/HeadphoneTable/HeadphoneTable';
+import GameTable from '../components/ProductDetail/GameTable/GameTable';
 
 const ProductScreen = ({ match }) => {
     const dispatch = useDispatch();
@@ -78,6 +79,11 @@ const ProductScreen = ({ match }) => {
                         {
                             singleProduct.headphoneDetail.HeadphoneType ? (
                                 <HeadphoneTable singleHeadphonePhone={singleProduct} />
+                            ) : null
+                        }                        
+                        {
+                            singleProduct.gameDetail.Platform ? (
+                                <GameTable singleGame={singleProduct} />
                             ) : null
                         }
                         {

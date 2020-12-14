@@ -22,6 +22,7 @@ import SearchScreen from './screens/SearchScreen';
 import TVScreen from './screens/TVScreen';
 import PhonesScreen from './screens/phonesScreen';
 import HeadphonesScreen from './screens/HeadphoneScreen';
+import GamesScreen from './screens/GamesScreen';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -46,6 +47,7 @@ function App() {
           <Route path="/tvs" component={TVScreen} exact />
           <Route path="/phones" component={PhonesScreen} exact />
           <Route path="/headphones" component={HeadphonesScreen} exact />
+          <Route path="/gaming" component={GamesScreen} exact />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/login" component={LoginScreen} exact /> 
           <Route path="/register" component={RegisterScreen} exact />

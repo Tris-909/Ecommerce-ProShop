@@ -8,6 +8,7 @@ import {getTopTiersLaptop} from '../redux/actions/laptopActions';
 import {getTopTVs} from '../redux/actions/tvActions';
 import {getTopPhones} from '../redux/actions/phoneActions';
 import {getTopHeadphone} from '../redux/actions/headphoneActions';
+import {getTopGames} from '../redux/actions/gameActions';
 
 //TODO: Components
 import TopProduct from '../components/TopProduct (Home)/TopProduct';
@@ -21,6 +22,7 @@ const HomeScreen = () => {
     const { topTV, loading: topTVLoading } = useSelector(state => state.topTVs);
     const { topPhones, loading: topPhonesLoading } = useSelector(state => state.topPhones);
     const { topHeadphone, loading: topHeadphoneLoading } = useSelector(state => state.topHeadphone);
+    const { topGames, loading: topGamesLoading } = useSelector(state => state.topGames);
 
     useEffect(() => {
         //TODO: Get carousel products for the first time 
@@ -56,6 +58,13 @@ const HomeScreen = () => {
             dispatch(getTopHeadphone());
         }
     }, [dispatch, topHeadphone]);
+
+    useEffect(() => {
+        //TODO: Fetch top-games for the first time
+        if (topGames.length === 0) {
+            dispatch(getTopGames());
+        }
+    }, [dispatch, topGames]);
 
     const checkIfErrorExisted = () => {
         if (topLaptopError) {
@@ -120,6 +129,18 @@ const HomeScreen = () => {
                                 title="Great Headphones for You"
                                 itemLink="/product"
                                 listItemLink="/headphones"
+                            />
+                        ) : null  
+                    }
+
+                    {
+                        topGames.length !== 0 ? (
+                            <TopProduct 
+                                loading={topGamesLoading}
+                                itemArray={topGames}
+                                title="For Game Lovers"
+                                itemLink="/product"
+                                listItemLink="/gaming"
                             />
                         ) : null  
                     }

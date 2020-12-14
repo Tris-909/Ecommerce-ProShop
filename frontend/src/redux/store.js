@@ -48,6 +48,10 @@ import {
     topHeadphoneReducer,
     allHeadphonesReducer
 } from './reducers/headphoneReducer';
+import {
+    topGameReducer,
+    allGamesReducer
+} from './reducers/gameReducer';
 
 const reducer = combineReducers({
     productsList: productListReducer,
@@ -78,7 +82,9 @@ const reducer = combineReducers({
     topPhones: topPhonesReducer,
     allPhones: allPhonesReducer,
     topHeadphone: topHeadphoneReducer,
-    allHeadphone: allHeadphonesReducer
+    allHeadphone: allHeadphonesReducer,
+    topGames: topGameReducer,
+    allGames: allGamesReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
