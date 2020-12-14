@@ -8,7 +8,9 @@ import {
     getAllUsers,
     deleteUserAdmin,
     getSingleUserAdmin,
-    updateSingleUserAdmin
+    updateSingleUserAdmin,
+    addItemToUserWishList,
+    deleteAnItemFromWishList
 } from '../controller/userController.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
@@ -16,6 +18,8 @@ import { admin } from '../middlewares/admin.js';
 router.route('/delete/:id').delete(protect, admin, deleteUserAdmin);
 router.route('/login').post(login);
 router.route('/profile').get(protect, getUserProfile).put(protect, changeUserProfile);
+router.route('/wishlist/additem').post(protect, addItemToUserWishList);
+router.route('/wishlist/deleteitem/:id').delete(protect, deleteAnItemFromWishList);
 router.route('/:id').get(protect, admin, getSingleUserAdmin);
 router.route('/:id').put(protect, admin, updateSingleUserAdmin);
 router.route('/').post(createUser).get(protect, admin, getAllUsers);

@@ -174,6 +174,52 @@ const updateSingleUserAdmin = AsyncHandler(async (req, res) => {
     }   
 }); 
 
+//?   @description : Add an Item to the wishList
+//?   @method : POST /api/users/wishlist/additem
+//?   @access : private
+const addItemToUserWishList = AsyncHandler(async (req, res) => {
+    const { itemId, productName, productPrice, productImage } = req.body;
+    const user = await User.findById(req.user._id);
+    const theItem = {
+        itemId, 
+        productName, 
+        productPrice, 
+        productImage
+    }    
+
+    user.wishList.push(theItem);
+    const newUser = await user.save();
+    
+    res.status(200);
+    res.send(newUser);
+});
+
+//?   @description : Delete an Item from the wishList
+//?   @method : DELETE /api/users/wishlist/deleteitem/:id
+//?   @access : private
+const deleteAnItemFromWishList = AsyncHandler(async (req, res) => {
+    const wishListItemId = req.params.id;
+    const user = await User.findById(req.user._id);
+
+    let deleteIndex;
+    for (let i = 0; i < user.wishList.length; i++) {
+        if (user.wishList[i]._id == wishListItemId) {
+            deleteIndex = i;
+            break;
+        } 
+    }
+
+    if (deleteIndex == undefined) {
+        res.status(404);
+        throw new Error("Can't find the item that you want to delete base on this wishListItemId");
+    }
+
+    user.wishList.splice(deleteIndex, 1);
+    await user.save();
+    res.status(200);
+    res.send("Delete the item from wishList successfully");
+});
+
 export {
     login,
     getUserProfile,
@@ -182,5 +228,7 @@ export {
     getAllUsers,
     deleteUserAdmin,
     getSingleUserAdmin,
-    updateSingleUserAdmin
+    updateSingleUserAdmin,
+    addItemToUserWishList,
+    deleteAnItemFromWishList
 }

@@ -24,7 +24,7 @@ const GamesScreen = () => {
                 {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please reload the webpage" /> : allGames.map((game) => {
                     return(
                         <Col sm={12} md={6} lg={6} xl={4} key={game._id}>
-                            <Product product={game} link={`/games`}/>
+                            <Product product={game} link={`/product`}/>
                         </Col>
                     );
                 })}
