@@ -5,7 +5,12 @@ import {Link} from 'react-router-dom';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {addItemToCart} from '../redux/actions/cartActions';
-import {ADD_PRODUCT_TO_CART_RESET} from '../redux/actions/actionTypes';
+import {addItemToWishList, removeAnItemFromWishList} from '../redux/actions/wishListActions';
+import {
+    ADD_PRODUCT_TO_CART_RESET,
+    ADD_ITEM_TO_WISH_LIST_RESET,
+    REMOVE_ITEM_FROM_WISH_LIST_RESET
+} from '../redux/actions/actionTypes';
 
 import Rating from './Rating';
 import Message from './Message';
@@ -33,21 +38,50 @@ const ButtonContainer = styled.div`
 
 const Product = ({ product, link = '/product' }) => {
     const [isLoved, setIsLoved] = useState(false);
+    const [wishListID, setWishListID] = useState(null);
+
     const dispatch = useDispatch();
     const { cartItems, addItemSuccess } = useSelector(state => state.cart);
+    const { wishList } = useSelector(state => state.wishList);
+    const { 
+        loading: addItemToWishListLoading, 
+        success: addItemToWishListSuccess, 
+        error: addItemToWishListError} = useSelector(state => state.addItemToWishList);
+    const {
+        loading: removeItemFromWishListLoading,
+        success: removeItemFromWishListSuccess,
+        error: removeItemFromWishListError
+    } = useSelector(state => state.removeItemFromWishList);
 
-    // useEffect(() => {
-    //     wishListItems.map((item) => {
-    //         if (item.itemId === product._id) {
-    //             setIsLoved(true);
-    //         }
-    //     })
-    // }, []);
+    useEffect(() => {
+        wishList.map((item) => {
+            if (item.itemId === product._id) {
+                setIsLoved(true);
+                setWishListID(item._id);
+            }
+        })
+    }, [wishList, product]);
 
     const onAddItemToCartHandler = (e, id) => {
         e.preventDefault();
         dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
         dispatch(addItemToCart(id, 1));
+    }
+
+    const onAddItemToWishList = (e) => {
+        e.preventDefault();
+        dispatch({type: ADD_ITEM_TO_WISH_LIST_RESET});
+        dispatch(addItemToWishList(product._id, product.name, product.price, product.image ,product.rating, product.numReviews));
+        if (addItemToWishListSuccess) {
+            setIsLoved(true);
+        }
+    }
+
+    const onRemoveItemFromWishList = (e) => {
+        e.preventDefault();
+        dispatch({ type: REMOVE_ITEM_FROM_WISH_LIST_RESET });
+        dispatch(removeAnItemFromWishList(wishListID));
+        setIsLoved(false);
     }
 
     return (
@@ -84,11 +118,18 @@ const Product = ({ product, link = '/product' }) => {
                             style={{ fontSize: '1.5rem', marginRight: '1.5rem', cursor: 'pointer' }}
                             onClick={(e) => onAddItemToCartHandler(e, product._id)}></i>
                         {
-
+                            isLoved ? (
+                                //TODO: Full Heart
+                                <span style={{color: '#f01838'}} onClick={(e) => onRemoveItemFromWishList(e)}>
+                                    <i className="fas fa-heart" style={{ fontSize: '1.5rem', cursor: 'pointer' }} ></i>
+                                </span>
+                            ) : (
+                                //TODO: Empty Heart
+                                <span style={{color: '#f01838'}} onClick={(e) => onAddItemToWishList(e)}>
+                                    <i className="far fa-heart" style={{ fontSize: '1.5rem', cursor: 'pointer' }} ></i>
+                                </span>
+                            )
                         }
-                        <span style={{color: '#f01838'}}>
-                            <i className="far fa-heart" style={{ fontSize: '1.5rem', cursor: 'pointer' }} ></i>
-                        </span>
                     </ButtonContainer>
                 </FootProductContainer>
             </Card.Body>

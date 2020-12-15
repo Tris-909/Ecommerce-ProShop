@@ -89,7 +89,7 @@ export const removeAnItemFromWishList = (wishListItemId) => async(dispatch, getS
             }
         }
 
-        await axios.post(`/api/users/wishlist/deleteitem/${wishListItemId}`,{} ,config);
+        await axios.delete(`/api/users/wishlist/deleteitem/${wishListItemId}`, config);
 
         dispatch({
             type: REMOVE_ITEM_FROM_WISH_LIST_SUCCESS

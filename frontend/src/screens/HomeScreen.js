@@ -9,6 +9,7 @@ import {getTopTVs} from '../redux/actions/tvActions';
 import {getTopPhones} from '../redux/actions/phoneActions';
 import {getTopHeadphone} from '../redux/actions/headphoneActions';
 import {getTopGames} from '../redux/actions/gameActions';
+import {getWishList} from '../redux/actions/wishListActions';
 
 //TODO: Components
 import TopProduct from '../components/TopProduct (Home)/TopProduct';
@@ -23,6 +24,9 @@ const HomeScreen = () => {
     const { topPhones, loading: topPhonesLoading } = useSelector(state => state.topPhones);
     const { topHeadphone, loading: topHeadphoneLoading } = useSelector(state => state.topHeadphone);
     const { topGames, loading: topGamesLoading } = useSelector(state => state.topGames);
+    const { wishList } = useSelector(state => state.wishList);
+    const { success: addItemToWishListSuccess} = useSelector(state => state.addItemToWishList);
+    const { success: removeItemFromWishListSuccess} = useSelector(state => state.removeItemFromWishList);
 
     useEffect(() => {
         //TODO: Get carousel products for the first time 
@@ -65,6 +69,13 @@ const HomeScreen = () => {
             dispatch(getTopGames());
         }
     }, [dispatch, topGames]);
+
+    useEffect(() => {
+        //TODO: Fetch Wishlist for the first time if needed
+        if (wishList.length === 0 || addItemToWishListSuccess || removeItemFromWishListSuccess) {
+            dispatch(getWishList());
+        } 
+    }, [dispatch, addItemToWishListSuccess, removeItemFromWishListSuccess]);
 
     const checkIfErrorExisted = () => {
         if (topLaptopError) {
