@@ -87,16 +87,13 @@ const ProductScreen = ({ match }) => {
                                 <GameTable singleGame={singleProduct} />
                             ) : null
                         }
-                        {
-                            singleProduct && user  ? (
-                                <ReviewSection 
-                                    singleProduct={singleProduct} 
-                                    user={user} 
-                                    userReviewError={userReviewError} 
-                                    deleteReviewError={deleteReviewError} 
-                                />
-                            ) : null
-                        }
+
+                        <ReviewSection 
+                            singleProduct={singleProduct} 
+                            user={user} 
+                            userReviewError={userReviewError} 
+                            deleteReviewError={deleteReviewError} 
+                        />
                     </>
                 );
             } else {

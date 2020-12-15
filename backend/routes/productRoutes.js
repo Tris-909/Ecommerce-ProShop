@@ -10,11 +10,9 @@ import {
     deleteReviewProduct,
     getTopRatedProducts,
     getAllLaptops,
-    getSingleLaptop,
     getTopTierLaptops,
     getAllTVs,
     getTopTierTVs,
-    getSingleTVs,
     getTopPhones,
     getAllPhones,
     getTopHeadphone,
@@ -29,7 +27,6 @@ router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/carousel').get(getTopRatedProducts);
 router.route('/laptops').get(getAllLaptops);
 router.route('/laptops/toptier').get(getTopTierLaptops);
-router.route('/laptops/:id').get(getSingleLaptop);
 router.route('/tvs').get(getAllTVs);
 router.route('/tvs/toptier').get(getTopTierTVs);
 router.route('/phones').get(getAllPhones);
@@ -38,7 +35,6 @@ router.route('/headphones').get(getAllHeadphones);
 router.route('/headphones/toptier').get(getTopHeadphone);
 router.route('/games/toptier').get(getTopGames);
 router.route('/games').get(getAllGames);
-router.route('/tvs/:id').get(getSingleTVs);
 router.route('/createReview').post(protect, createReview);
 router.route('/deletereview/:productid/:reviewid').delete(protect, deleteReviewProduct);
 router.route('/:id')

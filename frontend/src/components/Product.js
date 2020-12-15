@@ -104,7 +104,7 @@ const Product = ({ product, link = '/product' }) => {
                 {
                     addItemSuccess && (cartItems[cartItems.length-1].product === product._id) ? (
                     <div style={{marginTop: '1rem'}}>
-                        <Message variant="success" content="Add Item To Cart Successfully" /> 
+                        <Message variant="success" content="Add Item To Cart Successfully" addToCart={true} /> 
                     </div>
                     ): null
                 }

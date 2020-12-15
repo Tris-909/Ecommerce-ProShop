@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Row, Col, Form, Button, ListGroup } from 'react-bootstrap';
 import { createReview, deleteReview } from '../../redux/actions/userActions';
 import { CREATE_REVIEW_RESET, DELETE_REVIEW_RESET } from '../../redux/actions/actionTypes';
+import { Link } from 'react-router-dom';
 import Message from '../Message';
 import Rating from '../../components/Rating';
 import styled from 'styled-components';
@@ -12,6 +13,13 @@ const ReviewContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     font-size: 1.2rem;
+`;
+
+const NoReviewText = styled.div`
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
 `;
 
 const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError }) => {
@@ -42,10 +50,11 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                         <Message content="Delete Review Failed, Please Try Again :(" variant="danger" />
                     ) : null
                 }
-
-                { singleProduct.reviews.length === 0 ? (
+                { singleProduct.reviews.length == 0 ? (
                     <>
-                        <Message content="No Review" variant="secondary" />
+                        <NoReviewText>
+                            No Reviews 
+                        </NoReviewText>
                         { user ? (
                                 <Form onSubmit={onSubmitReviewHandler}>
                                     <Form.Group controlId='rating'>
@@ -73,7 +82,11 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                     </Form.Group>
                                     <Button type="submit" className="btn btn-primary"> Submit </Button>
                                 </Form>
-                            ) : <Message content="You need to sign in to post a review" variant="primary" />}
+                            ) : (
+                                <NoReviewText>
+                                    You need to <Link to="/login" style={{ textDecoration: 'underline' }}> sign in </Link> to post a review
+                                </NoReviewText>
+                            )}
                     </>
                     ) : (
                     <ListGroup variant="flush">

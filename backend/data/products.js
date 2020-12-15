@@ -1744,7 +1744,7 @@ const products = [
 },
 {
   name: "Demon's Souls",
-  image: '/images/game-10.jpg',
+  image: '/images/games-10.jpg',
   description:
     "From Bluepoint Games comes a remake of the PlayStation classic, Demon’s Souls™. Entirely rebuilt from the ground up and masterfully enhanced, this remake introduces the horrors of a fog-laden, dark fantasy land to a whole new generation of gamers. Those who have faced its trials and tribulations before, can once again challenge the darkness in stunning visual quality and incredible performance. In his quest for power, the 12th King of Boletaria, King Allant channelled the ancient Soul Arts, awakening a demon from the dawn of time itself, The Old One.",
   brand: 'Bluepoint Games',
@@ -1768,7 +1768,7 @@ const products = [
 },
 {
   name: "My Universe: Pet Clinic Cats & Dogs",
-  image: '/images/game-11.jpg',
+  image: '/images/games-11.jpg',
   description:
     "An injury, fever, an animal that refuses to eat: it’s up to you to act! Pay close attention during the medical examination, decide what care your four-legged patients need and take care of their personal well-being through dozens of activities.",
   brand: 'Microids Life',
@@ -1792,7 +1792,7 @@ const products = [
 },
 {
   name: "Mortal Kombat 11 Ultimate",
-  image: '/images/game-12.jpg',
+  image: '/images/games-12.jpg',
   description:
     "Take control of Earthrealm’s protectors in the game’s TWO critically acclaimed, time-bending Story Campaigns as they race to stop Kronika from rewinding time and rebooting history. Friendships are tested, and new alliances forged, in the battle to save all of existence. MK11 Ultimate features the komplete 37-character roster, including new additions Rain, Mileena & Rambo. Mortal Kombat 11 showcases every amusing friendship, gory fatality and soul-crushing fatal blow like never before. You’ll be so close to the fight, you can feel it!",
   brand: 'NetherRealm',
@@ -1816,7 +1816,7 @@ const products = [
 },
 {
   name: "Ori and the Blind Forest",
-  image: '/images/game-13.jpg',
+  image: '/images/games-13.jpg',
   description:
     "The forest of Nibel is dying. After a powerful storm sets a series of devastating events in motion, Ori must journey to find courage and confront a dark nemesis to save the forest of Nibel. Ori and the Blind Forest tells the tale of a young orphan destined for heroics, through a visually stunning Action-Platformer crafted by Moon Studios. Featuring hand-painted artwork, meticulously animated character performance, a fully orchestrated score, Ori and the Blind Forest explores a deeply emotional story about love and sacrifice, and the hope that exists in us all.",
   brand: 'Moon Studios',
@@ -1840,7 +1840,7 @@ const products = [
 },
 {
   name: "Ori and the Will of the Wisps",
-  image: '/images/game-14.jpg',
+  image: '/images/games-14.jpg',
   description:
     "The little spirit Ori is no stranger to peril, but when a fateful flight puts the owlet Ku in harm’s way, it will take more than bravery to bring a family back together, heal a broken land, and discover Ori’s true destiny. This highly anticipated sequel to the acclaimed action-platformer Ori and the Blind Forest finally comes to Nintendo Switch. Embark on an epic adventure in a vast world filled with new friends and foes that come to life in stunning, hand-painted artwork. Set to a fully orchestrated original score, Ori and the Will of the Wisps continues the Moon Studios tradition of tightly crafted platforming action and deeply emotional storytelling.",
   brand: 'Moon Studios',
@@ -1864,7 +1864,7 @@ const products = [
 },
 {
   name: "The Patheless Day One Edition",
-  image: '/images/game-15.jpg',
+  image: '/images/games-15.jpg',
   description:
     "Become the Hunter, a master of archery who travels to a mystical island to dispel a curse of darkness that grips the world. Forge a connection with your eagle companion as you hunt corrupted spirits, but be careful not to become the hunted yourself. Explore misty forests full of secrets, solve puzzles in ancient ruins, and test your skill in epic battles. The bond with your eagle and the fate of the world hang in the balance.",
   brand: 'Giant Squid',

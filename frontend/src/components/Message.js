@@ -9,7 +9,7 @@ const XSymbol = styled.strong`
     cursor: pointer;
 `;
 
-const Message = ({content, variant}) => {
+const Message = ({content, variant, addToCart = false}) => {
     const [show, setShow] = useState(true);
     
     const onClickHandler = (e) => {
@@ -26,7 +26,7 @@ const Message = ({content, variant}) => {
                 marginBottom: '1rem'
             }}
             >
-            <XSymbol onClick={(e) => onClickHandler(e)}>X</XSymbol>
+            <XSymbol onClick={(e) => onClickHandler(e)} style={{display: addToCart ? 'initial' : 'none'}}>X</XSymbol>
             {content}
         </Alert>
     )

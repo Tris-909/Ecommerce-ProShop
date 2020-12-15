@@ -117,8 +117,9 @@ const createReview = AsyncHandler(async(req, res) => {
         }
 
         product.reviews.push(review);
-        product.numReviews = product.numReviews++;
+        product.numReviews = product.numReviews +1;
         product.rating = product.reviews.reduce((acc, cur) => cur.rating + acc, 0) / product.numReviews;
+        console.log(product);
         await product.save();
 
         res.status(200);
@@ -150,9 +151,9 @@ const deleteReviewProduct = AsyncHandler(async(req, res) => {
             choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
 
             //TODO: RE-CALCULATE THE RATINGS AND NUM-REVIEWS OF THE PRODUCT
-            choosenProduct[0].numReviews--;
             choosenProduct[0].rating =  choosenProduct[0].reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct[0].numReviews;
-    
+            choosenProduct[0].numReviews = choosenProduct[0].numReviews - 1;
+            
             await choosenProduct[0].save();
             res.status(200).send('Review has been deleted');
         } else {
@@ -185,24 +186,6 @@ const getAllLaptops = AsyncHandler(async(req, res) => {
     res.json(laptops);
 });
 
-//?   Fetch Laptops from databases based on ID
-//?   GET /api/products/laptops/:id
-//?   Public Route
-const getSingleLaptop = AsyncHandler(async (req, res) => {
-    const laptop = await Product.findOne({
-        _id: req.params.id,
-        category: 'laptops'
-    });
-
-    if (laptop) {
-        res.status(200);
-        res.send(laptop);
-    } else {
-        res.status(404);
-        throw new Error("No data about this laptop is found !");
-    }
-});
-
 //? Fetch 3 most expensive laptops from databases to render to HomeScreen
 //? GET /api/products/laptops/toptier
 //? public routes
@@ -232,23 +215,6 @@ const getTopTierTVs = AsyncHandler(async(req, res) => {
     }).sort({ price: -1 }).limit(3);
 
     res.status(200).json(TopTierTVs);
-});
-
-//? GET A Single TV from databases based on it ID
-//? GET /api/products/tvs/:id
-//? Public Route
-const getSingleTVs = AsyncHandler(async(req, res) => {
-    const singleTV = await Product.findOne({
-        category: 'tvs',
-        _id: req.params.id
-    });
-
-    if (singleTV) {
-        res.status(200).json(singleTV);
-    } else {
-        res.status(404);
-        throw new Error('Cant find your TVs based on this ID')
-    }
 });
 
 //? GET Top 3 Most Expensive Phones from databases
@@ -353,11 +319,9 @@ export {
     deleteReviewProduct,
     getTopRatedProducts,
     getAllLaptops,
-    getSingleLaptop,
     getTopTierLaptops,
     getAllTVs,
     getTopTierTVs,
-    getSingleTVs,
     getTopPhones,
     getAllPhones,
     getTopHeadphone,
