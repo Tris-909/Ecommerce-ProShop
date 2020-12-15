@@ -88,7 +88,7 @@ const HomeScreen = () => {
         } else {
             return(
                 <>
-                    <Helmet title="Welcome to Proshop" href="/" />
+                    <Helmet title="Proshop | Electronics " href="/" />
                 
                     <CarouselSection 
                         carouselProducts={carouselProducts} 
