@@ -239,6 +239,24 @@ const deleteAnItemFromWishList = AsyncHandler(async (req, res) => {
     res.send("Delete the item from wishList successfully");
 });
 
+//?   @description : Delete all Items from the wishList
+//?   @method : DELETE /api/users/wishlist/deleteitem
+//?   @access : private
+const deleteAllItemsFromWishList = AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        user.wishList = [];
+        await user.save();
+
+        res.status(200);
+        res.send("Clear all items in the wish list successfully");
+    } else {
+        res.status(404);
+        throw new Error("Can't find the user that you are looking for");
+    }
+});
+
 export {
     login,
     getUserProfile,
@@ -252,5 +270,6 @@ export {
 
     getWishListItems,
     addItemToUserWishList,
-    deleteAnItemFromWishList
+    deleteAnItemFromWishList,
+    deleteAllItemsFromWishList
 }
