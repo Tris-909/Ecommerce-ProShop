@@ -11,7 +11,12 @@ import {
     REMOVE_ITEM_FROM_WISH_LIST_REQUEST,
     REMOVE_ITEM_FROM_WISH_LIST_SUCCESS,
     REMOVE_ITEM_FROM_WISH_LIST_FAIL,
-    REMOVE_ITEM_FROM_WISH_LIST_RESET
+    REMOVE_ITEM_FROM_WISH_LIST_RESET,
+
+    REMOVE_ALL_ITEMS_WISHLIST_REQUEST,
+    REMOVE_ALL_ITEMS_WISHLIST_SUCCESS,
+    REMOVE_ALL_ITEMS_WISHLIST_FAIL,
+    REMOVE_ALL_ITEMS_WISHLIST_RESET
 } from '../actions/actionTypes';
 
 const wishListInitialState = {
@@ -112,6 +117,42 @@ export const removeItemFromWishListReducer = (state = removeItemFromWishListInit
                 error: null
             }
         default: 
+            return state;
+    }
+}
+
+const removeAllItemInitlaState = {
+    success: false,
+    loading: false,
+    error: null
+}
+
+export const removeAllItemsFromWishListReducer = (state = removeAllItemInitlaState, action) => {
+    switch(action.type) {
+        case REMOVE_ALL_ITEMS_WISHLIST_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case REMOVE_ALL_ITEMS_WISHLIST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true
+            }
+        case REMOVE_ALL_ITEMS_WISHLIST_FAIL:
+            return {
+                ...state,
+                loading: false,
+                errro: action.payload
+            }
+        case REMOVE_ALL_ITEMS_WISHLIST_RESET: 
+            return {
+                success: false,
+                loading: false,
+                error: null
+            }
+        default:
             return state;
     }
 }

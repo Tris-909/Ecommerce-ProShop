@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Col, Row} from 'react-bootstrap';
-import {getWishList} from '../redux/actions/wishListActions';
+import {getWishList, removeAllItemsFromWishList} from '../redux/actions/wishListActions';
+import {REMOVE_ALL_ITEMS_WISHLIST_RESET} from '../redux/actions/actionTypes';
 import WishListProduct from '../components/WishList Product/WishListProduct';
 import styled from 'styled-components';
 
@@ -57,6 +58,7 @@ const WishListScreen = () => {
     const { wishList, loading, error } = useSelector(state => state.wishList)
     const { success: removeItemFromWishListSuccess } = useSelector(state => state.removeItemFromWishList);
     const { success: addItemToWishListSuccess } = useSelector(state => state.addItemToWishList);
+    const { success: removeAllItemsFromWishListSuccess } = useSelector(state => state.removeAllItemsFromWishList);
 
     const swapToShowGridMode = (e) => {
         e.preventDefault();
@@ -70,17 +72,19 @@ const WishListScreen = () => {
 
     const clearWishList = (e) => {
         e.preventDefault();
+        dispatch({ type: REMOVE_ALL_ITEMS_WISHLIST_RESET });
+        dispatch(removeAllItemsFromWishList());
     }
 
     useEffect(() => {
         dispatch(getWishList());
-    }, [dispatch, removeItemFromWishListSuccess, addItemToWishListSuccess]);
+    }, [dispatch, removeItemFromWishListSuccess, addItemToWishListSuccess, removeAllItemsFromWishListSuccess]);
 
     return (
         <div>
             <WishListText> Wish List </WishListText>
             <FlexContainer>
-                <ClearWishListButton>Clear Wish List</ClearWishListButton>
+                <ClearWishListButton onClick={(e) => clearWishList(e)} style={{ visibility: wishList.length===0 ? 'hidden' : 'initial' }}>Clear Wish List</ClearWishListButton>
                 <DisplayContainer>
                     <DisplayButtonContainer onClick={(e) => swapToShowGridMode(e)}>
                         <i className="fas fa-th-large"></i>

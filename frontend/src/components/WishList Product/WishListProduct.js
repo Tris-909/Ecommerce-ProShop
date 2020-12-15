@@ -5,7 +5,10 @@ import {Link} from 'react-router-dom';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {addItemToCart} from '../../redux/actions/cartActions';
-import {addItemToWishList, removeAnItemFromWishList} from '../../redux/actions/wishListActions';
+import {
+    addItemToWishList, 
+    removeAnItemFromWishList
+} from '../../redux/actions/wishListActions';
 import {
     ADD_PRODUCT_TO_CART_RESET,
     ADD_ITEM_TO_WISH_LIST_RESET,

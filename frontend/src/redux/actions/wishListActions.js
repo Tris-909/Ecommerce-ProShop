@@ -10,6 +10,10 @@ import {
     REMOVE_ITEM_FROM_WISH_LIST_REQUEST,
     REMOVE_ITEM_FROM_WISH_LIST_SUCCESS,
     REMOVE_ITEM_FROM_WISH_LIST_FAIL,
+
+    REMOVE_ALL_ITEMS_WISHLIST_REQUEST,
+    REMOVE_ALL_ITEMS_WISHLIST_SUCCESS,
+    REMOVE_ALL_ITEMS_WISHLIST_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -99,5 +103,32 @@ export const removeAnItemFromWishList = (wishListItemId) => async(dispatch, getS
             type: REMOVE_ITEM_FROM_WISH_LIST_FAIL,
             payload: error.response && error.response.data.message ? error.response.data : null
         })
+    }
+}
+
+export const removeAllItemsFromWishList = () => async( dispatch ,getState) => {
+    try {
+        dispatch({
+            type: REMOVE_ALL_ITEMS_WISHLIST_REQUEST
+        });
+
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.delete('/api/users/wishlist/deleteitem', config);
+
+        dispatch({
+            type: REMOVE_ALL_ITEMS_WISHLIST_SUCCESS
+        });
+    } catch (error) {
+        dispatch({
+            type: REMOVE_ALL_ITEMS_WISHLIST_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data : null
+        });
     }
 }

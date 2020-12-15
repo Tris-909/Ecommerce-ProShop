@@ -13,7 +13,8 @@ import { cartReducer } from './reducers/cartReducers';
 import {
     getWishListReducer,
     addItemToWishListReducer,
-    removeItemFromWishListReducer
+    removeItemFromWishListReducer,
+    removeAllItemsFromWishListReducer
 } from './reducers/wishListReducer';
 import { 
     userReducer, 
@@ -94,7 +95,8 @@ const reducer = combineReducers({
     allGames: allGamesReducer,
     wishList: getWishListReducer,
     addItemToWishList: addItemToWishListReducer,
-    removeItemFromWishList: removeItemFromWishListReducer
+    removeItemFromWishList: removeItemFromWishListReducer,
+    removeAllItemsFromWishList: removeAllItemsFromWishListReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
