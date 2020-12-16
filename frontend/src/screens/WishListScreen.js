@@ -4,6 +4,7 @@ import {Col, Row} from 'react-bootstrap';
 import {getWishList, removeAllItemsFromWishList} from '../redux/actions/wishListActions';
 import {REMOVE_ALL_ITEMS_WISHLIST_RESET} from '../redux/actions/actionTypes';
 import WishListProduct from '../components/WishList Product/WishListProduct';
+import WishListProductHorizontal from '../components/WishList Product/WishListProductHorizontal';
 import styled from 'styled-components';
 
 const FlexContainer = styled.div`
@@ -34,6 +35,11 @@ const ClearWishListButton = styled.button`
     font-weight: 600;
     padding: 10px;
     border: none;
+
+    @media (max-width: 350px) {
+        padding: 8px;
+        font-size: 0.7rem;
+    }
 `;
 
 const WishListText = styled.div`
@@ -41,6 +47,7 @@ const WishListText = styled.div`
     font-weight: 700;
     color: black;
     font-family: Rokkitt;
+
 `;
 
 const NoItemText = styled.div`
@@ -94,16 +101,26 @@ const WishListScreen = () => {
                     </DisplayButtonContainer>
                 </DisplayContainer>
             </FlexContainer>
-            <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
+            <Row style={{ justifyContent: 'center', alignItems: 'center', flexDirection: showGrid ? 'initial' : 'column'}}>
                 {
                     wishList.length !== 0 ? wishList.map((item) => {
-                        return (<Col 
-                            sm={showGrid ? 12 : 12} 
-                            md={showGrid ? 6 : 12} 
-                            lg={showGrid ? 6 : 12} 
-                            xl={showGrid ? 4 : 12} key={item._id}>
-                            <WishListProduct product={item} showList={!showGrid} /> 
-                        </Col>)
+                        if (showGrid) {
+                            return(
+                                <Col 
+                                        sm={showGrid ? 12 : 12} 
+                                        md={showGrid ? 6 : 12} 
+                                        lg={showGrid ? 6 : 12} 
+                                        xl={showGrid ? 4 : 12} key={item._id}>
+                                    <WishListProduct product={item} showList={!showGrid} /> 
+                                </Col>
+                            )
+                        } else {
+                            return(
+                                <Col key={item._id}>
+                                    <WishListProductHorizontal product={item} />
+                                </Col>
+                            )
+                        }
                     }) : (
                         <NoItemText>You Have No Items</NoItemText>
                     )

@@ -205,6 +205,7 @@ const addItemToUserWishList = AsyncHandler(async (req, res) => {
         productRating,
         productNumReviews
     }    
+    console.log(theItem);
 
     user.wishList.push(theItem);
     const newUser = await user.save();

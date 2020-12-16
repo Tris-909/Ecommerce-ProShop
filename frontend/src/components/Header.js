@@ -79,7 +79,7 @@ const Header = ({ history }) => {
 
                   {
                       screenWidth  < 991 ? (
-                        <NavDropdown title={`Products`} style={{ fontSize: '1.2rem',marginRight: '1rem 0rem' ,color: 'black', padding: '0rem'}} id="adminuser">
+                        <NavDropdown title={<span style={{ fontSize: '1.2rem',marginRight: '1rem 0rem' ,color: 'black', padding: '0rem'}}> Products </span>} id="adminuser">
                                 <LinkContainer to="/laptops">
                                     <NavDropdown.Item>Laptops</NavDropdown.Item>
                                 </LinkContainer>

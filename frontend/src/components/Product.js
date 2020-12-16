@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 import {useDispatch, useSelector} from 'react-redux';
 import {addItemToCart} from '../redux/actions/cartActions';
@@ -27,6 +28,10 @@ const FootProductContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 360px) {
+        flex-direction: column;
+    }
 `;
 
 const ButtonContainer = styled.div`
@@ -34,14 +39,21 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 360px) {
+        width: 100%;
+        justify-content: space-between;
+    }
 `;
 
-const Product = ({ product, link = '/product' }) => {
+const Product = (props) => {
+    const { product, link = '/product' } = props;
     const [isLoved, setIsLoved] = useState(false);
     const [wishListID, setWishListID] = useState(null);
 
     const dispatch = useDispatch();
     const { cartItems, addItemSuccess } = useSelector(state => state.cart);
+    const { user } = useSelector(state => state.user);
     const { wishList } = useSelector(state => state.wishList);
     const { 
         loading: addItemToWishListLoading, 
@@ -64,24 +76,39 @@ const Product = ({ product, link = '/product' }) => {
 
     const onAddItemToCartHandler = (e, id) => {
         e.preventDefault();
-        dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
-        dispatch(addItemToCart(id, 1));
+        
+        if (user) {
+            dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
+            dispatch(addItemToCart(id, 1));
+        } else {
+            props.history.push('/login')
+        }
     }
 
     const onAddItemToWishList = (e) => {
         e.preventDefault();
         dispatch({type: ADD_ITEM_TO_WISH_LIST_RESET});
-        dispatch(addItemToWishList(product._id, product.name, product.price, product.image ,product.rating, product.numReviews));
-        if (addItemToWishListSuccess) {
-            setIsLoved(true);
+        
+        if (user) {
+            dispatch(addItemToWishList(product._id, product.name, product.price, product.image ,product.rating, product.numReviews));
+            if (addItemToWishListSuccess) {
+                setIsLoved(true);
+            }
+        } else {
+            props.history.push('/login');
         }
     }
 
     const onRemoveItemFromWishList = (e) => {
         e.preventDefault();
         dispatch({ type: REMOVE_ITEM_FROM_WISH_LIST_RESET });
-        dispatch(removeAnItemFromWishList(wishListID));
-        setIsLoved(false);
+        
+        if (user) {
+            dispatch(removeAnItemFromWishList(wishListID));
+            setIsLoved(false);
+        } else {
+            props.history.push('/login');
+        }
     }
 
     return (
@@ -137,4 +164,4 @@ const Product = ({ product, link = '/product' }) => {
     )
 }
 
-export default Product
+export default withRouter(Product)

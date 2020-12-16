@@ -66,7 +66,7 @@ export const addItemToWishList = (itemId, productName, productPrice, productImag
             productImage, 
             productRating, 
             productNumReviews
-        } ,config);
+        } , config);
 
         dispatch({
             type: ADD_ITEM_TO_WISH_LIST_SUCCESS

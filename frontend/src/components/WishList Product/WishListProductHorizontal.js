@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
@@ -15,44 +14,70 @@ import {
     REMOVE_ITEM_FROM_WISH_LIST_RESET
 } from '../../redux/actions/actionTypes';
 
-import Rating from '../Rating';
 import Message from '../Message';
+
+const Card = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid grey;
+    padding: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+`;
+
+const CardTopSectionContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const CardImageContainer = styled.div`
+    width: 40%;
+    height: 100%;
+    margin-right: 10px;
+`;
+
+const CartTextContainer = styled.div`
+    width: 60%;
+    font-size: 13px;
+    font-weight: 800;
+
+    @media (min-width: 450px) {
+        margin-top: 10px;
+        font-size: 0.8rem;
+    }
+
+    @media (min-width: 600px) {
+        margin-top: 10px;
+        font-size: 1rem;
+        align-self: center;
+    }
+
+    @media (min-width: 800px) {
+        font-size: 1.5rem;
+    }
+`;
+
+const CardBototmContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
 
 const CardMoneyText = styled.div`
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
-    padding-top: 1rem;
     font-family: 'Luckiest Guy', cursive;
-
-    @media (max-width: 400px) {
-        font-size: 2rem;
-    }
 `;
 
-const FootProductContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    @media (max-width: 400px) {
-        flex-direction: column;
-    }
-`;
-
-const ButtonContainer = styled.div`
-    padding-top: 1rem;
+const CardButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
-    @media (max-width: 400px) {
-        width: 100%;
-        justify-content: space-between;
-    }
 `;
 
-const WishListProduct = ({ product, showList }) => {
+const WishListProductHorizontal = ({ product }) => {
     const [isLoved, setIsLoved] = useState(true);
     const [wishListID, setWishListID] = useState(null);
 
@@ -95,40 +120,27 @@ const WishListProduct = ({ product, showList }) => {
         setIsLoved(false);
     }
 
-    
-    return (
-        <Card className="my-3 p-3 rounded" style={{ flexDirection: showList ? 'row' : 'column' }}>
-            <Link to={`/product/${product.itemId}`}>
-                <Card.Img src={product.productImage} variant="top" style={{ width: showList ? '100%' : '100%' }} />
-            </Link>
-            <Card.Body>
-                <Link to={`/product/${product.itemId}`}>
-                    <Card.Title as="div" style={{ fontSize: showList ? '1.5rem' : '1rem' }}>
-                        {product.productName}
-                    </Card.Title>
-                </Link>
-                <Card.Text as="div">
-                    <Rating 
-                        rating={product.productRating} 
-                        text={`${product.productNumReviews} reviews`}
-                    />
-                </Card.Text>
-                {
-                    addItemSuccess && (cartItems[cartItems.length-1].product === product._id) ? (
-                    <div style={{marginTop: '1rem'}}>
-                        <Message variant="success" content="Add Item To Cart Successfully" /> 
-                    </div>
-                    ): null
-                }
-                <FootProductContainer>
-                    <CardMoneyText>
-                        $ {product.productPrice}
-                    </CardMoneyText>
-
-                    <ButtonContainer>
+    return(
+        <Card>
+            <CardTopSectionContainer>
+                <CardImageContainer>
+                    <img src={product.productImage} alt={product.productName} style={{ width: '100%' }}/>
+                </CardImageContainer>
+                <CartTextContainer>
+                    {product.productName}
+                </CartTextContainer>
+            </CardTopSectionContainer>
+            <CardBototmContainer>
+                <CardMoneyText>
+                    $ {product.productPrice}
+                </CardMoneyText>
+                <CardButtonContainer>
+                    <div>
                         <i className="fas fa-cart-plus" 
                             style={{ fontSize: '1.5rem', marginRight: '1.5rem', cursor: 'pointer' }}
                             onClick={(e) => onAddItemToCartHandler(e, product._id)}></i>
+                    </div>
+                    <div>
                         {
                             isLoved ? (
                                 //TODO: Full Heart
@@ -142,11 +154,18 @@ const WishListProduct = ({ product, showList }) => {
                                 </span>
                             )
                         }
-                    </ButtonContainer>
-                </FootProductContainer>
-            </Card.Body>
+                    </div>
+                </CardButtonContainer>
+            </CardBototmContainer>
+            {
+                addItemSuccess && (cartItems[cartItems.length-1].product === product._id) ? (
+                <div style={{marginTop: '1rem'}}>
+                    <Message variant="success" content="Add Item To Cart Successfully" /> 
+                </div>
+                ): null
+            }
         </Card>
     )
-}
+} 
 
-export default WishListProduct;
+export default WishListProductHorizontal;
