@@ -10,8 +10,10 @@ const SubNavBar = styled.nav`
     justify-content: space-evenly;
     align-items: center;
     background-color: black;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+
+    &:hover {
+        text-decoration: none;
+    }
 `;
 
 const NavItem = styled.div`
@@ -22,6 +24,21 @@ const NavItem = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all .2s;
+
+    &:hover {
+        color: black;
+    }
+`;
+
+const SubLink = styled(Link)`
+    width: 100%;
+    padding: 1rem 0rem;
+
+    &:hover {
+        text-decoration: none;
+        background-color: rgb(252, 240, 3);
+    }
 `;
 
 const SubNavbar = () => {
@@ -37,36 +54,36 @@ const SubNavbar = () => {
 
     return !screenWidth ? (
         <SubNavBar>
-            <Link to="/laptops" style={{width: '100%'}}>
+            <SubLink to="/laptops">
                 <NavItem>
                     <i className="fas fa-laptop" style={{ marginRight: '0.5rem' }}></i>
                     Laptops
                 </NavItem>
-            </Link>
-            <Link to="/tvs" style={{width: '100%'}}>
+            </SubLink>
+            <SubLink to="/tvs">
                 <NavItem>
                     <i className="fas fa-tv" style={{ marginRight: '0.5rem' }}></i>
                     TVs 
                 </NavItem>
-            </Link>
-            <Link to="/phones" style={{width: '100%'}}>
+            </SubLink>
+            <SubLink to="/phones">
                 <NavItem>
                     <i className="fas fa-mobile-alt" style={{ marginRight: '0.5rem' }}></i>
                     Phones
                 </NavItem>
-            </Link>
-            <Link to="/headphones" style={{width: '100%'}}>
+            </SubLink>
+            <SubLink to="/headphones">
                 <NavItem>
                     <i className="fas fa-headphones" style={{ marginRight: '0.5rem' }}></i>
                     HeadPhones
                 </NavItem>
-            </Link>
-            <Link to="/gaming" style={{width: '100%'}}>
+            </SubLink>
+            <SubLink to="/gaming">
                 <NavItem style={{borderRight: 'none'}}>
                     <i className="fas fa-gamepad" style={{ marginRight: '0.5rem' }}></i>
                     Gaming
                 </NavItem>
-            </Link>
+            </SubLink>
         </SubNavBar>
     ) : null
 }
