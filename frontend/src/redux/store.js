@@ -9,7 +9,11 @@ import {
     deleteProductAsAdmin,
     carouselProductReducer 
 } from './reducers/productReducers';
-import { cartReducer } from './reducers/cartReducers';
+import { 
+    cartReducer, 
+    removeItemFromCart, 
+    cartItems 
+} from './reducers/cartReducers';
 import {
     getWishListReducer,
     addItemToWishListReducer,
@@ -65,6 +69,8 @@ const reducer = combineReducers({
     singleProduct: SingleProductReducer,
     deleteProduct: deleteProductAsAdmin,
     cart: cartReducer,
+    removeCart: removeItemFromCart,
+    cartList: cartItems,
     user: userReducer,
     userDetails: userDetailsReducer,
     orders: ordersReducer,

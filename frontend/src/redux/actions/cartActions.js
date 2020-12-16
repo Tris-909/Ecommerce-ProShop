@@ -1,46 +1,107 @@
 import {
     ADD_PRODUCT_TO_CART,
-    ADD_PRODUCT_TO_CART_SUCCES,
-    REMOVE_PRODUCT_TO_CART,
+    ADD_PRODUCT_TO_CART_SUCCESS,
+    ADD_PRODUCT_TO_CART_FAIL,
+
+    REMOVE_PRODUCT_FROM_CART_REQUEST,
+    REMOVE_PRODUCT_FROM_CART_SUCCESS,
+    REMOVE_PRODUCT_FROM_CART_FAIL,
+    REMOVE_PRODUCT_FROM_CART_RESET,
+
+    GET_ALL_ITEMS_FROM_CART_REQUEST,
+    GET_ALL_ITEMS_FROM_CART_SUCCESS,
+    GET_ALL_ITEMS_FROM_CART_FAIL,
+
     SAVE_SHIPPING_ADDRESS_CART,
     SAVE_PAYMENT_METHOD,
     REMOVE_PRODUCTS_FROM_CART_AFTERBUY
 } from './actionTypes';
 import axios from 'axios';
 
-export const addItemToCart = (id, qty) => async (dispatch, getState) => {
+export const addItemToCart = (itemId, productName, productImage, productPrice, countInStock, qty) => async (dispatch, getState) => {
     try {
-        const data = (await axios.get(`/api/products/${id}`)).data;
-
         dispatch({
-            type: ADD_PRODUCT_TO_CART,
-            payload: {
-                product: data._id,
-                name: data.name,
-                image: data.image,
-                price: data.price,
-                countInStock: data.countInStock,
-                qty
-            }
+            type: ADD_PRODUCT_TO_CART
         });
 
-        localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.post('/api/users/cart/additem', { 
+            itemId, 
+            productName, 
+            productImage, 
+            productPrice, 
+            countInStock, 
+            qty
+        }, config);
 
         dispatch({
-            type: ADD_PRODUCT_TO_CART_SUCCES
+            type: ADD_PRODUCT_TO_CART_SUCCESS
         });
     } catch(error) {
-        console.log(error);
+        dispatch({
+            type: ADD_PRODUCT_TO_CART_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
     } 
 }
 
 export const removeItemFromCart = (id) => async (dispatch, getState) => {
-    dispatch({
-        type: REMOVE_PRODUCT_TO_CART,
-        payload: id
-    });
+    try {
+        dispatch({
+            type: REMOVE_PRODUCT_FROM_CART_REQUEST
+        });
 
-    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.delete(`/api/users/cart/removeitem/${id}`, config);
+
+        dispatch({
+            type: REMOVE_PRODUCT_FROM_CART_SUCCESS
+        });
+    } catch(error) {
+        dispatch({
+            type: REMOVE_PRODUCT_FROM_CART_FAIL,
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+export const getAllItemsCart = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: GET_ALL_ITEMS_FROM_CART_REQUEST });
+
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        const { data } = await axios.get('/api/users/cart', config);
+
+        dispatch({
+            type: GET_ALL_ITEMS_FROM_CART_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: GET_ALL_ITEMS_FROM_CART_FAIL
+        })
+    }
 }
 
 export const saveShippingAddress = (data) => async (dispatch) => {

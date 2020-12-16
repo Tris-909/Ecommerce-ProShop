@@ -266,6 +266,21 @@ const addItemToCart = AsyncHandler(async (req, res) => {
     const { itemId, productName, productImage, productPrice, countInStock, quantity } = req.body;
 
     if (user) {
+        const item = {
+            itemId,
+            productName, 
+            productImage, 
+            productPrice, 
+            countInStock, 
+            quantity
+        }
+
+        const existedItem = user.cartList.find(x => x.itemId === item.itemId);
+        if (existedItem) {
+            res.status(400);
+            throw new Error("This item is already in the cart");
+        }
+
         user.cartList.push({
             itemId,
             productName, 

@@ -1,10 +1,18 @@
 import { 
     ADD_PRODUCT_TO_CART, 
-    ADD_PRODUCT_TO_CART_SUCCES,
+    ADD_PRODUCT_TO_CART_SUCCESS,
     ADD_PRODUCT_TO_CART_FAIL,
     ADD_PRODUCT_TO_CART_RESET,
     
-    REMOVE_PRODUCT_TO_CART, 
+    REMOVE_PRODUCT_FROM_CART_REQUEST,
+    REMOVE_PRODUCT_FROM_CART_SUCCESS,
+    REMOVE_PRODUCT_FROM_CART_FAIL,
+    REMOVE_PRODUCT_FROM_CART_RESET,
+
+    GET_ALL_ITEMS_FROM_CART_REQUEST,
+    GET_ALL_ITEMS_FROM_CART_SUCCESS,
+    GET_ALL_ITEMS_FROM_CART_FAIL,
+
     SAVE_SHIPPING_ADDRESS_CART, 
     SAVE_PAYMENT_METHOD,
     REMOVE_PRODUCTS_FROM_CART_AFTERBUY
@@ -12,7 +20,9 @@ import {
 
 const initialState = {
     cartItems: [],
+    addItemLoading: false,
     addItemSuccess: false,
+    addItemError: null,
     shippingAddress: {
         address: '',
         city: '',
@@ -25,35 +35,26 @@ const initialState = {
 export const cartReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_PRODUCT_TO_CART: 
-            const item = action.payload;
-
-            const existedItem = state.cartItems.find(x => x.product === item.product);
-
-            if (existedItem) {
-                return {
-                    ...state,
-                    cartItems: state.cartItems.map(x => x.product === existedItem.product ? item : x)
-                }
-            } else {
-                return {
-                    ...state,
-                    cartItems: [...state.cartItems, item]
-                }
+            return {
+                ...state,
+                loading: true
             }
-        case ADD_PRODUCT_TO_CART_SUCCES:
+        case ADD_PRODUCT_TO_CART_SUCCESS:
             return {
                 ...state,
                 addItemSuccess: true
             }
+        case ADD_PRODUCT_TO_CART_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
         case ADD_PRODUCT_TO_CART_RESET:
             return {
                 ...state,
-                addItemSuccess: false
-            }
-        case REMOVE_PRODUCT_TO_CART:
-            return {
-                ...state,
-                cartItems: state.cartItems.filter(x => x.product !== action.payload)
+                addItemSuccess: false,
+                addItemLoading: false,
+                addItemError: null,
             }
         case SAVE_SHIPPING_ADDRESS_CART: 
             return {
@@ -69,6 +70,72 @@ export const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cartItems: []
+            }
+        default:
+            return state;
+    }
+}
+
+const initialRemoveItemCartState = {
+    loading: false,
+    success: false,
+    error: null
+}
+
+export const removeItemFromCart = (state = initialRemoveItemCartState, action) => {
+    switch(action.type) {
+        case REMOVE_PRODUCT_FROM_CART_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case REMOVE_PRODUCT_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true
+            }            
+        case REMOVE_PRODUCT_FROM_CART_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }            
+        case REMOVE_PRODUCT_FROM_CART_RESET:
+            return {
+                loading: false,
+                success: false,
+                error: null
+            }
+        default: 
+            return state;
+    }
+}
+
+const allItemsFromCart = {
+    cartItems: [],
+    loading: false,
+    error: null
+}
+
+export const cartItems = (state = allItemsFromCart, action) => {
+    switch(action.type) {
+        case GET_ALL_ITEMS_FROM_CART_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_ALL_ITEMS_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                cartItems: [...action.payload]
+            }
+        case GET_ALL_ITEMS_FROM_CART_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
             }
         default:
             return state;
