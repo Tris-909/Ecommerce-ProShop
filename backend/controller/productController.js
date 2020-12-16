@@ -119,9 +119,38 @@ const createReview = AsyncHandler(async(req, res) => {
         product.reviews.push(review);
         product.numReviews = product.numReviews +1;
         product.rating = product.reviews.reduce((acc, cur) => cur.rating + acc, 0) / product.numReviews;
-        console.log(product);
-        await product.save();
+       
+        switch(rating) {
+            case 1: 
+                product.numOf1StarsReviews =  product.numOf1StarsReviews + 1;
+                await product.save();
 
+                break;
+            case 2: 
+                product.numOf2StarsReviews =  product.numOf2StarsReviews + 1;
+                await product.save();
+
+                break;
+            case 3: 
+                product.numOf3StarsReviews =  product.numOf3StarsReviews + 1;
+                await product.save();
+
+                break;
+            case 4:
+                product.numOf4StarsReviews =  product.numOf4StarsReviews + 1;
+                await product.save();
+
+                break;
+            case 5:
+                product.numOf5StarsReviews =  product.numOf5StarsReviews + 1;
+                await product.save();
+
+                break;
+            default:
+                break;
+        }
+
+        await product.save();
         res.status(200);
         res.send('Review has been added'); 
     } else {
@@ -148,13 +177,45 @@ const deleteReviewProduct = AsyncHandler(async(req, res) => {
         }
         
         if (deletedReviewIndex !== undefined) {
-            choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
-
             //TODO: RE-CALCULATE THE RATINGS AND NUM-REVIEWS OF THE PRODUCT
             choosenProduct[0].rating =  choosenProduct[0].reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct[0].numReviews;
             choosenProduct[0].numReviews = choosenProduct[0].numReviews - 1;
-            
-            await choosenProduct[0].save();
+
+            switch(choosenProduct[0].reviews[deletedReviewIndex].rating) {
+                case 1:
+                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
+                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
+                    await choosenProduct[0].save();
+
+                    break;
+                case 2:
+                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
+                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
+                    await choosenProduct[0].save();
+
+                    break;
+                case 3: 
+                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
+                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
+                    await choosenProduct[0].save();
+
+                    break;
+                case 4:
+                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
+                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
+                    await choosenProduct[0].save();
+
+                    break;
+                case 5:
+                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
+                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
+                    await choosenProduct[0].save();
+
+                    break;
+                default: 
+                    return;
+            }
+
             res.status(200).send('Review has been deleted');
         } else {
             res.status(404);

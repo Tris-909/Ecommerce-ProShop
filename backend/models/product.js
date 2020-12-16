@@ -87,6 +87,31 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    numOf5StarsReviews: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    numOf4StarsReviews: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    numOf3StarsReviews: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    numOf2StarsReviews: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    numOf1StarsReviews: {
+        type: Number,
+        required: true,
+        default: 0
     }
 }, {
     timestamps: true

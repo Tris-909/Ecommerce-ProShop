@@ -39,6 +39,14 @@ h3 {
   background-color: black;
 }
 
+.progress-bar {
+  background-color: rgb(255, 230, 0) !important;
+}
+
+.progress {
+  background-color: #dfdfdf !important;
+}
+
 #adminuser {
   color: black;
 }

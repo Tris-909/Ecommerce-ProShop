@@ -25,10 +25,6 @@ const NavItem = styled.div`
     justify-content: center;
     align-items: center;
     transition: all .2s;
-
-    &:hover {
-        color: black;
-    }
 `;
 
 const SubLink = styled(Link)`
@@ -38,6 +34,10 @@ const SubLink = styled(Link)`
     &:hover {
         text-decoration: none;
         background-color: rgb(252, 240, 3);
+
+        div {
+            color: black;
+        }
     }
 `;
 

@@ -27,9 +27,16 @@ const importData = async () => {
         const sampleProducts = products.map((product) => {
             return {
                 ...product,
+                numOf5StarsReviews: 0,
+                numOf4StarsReviews: 0,
+                numOf3StarsReviews: 0,
+                numOf2StarsReviews: 0,
+                numOf1StarsReviews: 0,
                 user: adminUser
             }
         });
+
+        console.log(sampleProducts);
 
         await Product.insertMany(sampleProducts);
         console.log('Data Imported'.green.inverse);

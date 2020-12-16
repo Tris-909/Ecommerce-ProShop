@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { Row, Col, Form, Button, ListGroup } from 'react-bootstrap';
+import { Row, Col, Form, Button, ListGroup, ProgressBar  } from 'react-bootstrap';
 import { createReview, deleteReview } from '../../redux/actions/userActions';
 import { CREATE_REVIEW_RESET, DELETE_REVIEW_RESET } from '../../redux/actions/actionTypes';
 import { Link } from 'react-router-dom';
@@ -22,10 +22,35 @@ const NoReviewText = styled.div`
     text-align: center;
 `;
 
+const ReviewOverallContainer = styled.div`
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex-direction: column;
+`;
+
+const RatingOverallText = styled.div`
+    font-size: 1.5rem;
+    font-family: Rokkitt;
+`;
+
+const ReviewOverallProgressBarContainer = styled.div`
+    margin-top: 10px;
+    display: flex;
+`;
+
 const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError }) => {
     const dispatch = useDispatch();
+    //TODO: TO POST A RATING
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
+
+    //TODO: TO CALCULATE INFO FOR PROGRESS BAR
+    const [numOf5StarsReviews, setNumOf5StarReviews] = useState(0);
+    const [numOf4StarsReviews, setNumOf4StarReviews] = useState(0);
+    const [numOf3StarsReviews, setNumOf3StarReviews] = useState(0);
+    const [numOf2StarsReviews, setNumOf2StarReviews] = useState(0);
+    const [numOf1StarsReviews, setNumOf1StarReviews] = useState(0);
 
     const onSubmitReviewHandler = (e) => {
         e.preventDefault();
@@ -41,10 +66,34 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
         dispatch(deleteReview(singleProduct._id, reviewId));
     }
 
+
     return (
         <Row>
             <Col md={6}>
-                <h2>Reviews</h2>
+                <h2>Reviews :</h2>
+                <ReviewOverallContainer>
+                    <RatingOverallText> Rating SnapShot </RatingOverallText>
+                    <ReviewOverallProgressBarContainer>
+                        5 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
+                        <ProgressBar variant={"progresss-bar-css"} now={100} label style={{width: '100%'}} />
+                    </ReviewOverallProgressBarContainer>
+                    <ReviewOverallProgressBarContainer>
+                        4 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
+                        <ProgressBar variant={"progresss-bar-css"} now={0} label style={{width: '100%'}} />
+                    </ReviewOverallProgressBarContainer>
+                    <ReviewOverallProgressBarContainer>
+                        3 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
+                        <ProgressBar variant={"progresss-bar-css"} now={0} label style={{width: '100%'}} />
+                    </ReviewOverallProgressBarContainer>
+                    <ReviewOverallProgressBarContainer>
+                        2 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
+                        <ProgressBar variant={"progresss-bar-css"} now={0} label style={{width: '100%'}} />
+                    </ReviewOverallProgressBarContainer>
+                    <ReviewOverallProgressBarContainer>
+                        1 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
+                        <ProgressBar variant={"progresss-bar-css"} now={0} label style={{width: '100%'}} />
+                    </ReviewOverallProgressBarContainer>
+                </ReviewOverallContainer>
                 {
                     deleteReviewError ? (
                         <Message content="Delete Review Failed, Please Try Again :(" variant="danger" />
