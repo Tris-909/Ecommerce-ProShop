@@ -84,10 +84,7 @@ const WishListProductHorizontal = ({ product }) => {
     const dispatch = useDispatch();
     const { cartItems, addItemSuccess } = useSelector(state => state.cart);
     const { wishList } = useSelector(state => state.wishList);
-    const { 
-        loading: addItemToWishListLoading, 
-        success: addItemToWishListSuccess, 
-        error: addItemToWishListError} = useSelector(state => state.addItemToWishList);
+    const { success: addItemToWishListSuccess } = useSelector(state => state.addItemToWishList);
 
     useEffect(() => {
         wishList.map((item) => {
@@ -122,6 +119,7 @@ const WishListProductHorizontal = ({ product }) => {
 
     return(
         <Card>
+            <Link to={`/product/${product.itemId}`}> 
             <CardTopSectionContainer>
                 <CardImageContainer>
                     <img src={product.productImage} alt={product.productName} style={{ width: '100%' }}/>
@@ -130,6 +128,7 @@ const WishListProductHorizontal = ({ product }) => {
                     {product.productName}
                 </CartTextContainer>
             </CardTopSectionContainer>
+            </Link>
             <CardBototmContainer>
                 <CardMoneyText>
                     $ {product.productPrice}

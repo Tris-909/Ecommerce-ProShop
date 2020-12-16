@@ -106,12 +106,8 @@ const WishListScreen = () => {
                     wishList.length !== 0 ? wishList.map((item) => {
                         if (showGrid) {
                             return(
-                                <Col 
-                                        sm={showGrid ? 12 : 12} 
-                                        md={showGrid ? 6 : 12} 
-                                        lg={showGrid ? 6 : 12} 
-                                        xl={showGrid ? 4 : 12} key={item._id}>
-                                    <WishListProduct product={item} showList={!showGrid} /> 
+                                <Col key={item._id}>
+                                    <WishListProduct product={item} /> 
                                 </Col>
                             )
                         } else {

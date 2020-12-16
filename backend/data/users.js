@@ -6,6 +6,7 @@ const users = [
         email: 'admin@email.com',
         password: bcrypt.hashSync('123', 10),
         wishList: [],
+        cartList: [],
         isAdmin: true
     },
     {
@@ -13,6 +14,7 @@ const users = [
         email: 'random1@email.com',
         password: bcrypt.hashSync('123', 10),
         wishList: [],
+        cartList: [],
         isAdmin: false
     },
     {
@@ -20,6 +22,7 @@ const users = [
         email: 'random2@email.com',
         password: bcrypt.hashSync('123', 10),
         wishList: [],
+        cartList: [],
         isAdmin: false
     }
 ]

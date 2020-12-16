@@ -52,17 +52,14 @@ const ButtonContainer = styled.div`
     }
 `;
 
-const WishListProduct = ({ product, showList }) => {
+const WishListProduct = ({ product }) => {
     const [isLoved, setIsLoved] = useState(true);
     const [wishListID, setWishListID] = useState(null);
 
     const dispatch = useDispatch();
     const { cartItems, addItemSuccess } = useSelector(state => state.cart);
     const { wishList } = useSelector(state => state.wishList);
-    const { 
-        loading: addItemToWishListLoading, 
-        success: addItemToWishListSuccess, 
-        error: addItemToWishListError} = useSelector(state => state.addItemToWishList);
+    const { success: addItemToWishListSuccess } = useSelector(state => state.addItemToWishList);
 
     useEffect(() => {
         wishList.map((item) => {
@@ -97,13 +94,13 @@ const WishListProduct = ({ product, showList }) => {
 
     
     return (
-        <Card className="my-3 p-3 rounded" style={{ flexDirection: showList ? 'row' : 'column' }}>
+        <Card className="my-3 p-3 rounded">
             <Link to={`/product/${product.itemId}`}>
-                <Card.Img src={product.productImage} variant="top" style={{ width: showList ? '100%' : '100%' }} />
+                <Card.Img src={product.productImage} variant="top"/>
             </Link>
             <Card.Body>
                 <Link to={`/product/${product.itemId}`}>
-                    <Card.Title as="div" style={{ fontSize: showList ? '1.5rem' : '1rem' }}>
+                    <Card.Title as="div">
                         {product.productName}
                     </Card.Title>
                 </Link>
