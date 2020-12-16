@@ -5,8 +5,14 @@ import {Link} from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 
 import {useDispatch, useSelector} from 'react-redux';
-import {addItemToCart} from '../redux/actions/cartActions';
-import {addItemToWishList, removeAnItemFromWishList} from '../redux/actions/wishListActions';
+import {
+    addItemToCart,
+    getAllItemsCart
+} from '../redux/actions/cartActions';
+import {
+    addItemToWishList, 
+    removeAnItemFromWishList
+} from '../redux/actions/wishListActions';
 import {
     ADD_PRODUCT_TO_CART_RESET,
     ADD_ITEM_TO_WISH_LIST_RESET,
@@ -52,18 +58,11 @@ const Product = (props) => {
     const [wishListID, setWishListID] = useState(null);
 
     const dispatch = useDispatch();
-    const { cartItems, addItemSuccess } = useSelector(state => state.cart);
+    const { addItemSuccess } = useSelector(state => state.cart);
+    const { cartItems } = useSelector(state => state.cartList);
     const { user } = useSelector(state => state.user);
     const { wishList } = useSelector(state => state.wishList);
-    const { 
-        loading: addItemToWishListLoading, 
-        success: addItemToWishListSuccess, 
-        error: addItemToWishListError} = useSelector(state => state.addItemToWishList);
-    const {
-        loading: removeItemFromWishListLoading,
-        success: removeItemFromWishListSuccess,
-        error: removeItemFromWishListError
-    } = useSelector(state => state.removeItemFromWishList);
+    const { success: addItemToWishListSuccess } = useSelector(state => state.addItemToWishList);
 
     useEffect(() => {
         wishList.map((item) => {
@@ -74,12 +73,16 @@ const Product = (props) => {
         })
     }, [wishList, product]);
 
-    const onAddItemToCartHandler = (e, id) => {
+    useEffect(() => {
+        dispatch(getAllItemsCart());
+    }, [dispatch, addItemSuccess]);
+
+    const onAddItemToCartHandler = (e, id, productName, productImage, productPrice, countInStock) => {
         e.preventDefault();
-        
+
         if (user) {
             dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
-            dispatch(addItemToCart(id, 1));
+            dispatch(addItemToCart(id, productName, productImage, productPrice, countInStock, 1));
         } else {
             props.history.push('/login')
         }
@@ -129,11 +132,15 @@ const Product = (props) => {
                     />
                 </Card.Text>
                 {
-                    addItemSuccess && (cartItems[cartItems.length-1].product === product._id) ? (
-                    <div style={{marginTop: '1rem'}}>
-                        <Message variant="success" content="Add Item To Cart Successfully" addToCart={true} /> 
-                    </div>
-                    ): null
+                    addItemSuccess ? cartItems.map((item) => {
+                        if (item.itemId == product._id) {
+                            return(
+                            <div style={{marginTop: '1rem'}}>
+                                <Message variant="success" content="Add Item To Cart Successfully" addToCart={true} /> 
+                            </div>
+                            );
+                        }
+                    }) : null
                 }
                 <FootProductContainer>
                     <CardMoneyText>
@@ -143,7 +150,8 @@ const Product = (props) => {
                     <ButtonContainer>
                         <i className="fas fa-cart-plus" 
                             style={{ fontSize: '1.5rem', marginRight: '1.5rem', cursor: 'pointer' }}
-                            onClick={(e) => onAddItemToCartHandler(e, product._id)}></i>
+                            onClick={(e) => 
+                            onAddItemToCartHandler(e, product._id, product.name, product.image, product.price, product.countInStock, 1)}></i>
                         {
                             isLoved ? (
                                 //TODO: Full Heart

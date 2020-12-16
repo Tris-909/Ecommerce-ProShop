@@ -264,7 +264,8 @@ const deleteAllItemsFromWishList = AsyncHandler(async (req, res) => {
 const addItemToCart = AsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     const { itemId, productName, productImage, productPrice, countInStock, quantity } = req.body;
-
+    console.log(req.body);
+    
     if (user) {
         const item = {
             itemId,

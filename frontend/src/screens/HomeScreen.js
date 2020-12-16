@@ -10,6 +10,7 @@ import {getTopPhones} from '../redux/actions/phoneActions';
 import {getTopHeadphone} from '../redux/actions/headphoneActions';
 import {getTopGames} from '../redux/actions/gameActions';
 import {getWishList} from '../redux/actions/wishListActions';
+import {getAllItemsCart} from '../redux/actions/cartActions';
 
 //TODO: Components
 import TopProduct from '../components/TopProduct (Home)/TopProduct';
@@ -25,6 +26,7 @@ const HomeScreen = () => {
     const { topHeadphone, loading: topHeadphoneLoading } = useSelector(state => state.topHeadphone);
     const { topGames, loading: topGamesLoading } = useSelector(state => state.topGames);
     const { wishList } = useSelector(state => state.wishList);
+    const { cartItems } = useSelector(state => state.cartList);
     const { success: addItemToWishListSuccess} = useSelector(state => state.addItemToWishList);
     const { success: removeItemFromWishListSuccess} = useSelector(state => state.removeItemFromWishList);
 

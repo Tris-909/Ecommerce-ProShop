@@ -6,7 +6,6 @@ import {
     REMOVE_PRODUCT_FROM_CART_REQUEST,
     REMOVE_PRODUCT_FROM_CART_SUCCESS,
     REMOVE_PRODUCT_FROM_CART_FAIL,
-    REMOVE_PRODUCT_FROM_CART_RESET,
 
     GET_ALL_ITEMS_FROM_CART_REQUEST,
     GET_ALL_ITEMS_FROM_CART_SUCCESS,
@@ -23,7 +22,14 @@ export const addItemToCart = (itemId, productName, productImage, productPrice, c
         dispatch({
             type: ADD_PRODUCT_TO_CART
         });
-
+        console.log({
+            itemId, 
+            productName, 
+            productImage, 
+            productPrice, 
+            countInStock: countInStock, 
+            quantity: qty
+        });
         const { user: {user} } = getState();
         const config = {
             headers: {
@@ -37,8 +43,8 @@ export const addItemToCart = (itemId, productName, productImage, productPrice, c
             productName, 
             productImage, 
             productPrice, 
-            countInStock, 
-            qty
+            countInStock: countInStock, 
+            quantity: qty
         }, config);
 
         dispatch({
