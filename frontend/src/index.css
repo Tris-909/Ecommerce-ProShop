@@ -95,6 +95,11 @@ h3 {
     margin: 10px;
     border-radius: 50%;
   }
-
-
 }
+
+@media (max-width: 370px) {
+  .table th, .table td {
+    padding: 0.5rem;
+  }
+}
+

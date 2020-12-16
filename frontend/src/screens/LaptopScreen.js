@@ -24,7 +24,7 @@ const LaptopScreen = () => {
                 {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please reload the webpage" /> : laptops.map((laptop) => {
                     return(
                         <Col sm={12} md={6} lg={6} xl={4} key={laptop._id}>
-                            <Product product={laptop} link={`/laptops`}/>
+                            <Product product={laptop} link={`/product`}/>
                         </Col>
                     );
                 })}

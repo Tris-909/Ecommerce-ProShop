@@ -29,11 +29,28 @@ const getProductById = AsyncHandler(async (req, res) => {
     const theProduct = await Product.findById(req.params.id);
 
     if (theProduct) {
+        theProduct.reviews = [];
         res.send(theProduct);
     } else {
         res.status(404).send('Something went wrong :(');
     }
 })
+
+//? GET some reviews out of a product based on the product ID
+//? /api/products/getreviews/:id?pageReviewNumber=1
+//? Public Route
+const getSomeReviews = AsyncHandler(async (req, res) => {
+    const pageSize = 1;
+    const page = Number(req.query.pageReviewNumber) || 1
+
+    const currentNumOfReviews = await Product.findById(req.params.id).select('numReviews');
+    await Product.findOne({ _id: req.params.id }).select('reviews').then(function(myDoc) {
+
+        const setOfReviews = myDoc.reviews.slice((page-1)*pageSize , (page)*pageSize);
+        console.log(setOfReviews);
+        res.send({setOfReviews, page, pages: Math.ceil( currentNumOfReviews.numReviews / pageSize )}); 
+    });
+});
 
 //? Delete a product based on it ID
 //? DELETE /api/products/:id
@@ -119,8 +136,8 @@ const createReview = AsyncHandler(async(req, res) => {
         product.reviews.push(review);
         product.numReviews = product.numReviews +1;
         product.rating = product.reviews.reduce((acc, cur) => cur.rating + acc, 0) / product.numReviews;
-       
-        switch(rating) {
+
+        switch(Number(rating)) {
             case 1: 
                 product.numOf1StarsReviews =  product.numOf1StarsReviews + 1;
                 await product.save();
@@ -164,52 +181,58 @@ const createReview = AsyncHandler(async(req, res) => {
 //? Private
 const deleteReviewProduct = AsyncHandler(async(req, res) => {
     const { reviewid, productid } = req.params;
-    const choosenProduct = await Product.find({ _id: productid });
+    const choosenProduct = await Product.findById(productid);
 
     if (choosenProduct) {
         //TODO: FIND THE POSITION OF THE DELETED REVIEWS AND DELETE THE REVIEW
         let deletedReviewIndex;
-        for (let i = 0; i < choosenProduct[0].reviews.length; i++) {
-            if (reviewid == choosenProduct[0].reviews[i]._id) {
+        for (let i = 0; i < choosenProduct.reviews.length; i++) {
+            if (reviewid == choosenProduct.reviews[i]._id) {
                 deletedReviewIndex = i;
                 break;
             }
         }
         
         if (deletedReviewIndex !== undefined) {
-            //TODO: RE-CALCULATE THE RATINGS AND NUM-REVIEWS OF THE PRODUCT
-            choosenProduct[0].rating =  choosenProduct[0].reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct[0].numReviews;
-            choosenProduct[0].numReviews = choosenProduct[0].numReviews - 1;
-
-            switch(choosenProduct[0].reviews[deletedReviewIndex].rating) {
+            switch(choosenProduct.reviews[deletedReviewIndex].rating) {
                 case 1:
-                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
-                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
-                    await choosenProduct[0].save();
+                    choosenProduct.numOf1StarsReviews = choosenProduct.numOf1StarsReviews -1;
+                    choosenProduct.reviews.splice(deletedReviewIndex, 1);
+                    choosenProduct.rating =  choosenProduct.reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct.numReviews;
+                    choosenProduct.numReviews = choosenProduct.numReviews - 1;
+                    await choosenProduct.save();
 
                     break;
                 case 2:
-                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
-                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
-                    await choosenProduct[0].save();
+                    choosenProduct.numOf2StarsReviews = choosenProduct.numOf2StarsReviews -1;
+                    choosenProduct.reviews.splice(deletedReviewIndex, 1);
+                    choosenProduct.rating =  choosenProduct.reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct.numReviews;
+                    choosenProduct.numReviews = choosenProduct.numReviews - 1;
+                    await choosenProduct.save();
 
                     break;
                 case 3: 
-                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
-                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
-                    await choosenProduct[0].save();
+                    choosenProduct.numOf3StarsReviews = choosenProduct.numOf3StarsReviews -1;
+                    choosenProduct.reviews.splice(deletedReviewIndex, 1);
+                    choosenProduct.rating =  choosenProduct.reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct.numReviews;
+                    choosenProduct.numReviews = choosenProduct.numReviews - 1;
+                    await choosenProduct.save();
 
                     break;
                 case 4:
-                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
-                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
-                    await choosenProduct[0].save();
+                    choosenProduct.numOf4StarsReviews = choosenProduct.numOf4StarsReviews -1;
+                    choosenProduct.reviews.splice(deletedReviewIndex, 1);
+                    choosenProduct.rating =  choosenProduct.reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct.numReviews;
+                    choosenProduct.numReviews = choosenProduct.numReviews - 1;
+                    await choosenProduct.save();
 
                     break;
                 case 5:
-                    choosenProduct[0].numOf1StarsReviews = choosenProduct[0].numOf1StarsReviews -1;
-                    choosenProduct[0].reviews.splice(deletedReviewIndex, 1);
-                    await choosenProduct[0].save();
+                    choosenProduct.numOf5StarsReviews = choosenProduct.numOf5StarsReviews -1;
+                    choosenProduct.reviews.splice(deletedReviewIndex, 1);
+                    choosenProduct.rating =  choosenProduct.reviews.reduce((acc, cur) => cur.rating + acc, 0) / choosenProduct.numReviews;
+                    choosenProduct.numReviews = choosenProduct.numReviews - 1;
+                    await choosenProduct.save();
 
                     break;
                 default: 
@@ -373,6 +396,7 @@ const getAllGames = AsyncHandler(async(req, res) => {
 export {
     getProducts,
     getProductById,
+    getSomeReviews,
     deleteProductByIdAsAdmin,
     createProduct,
     updateProduct,

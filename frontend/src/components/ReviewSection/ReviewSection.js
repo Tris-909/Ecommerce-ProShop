@@ -67,6 +67,14 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
     }
 
 
+    useEffect(() => {
+        setNumOf5StarReviews(Math.ceil((singleProduct.numOf5StarsReviews/singleProduct.numReviews)*100));
+        setNumOf4StarReviews(Math.ceil((singleProduct.numOf4StarsReviews/singleProduct.numReviews)*100));
+        setNumOf3StarReviews(Math.ceil((singleProduct.numOf3StarsReviews/singleProduct.numReviews)*100));
+        setNumOf2StarReviews(Math.ceil((singleProduct.numOf2StarsReviews/singleProduct.numReviews)*100));
+        setNumOf1StarReviews(Math.ceil((singleProduct.numOf1StarsReviews/singleProduct.numReviews)*100));
+    }, [dispatch, singleProduct]);
+
     return (
         <Row>
             <Col md={6}>
@@ -75,23 +83,28 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                     <RatingOverallText> Rating SnapShot </RatingOverallText>
                     <ReviewOverallProgressBarContainer>
                         5 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
-                        <ProgressBar variant={"progresss-bar-css"} now={100} label style={{width: '100%'}} />
+                        <ProgressBar variant={"progresss-bar-css"} now={numOf5StarsReviews} label style={{width: '100%', marginRight: '10px'}} />
+                        { singleProduct.numOf5StarsReviews }
                     </ReviewOverallProgressBarContainer>
                     <ReviewOverallProgressBarContainer>
                         4 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
-                        <ProgressBar variant={"progresss-bar-css"} now={0} label style={{width: '100%'}} />
+                        <ProgressBar variant={"progresss-bar-css"} now={numOf4StarsReviews} label style={{width: '100%', marginRight: '10px'}} />
+                        { singleProduct.numOf4StarsReviews }
                     </ReviewOverallProgressBarContainer>
                     <ReviewOverallProgressBarContainer>
                         3 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
-                        <ProgressBar variant={"progresss-bar-css"} now={0} label style={{width: '100%'}} />
+                        <ProgressBar variant={"progresss-bar-css"} now={numOf3StarsReviews} label style={{width: '100%', marginRight: '10px'}} />
+                        { singleProduct.numOf3StarsReviews }
                     </ReviewOverallProgressBarContainer>
                     <ReviewOverallProgressBarContainer>
                         2 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
-                        <ProgressBar variant={"progresss-bar-css"} now={0} label style={{width: '100%'}} />
+                        <ProgressBar variant={"progresss-bar-css"} now={numOf2StarsReviews} label style={{width: '100%', marginRight: '10px'}} />
+                        { singleProduct.numOf2StarsReviews }
                     </ReviewOverallProgressBarContainer>
                     <ReviewOverallProgressBarContainer>
                         1 <i className="fas fa-star" style={{ marginRight: '1rem', marginLeft: '0.5rem' }}></i> 
-                        <ProgressBar variant={"progresss-bar-css"} now={0} label style={{width: '100%'}} />
+                        <ProgressBar variant={"progresss-bar-css"} now={numOf1StarsReviews} label style={{width: '100%', marginRight: '10px'}} />
+                        { singleProduct.numOf1StarsReviews }
                     </ReviewOverallProgressBarContainer>
                 </ReviewOverallContainer>
                 {
@@ -143,10 +156,14 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                             <ListGroup.Item key={review._id}>
                                 <ReviewContainer>
                                     <strong>{review.name}</strong>
-                                    <i 
+                                    
+                                    { user._id == review.user ? (
+                                        <i 
                                         className="fas fa-trash" 
                                         style={{ cursor: 'pointer' }}
                                         onClick={(e) => onDeleteReviewHandler(e, review._id)}></i>
+                                    ) : null
+                                    }
                                 </ReviewContainer>
 
                                 <Rating rating={review.rating} />
@@ -171,11 +188,11 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                             value={rating}
                                             onChange={(e) => setRating(e.target.value)}>
                                                 <option value=''>Select...</option>
-                                                <option value='1'>1 - Awful</option>
-                                                <option value='2'>2 - Bad</option>
-                                                <option value='3'>3 - Okay</option>
-                                                <option value='4'>4 - Good</option>
-                                                <option value='5'>5 - Excellent</option>
+                                                <option value={1}>1 - Awful</option>
+                                                <option value={2}>2 - Bad</option>
+                                                <option value={3}>3 - Okay</option>
+                                                <option value={4}>4 - Good</option>
+                                                <option value={5}>5 - Excellent</option>
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group controlId="comment">
