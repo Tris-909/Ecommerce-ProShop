@@ -258,6 +258,80 @@ const deleteAllItemsFromWishList = AsyncHandler(async (req, res) => {
     }
 });
 
+//?   @description : Add an Item to the Cart
+//?   @method : POST /api/users/cart/additem
+//?   @access : private
+const addItemToCart = AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    const { itemId, productName, productImage, productPrice, countInStock, quantity } = req.body;
+
+    if (user) {
+        user.cartList.push({
+            itemId,
+            productName, 
+            productImage, 
+            productPrice, 
+            countInStock, 
+            quantity
+        });
+
+        const savedUser = await user.save();
+        res.status(200).send(savedUser);
+    } else {
+        res.status(404);
+        throw new Error('Cant find the user')
+    }
+
+
+});
+
+//?   @description : Remove an Item from the Cart
+//?   @method : DELETE /api/users/cart/removeitem/:id
+//?   @access : private
+const removeItemFromCart = AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    const cartItemId = req.params.id;
+
+    if (user) {
+        let deletedIndex;
+        for (let i = 0; i < user.cartList.length; i++) {
+            if (user.cartList[i].itemId == cartItemId) {
+                deletedIndex = i;
+                break;
+            }
+        }
+
+        if (deletedIndex === undefined) {
+            res.status(404);
+            throw new Error("Can't find the item in the cart with this Id, please try again");
+        }
+
+        user.cartList.splice(deletedIndex, 1);
+        await user.save();
+
+        res.status(200);
+        res.send('Delete item from cartList successfully');
+    } else {
+        res.status(404);
+        throw new Error('User is not existed');
+    }
+});
+
+//?   @description : GET all Items from the Cart
+//?   @method : GET /api/users/cart
+//?   @access : private
+const getUserCartList = AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        res.status(200);
+        res.send(user.cartList);
+    } else {
+        res.status(404);
+        throw new Error("Can't Find User With This ID");
+    }
+});
+
 export {
     login,
     getUserProfile,
@@ -272,5 +346,9 @@ export {
     getWishListItems,
     addItemToUserWishList,
     deleteAnItemFromWishList,
-    deleteAllItemsFromWishList
+    deleteAllItemsFromWishList,
+
+    addItemToCart,
+    removeItemFromCart,
+    getUserCartList
 }
