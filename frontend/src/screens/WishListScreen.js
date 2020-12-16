@@ -101,7 +101,11 @@ const WishListScreen = () => {
                     </DisplayButtonContainer>
                 </DisplayContainer>
             </FlexContainer>
-            <Row style={{ justifyContent: 'center', alignItems: 'center', flexDirection: showGrid ? 'initial' : 'column'}}>
+            <Row style={{ 
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                flexDirection: showGrid ? 'initial' : 'column',
+                transition: 'all .5s'}}>
                 {
                     wishList.length !== 0 ? wishList.map((item) => {
                         if (showGrid) {
