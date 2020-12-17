@@ -77,6 +77,23 @@ const userSchema = mongoose.Schema({
                 required: true
             }
         }
+    ],
+    agreeAndDisAgree: [
+        {
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'Product'
+            },
+            reviewId: {
+                type: String,
+                required: true
+            },
+            agree: {
+                type: Boolean,
+                required: true
+            }
+        }
     ]
 }, {
     timestamps: true

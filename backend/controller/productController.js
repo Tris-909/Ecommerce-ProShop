@@ -1,5 +1,6 @@
 import AsyncHandler from 'express-async-handler';
 import Product from '../models/product.js';
+import User from '../models/user.js';
 
 //?   Fetch All Products
 //?   /api/products
@@ -50,6 +51,98 @@ const getSomeReviews = AsyncHandler(async (req, res) => {
         console.log(setOfReviews);
         res.send({setOfReviews, page, pages: Math.ceil( currentNumOfReviews.numReviews / pageSize )}); 
     });
+});
+
+//? stick a review as agree
+//? POST /api/products/reviews/agree
+//? private Route
+const stickAReviewAsAgree = AsyncHandler(async (req, res) => {
+    const { productId, reviewId } = req.body;
+    const product = await Product.findById(productId);
+    const user = await User.findById(req.user._id);
+
+    if (product) {        
+        for (let i = 0; i < req.user.agreeAndDisAgree.length; i++) {
+            if (req.params.reviewId == req.user.agreeAndDisAgree[i].reviewId ) {
+                res.status(400);
+                res.send("User have already choosen and this process can't be reversed");
+            }
+        }
+
+        let currentReviewIndex;
+        for (let i = 0; i < product.reviews.length; i++) {
+            if (product.reviews[i]._id  == reviewId ) {
+                currentReviewIndex = i;
+            }
+        }
+
+        product.reviews[currentReviewIndex].agree.push({
+            userId: req.user._id
+        });
+        product.reviews[currentReviewIndex].numOfAgrees = product.reviews[currentReviewIndex].numOfAgrees + 1;
+
+
+        user.agreeAndDisAgree.push({
+            productId: productId,
+            reviewId: reviewId,
+            agree: true
+        });
+
+        await product.save();
+        await user.save();
+
+        res.status(200);
+        res.send({ product, user });
+    } else {
+        res.status(404);
+        throw new Error("Can't find the product that you are looking for");
+    }
+});
+
+//? stick a review as disagree
+//? POST /api/products/reviews/disagree
+//? privateRoute
+const stickAReviewAsDisAgree = AsyncHandler(async (req, res) => {
+    const { productId, reviewId } = req.body;
+    const product = await Product.findById(productId);
+    const user = await User.findById(req.user._id);
+
+    if (product) {        
+        for (let i = 0; i < req.user.agreeAndDisAgree.length; i++) {
+            if (req.params.reviewId == req.user.agreeAndDisAgree[i].reviewId ) {
+                res.status(400);
+                res.send("User have already choosen and this process can't be reversed");
+            }
+        }
+
+        let currentReviewIndex;
+        for (let i = 0; i < product.reviews.length; i++) {
+            if (product.reviews[i]._id  == reviewId ) {
+                currentReviewIndex = i;
+            }
+        }
+
+        product.reviews[currentReviewIndex].disAgree.push({
+            userId: req.user._id
+        });
+        product.reviews[currentReviewIndex].numOfDisAgrees = product.reviews[currentReviewIndex].numOfDisAgrees + 1;
+
+
+        user.agreeAndDisAgree.push({
+            productId: productId,
+            reviewId: reviewId,
+            agree: false
+        });
+
+        await product.save();
+        await user.save();
+
+        res.status(200);
+        res.send({ product, user });
+    } else {
+        res.status(404);
+        throw new Error("Can't find the product that you are looking for");
+    }
 });
 
 //? Delete a product based on it ID
@@ -397,6 +490,8 @@ export {
     getProducts,
     getProductById,
     getSomeReviews,
+    stickAReviewAsAgree,
+    stickAReviewAsDisAgree,
     deleteProductByIdAsAdmin,
     createProduct,
     updateProduct,

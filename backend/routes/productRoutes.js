@@ -3,6 +3,8 @@ const router = express.Router();
 import { 
     getProducts, 
     getProductById, 
+    stickAReviewAsAgree,
+    stickAReviewAsDisAgree,
     getSomeReviews,
     deleteProductByIdAsAdmin, 
     createProduct, 
@@ -36,6 +38,8 @@ router.route('/headphones').get(getAllHeadphones);
 router.route('/headphones/toptier').get(getTopHeadphone);
 router.route('/games/toptier').get(getTopGames);
 router.route('/games').get(getAllGames);
+router.route('/reviews/agree').post(protect, stickAReviewAsAgree);
+router.route('/reviews/disagree').post(protect, stickAReviewAsDisAgree);
 router.route('/createReview').post(protect, createReview);
 router.route('/getreviews/:id').get(getSomeReviews);
 router.route('/deletereview/:productid/:reviewid').delete(protect, deleteReviewProduct);

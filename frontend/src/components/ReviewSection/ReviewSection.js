@@ -142,8 +142,8 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                     <div>
                         {pages*5 > singleProduct.numReviews ? singleProduct.numReviews : pages*5 } of {singleProduct.numReviews} Reviews
                     </div>
-                    <div>
-                        <NavDropdown title="Filter" id="nav-dropdown">
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <NavDropdown title="Filter" id="nav-dropdown" style={{marginRight: '0rem'}}>
                             <NavDropdown.Item>Highest To Lowest Rating</NavDropdown.Item>
                             <NavDropdown.Item>Lowest To Highest Rating</NavDropdown.Item>
                             <NavDropdown.Item>Most Agree</NavDropdown.Item>

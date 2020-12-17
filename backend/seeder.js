@@ -36,7 +36,6 @@ const importData = async () => {
             }
         });
 
-        console.log(sampleProducts);
 
         await Product.insertMany(sampleProducts);
         console.log('Data Imported'.green.inverse);

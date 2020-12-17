@@ -17,6 +17,34 @@ const reviewSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
+    numOfAgrees: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    agree: [
+        { 
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'User'
+            }
+        }
+    ],
+    numOfDisAgrees: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    disAgree: [
+        {
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'User'
+            }
+        }
+    ]
 }, {
     timestamps: true
 });

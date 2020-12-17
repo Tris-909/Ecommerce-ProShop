@@ -16,6 +16,8 @@ const login = AsyncHandler(async (req, res) => {
             email: user.email,
             isAdmin:  user.isAdmin,
             wishList: user.wishList,
+            cartList: user.cartList,
+            agreeAndDisAgree: user.agreeAndDisAgree,
             token: generateToken(user._id)
         })
     } else {
