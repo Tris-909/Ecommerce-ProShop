@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Form, Button, ListGroup, ProgressBar, Pagination, NavDropdown  } from 'react-bootstrap';
-import { createReview, deleteReview } from '../../redux/actions/userActions';
+import { createReview, deleteReview, getCurrentUserStatus } from '../../redux/actions/userActions';
 import { getSetOfReviewsOfCurrentProductBasedOnPageNumber } from '../../redux/actions/productActions';
-import { CREATE_REVIEW_RESET, DELETE_REVIEW_RESET, GET_SET_REVIEWS_RESET } from '../../redux/actions/actionTypes';
+import { 
+    CREATE_REVIEW_RESET, 
+    DELETE_REVIEW_RESET, 
+    GET_SET_REVIEWS_RESET
+} from '../../redux/actions/actionTypes';
 import { Link } from 'react-router-dom';
 import Message from '../Message';
 import Rating from '../../components/Rating';
@@ -55,20 +59,17 @@ const FilterBar = styled.div`
 
 const AgreeContainer = styled.div`
     display: flex;
+
+    @media (max-width: 420px) {
+        display: initial;
+    }
 `;
 
-const DisAgreeText = styled.button`
-    padding: 0px 10px;
-    border: none;
-    margin-right: 1rem;
-    background-color:  #f1f1f1;
-    font-weight: 700;
-    color: ${props => props.red ? "red" : "black"};
-`;
 
 const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError }) => {
     const dispatch = useDispatch();
-    const { currentReviews, page, pages, success } = useSelector(state => state.setOfReviews);
+    const { currentReviews, setAgreeSuccess ,setDisAgreeSuccess, pages, page, success } = useSelector(state => state.setOfReviews);
+    const { userStatus } = useSelector(state => state.currentUserStatus);
 
     //TODO: LOAD A REVIEW FOR A FIRST-TIME
     const [firsttime, setFirstTime] = useState(true);
@@ -115,7 +116,17 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
             dispatch(getSetOfReviewsOfCurrentProductBasedOnPageNumber(singleProduct._id, 1));
             setFirstTime(false);
         }
+        if (!userStatus) {
+            dispatch(getCurrentUserStatus());
+        }
     }, [dispatch, singleProduct, success]);
+
+    useEffect(() => {
+        dispatch(getCurrentUserStatus());
+        // Adding an action to get that just clicked reviews to update it indepentdently
+        // Or find a way to get that set of reviews again after update it
+        dispatch(getSetOfReviewsOfCurrentProductBasedOnPageNumber(singleProduct._id, page));
+    }, [dispatch, setAgreeSuccess, setDisAgreeSuccess]);
 
     return (
         <Row>
@@ -227,17 +238,20 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                 <p>{ review.comment }</p>
 
                                 <AgreeContainer>
-                                    Helpful ? 
-                                    <AgreeText 
-                                        numOfAgrees={review.numOfAgrees}
-                                        useAgreeOrDisAgreeArray={user.agreeAndDisAgree}
-                                        reviewID={review._id}
-                                     />
-                                    <DisAgreeTextContainer 
-                                        numOfDisAgrees={review.numOfDisAgrees}
-                                        useAgreeOrDisAgreeArray={user.agreeAndDisAgree}
-                                        reviewID={review._id}
-                                    />
+                                        Helpful ? 
+
+                                        <AgreeText 
+                                            numOfAgrees={review.numOfAgrees}
+                                            useAgreeOrDisAgreeArray={userStatus.agreeAndDisAgree}
+                                            reviewID={review._id}
+                                            productID={singleProduct._id}
+                                         />
+                                        <DisAgreeTextContainer 
+                                            numOfDisAgrees={review.numOfDisAgrees}
+                                            useAgreeOrDisAgreeArray={userStatus.agreeAndDisAgree}
+                                            reviewID={review._id}
+                                            productID={singleProduct._id}
+                                        />
                                 </AgreeContainer>
                             </ListGroup.Item>
                         ))}

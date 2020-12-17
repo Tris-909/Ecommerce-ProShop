@@ -25,7 +25,8 @@ import {
     userReducer, 
     userDetailsReducer,
     userReviewReducer,
-    deleteReviewReducer 
+    deleteReviewReducer,
+    currentUserStatusReducer 
 } from './reducers/userReducers';
 import { 
     ordersReducer, 
@@ -69,6 +70,7 @@ const reducer = combineReducers({
     productsList: productListReducer,
     singleProduct: SingleProductReducer,
     setOfReviews: setReviewsReducer,
+    currentUserStatus: currentUserStatusReducer,
     deleteProduct: deleteProductAsAdmin,
     cart: cartReducer,
     removeCart: removeItemFromCart,

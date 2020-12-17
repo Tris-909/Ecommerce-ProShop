@@ -26,6 +26,27 @@ const login = AsyncHandler(async (req, res) => {
     }
 }); 
 
+//?   @description : take user current details in databases
+//?   @method : GET /api/users/currentstatus
+//?   @access : private 
+const getCurrentUserStatus = AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        res.status(200).send({
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            wishList: user.wishList,
+            cartList: user.cartList,
+            agreeAndDisAgree: user.agreeAndDisAgree
+        });
+    } else {
+        res.status(404);
+        throw new Error("Can't find the user");
+    }
+});
+
 //?   @description : Get User Profile 
 //?   @method : GET /api/users/profile
 //?   @access : private 
@@ -353,6 +374,7 @@ const getUserCartList = AsyncHandler(async (req, res) => {
 export {
     login,
     getUserProfile,
+    getCurrentUserStatus,
     createUser,
     changeUserProfile,
     

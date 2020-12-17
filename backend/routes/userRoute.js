@@ -3,6 +3,7 @@ const router = express.Router();
 import { 
     login, 
     getUserProfile, 
+    getCurrentUserStatus,
     createUser, 
     changeUserProfile, 
     getAllUsers,
@@ -22,6 +23,7 @@ import { admin } from '../middlewares/admin.js';
 
 router.route('/delete/:id').delete(protect, admin, deleteUserAdmin);
 router.route('/login').post(login);
+router.route('/currentstatus').get(protect, getCurrentUserStatus);
 router.route('/profile').get(protect, getUserProfile).put(protect, changeUserProfile);
 router.route('/wishlist/additem').post(protect, addItemToUserWishList);
 router.route('/wishlist/deleteitem').delete(protect, deleteAllItemsFromWishList);

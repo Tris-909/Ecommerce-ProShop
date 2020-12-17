@@ -34,7 +34,11 @@ import {
 
     SET_A_REVIEW_AS_DISAGREE_PENDING,
     SET_A_REVIEW_AS_DISAGREE_SUCCESS,
-    SET_A_REVIEW_AS_DISAGREE_FAIL
+    SET_A_REVIEW_AS_DISAGREE_FAIL,
+
+    GET_USER_CURRENT_STATUS_PENDING,
+    GET_USER_CURRENT_STATUS_SUCCESS,
+    GET_USER_CURRENT_STATUS_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -276,6 +280,32 @@ export const stickAReviewAsDisAgree = (productId, reviewID) => async(dispatch, g
     } catch(error) {
         dispatch({
             type: SET_A_REVIEW_AS_DISAGREE_FAIL
+        });
+    }
+}
+
+export const getCurrentUserStatus = () => async(dispatch, getState) => {
+    try {
+        dispatch({ type: GET_USER_CURRENT_STATUS_PENDING });
+
+        const {user: {user}} = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        const { data } = await axios.get('/api/users/currentstatus', config);
+        
+        dispatch({
+            type: GET_USER_CURRENT_STATUS_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: GET_USER_CURRENT_STATUS_FAIL,
+            error:  error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }
 }
