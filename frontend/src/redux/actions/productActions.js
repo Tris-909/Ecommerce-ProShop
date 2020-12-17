@@ -9,7 +9,11 @@ import {
 
     GET_CAROUSEL_PRODUCTS_REQUEST,
     GET_CAROUSEL_PRODUCTS_SUCCESS,
-    GET_CAROUSEL_PRODUCTS_FAIL
+    GET_CAROUSEL_PRODUCTS_FAIL,
+
+    GET_SET_REVIEWS_PENDING,
+    GET_SET_REVIEWS_SUCCESS,
+    GET_SET_REVIEWS_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -65,6 +69,25 @@ export const getCarouselProducts = () => async(dispatch) => {
         dispatch({
             type: GET_CAROUSEL_PRODUCTS_FAIL,
             error: error.response && error.response.data.message ? error.response.data.message : null
+        });
+    }
+}
+
+export const getSetOfReviewsOfCurrentProductBasedOnPageNumber = (productId, pageReviewNumber) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_SET_REVIEWS_PENDING
+        });
+        const {data} = await axios.get(`/api/products/getreviews/${productId}?pageReviewNumber=${pageReviewNumber}`);
+        
+        dispatch({
+            type: GET_SET_REVIEWS_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: GET_SET_REVIEWS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : null
         });
     }
 }

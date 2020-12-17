@@ -7,7 +7,8 @@ import {
     productListReducer, 
     SingleProductReducer, 
     deleteProductAsAdmin,
-    carouselProductReducer 
+    carouselProductReducer ,
+    setReviewsReducer
 } from './reducers/productReducers';
 import { 
     cartReducer, 
@@ -67,6 +68,7 @@ import {
 const reducer = combineReducers({
     productsList: productListReducer,
     singleProduct: SingleProductReducer,
+    setOfReviews: setReviewsReducer,
     deleteProduct: deleteProductAsAdmin,
     cart: cartReducer,
     removeCart: removeItemFromCart,

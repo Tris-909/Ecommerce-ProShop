@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { Row, Col, Form, Button, ListGroup, ProgressBar  } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, Form, Button, ListGroup, ProgressBar, Pagination, NavDropdown  } from 'react-bootstrap';
 import { createReview, deleteReview } from '../../redux/actions/userActions';
-import { CREATE_REVIEW_RESET, DELETE_REVIEW_RESET } from '../../redux/actions/actionTypes';
+import { getSetOfReviewsOfCurrentProductBasedOnPageNumber } from '../../redux/actions/productActions';
+import { CREATE_REVIEW_RESET, DELETE_REVIEW_RESET, GET_SET_REVIEWS_RESET } from '../../redux/actions/actionTypes';
 import { Link } from 'react-router-dom';
 import Message from '../Message';
 import Rating from '../../components/Rating';
@@ -39,8 +40,23 @@ const ReviewOverallProgressBarContainer = styled.div`
     display: flex;
 `;
 
+const FilterBar = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    background-color: #f1f1f1;
+`;
+
 const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError }) => {
     const dispatch = useDispatch();
+    const { currentReviews, page, pages, success } = useSelector(state => state.setOfReviews);
+
+    //TODO: LOAD A REVIEW FOR A FIRST-TIME
+    const [firsttime, setFirstTime] = useState(true);
+
     //TODO: TO POST A RATING
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
@@ -66,6 +82,11 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
         dispatch(deleteReview(singleProduct._id, reviewId));
     }
 
+    const getNextSetOfReviews = (e, nextPages) => {
+        e.preventDefault();
+        dispatch({ type: GET_SET_REVIEWS_RESET });
+        dispatch(getSetOfReviewsOfCurrentProductBasedOnPageNumber(singleProduct._id, nextPages));
+    }
 
     useEffect(() => {
         setNumOf5StarReviews(Math.ceil((singleProduct.numOf5StarsReviews/singleProduct.numReviews)*100));
@@ -73,7 +94,12 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
         setNumOf3StarReviews(Math.ceil((singleProduct.numOf3StarsReviews/singleProduct.numReviews)*100));
         setNumOf2StarReviews(Math.ceil((singleProduct.numOf2StarsReviews/singleProduct.numReviews)*100));
         setNumOf1StarReviews(Math.ceil((singleProduct.numOf1StarsReviews/singleProduct.numReviews)*100));
-    }, [dispatch, singleProduct]);
+
+        if (firsttime) {
+            dispatch(getSetOfReviewsOfCurrentProductBasedOnPageNumber(singleProduct._id, 1));
+            setFirstTime(false);
+        }
+    }, [dispatch, singleProduct, success]);
 
     return (
         <Row>
@@ -112,7 +138,21 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                         <Message content="Delete Review Failed, Please Try Again :(" variant="danger" />
                     ) : null
                 }
-                { singleProduct.reviews.length == 0 ? (
+                <FilterBar>
+                    <div>
+                        {pages*5 > singleProduct.numReviews ? singleProduct.numReviews : pages*5 } of {singleProduct.numReviews} Reviews
+                    </div>
+                    <div>
+                        <NavDropdown title="Filter" id="nav-dropdown">
+                            <NavDropdown.Item>Highest To Lowest Rating</NavDropdown.Item>
+                            <NavDropdown.Item>Lowest To Highest Rating</NavDropdown.Item>
+                            <NavDropdown.Item>Most Agree</NavDropdown.Item>
+                            <NavDropdown.Item>Most Disagree</NavDropdown.Item>
+                            <NavDropdown.Item>Most Recent</NavDropdown.Item>
+                        </NavDropdown>
+                    </div>
+                </FilterBar>
+                { currentReviews.length == 0 ? (
                     <>
                         <NoReviewText>
                             No Reviews 
@@ -152,7 +192,7 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                     </>
                     ) : (
                     <ListGroup variant="flush">
-                        { singleProduct.reviews.map((review) => (
+                        { currentReviews.map((review) => (
                             <ListGroup.Item key={review._id}>
                                 <ReviewContainer>
                                     <strong>{review.name}</strong>
@@ -171,6 +211,17 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                 <p>{ review.comment }</p>
                             </ListGroup.Item>
                         ))}
+                        {
+                            pages === 1 ? null : (
+                                <Pagination>
+                                    { 
+                                        Array.from(Array(pages), (e , i) => {
+                                            return(<Pagination.Item key={i} onClick={(e) => getNextSetOfReviews(e, i+1)}>{i+1}</Pagination.Item>)
+                                        })
+                                    }
+                                </Pagination>
+                            )
+                        }
                         <ListGroup.Item>
                             <h2>Post A Review</h2>
                             {userReviewError ? (

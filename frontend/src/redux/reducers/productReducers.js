@@ -14,7 +14,11 @@ import {
 
     GET_CAROUSEL_PRODUCTS_REQUEST,
     GET_CAROUSEL_PRODUCTS_SUCCESS,
-    GET_CAROUSEL_PRODUCTS_FAIL
+    GET_CAROUSEL_PRODUCTS_FAIL,
+    GET_SET_REVIEWS_PENDING,
+    GET_SET_REVIEWS_SUCCESS,
+    GET_SET_REVIEWS_FAIL,
+    GET_SET_REVIEWS_RESET
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -150,3 +154,48 @@ export const carouselProductReducer = (state = carouselProductInitialState, acti
             return state;
     }
 } 
+
+const setReviewsInitialState = {
+    currentReviews: [],
+    page: null,
+    pages: null,
+    success: false,
+    loading: false,
+    error: null
+}
+
+export const setReviewsReducer = (state = setReviewsInitialState, action) => {
+    switch(action.type) {
+        case GET_SET_REVIEWS_PENDING:
+            return {
+                ...state,
+                loading: true,
+            }
+        case GET_SET_REVIEWS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                currentReviews: [...action.payload.setOfReviews],
+                page: action.payload.page,
+                pages: action.payload.pages
+            }
+        case GET_SET_REVIEWS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case GET_SET_REVIEWS_RESET:
+            return {
+                currentReviews: [],
+                page: null,
+                pages: null,
+                loading: false,
+                error: null,
+                success: false
+            }
+        default:
+            return state;
+    }
+}

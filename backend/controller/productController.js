@@ -40,7 +40,7 @@ const getProductById = AsyncHandler(async (req, res) => {
 //? /api/products/getreviews/:id?pageReviewNumber=1
 //? Public Route
 const getSomeReviews = AsyncHandler(async (req, res) => {
-    const pageSize = 1;
+    const pageSize = 5;
     const page = Number(req.query.pageReviewNumber) || 1
 
     const currentNumOfReviews = await Product.findById(req.params.id).select('numReviews');
