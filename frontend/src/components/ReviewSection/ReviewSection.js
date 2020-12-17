@@ -21,6 +21,7 @@ const ReviewContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     font-size: 1.2rem;
+    font-weight: 800;
 `;
 
 const NoReviewText = styled.div`
@@ -88,6 +89,9 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
     const onSubmitReviewHandler = (e) => {
         e.preventDefault();
         dispatch({ type: CREATE_REVIEW_RESET });
+        if (rating == 0 || comment == '') {
+
+        }
         dispatch(createReview( rating, comment, singleProduct._id ));
         setRating(0);
         setComment('');
@@ -240,18 +244,26 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                 <AgreeContainer>
                                         Helpful ? 
 
-                                        <AgreeText 
-                                            numOfAgrees={review.numOfAgrees}
-                                            useAgreeOrDisAgreeArray={userStatus.agreeAndDisAgree}
-                                            reviewID={review._id}
-                                            productID={singleProduct._id}
-                                         />
-                                        <DisAgreeTextContainer 
-                                            numOfDisAgrees={review.numOfDisAgrees}
-                                            useAgreeOrDisAgreeArray={userStatus.agreeAndDisAgree}
-                                            reviewID={review._id}
-                                            productID={singleProduct._id}
-                                        />
+                                        {
+                                            userStatus ? (
+                                                <AgreeText 
+                                                    numOfAgrees={review.numOfAgrees}
+                                                    useAgreeOrDisAgreeArray={userStatus.agreeAndDisAgree}
+                                                    reviewID={review._id}
+                                                    productID={singleProduct._id}
+                                                />
+                                            ) : null
+                                        }
+                                        {
+                                            userStatus ? (
+                                                <DisAgreeTextContainer 
+                                                    numOfDisAgrees={review.numOfDisAgrees}
+                                                    useAgreeOrDisAgreeArray={userStatus.agreeAndDisAgree}
+                                                    reviewID={review._id}
+                                                    productID={singleProduct._id}
+                                                />
+                                            ) : null
+                                        }
                                 </AgreeContainer>
                             </ListGroup.Item>
                         ))}
@@ -272,7 +284,7 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                 <Message 
                                     variant="danger" 
                                     content={ userReviewError === 'User has already review this product'
-                                        ? userReviewError :"Something is wrong while we're trying to create the reviews, please reload the page" }/>
+                                        ? userReviewError :"Please fill in comment and rating" }/>
                             ) : null}
                             { user ? (
                                 <Form onSubmit={onSubmitReviewHandler}>

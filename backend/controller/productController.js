@@ -48,7 +48,6 @@ const getSomeReviews = AsyncHandler(async (req, res) => {
     await Product.findOne({ _id: req.params.id }).select('reviews').then(function(myDoc) {
 
         const setOfReviews = myDoc.reviews.slice((page-1)*pageSize , (page)*pageSize);
-        console.log(setOfReviews);
         res.send({setOfReviews, page, pages: Math.ceil( currentNumOfReviews.numReviews / pageSize )}); 
     });
 });
@@ -57,13 +56,14 @@ const getSomeReviews = AsyncHandler(async (req, res) => {
 //? POST /api/products/reviews/agree
 //? private Route
 const stickAReviewAsAgree = AsyncHandler(async (req, res) => {
+    console.log('start StickAReviewAgree')
     const { productId, reviewId } = req.body;
     const product = await Product.findById(productId);
     const user = await User.findById(req.user._id);
 
     if (product) {        
         for (let i = 0; i < req.user.agreeAndDisAgree.length; i++) {
-            if (req.params.reviewId == req.user.agreeAndDisAgree[i].reviewId ) {
+            if (reviewId == req.user.agreeAndDisAgree[i].reviewId ) {
                 res.status(400);
                 res.send("User have already choosen and this process can't be reversed");
             }
@@ -109,7 +109,7 @@ const stickAReviewAsDisAgree = AsyncHandler(async (req, res) => {
 
     if (product) {        
         for (let i = 0; i < req.user.agreeAndDisAgree.length; i++) {
-            if (req.params.reviewId == req.user.agreeAndDisAgree[i].reviewId ) {
+            if (reviewId == req.user.agreeAndDisAgree[i].reviewId ) {
                 res.status(400);
                 res.send("User have already choosen and this process can't be reversed");
             }
@@ -138,7 +138,7 @@ const stickAReviewAsDisAgree = AsyncHandler(async (req, res) => {
         await user.save();
 
         res.status(200);
-        res.send('Adding new numOfDisAgrees and disAgreeArray into that new review adding a new item into agreeorDisAgree array of user');
+        res.send('Adding new numOfDisAgrees and disagreeArray into that new review adding a new item into agreeorDisAgree array of user');
     } else {
         res.status(404);
         throw new Error("Can't find the product that you are looking for");
