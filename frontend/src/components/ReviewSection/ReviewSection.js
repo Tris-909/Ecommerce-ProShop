@@ -7,7 +7,10 @@ import { CREATE_REVIEW_RESET, DELETE_REVIEW_RESET, GET_SET_REVIEWS_RESET } from 
 import { Link } from 'react-router-dom';
 import Message from '../Message';
 import Rating from '../../components/Rating';
+import AgreeText from './AgreeOrDisAgree/AgreeText';
+import DisAgreeTextContainer from './AgreeOrDisAgree/DisAgreeText';
 import styled from 'styled-components';
+
 
 const ReviewContainer = styled.div`
     display: flex;
@@ -48,6 +51,19 @@ const FilterBar = styled.div`
     margin-bottom: 1rem;
     padding-left: 1rem;
     background-color: #f1f1f1;
+`;
+
+const AgreeContainer = styled.div`
+    display: flex;
+`;
+
+const DisAgreeText = styled.button`
+    padding: 0px 10px;
+    border: none;
+    margin-right: 1rem;
+    background-color:  #f1f1f1;
+    font-weight: 700;
+    color: ${props => props.red ? "red" : "black"};
 `;
 
 const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError }) => {
@@ -209,6 +225,20 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                 <Rating rating={review.rating} />
                                 <p>{ review.createdAt.substring(0,10) }</p>
                                 <p>{ review.comment }</p>
+
+                                <AgreeContainer>
+                                    Helpful ? 
+                                    <AgreeText 
+                                        numOfAgrees={review.numOfAgrees}
+                                        useAgreeOrDisAgreeArray={user.agreeAndDisAgree}
+                                        reviewID={review._id}
+                                     />
+                                    <DisAgreeTextContainer 
+                                        numOfDisAgrees={review.numOfDisAgrees}
+                                        useAgreeOrDisAgreeArray={user.agreeAndDisAgree}
+                                        reviewID={review._id}
+                                    />
+                                </AgreeContainer>
                             </ListGroup.Item>
                         ))}
                         {
