@@ -228,12 +228,12 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                 <ReviewContainer>
                                     <strong>{review.name}</strong>
                                     
-                                    { user._id == review.user ? (
+                                    { user ? user._id == review.user ? (
                                         <i 
                                         className="fas fa-trash" 
                                         style={{ cursor: 'pointer' }}
                                         onClick={(e) => onDeleteReviewHandler(e, review._id)}></i>
-                                    ) : null
+                                    ) : null  : null
                                     }
                                 </ReviewContainer>
 
@@ -252,7 +252,14 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                                     reviewID={review._id}
                                                     productID={singleProduct._id}
                                                 />
-                                            ) : null
+                                            ) : (
+                                                <AgreeText 
+                                                numOfAgrees={review.numOfAgrees}
+                                                useAgreeOrDisAgreeArray={[]}
+                                                reviewID={review._id}
+                                                productID={singleProduct._id}
+                                            />
+                                            )
                                         }
                                         {
                                             userStatus ? (
@@ -262,7 +269,14 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                                     reviewID={review._id}
                                                     productID={singleProduct._id}
                                                 />
-                                            ) : null
+                                            ) : (
+                                                <DisAgreeTextContainer 
+                                                numOfDisAgrees={review.numOfDisAgrees}
+                                                useAgreeOrDisAgreeArray={[]}
+                                                reviewID={review._id}
+                                                productID={singleProduct._id}
+                                            /> 
+                                            )
                                         }
                                 </AgreeContainer>
                             </ListGroup.Item>
@@ -313,7 +327,11 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                                     </Form.Group>
                                     <Button type="submit" className="btn btn-primary"> Submit </Button>
                                 </Form>
-                            ) : <Message content="You need to sign in to post a review" variant="primary" />}
+                            ) : (
+                            <NoReviewText>
+                                You need to <Link to="/login" style={{ textDecoration: 'underline' }}> sign in </Link> to post a review
+                            </NoReviewText>
+                            )}
                         </ListGroup.Item>
                     </ListGroup>
                 )}

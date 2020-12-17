@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_A_REVIEW_AS_AGREE_RESET } from '../../../redux/actions/actionTypes';
 import { stickAReviewAsAgree } from '../../../redux/actions/userActions';
+import {withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 
 const AgreeTextContainer = styled.div`
@@ -23,9 +24,11 @@ color: ${props => props.isAgreeded ? "green" : "black"};
 }
 `;
 
-const AgreeText = ({ numOfAgrees, useAgreeOrDisAgreeArray, reviewID, productID }) => {
+const AgreeText = (props) => {
     const dispatch = useDispatch();
+    const { numOfAgrees, useAgreeOrDisAgreeArray, reviewID, productID, history } = props; 
     const [isAgreeded, setIsAgreeded] = useState(false);
+    const { user } = useSelector(state => state.user);
 
     useEffect(() => {
         for (let i = 0; i < useAgreeOrDisAgreeArray.length; i++) {
@@ -37,6 +40,9 @@ const AgreeText = ({ numOfAgrees, useAgreeOrDisAgreeArray, reviewID, productID }
     
     const onClickHandler = (e) => {
         e.preventDefault();
+        if (!user) {
+            history.push('/login');
+        }
         dispatch({ type: SET_A_REVIEW_AS_AGREE_RESET });
         dispatch(stickAReviewAsAgree(productID, reviewID));
     }
@@ -48,4 +54,4 @@ const AgreeText = ({ numOfAgrees, useAgreeOrDisAgreeArray, reviewID, productID }
     )
 }
 
-export default AgreeText;
+export default withRouter(AgreeText);

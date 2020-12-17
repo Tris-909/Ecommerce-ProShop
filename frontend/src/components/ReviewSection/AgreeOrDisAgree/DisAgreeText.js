@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {stickAReviewAsDisAgree} from '../../../redux/actions/userActions';
 import { SET_A_REVIEW_AS_DISAGREE_RESET } from '../../../redux/actions/actionTypes';
 import styled from 'styled-components';
+import {withRouter} from 'react-router-dom';
 
 const DisAgreeTextContainer = styled.div`
 padding: 0px 10px;
@@ -23,9 +24,11 @@ color: ${props => props.isDisAgreeded ? "red" : "black"};
 }
 `;
 
-const DisAgreeText = ({ numOfDisAgrees, useAgreeOrDisAgreeArray, reviewID, productID }) => {
+const DisAgreeText = (props) => {
     const dispatch = useDispatch();
+    const { numOfDisAgrees, useAgreeOrDisAgreeArray, reviewID, productID, history } = props;
     const [isDisAgreeded, setIsDisAgreeded] = useState(false);
+    const { user } = useSelector(state => state.user);
 
     useEffect(() => {
         for (let i = 0; i < useAgreeOrDisAgreeArray.length; i++) {
@@ -37,6 +40,9 @@ const DisAgreeText = ({ numOfDisAgrees, useAgreeOrDisAgreeArray, reviewID, produ
     
     const onClickHandler = (e) => {
         e.preventDefault();
+        if (!user) {
+            history.push('/login');
+        }
         dispatch({ type: SET_A_REVIEW_AS_DISAGREE_RESET });
         dispatch(stickAReviewAsDisAgree(productID, reviewID));
     }
@@ -48,4 +54,4 @@ const DisAgreeText = ({ numOfDisAgrees, useAgreeOrDisAgreeArray, reviewID, produ
     )
 }
 
-export default DisAgreeText;
+export default withRouter(DisAgreeText);
