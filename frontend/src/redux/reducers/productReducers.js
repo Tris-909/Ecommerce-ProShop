@@ -18,7 +18,17 @@ import {
     GET_SET_REVIEWS_PENDING,
     GET_SET_REVIEWS_SUCCESS,
     GET_SET_REVIEWS_FAIL,
-    GET_SET_REVIEWS_RESET
+    GET_SET_REVIEWS_RESET,
+
+    SET_A_REVIEW_AS_AGREE_PENDING,
+    SET_A_REVIEW_AS_AGREE_SUCCESS,
+    SET_A_REVIEW_AS_AGREE_FAIL,
+    SET_A_REVIEW_AS_AGREE_RESET,
+
+    SET_A_REVIEW_AS_DISAGREE_PENDING,
+    SET_A_REVIEW_AS_DISAGREE_SUCCESS,
+    SET_A_REVIEW_AS_DISAGREE_FAIL,
+    SET_A_REVIEW_AS_DISAGREE_RESET
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -157,6 +167,10 @@ export const carouselProductReducer = (state = carouselProductInitialState, acti
 
 const setReviewsInitialState = {
     currentReviews: [],
+    setAgreeSuccess: false,
+    setAgreeError: null,
+    setDisAgreeSuccess: false,
+    setDisAgreeError: null,
     page: null,
     pages: null,
     success: false,
@@ -194,6 +208,54 @@ export const setReviewsReducer = (state = setReviewsInitialState, action) => {
                 loading: false,
                 error: null,
                 success: false
+            }
+        case SET_A_REVIEW_AS_AGREE_PENDING: 
+            return {
+                ...state,
+                loading: true
+            }
+        case SET_A_REVIEW_AS_AGREE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                setAgreeSuccess: true
+            }
+        case SET_A_REVIEW_AS_AGREE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                setAgreeError: action.payload
+            }
+        case SET_A_REVIEW_AS_AGREE_RESET:
+            return {
+                ...state,
+                loading: false,
+                setAgreeError: null,
+                setAgreeSuccess: false
+            }
+        case SET_A_REVIEW_AS_DISAGREE_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
+        case SET_A_REVIEW_AS_DISAGREE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                setDisAgreeSuccess: true
+            }
+        case SET_A_REVIEW_AS_DISAGREE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                setDisAgreeError: action.payload
+            }
+        case SET_A_REVIEW_AS_DISAGREE_RESET:
+            return {
+                ...state,
+                loading: false,
+                setDisAgreeSuccess: false,
+                setDisAgreeError: null
             }
         default:
             return state;

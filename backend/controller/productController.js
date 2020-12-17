@@ -92,7 +92,7 @@ const stickAReviewAsAgree = AsyncHandler(async (req, res) => {
         await user.save();
 
         res.status(200);
-        res.send({ product, user });
+        res.send('Adding new numOfAgreees and agreeArray into that new review adding a new item into agreeorDisAgree array of user');
     } else {
         res.status(404);
         throw new Error("Can't find the product that you are looking for");
@@ -138,7 +138,7 @@ const stickAReviewAsDisAgree = AsyncHandler(async (req, res) => {
         await user.save();
 
         res.status(200);
-        res.send({ product, user });
+        res.send('Adding new numOfDisAgrees and disAgreeArray into that new review adding a new item into agreeorDisAgree array of user');
     } else {
         res.status(404);
         throw new Error("Can't find the product that you are looking for");

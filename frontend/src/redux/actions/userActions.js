@@ -26,7 +26,15 @@ import {
 
     DELETE_REVIEW_REQUEST,
     DELETE_REVIEW_SUCCESS,
-    DELETE_REVIEW_FAIL
+    DELETE_REVIEW_FAIL,
+
+    SET_A_REVIEW_AS_AGREE_PENDING,
+    SET_A_REVIEW_AS_AGREE_SUCCESS,
+    SET_A_REVIEW_AS_AGREE_FAIL,
+
+    SET_A_REVIEW_AS_DISAGREE_PENDING,
+    SET_A_REVIEW_AS_DISAGREE_SUCCESS,
+    SET_A_REVIEW_AS_DISAGREE_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -210,6 +218,64 @@ export const deleteReview = (productID, reviewID) => async(dispatch, getState) =
         dispatch({
             type: DELETE_REVIEW_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+export const stickAReviewAsAgree = (productId, reviewID) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: SET_A_REVIEW_AS_AGREE_PENDING
+        });
+
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.post('/api/products/reviews/agree', {
+            productId: productId,
+            reviewId: reviewID
+        }, config);
+
+        dispatch({
+            type: SET_A_REVIEW_AS_AGREE_SUCCESS
+        });
+    } catch(error) {
+        dispatch({
+            type: SET_A_REVIEW_AS_AGREE_FAIL
+        });
+    }
+}
+
+export const stickAReviewAsDisAgree = (productId, reviewID) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: SET_A_REVIEW_AS_DISAGREE_PENDING
+        });
+
+        const { user: {user} } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+
+        await axios.post('/api/products/reviews/disagree', {
+            productId: productId,
+            reviewId: reviewID
+        }, config);
+
+        dispatch({
+            type: SET_A_REVIEW_AS_DISAGREE_SUCCESS
+        });
+    } catch(error) {
+        dispatch({
+            type: SET_A_REVIEW_AS_DISAGREE_FAIL
         });
     }
 }
