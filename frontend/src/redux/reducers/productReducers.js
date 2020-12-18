@@ -297,7 +297,7 @@ export const setReviewsReducer = (state = setReviewsInitialState, action) => {
             return {
                 ...state,
                 loading: false,
-                currentReviews: [...action.payload.setOfReviews],
+                currentReviews: [...action.payload.currentSetOfReviews],
                 page: action.payload.page,
                 pages: action.payload.pages,
                 getReviewsLTHRSuccess: true
@@ -327,7 +327,7 @@ export const setReviewsReducer = (state = setReviewsInitialState, action) => {
             return {
                 ...state,
                 loading: false,
-                currentReviews: [...action.payload.setOfReviews],
+                currentReviews: [...action.payload.currentSetOfReviews],
                 page: action.payload.page,
                 pages: action.payload.pages,
                 getReviewsHTLASuccess: true
@@ -357,7 +357,7 @@ export const setReviewsReducer = (state = setReviewsInitialState, action) => {
             return {
                 ...state,
                 loading: false,
-                currentReviews: [...action.payload.setOfReviews],
+                currentReviews: [...action.payload.currentSetOfReviews],
                 page: action.payload.page,
                 pages: action.payload.pages,
                 getReviewsLTHASuccess: true
@@ -387,7 +387,7 @@ export const setReviewsReducer = (state = setReviewsInitialState, action) => {
             return {
                 ...state,
                 loading: false,
-                currentReviews: [...action.payload.setOfReviews],
+                currentReviews: [...action.payload.currentSetOfReviews],
                 page: action.payload.page,
                 pages: action.payload.pages,
                 getReviewsHTLDASuccess: true
@@ -417,7 +417,7 @@ export const setReviewsReducer = (state = setReviewsInitialState, action) => {
             return {
                 ...state,
                 loading: false,
-                currentReviews: [...action.payload.setOfReviews],
+                currentReviews: [...action.payload.currentSetOfReviews],
                 page: action.payload.page,
                 pages: action.payload.pages,
                 getReviewsLTHDASuccess: true

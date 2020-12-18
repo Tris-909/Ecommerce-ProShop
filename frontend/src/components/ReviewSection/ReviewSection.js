@@ -3,10 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Form, Button, ListGroup, ProgressBar, Pagination, NavDropdown  } from 'react-bootstrap';
 import { createReview, deleteReview, getCurrentUserStatus } from '../../redux/actions/userActions';
 import { getSetOfReviewsOfCurrentProductBasedOnPageNumber } from '../../redux/actions/productActions';
+import {
+    getReviewsHTLR,
+    getReviewsLTHR,
+    getReviewsHTLA,
+    getReviewsLTHA,
+    getReviewsHTLDA,
+    getReviewsLTHDA
+} from '../../redux/actions/filterReviewsActions';
 import { 
     CREATE_REVIEW_RESET, 
     DELETE_REVIEW_RESET, 
-    GET_SET_REVIEWS_RESET
+    GET_SET_REVIEWS_RESET,
+    GET_REVIEWS_HTLR_RESET,
+    GET_REVIEWS_LTHR_RESET,
+    GET_REVIEWS_HTLA_RESET,
+    GET_REVIEWS_LTHA_RESET,
+    GET_REVIEWS_HTLDA_RESET,
+    GET_REVIEWS_LTHDA_RESET
 } from '../../redux/actions/actionTypes';
 import { Link } from 'react-router-dom';
 import Message from '../Message';
@@ -109,6 +123,44 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
         dispatch(getSetOfReviewsOfCurrentProductBasedOnPageNumber(singleProduct._id, nextPages));
     }
 
+    //TODO: REVIEWS FILTERS
+    const getSetOfReviewsHighToLowRating = (e) => {
+        e.preventDefault();
+        dispatch({ type: GET_REVIEWS_HTLR_RESET });
+        dispatch(getReviewsHTLR(singleProduct._id, page));
+    }
+
+    const getSetOfReviewsLowToHighRating = (e) => {
+        e.preventDefault();
+        dispatch({ type: GET_REVIEWS_LTHR_RESET });
+        dispatch(getReviewsLTHR(singleProduct._id, page));
+    }
+
+    const getSetOfReviewsHighToLowAgrees = (e) => {
+        e.preventDefault();
+        dispatch({ type: GET_REVIEWS_HTLA_RESET });
+        dispatch(getReviewsHTLA(singleProduct._id, page));
+    }
+
+    const getSetOfReviewsLowToHighAgrees = (e) => {
+        e.preventDefault();
+        dispatch({ type: GET_REVIEWS_LTHA_RESET });
+        dispatch(getReviewsLTHA(singleProduct._id, page));
+    }
+
+    const getSetOfReviewsHighToLowDisAgrees = (e) => {
+        e.preventDefault();
+        dispatch({ type: GET_REVIEWS_HTLDA_RESET  });
+        dispatch(getReviewsHTLDA(singleProduct._id, page));
+    }
+
+    const getSetOfReviewLowToHighDisAgrees = (e) => {
+        e.preventDefault();
+        dispatch({ type: GET_REVIEWS_HTLDA_RESET });
+        dispatch(getReviewsLTHDA(singleProduct._id, page));
+    }
+
+    //TODO: END OF REVIEW FILTERS
     useEffect(() => {
         setNumOf5StarReviews(Math.ceil((singleProduct.numOf5StarsReviews/singleProduct.numReviews)*100));
         setNumOf4StarReviews(Math.ceil((singleProduct.numOf4StarsReviews/singleProduct.numReviews)*100));
@@ -175,11 +227,24 @@ const ReviewSection = ({ singleProduct, user, userReviewError, deleteReviewError
                     </div>
                     <div style={{display: 'flex', justifyContent: 'center'}}>
                         <NavDropdown title="Filter" id="nav-dropdown" style={{marginRight: '0rem'}}>
-                            <NavDropdown.Item>Highest To Lowest Rating</NavDropdown.Item>
-                            <NavDropdown.Item>Lowest To Highest Rating</NavDropdown.Item>
-                            <NavDropdown.Item>Most Agree</NavDropdown.Item>
-                            <NavDropdown.Item>Most Disagree</NavDropdown.Item>
-                            <NavDropdown.Item>Most Recent</NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => getSetOfReviewsHighToLowRating(e)}>
+                                Highest To Lowest Rating
+                            </NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => getSetOfReviewsLowToHighRating(e)}>
+                                Lowest To Highest Rating
+                            </NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => getSetOfReviewsHighToLowAgrees(e)}>
+                                Highest To Lowest Agrees
+                            </NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => getSetOfReviewsLowToHighAgrees(e)}>
+                                Lowest To Highest Agrees
+                            </NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => getSetOfReviewsHighToLowDisAgrees(e)}>
+                                Highest To Lowest DisAgrees
+                            </NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => getSetOfReviewLowToHighDisAgrees(e)}>
+                                Lowest To Highest DisAgrees
+                            </NavDropdown.Item>
                         </NavDropdown>
                     </div>
                 </FilterBar>
