@@ -33,7 +33,8 @@ import {
 
     GET_USER_CURRENT_STATUS_PENDING,
     GET_USER_CURRENT_STATUS_SUCCESS,
-    GET_USER_CURRENT_STATUS_FAIL
+    GET_USER_CURRENT_STATUS_FAIL,
+    GET_USER_CURRENT_STATUS_RESET
 } from '../actions/actionTypes';
 
 const initialUserState = {
@@ -253,6 +254,12 @@ const currentUserStatusReducer = (state = currentUserStatusState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload
+            }
+        case GET_USER_CURRENT_STATUS_RESET:
+            return {
+                userStatus: null,
+                loading: false,
+                error: null
             }
         default: 
             return state;

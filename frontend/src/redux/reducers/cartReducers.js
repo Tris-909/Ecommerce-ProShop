@@ -12,6 +12,7 @@ import {
     GET_ALL_ITEMS_FROM_CART_REQUEST,
     GET_ALL_ITEMS_FROM_CART_SUCCESS,
     GET_ALL_ITEMS_FROM_CART_FAIL,
+    GET_ALL_ITEMS_FROM_CART_RESET,
 
     SAVE_SHIPPING_ADDRESS_CART, 
     SAVE_PAYMENT_METHOD,
@@ -136,6 +137,12 @@ export const cartItems = (state = allItemsFromCart, action) => {
                 ...state,
                 loading: false,
                 error: action.payload
+            }
+        case GET_ALL_ITEMS_FROM_CART_RESET:
+            return {
+                cartItems: [],
+                loading: false,
+                error: null
             }
         default:
             return state;

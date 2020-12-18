@@ -7,7 +7,10 @@ import {
     GET_ORDER_OF_USER_RESET, 
     GET_USER_DETAILS_RESET, 
     GET_ALL_USERS_RESET,
-    DELETE_REVIEW_RESET
+    DELETE_REVIEW_RESET,
+    GET_USER_CURRENT_STATUS_RESET,
+    GET_WISH_LIST_RESET,
+    GET_ALL_ITEMS_FROM_CART_RESET
 } from '../redux/actions/actionTypes';
 import {withRouter} from 'react-router'
 import SearchBox from './SearchBox';
@@ -58,8 +61,12 @@ const Header = ({ history }) => {
         dispatch({ type: GET_USER_DETAILS_RESET });
         dispatch({ type: GET_ALL_USERS_RESET });
         dispatch({ type: DELETE_REVIEW_RESET });
+        dispatch({ type: GET_USER_CURRENT_STATUS_RESET });
+        dispatch({ type: GET_WISH_LIST_RESET });
+        dispatch({ type: GET_ALL_ITEMS_FROM_CART_RESET });
         dispatch(logOut());
         history.push('/');
+        window.location.reload();
     }
 
     return (

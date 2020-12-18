@@ -67,7 +67,7 @@ import {
 } from './reducers/gameReducer';
 import {
     alsoLikeReducer
-} from './actions/youMayAlsoLike';
+} from './reducers/alsoLikeReducers';
 
 const reducer = combineReducers({
     productsList: productListReducer,

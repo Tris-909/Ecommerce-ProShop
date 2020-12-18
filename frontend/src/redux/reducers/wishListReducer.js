@@ -2,6 +2,7 @@ import {
     GET_WISH_LIST_REQUEST,
     GET_WISH_LIST_SUCCESS,
     GET_WISH_LIST_FAIL,
+    GET_WISH_LIST_RESET,
 
     ADD_ITEM_TO_WISH_LIST_REQUEST,
     ADD_ITEM_TO_WISH_LIST_SUCCESS,
@@ -43,6 +44,12 @@ export const getWishListReducer = (state = wishListInitialState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload
+            }
+        case GET_WISH_LIST_RESET:
+            return {
+                wishList: [],
+                loading: false,
+                error: null
             }
         default:
             return state;
