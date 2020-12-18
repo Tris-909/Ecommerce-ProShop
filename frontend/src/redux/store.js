@@ -65,6 +65,9 @@ import {
     topGameReducer,
     allGamesReducer
 } from './reducers/gameReducer';
+import {
+    alsoLikeReducer
+} from './actions/youMayAlsoLike';
 
 const reducer = combineReducers({
     productsList: productListReducer,
@@ -106,7 +109,8 @@ const reducer = combineReducers({
     wishList: getWishListReducer,
     addItemToWishList: addItemToWishListReducer,
     removeItemFromWishList: removeItemFromWishListReducer,
-    removeAllItemsFromWishList: removeAllItemsFromWishListReducer
+    removeAllItemsFromWishList: removeAllItemsFromWishListReducer,
+    alsoLike: alsoLikeReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
