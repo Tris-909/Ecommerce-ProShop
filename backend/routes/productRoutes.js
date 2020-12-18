@@ -10,6 +10,8 @@ import {
     getReviewsFilteredLowToHighRating,
     getReviewsFilteredHighToLowAgree,
     getReviewsFilteredLowToHighAgree,
+    getReviewsFilteredHighToLowDisAgree,
+    getReviewsFilteredLowToHighDisAgree,
     deleteProductByIdAsAdmin, 
     createProduct, 
     updateProduct,
@@ -45,11 +47,18 @@ router.route('/games').get(getAllGames);
 router.route('/reviews/agree').post(protect, stickAReviewAsAgree);
 router.route('/reviews/disagree').post(protect, stickAReviewAsDisAgree);
 router.route('/createReview').post(protect, createReview);
+
 router.route('/getreviews/:id').get(getSomeReviews);
+
 router.route('/getreviews/HtLR/:id').get(getSomeReviewsFilteredHighToLowRating);
 router.route('/getreviews/LtHR/:id').get(getReviewsFilteredLowToHighRating);
+
 router.route('/getreviews/HtLA/:id').get(getReviewsFilteredHighToLowAgree);
 router.route('/getreviews/LtHA/:id').get(getReviewsFilteredLowToHighAgree);
+
+router.route('/getreviews/HtLDA/:id').get(getReviewsFilteredHighToLowDisAgree);
+router.route('/getreviews/LtHDA/:id').get(getReviewsFilteredLowToHighDisAgree);
+
 router.route('/deletereview/:productid/:reviewid').delete(protect, deleteReviewProduct);
 router.route('/:id')
 .get(getProductById)

@@ -88,7 +88,7 @@ const getReviewsFilteredLowToHighRating = AsyncHandler(async (req, res) => {
 //? Public Route
 const getReviewsFilteredHighToLowAgree = AsyncHandler(async(req, res) => {
     const pageSize  = 5;
-    const currentPage = req.query.pageReviewNumber || 1;
+    const currentPage = Number(req.query.pageReviewNumber) || 1;
 
     const currentNumOfReviews = await Product.findById(req.params.id).select('numReviews');
     await Product.findOne({ _id: req.params.id }, 'reviews', function(err, docs) {
@@ -105,16 +105,45 @@ const getReviewsFilteredHighToLowAgree = AsyncHandler(async(req, res) => {
 //? Public Route
 const getReviewsFilteredLowToHighAgree = AsyncHandler(async(req, res) => {
     const pageSize = 5;
-    const currentPage = req.query.pageReviewNumber || 1;
+    const currentPage = Number(req.query.pageReviewNumber) || 1;
 
     const currentNumOfReviews = await Product.findById(req.params.id).select('numReviews');
     await Product.findOne({ _id: req.params.id }, 'reviews', function(err, docs) {
-        docs.reviews.sort(function(a, b) { return b.numOfDisAgrees - a.numOfDisAgrees });
+        docs.reviews.sort(function(a, b) { return a.numOfAgrees - b.numOfAgrees });
         const currentSetOfReviews = docs.reviews.slice((currentPage-1)*pageSize, currentPage*pageSize);
         res.send({ currentSetOfReviews, page: currentPage, pages: Math.ceil( currentNumOfReviews/pageSize )});
     });
 });
 
+//? GET some reviews out of a product based on productID filtered by high to low DISagree
+//? /api/products/getreviews/HtLDA/:id?pageReviewNumber
+//? Public Route
+const getReviewsFilteredHighToLowDisAgree = AsyncHandler(async (req, res) => {
+    const pageSize = 5;
+    const currentPage = Number(req.query.pageReviewNumber) ||  1;
+
+    const numReviews = await Product.findById(req.params.id).select('numReviews');
+    await Product.findOne({ _id: req.params.id }, 'reviews', function(err, docs) {
+        docs.reviews.sort(function(a,b) { return( b.numOfDisAgrees - a.numOfDisAgrees )});
+        const currentSetOfReviews = docs.reviews.slice((currentPage - 1)*pageSize, pageSize*currentPage);
+        res.send({ currentSetOfReviews, page: currentPage, pageSize: Math.ceil( numReviews/pageSize )});
+    });
+});
+
+//? GET some reviews out of a product based on productID filtered by low to high DISagree
+//? /api/products/getreviews/LtHDA/:id?pageReviewNumber
+//? Public Route
+const getReviewsFilteredLowToHighDisAgree = AsyncHandler(async (req, res) => {
+    const pageSize = 5;
+    const currentPage = Number(req.query.pageReviewNumber) ||  1;
+
+    const numReviews = await Product.findById(req.params.id).select('numReviews');
+    await Product.findOne({ _id: req.params.id }, 'reviews', function(err, docs) {
+        docs.reviews.sort(function(a,b) { return( a.numOfDisAgrees - b.numOfDisAgrees )});
+        const currentSetOfReviews = docs.reviews.slice((currentPage - 1)*pageSize, pageSize*currentPage);
+        res.send({ currentSetOfReviews, page: currentPage, pageSize: Math.ceil( numReviews/pageSize )});
+    });
+}); 
 
 //? stick a review as agree
 //? POST /api/products/reviews/agree
@@ -558,6 +587,8 @@ export {
     getReviewsFilteredLowToHighRating,
     getReviewsFilteredHighToLowAgree,
     getReviewsFilteredLowToHighAgree,
+    getReviewsFilteredHighToLowDisAgree,
+    getReviewsFilteredLowToHighDisAgree,
     stickAReviewAsAgree,
     stickAReviewAsDisAgree,
     deleteProductByIdAsAdmin,
