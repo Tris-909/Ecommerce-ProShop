@@ -6,6 +6,10 @@ import {
     stickAReviewAsAgree,
     stickAReviewAsDisAgree,
     getSomeReviews,
+    getSomeReviewsFilteredHighToLowRating,
+    getReviewsFilteredLowToHighRating,
+    getReviewsFilteredHighToLowAgree,
+    getReviewsFilteredLowToHighAgree,
     deleteProductByIdAsAdmin, 
     createProduct, 
     updateProduct,
@@ -42,6 +46,10 @@ router.route('/reviews/agree').post(protect, stickAReviewAsAgree);
 router.route('/reviews/disagree').post(protect, stickAReviewAsDisAgree);
 router.route('/createReview').post(protect, createReview);
 router.route('/getreviews/:id').get(getSomeReviews);
+router.route('/getreviews/HtLR/:id').get(getSomeReviewsFilteredHighToLowRating);
+router.route('/getreviews/LtHR/:id').get(getReviewsFilteredLowToHighRating);
+router.route('/getreviews/HtLA/:id').get(getReviewsFilteredHighToLowAgree);
+router.route('/getreviews/LtHA/:id').get(getReviewsFilteredLowToHighAgree);
 router.route('/deletereview/:productid/:reviewid').delete(protect, deleteReviewProduct);
 router.route('/:id')
 .get(getProductById)
