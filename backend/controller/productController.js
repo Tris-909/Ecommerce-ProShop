@@ -579,6 +579,121 @@ const getAllGames = AsyncHandler(async(req, res) => {
     }
 });
 
+//? "YOU MAY ALSO LIKE" GET 6 cheapest laptops to serve on the carousel of you may also like function
+//? /api/products/laptops/alsolike
+//? public
+const getLaptopsReccommendation = AsyncHandler(async (req, res) => {
+    const product = await Product.find({ category: 'laptops' }).select({
+        "_id": 1,
+        "rating": 1,
+        "name": 1,
+        "price": 1,
+        "image": 1,
+        "numReviews": 1
+    }).sort({ price: 1 });
+
+    if (product) {
+        const productsSliced = product.slice(0, 6);
+        res.status(200);
+        res.send(productsSliced);
+    } else {
+        res.status(404);
+        throw new Error("Can't fetch recommended Laptops !");
+    }
+});
+
+//? "YOU MAY ALSO LIKE" GET 6 cheapest tvs 
+//? /api/products/tvs/alsolike
+//? public
+const getTVSRecommendation = AsyncHandler(async (req, res) => {
+    const product = await Product.find({ category: 'tvs' }).select({
+        "_id": 1,
+        "rating": 1,
+        "name": 1,
+        "price": 1,
+        "image": 1,
+        "numReviews": 1
+    }).sort({ price: 1 });
+
+    if (product) {
+        const productsSliced = product.slice(0, 6);
+        res.status(200);
+        res.send(productsSliced);
+    } else {
+        res.status(404);
+        throw new Error("Can't fetch recommended TVS !");
+    }
+});
+
+//? "YOU MAY ALSO LIKE" GET 6 cheapest phones 
+//? /api/products/phones/alsolike
+//? public
+const getPhonesRecommendation = AsyncHandler(async (req, res) => {
+    const product = await Product.find({ category: 'phones' }).select({
+        "_id": 1,
+        "rating": 1,
+        "name": 1,
+        "price": 1,
+        "image": 1,
+        "numReviews": 1
+    }).sort({ price: 1 });
+
+    if (product) {
+        const productsSliced = product.slice(0, 6);
+        res.status(200);
+        res.send(productsSliced);
+    } else {
+        res.status(404);
+        throw new Error("Can't fetch recommended Phones !");
+    }
+});
+
+//? "YOU MAY ALSO LIKE" GET 6 cheapest headphone 
+//? /api/products/headphone/alsolike
+//? public
+const getHeadPhonesRecommendation = AsyncHandler(async (req, res) => {
+    const product = await Product.find({ category: 'headphone' }).select({
+        "_id": 1,
+        "rating": 1,
+        "name": 1,
+        "price": 1,
+        "image": 1,
+        "numReviews": 1
+    }).sort({ price: 1 });
+
+    if (product) {
+        const productsSliced = product.slice(0, 6);
+        res.status(200);
+        res.send(productsSliced);
+    } else {
+        res.status(404);
+        throw new Error("Can't fetch recommended HeadPhones !");
+    }
+});
+
+//? "YOU MAY ALSO LIKE" GET 6 cheapest games 
+//? /api/products/game/alsolike
+//? public
+const getGamesRecommendation = AsyncHandler(async (req, res) => {
+    const product = await Product.find({ category: 'game' }).select({
+        "_id": 1,
+        "rating": 1,
+        "name": 1,
+        "price": 1,
+        "image": 1,
+        "numReviews": 1
+    }).sort({ price: 1 });
+
+    if (product) {
+        const productsSliced = product.slice(0, 6);
+        res.status(200);
+        res.send(productsSliced);
+    } else {
+        res.status(404);
+        throw new Error("Can't fetch recommended Games !");
+    }
+});
+
 export {
     getProducts,
     getProductById,
@@ -606,5 +721,10 @@ export {
     getTopHeadphone,
     getAllHeadphones,
     getTopGames,
-    getAllGames
+    getAllGames,
+    getLaptopsReccommendation,
+    getTVSRecommendation,
+    getPhonesRecommendation,
+    getHeadPhonesRecommendation,
+    getGamesRecommendation
 }

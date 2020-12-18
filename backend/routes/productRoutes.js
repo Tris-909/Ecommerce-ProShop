@@ -27,12 +27,22 @@ import {
     getTopHeadphone,
     getAllHeadphones,
     getTopGames,
-    getAllGames
+    getAllGames,
+    getLaptopsReccommendation,
+    getTVSRecommendation,
+    getPhonesRecommendation,
+    getHeadPhonesRecommendation,
+    getGamesRecommendation
 } from '../controller/productController.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
 router.route('/').get(getProducts).post(protect, admin, createProduct);
+router.route('/laptops/alsolike').get(getLaptopsReccommendation);
+router.route('/tvs/alsolike').get(getTVSRecommendation);
+router.route('/phones/alsolike').get(getPhonesRecommendation);
+router.route('/headphones/alsolike').get(getHeadPhonesRecommendation);
+router.route('/games/alsolike').get(getGamesRecommendation);
 router.route('/carousel').get(getTopRatedProducts);
 router.route('/laptops').get(getAllLaptops);
 router.route('/laptops/toptier').get(getTopTierLaptops);
