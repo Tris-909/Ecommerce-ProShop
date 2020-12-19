@@ -10,6 +10,7 @@ const products = [
     countInStock: 5,
     rating: 0,
     numReviews: 0,
+    youtube: "https://www.youtube.com/embed/52kR6hvnX9c",
     details: {
         displaySizeInches: '14"',
         resolutionPixels: '1920x1080',
@@ -47,6 +48,7 @@ const products = [
     countInStock: 2,
     rating: 0,
     numReviews: 0,
+    youtube: "https://www.youtube.com/embed/Srsx3kWIqn4",
     details: {
         displaySizeInches: '15.6"',
         resolutionPixels: '1920x1080',
@@ -84,6 +86,7 @@ const products = [
     countInStock: 3,
     rating: 0,
     numReviews: 0,
+    youtube: "https://www.youtube.com/embed/PQDsYhfIP8A",
     details: {
         displaySizeInches: '17.3"',
         resolutionPixels: '1920x1080',
@@ -121,6 +124,7 @@ const products = [
     countInStock: 8,
     rating: 0,
     numReviews: 0,
+    youtube: "https://www.youtube.com/embed/367pqLOIXcM",
     details: {
         displaySizeInches: '15.6"',
         resolutionPixels: '1920x1080',
@@ -158,6 +162,7 @@ const products = [
     countInStock: 4,
     rating: 0,
     numReviews: 0,
+    youtube: "https://www.youtube.com/embed/opkIJsK2OYw",
     details: {
         displaySizeInches: '15.6"',
         resolutionPixels: '1920x1080',
@@ -195,6 +200,7 @@ const products = [
     countInStock: 7,
     rating: 0,
     numReviews: 0,
+    youtube: "https://www.youtube.com/embed/A15P1ORok28",
     details: {
         displaySizeInches: '15.6"',
         resolutionPixels: '1920x1080',
@@ -232,6 +238,7 @@ const products = [
   countInStock: 7,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/sD0esnE-i14",
   details: {
       displaySizeInches: '17.3"',
       resolutionPixels: '3840 x 2160',
@@ -269,6 +276,7 @@ const products = [
   countInStock: 7,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/WeIEa51NnSk",
   details: {
       displaySizeInches: '13.3"',
       resolutionPixels: '2560 x 1600',
@@ -306,6 +314,7 @@ const products = [
   countInStock: 7,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/hs1HoLs4SD0",
   details: {
       displaySizeInches: '13.3"',
       resolutionPixels: '2560 x 1600',
@@ -343,6 +352,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/vV76p3j3eEk",
   details: {
       displaySizeInches: '15.6"',
       resolutionPixels: '1920 x 1080',
@@ -380,6 +390,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/lHCVS2L9bDQ",
   details: {
       displaySizeInches: '14"',
       resolutionPixels: '1920 x 1080',
@@ -417,6 +428,7 @@ const products = [
   countInStock: 6,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/1O0xlHa4rTM",
   details: {
       displaySizeInches: '17.3"',
       resolutionPixels: '1920 x 1080',
@@ -454,6 +466,7 @@ const products = [
   countInStock: 6,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/kwlOAeFLKH0",
   details: {
       displaySizeInches: '15.6"',
       resolutionPixels: '1920 x 1080',
@@ -491,6 +504,7 @@ const products = [
   countInStock: 6,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/rkIcHMAtiKk",
   details: {
       displaySizeInches: '15.6"',
       resolutionPixels: '1920 x 1080',
@@ -528,6 +542,7 @@ const products = [
   countInStock: 7,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/CAo8s4tiCEw",
   details: {
       displaySizeInches: '15.6"',
       resolutionPixels: '1920 x 1080',
@@ -565,6 +580,7 @@ const products = [
   countInStock: 3,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/4zLryOqVhtM",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '75 Inches',
@@ -592,6 +608,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/Uzr6NW6EKXU",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '48 Inches',
@@ -619,6 +636,7 @@ const products = [
   countInStock: 6,
   rating: 4,
   numReviews: 8,
+  youtube: "NoInfo",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '70 Inches',
@@ -646,6 +664,7 @@ const products = [
   countInStock: 2,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/gOz4vT_-NdU",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '55 Inches',
@@ -673,6 +692,7 @@ const products = [
   countInStock: 2,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/c6XFbF_Ew-0",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '75 Inches',
@@ -700,6 +720,7 @@ const products = [
   countInStock: 2,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/eATZg9vXqrU",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '65 Inches',
@@ -727,6 +748,7 @@ const products = [
   countInStock: 7,
   rating: 0,
   numReviews: 0,
+  youtube: "NoInfo",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '24 Inches',
@@ -754,6 +776,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/CKmcrjyGN2o",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '65 Inches',
@@ -781,6 +804,7 @@ const products = [
   countInStock: 6,
   rating: 0,
   numReviews: 0,
+  youtube: "NoInfo",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '32 Inches',
@@ -808,6 +832,7 @@ const products = [
   countInStock: 7,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/f2Q4AtvNwxw",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '65 Inches',
@@ -836,6 +861,7 @@ const products = [
   rating: 0,
   numReviews: 0,
   details: {exist: true},
+  youtube: "No Info",
   tvsDetail: {
     screenSizes: '49 Inches',
     screenType: 'LED LCD - Flat',
@@ -862,6 +888,7 @@ const products = [
   countInStock: 8,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/9WdCLxdn5tA",
   details: {exist: true},
   tvsDetail: {
     screenSizes: '65 Inches',
@@ -889,6 +916,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/cnXapYkboRQ",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -919,6 +947,7 @@ const products = [
   countInStock: 4,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/x0Kv_QRWR-I",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -949,6 +978,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/VqpZKflGw4Y",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -979,6 +1009,7 @@ const products = [
   countInStock: 4,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/8XhJEbHBE",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1009,6 +1040,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/k9SS89Lvlo4",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1039,6 +1071,7 @@ const products = [
   countInStock: 8,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/TcI7PWu5ExE",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1069,6 +1102,7 @@ const products = [
   countInStock: 4,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/OIPe3qkxA_M",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1099,6 +1133,7 @@ const products = [
   countInStock: 4,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/0h4_sJbnRsI",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1129,6 +1164,7 @@ const products = [
   countInStock: 4,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/7qCX0SVwrzA",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1159,6 +1195,7 @@ const products = [
   countInStock: 4,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/MOtUzXSUqHs",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1189,6 +1226,7 @@ const products = [
   countInStock: 4,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/A7XYlTntTks",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1219,6 +1257,7 @@ const products = [
   countInStock: 4,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/WXpP_QCFBhA",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {
@@ -1249,6 +1288,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/vuoxprrEwbg",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1273,6 +1313,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/aMO7tMkOXnk",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1297,6 +1338,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/xOoG1iOdqMo",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1321,6 +1363,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/uQrG0BOngXs",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1345,6 +1388,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/yNlLhqM7Km8",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1369,6 +1413,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/1tpU8cpgY1I",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1393,6 +1438,7 @@ const products = [
   countInStock: 10,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/ZUXPZSPLARw",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1417,6 +1463,7 @@ const products = [
   countInStock: 10,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/tNgiND7xb5Q",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1441,6 +1488,7 @@ const products = [
   countInStock: 8,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/gvS6dzdu86s",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1465,6 +1513,7 @@ const products = [
   countInStock: 8,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/t3denwA8nUI",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1489,6 +1538,7 @@ const products = [
   countInStock: 8,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/eibi59EUmBw",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1513,6 +1563,7 @@ const products = [
   countInStock: 8,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/dI_dkP828Xc",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: { exist: true },
@@ -1537,6 +1588,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/LembwKDo1Dk",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1561,6 +1613,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/WsXnJUP99jc",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1585,6 +1638,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/R_Ob-fupzKg",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1609,6 +1663,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/gHzuHo80U2M",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1633,6 +1688,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/aTS9n_m7TW0",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1657,6 +1713,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/ssrNcwxALS4",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1681,6 +1738,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/qMHUHxHZhaU",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1705,6 +1763,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/L20nioDjCxU",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1729,6 +1788,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/Ib5ygUYjHZI",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1753,6 +1813,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/2TMs2E6cms4",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1777,6 +1838,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/ft1IwZPeqro",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1801,6 +1863,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/f8o9bysnzoQ",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1825,6 +1888,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/cklw-Yu3moE",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1849,6 +1913,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/2reK8k8nwBc",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},
@@ -1873,6 +1938,7 @@ const products = [
   countInStock: 5,
   rating: 0,
   numReviews: 0,
+  youtube: "https://www.youtube.com/embed/4m73BSovpEc",
   details: {exist: true},
   tvsDetail: {exist: true },
   phoneDetail: {exist: true},

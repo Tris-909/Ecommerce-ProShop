@@ -28,6 +28,7 @@ import PhoneTable from '../components/ProductDetail/PhoneTable/PhoneTable';
 import HeadphoneTable from '../components/ProductDetail/HeadphoneTable/HeadphoneTable';
 import GameTable from '../components/ProductDetail/GameTable/GameTable';
 import AlsoLikeProduct from '../components/AlsoLike/AlsoLikeProduct';
+import Iframe from 'react-iframe'
 
 const YouMayAlsoLikeText = styled.div`
     font-size: 2.5rem;
@@ -124,6 +125,13 @@ const ProductScreen = ({ match }) => {
                                 numReviews={singleProduct.numReviews}
                             />
                         </Row>
+                        {
+                            singleProduct.youtube ? (
+                                <Row>
+                                    <iframe title={singleProduct.name} width="100%" height="500" src={singleProduct.youtube} frameBorder="0" allowFullScreen></iframe>
+                                </Row>
+                            ) : null
+                        }
                         {
                             singleProduct.details.proccessorCores ? (
                                 <LapTopTable singleLaptop={singleProduct} />
