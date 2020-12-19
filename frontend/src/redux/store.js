@@ -8,7 +8,8 @@ import {
     SingleProductReducer, 
     deleteProductAsAdmin,
     carouselProductReducer ,
-    setReviewsReducer
+    setReviewsReducer,
+    getListOfProductsBasedOnCategory
 } from './reducers/productReducers';
 import { 
     cartReducer, 
@@ -45,25 +46,19 @@ import {
     update_Product_Admin_Reducer 
 } from './reducers/adminReducers';
 import {
-    topLaptopReducer,
-    allLaptopsReducer,
-    getALaptopReducer
+    topLaptopReducer
 } from './reducers/laptopReducer';
 import {
-    getTopTVs,
-    getALLTVs
+    getTopTVs
 } from './reducers/tvReducers';
 import {
-    topPhonesReducer,
-    allPhonesReducer
+    topPhonesReducer
 } from './reducers/phoneReducers';
 import {
-    topHeadphoneReducer,
-    allHeadphonesReducer
+    topHeadphoneReducer
 } from './reducers/headphoneReducer';
 import {
-    topGameReducer,
-    allGamesReducer
+    topGameReducer
 } from './reducers/gameReducer';
 import {
     alsoLikeReducer
@@ -72,6 +67,7 @@ import {
 const reducer = combineReducers({
     productsList: productListReducer,
     singleProduct: SingleProductReducer,
+    listProducts: getListOfProductsBasedOnCategory,
     setOfReviews: setReviewsReducer,
     currentUserStatus: currentUserStatusReducer,
     deleteProduct: deleteProductAsAdmin,
@@ -96,16 +92,10 @@ const reducer = combineReducers({
     deleteReview: deleteReviewReducer,
     carouselProducts: carouselProductReducer,
     topLaptops: topLaptopReducer,
-    allLaptops: allLaptopsReducer,
-    singleLaptop: getALaptopReducer,
     topTVs: getTopTVs,
-    allTVs: getALLTVs,
     topPhones: topPhonesReducer,
-    allPhones: allPhonesReducer,
     topHeadphone: topHeadphoneReducer,
-    allHeadphone: allHeadphonesReducer,
     topGames: topGameReducer,
-    allGames: allGamesReducer,
     wishList: getWishListReducer,
     addItemToWishList: addItemToWishListReducer,
     removeItemFromWishList: removeItemFromWishListReducer,

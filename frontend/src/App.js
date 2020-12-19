@@ -17,13 +17,9 @@ import AdminUserInfoScreen from './screens/AdminUserInfoScreen';
 import ProductListAdminScreen from './screens/ProductListAdminScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import AdminOrdersScreen from './screens/AdminOrdersScreen';
-import LaptopScreen from './screens/LaptopScreen';
 import SearchScreen from './screens/SearchScreen';
-import TVScreen from './screens/TVScreen';
-import PhonesScreen from './screens/phonesScreen';
-import HeadphonesScreen from './screens/HeadphoneScreen';
-import GamesScreen from './screens/GamesScreen';
 import WishListScreen from './screens/WishListScreen';
+import ListScreen from './screens/ListScreen';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -46,11 +42,11 @@ function App() {
       <main className='py-3'>
         <MarginContainer>  
           <Route path="/product/:id" component={ProductScreen} />
-          <Route path="/laptops" component={LaptopScreen} exact />
-          <Route path="/tvs" component={TVScreen} exact />
-          <Route path="/phones" component={PhonesScreen} exact />
-          <Route path="/headphones" component={HeadphonesScreen} exact />
-          <Route path="/gaming" component={GamesScreen} exact />
+          <Route path="/laptops" component={ListScreen} exact />
+          <Route path="/tvs" component={ListScreen} exact />
+          <Route path="/phones" component={ListScreen} exact />
+          <Route path="/headphone" component={ListScreen} exact />
+          <Route path="/game" component={ListScreen} exact />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/login" component={LoginScreen} exact /> 
           <Route path="/register" component={RegisterScreen} exact />

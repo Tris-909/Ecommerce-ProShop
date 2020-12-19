@@ -28,7 +28,6 @@ import PhoneTable from '../components/ProductDetail/PhoneTable/PhoneTable';
 import HeadphoneTable from '../components/ProductDetail/HeadphoneTable/HeadphoneTable';
 import GameTable from '../components/ProductDetail/GameTable/GameTable';
 import AlsoLikeProduct from '../components/AlsoLike/AlsoLikeProduct';
-import Iframe from 'react-iframe'
 
 const YouMayAlsoLikeText = styled.div`
     font-size: 2.5rem;
@@ -41,19 +40,6 @@ const YouMayAlsoLikeText = styled.div`
     @media (max-width: 480px) {
         font-size: 1.5rem;
     }
-`;
-
-const AlsoLikeCard = styled.div`
-    border: 0.5px solid grey;
-    border-radius: 1%;
-    padding: 10px;
-    height: 100%;
-`;
-
-const AlsoLikeName = styled.div`
-    font-size: 1rem;
-    font-weight: 700px;
-
 `;
 
 const ProductScreen = ({ match }) => {

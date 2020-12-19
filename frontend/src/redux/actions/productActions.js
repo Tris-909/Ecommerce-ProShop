@@ -13,7 +13,11 @@ import {
 
     GET_SET_REVIEWS_PENDING,
     GET_SET_REVIEWS_SUCCESS,
-    GET_SET_REVIEWS_FAIL
+    GET_SET_REVIEWS_FAIL,
+
+    GET_LIST_PRODUCTS_PENDING,
+    GET_LIST_PRODUCTS_SUCCESS,
+    GET_LIST_PRODUCTS_FAIL
 } from './actionTypes';
 import axios from 'axios';
 
@@ -89,5 +93,25 @@ export const getSetOfReviewsOfCurrentProductBasedOnPageNumber = (productId, page
             type: GET_SET_REVIEWS_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : null
         });
+    }
+}
+
+export const getListOfProductsBasedOnCategory = (category, page) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: GET_LIST_PRODUCTS_PENDING
+        });
+
+        const { data } = await axios.get(`/api/products/list/${category}?page=${page}`);
+
+        dispatch({
+            type: GET_LIST_PRODUCTS_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: GET_LIST_PRODUCTS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : null
+        })
     }
 }

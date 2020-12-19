@@ -72,13 +72,13 @@ const SubNavbar = () => {
                     Phones
                 </NavItem>
             </SubLink>
-            <SubLink to="/headphones">
+            <SubLink to="/headphone">
                 <NavItem>
                     <i className="fas fa-headphones" style={{ marginRight: '0.5rem' }}></i>
                     HeadPhones
                 </NavItem>
             </SubLink>
-            <SubLink to="/gaming">
+            <SubLink to="/game">
                 <NavItem style={{borderRight: 'none'}}>
                     <i className="fas fa-gamepad" style={{ marginRight: '0.5rem' }}></i>
                     Gaming

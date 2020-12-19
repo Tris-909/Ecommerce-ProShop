@@ -71,7 +71,7 @@ router.route('/getreviews/HtLDA/:id').get(getReviewsFilteredHighToLowDisAgree);
 router.route('/getreviews/LtHDA/:id').get(getReviewsFilteredLowToHighDisAgree);
 
 router.route('/deletereview/:productid/:reviewid').delete(protect, deleteReviewProduct);
-router.route('/:category').get(getListOfProducts);
+router.route('/list/:category').get(getListOfProducts);
 router.route('/:id')
 .get(getProductById)
 .delete(protect, admin, deleteProductByIdAsAdmin)

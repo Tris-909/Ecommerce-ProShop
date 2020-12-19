@@ -93,13 +93,13 @@ const Header = ({ history }) => {
                                 <LinkContainer to="/tvs">
                                     <NavDropdown.Item>TVs</NavDropdown.Item>
                                 </LinkContainer>
-                                <LinkContainer to="/phones">
+                                <LinkContainer to="/phone">
                                     <NavDropdown.Item>Phones</NavDropdown.Item>
                                 </LinkContainer>
-                                <LinkContainer to="/headphones">
+                                <LinkContainer to="/headphone">
                                     <NavDropdown.Item>Headphones</NavDropdown.Item>
                                 </LinkContainer>                                
-                                <LinkContainer to="/gaming">
+                                <LinkContainer to="/game">
                                     <NavDropdown.Item>Gaming</NavDropdown.Item>
                                 </LinkContainer>
                         </NavDropdown>
