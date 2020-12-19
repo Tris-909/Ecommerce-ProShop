@@ -45,6 +45,8 @@ export const topLaptopReducer = (state = topLaptopInitialState, action) => {
 
 const allLaptopsInitialState = {
     laptops: [],
+    page: null,
+    pages: null,
     loading: false,
     error: null
 }
@@ -60,7 +62,9 @@ export const allLaptopsReducer = (state = allLaptopsInitialState, action) => {
             return {
                 ...state,
                 loading: false,
-                laptops: action.payload
+                laptops: [...action.payload.laptops],
+                page: action.payload.page,
+                pages: action.payload.pages
             }
         case GET_ALL_LAPTOPS_FAIL:
             return {

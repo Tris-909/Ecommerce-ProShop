@@ -32,13 +32,13 @@ export const getTopTiersLaptop = () => async(dispatch) => {
     }
 }
 
-export const getAllLaptops = () => async(dispatch) => {
+export const getAllLaptops = (page) => async(dispatch) => {
     try {
         dispatch({
             type: GET_ALL_LAPTOPS_REQUEST
         });
 
-        const { data } = await axios.get('/api/products/laptops');
+        const { data } = await axios.get(`/api/products/laptops?page=${page}`);
 
         dispatch({
             type: GET_ALL_LAPTOPS_SUCCESS,

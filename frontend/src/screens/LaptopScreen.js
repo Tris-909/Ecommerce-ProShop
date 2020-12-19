@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Pagination } from 'react-bootstrap';
 import Product from '../components/Product';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../components/Loading';
@@ -9,13 +9,18 @@ import {getAllLaptops} from '../redux/actions/laptopActions';
 
 const LaptopScreen = () => {
     const dispatch = useDispatch();
-    const { laptops, loading, error } = useSelector(state => state.allLaptops);
+    const { laptops, page, pages, loading, error } = useSelector(state => state.allLaptops);
     
     useEffect(() => {
         if (laptops.length === 0) {
-            dispatch(getAllLaptops());
+            dispatch(getAllLaptops(0));
         }
     }, [dispatch, laptops]);
+
+    const getNextSetOfReviews = (e, nextpage) => {
+        e.preventDefault();
+        dispatch(getAllLaptops(nextpage-1));
+    }
 
     return(
         <>
@@ -28,6 +33,17 @@ const LaptopScreen = () => {
                         </Col>
                     );
                 })}
+                {
+                pages === 1 ? null : (
+                    <Pagination>
+                        { 
+                            Array.from(Array(pages), (e , i) => {
+                                return(<Pagination.Item key={i} onClick={(e) => getNextSetOfReviews(e, i+1)}>{i+1}</Pagination.Item>)
+                            })
+                        }
+                    </Pagination>
+                )
+                }
             </Row>
         </>
     );

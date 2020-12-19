@@ -447,13 +447,26 @@ const getTopRatedProducts = AsyncHandler(async(req, res) => {
 });
 
 //?   Fetch All Laptops from databases
-//?   GET /api/products/laptops
+//?   GET /api/products/laptops?page=1;
 //?   Public Route
 const getAllLaptops = AsyncHandler(async(req, res) => {
+    const pageSize = 6;
+    const currentPage = req.query.page || 0;
+    
+    const numberOfLaptops = await Product.count({ category: 'laptops' });
     const laptops = await Product.find({
         category: 'laptops'
-    });
-    res.json(laptops);
+    }).select({
+        "rating": 1,
+        "numReviews": 1,
+        "price": 1,
+        "countInStock": 1,
+        "_id": 1,
+        "name": 1,
+        "image": 1,
+    }).skip(currentPage*pageSize).limit(pageSize);
+    
+    res.json({laptops, page: currentPage, pages: Math.ceil(numberOfLaptops/pageSize)});
 });
 
 //? Fetch 3 most expensive laptops from databases to render to HomeScreen
