@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Pagination } from 'react-bootstrap';
 import Product from '../components/Product';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTVs } from '../redux/actions/tvActions';
@@ -9,13 +9,18 @@ import Helmet from '../components/Helmet';
 
 const TVScreen = () => {
     const dispatch = useDispatch();
-    const { tvs, loading, error } = useSelector(state => state.allTVs);
+    const { tvs, pages, page, loading, error } = useSelector(state => state.allTVs);
     
     useEffect(() => {
         if (tvs.length === 0) {
-            dispatch(getAllTVs());
+            dispatch(getAllTVs(0));
         }
     }, [dispatch, tvs]);
+
+    const getNextSetOfReviews = (e, nextpage) => {
+        e.preventDefault();
+        dispatch(getAllTVs(nextpage-1));
+    }
 
     return (
     <>
@@ -28,6 +33,17 @@ const TVScreen = () => {
                     </Col>
                 );
             })}
+            {
+                pages === 1 ? null : (
+                    <Pagination>
+                        { 
+                            Array.from(Array(pages), (e , i) => {
+                                return(<Pagination.Item key={i} onClick={(e) => getNextSetOfReviews(e, i+1)}>{i+1}</Pagination.Item>)
+                            })
+                        }
+                    </Pagination>
+                )
+            }
         </Row>
     </>
     )

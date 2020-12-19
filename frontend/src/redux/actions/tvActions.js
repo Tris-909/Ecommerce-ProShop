@@ -29,13 +29,13 @@ export const getTopTVs = () => async(dispatch) => {
     }
 }
 
-export const getAllTVs = () => async(dispatch) => {
+export const getAllTVs = (nextPage) => async(dispatch) => {
     try {
         dispatch({
             type: GET_ALL_TVS_REQUEST
         });
 
-        const { data } = await axios.get('/api/products/tvs');
+        const { data } = await axios.get(`/api/products/tvs?page=${nextPage}`);
 
         dispatch({
             type: GET_ALL_TVS_SUCCESS,

@@ -55,7 +55,9 @@ export const getALLTVs = (state = all_TVs_Initial_State, action) => {
             return {
                 ...state,
                 loading: false,
-                tvs: [...action.payload]
+                tvs: [...action.payload.AllTVs],
+                page: action.payload.page,
+                pages: action.payload.pages
             }
         case GET_ALL_TVS_FAIL:
             return {

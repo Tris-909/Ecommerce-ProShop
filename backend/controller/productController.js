@@ -37,6 +37,33 @@ const getProductById = AsyncHandler(async (req, res) => {
     }
 })
 
+//? Get a list of product based on it category combined with pagination system
+//? /api/products/:category?page=0
+//? Public Route
+const getListOfProducts = AsyncHandler(async (req, res) => {
+    const pageSize = 6;
+    const currentPage = Number(req.query.page) || 0;
+    const totalProductsOfThatCategory = await Product.count({ category: req.params.category });
+
+    const productList = await Product.find({ category: req.params.category }).select({
+        "rating": 1,
+        "numReviews": 1,
+        "price": 1,
+        "countInStock": 1,
+        "_id": 1,
+        "name": 1,
+        "image": 1,
+    }).skip(pageSize * currentPage).limit(pageSize);
+
+    if (productList) {
+        res.status(200).send({ listItems: productList, page: pageSize, pages: Math.ceil(totalProductsOfThatCategory/pageSize)});
+    } else {
+        res.status(404);
+        throw new Error("Can't find the list of product");
+    }
+
+});
+
 //? GET some reviews out of a product based on the product ID
 //? /api/products/getreviews/:id?pageReviewNumber=1
 //? Public Route
@@ -482,11 +509,23 @@ const getTopTierLaptops = AsyncHandler(async (req, res) => {
 //? GET /api/products/tvs
 //? Public Route
 const getAllTVs = AsyncHandler(async(req, res) => {
+    const pageSize = 6;
+    const currentPage = Number(req.query.page) || 0;
+
+    const numOfTVs = await Product.count({ category: "tvs" });
     const AllTVs = await Product.find({
         category: 'tvs'
-    });
+    }).select({
+        "rating": 1,
+        "numReviews": 1,
+        "price": 1,
+        "countInStock": 1,
+        "_id": 1,
+        "name": 1,
+        "image": 1,
+    }).skip(pageSize*currentPage).limit(pageSize);
 
-    res.status(200).json(AllTVs);
+    res.status(200).json({AllTVs, page: currentPage, pages: Math.ceil(numOfTVs/ pageSize)});
 });
 
 //? GET Top 3 Most Expensive TVs from databases 
@@ -709,6 +748,7 @@ const getGamesRecommendation = AsyncHandler(async (req, res) => {
 
 export {
     getProducts,
+    getListOfProducts,
     getProductById,
     getSomeReviews,
     getSomeReviewsFilteredHighToLowRating,
