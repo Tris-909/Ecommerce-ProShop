@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Form, Button, Row, Col} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../components/Loading';
+import LoadingScreen from '../components/LoadingScreen';
 import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import { loginUser } from '../redux/actions/userActions';
@@ -31,8 +32,9 @@ const LoginScreen = ({ location, history }) => {
             <Helmet title="Log In | ProShop" href="/login" />
             <h1>Sign In</h1>
             { error ? <Message variant="danger" content={error} /> : null }
-            { loading ? <Loading /> : null }
-            <Form onSubmit={submitHandler}>
+            { loading ? <LoadingScreen /> : (
+                <>
+                <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>
                     <Form.Label>Email :</Form.Label>
                     <Form.Control 
@@ -52,13 +54,15 @@ const LoginScreen = ({ location, history }) => {
                 </Form.Group>
                  
                  <Button type="submit" variant='primary'>Sign In</Button>
-            </Form>
+                </Form>
 
-            <Row className="py-3">
-                <Col>
-                    Don't have an account ? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Click Here !</Link>
-                </Col>
-            </Row>
+                <Row className="py-3">
+                    <Col>
+                        Don't have an account ? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Click Here !</Link>
+                    </Col>
+                </Row>
+                </>
+            ) }
         </FormContainer>    
     )
 }

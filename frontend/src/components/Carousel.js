@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getCarouselProducts } from '../redux/actions/productActions'
 import Loading from '../components/Loading';
 import Message from '../components/Message';
+import LoadingScreen from './LoadingScreen';
 
 const CarouselSection = ({ carouselProducts, loading, error }) => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const CarouselSection = ({ carouselProducts, loading, error }) => {
         }
     }, [dispatch, carouselProducts]);
 
-    return loading ? <Loading /> : error ? <Message variant="danger" content={error} /> : (
+    return loading ? <LoadingScreen /> : error ? <Message variant="danger" content={error} /> : (
         <Carousel 
             pause='hover' 
             style={{ marginBottom: '2rem', backgroundColor: 'yellow'}}

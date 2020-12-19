@@ -20,8 +20,9 @@ import ProductImage from '../components/ProductDetail/ProductImage';
 import ProductInfo from '../components/ProductDetail/ProductInfo';
 import ProductCard from '../components/ProductDetail/ProductCard';
 import ReviewSection from '../components/ReviewSection/ReviewSection';
-import Loading from '../components/Loading';
+import LoadingScreen from '../components/LoadingScreen';
 import Helmet from '../components/Helmet';
+import Loading from '../components/Loading';
 import LapTopTable from '../components/ProductDetail/LaptopTable/LapTopTable';
 import TVTable from '../components/ProductDetail/TvTable/TVTable';
 import PhoneTable from '../components/ProductDetail/PhoneTable/PhoneTable';
@@ -154,7 +155,7 @@ const ProductScreen = ({ match }) => {
                         <Row style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                             <YouMayAlsoLikeText>You May Also Like</YouMayAlsoLikeText>
                             <Row>
-                              {alsoLikeItems.length !== 0 ? alsoLikeItems.map((item) => {
+                             { alsoLikeLoading ? <Loading /> : alsoLikeItems.length !== 0 ? alsoLikeItems.map((item) => {
                                 const product = {
                                     itemId: item._id,
                                     productName: item.name,
@@ -174,7 +175,7 @@ const ProductScreen = ({ match }) => {
                     </>
                 );
             } else {
-                return( <Loading /> );                
+                return( <LoadingScreen /> );                
             }
         }
     }

@@ -6,6 +6,7 @@ import Loading from '../components/Loading';
 import Message from '../components/Message';
 import Helmet from '../components/Helmet';
 import {getListOfProductsBasedOnCategory} from '../redux/actions/productActions';
+import LoadingScreen from '../components/LoadingScreen';
 
 const ListScreen = () => {
     const dispatch = useDispatch();
@@ -33,14 +34,14 @@ const ListScreen = () => {
         <>
             {category ? <Helmet title={`${category.toUpperCase()} | ProShop`} /> : null}
             <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
-                {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please reload the webpage" /> : productsList.map((item) => {
+                {loading ? <LoadingScreen /> : error ? <Message variant="danger" content="Something is wrong, please reload the webpage" /> : productsList.map((item) => {
                     return(
                         <Col sm={12} md={6} lg={6} xl={4} key={item._id}>
                             <Product product={item} link={`/product`}/>
                         </Col>
                     );
                 })}
-                {
+                { !loading ? 
                 pages === 1 ? null : (
                     <Pagination>
                         { 
@@ -49,7 +50,7 @@ const ListScreen = () => {
                             })
                         }
                     </Pagination>
-                )
+                ) : null
                 }
             </Row>
         </>
