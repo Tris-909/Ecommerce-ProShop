@@ -43,6 +43,8 @@ const getProductById = AsyncHandler(async (req, res) => {
 const getListOfProducts = AsyncHandler(async (req, res) => {
     const pageSize = 6;
     const currentPage = Number(req.query.page) || 0;
+    const lowPrice = Number(req.query.lowPrice) || 0;
+    const highPrice = Number(req.query.highPrice) || 7600;
 
     const totalProductsOfThatCategory = await Product.countDocuments({ category: req.params.category });
     const listOfBrands = await Product.find({ category: req.params.category }).select({
@@ -56,9 +58,11 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         }
     }
 
-    
-
-    const productList = await Product.find({ category: req.params.category }).select({
+    const productList = await Product.find({ 
+        category: req.params.category,
+        price: { $gt: lowPrice, $lt: highPrice }
+        })
+        .select({
         "rating": 1,
         "numReviews": 1,
         "price": 1,

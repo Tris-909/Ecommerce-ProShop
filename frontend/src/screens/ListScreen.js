@@ -75,6 +75,8 @@ const CurrentPageName = styled.div`
 const ListScreen = () => {
     const dispatch = useDispatch();
     const [category, setCategory] = useState(null);
+    const [lowPrice, setLowPrice] = useState("");
+    const [highPrice, setHighPrice] = useState("");
     const { productsList, brands, pages, loading, error } = useSelector(state => state.listProducts);
     
     useEffect(() => {
@@ -91,7 +93,12 @@ const ListScreen = () => {
 
     const getNextSetOfReviews = (e, nextpage) => {
         e.preventDefault();
-        dispatch(getListOfProductsBasedOnCategory(category, nextpage-1));
+        dispatch(getListOfProductsBasedOnCategory(category, nextpage-1, lowPrice, highPrice));
+    }
+
+    const onFilterPriceHandler = (e) => {
+        e.preventDefault();
+        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice));
     }
 
     return(
@@ -107,7 +114,10 @@ const ListScreen = () => {
                                 Price
                             </FilterPriceName>
                             <FilterPriceInbox>
-                                <InputFilter /> to <InputFilter /> <PriceGoButton> Go </PriceGoButton>
+                                <InputFilter placeholder="0" value={lowPrice} onChange={(e) => setLowPrice(e.target.value)}/> 
+                                to 
+                                <InputFilter placeholder="7600" value={highPrice} onChange={(e) => setHighPrice(e.target.value)} /> 
+                                <PriceGoButton onClick={(e) => onFilterPriceHandler(e)}> Go </PriceGoButton>
                             </FilterPriceInbox>
                         </FilterPriceCard>
                         <FilterPriceCard>
@@ -137,6 +147,8 @@ const ListScreen = () => {
                             </Col>
                         );
                     })}
+                </Row>
+                <Row style={{display: 'flex', justifyContent: 'center'}}>
                     { !loading ? 
                     pages === 1 ? null : (
                         <Pagination>

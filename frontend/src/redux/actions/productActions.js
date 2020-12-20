@@ -96,13 +96,13 @@ export const getSetOfReviewsOfCurrentProductBasedOnPageNumber = (productId, page
     }
 }
 
-export const getListOfProductsBasedOnCategory = (category, page) => async(dispatch, getState) => {
+export const getListOfProductsBasedOnCategory = (category, page, lowPrice, highPrice) => async(dispatch, getState) => {
     try {
         dispatch({
             type: GET_LIST_PRODUCTS_PENDING
         });
 
-        const { data } = await axios.get(`/api/products/list/${category}?page=${page}`);
+        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}`);
 
         dispatch({
             type: GET_LIST_PRODUCTS_SUCCESS,
