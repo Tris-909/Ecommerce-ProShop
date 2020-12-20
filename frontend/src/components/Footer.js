@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const FooterContainer = styled.div`
