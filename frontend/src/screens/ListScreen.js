@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Row, Col, Pagination } from 'react-bootstrap';
+import { Row, Col, Pagination, Form } from 'react-bootstrap';
 import Product from '../components/Product';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../components/Loading';
@@ -75,7 +75,7 @@ const CurrentPageName = styled.div`
 const ListScreen = () => {
     const dispatch = useDispatch();
     const [category, setCategory] = useState(null);
-    const { productsList, page, pages, loading, error } = useSelector(state => state.listProducts);
+    const { productsList, brands, pages, loading, error } = useSelector(state => state.listProducts);
     
     useEffect(() => {
         async function setCat(){
@@ -115,7 +115,15 @@ const ListScreen = () => {
                                 Brand
                             </FilterPriceName>
                             <FilterPriceInbox>
-                               
+                               <Form>
+                                   {
+                                       brands ? brands.map((brand) => (
+                                            <div key={brand}>
+                                                <Form.Check type="checkbox" id={brand} label={`${brand}`} />
+                                            </div>
+                                       )) : null
+                                   }
+                               </Form>
                             </FilterPriceInbox>
                         </FilterPriceCard>
                     </FilterCard>

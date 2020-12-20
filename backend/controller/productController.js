@@ -43,7 +43,20 @@ const getProductById = AsyncHandler(async (req, res) => {
 const getListOfProducts = AsyncHandler(async (req, res) => {
     const pageSize = 6;
     const currentPage = Number(req.query.page) || 0;
-    const totalProductsOfThatCategory = await Product.count({ category: req.params.category });
+
+    const totalProductsOfThatCategory = await Product.countDocuments({ category: req.params.category });
+    const listOfBrands = await Product.find({ category: req.params.category }).select({
+        "brand": 1
+    });
+    const ArrayOfBrands = [];
+
+    for (let i = 0; i < listOfBrands.length; i++) {
+        if (!ArrayOfBrands.includes(listOfBrands[i].brand)) {
+            ArrayOfBrands.push(listOfBrands[i].brand);
+        }
+    }
+
+    
 
     const productList = await Product.find({ category: req.params.category }).select({
         "rating": 1,
@@ -56,7 +69,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
     }).skip(pageSize * currentPage).limit(pageSize);
 
     if (productList) {
-        res.status(200).send({ listItems: productList, page: pageSize, pages: Math.ceil(totalProductsOfThatCategory/pageSize)});
+        res.status(200).send({ listItems: productList, brands: ArrayOfBrands ,page: pageSize, pages: Math.ceil(totalProductsOfThatCategory/pageSize)});
     } else {
         res.status(404);
         throw new Error("Can't find the list of product");
@@ -745,6 +758,8 @@ const getGamesRecommendation = AsyncHandler(async (req, res) => {
         throw new Error("Can't fetch recommended Games !");
     }
 });
+
+
 
 export {
     getProducts,
