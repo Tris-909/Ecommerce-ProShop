@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { Row, Col, Pagination, Form } from 'react-bootstrap';
 import Product from '../components/Product';
 import { useDispatch, useSelector } from 'react-redux';
-import Loading from '../components/Loading';
 import Message from '../components/Message';
 import Helmet from '../components/Helmet';
 import {getListOfProductsBasedOnCategory} from '../redux/actions/productActions';
@@ -75,9 +74,10 @@ const CurrentPageName = styled.div`
 const ListScreen = () => {
     const dispatch = useDispatch();
     const [category, setCategory] = useState(null);
-    const [lowPrice, setLowPrice] = useState("");
-    const [highPrice, setHighPrice] = useState("");
-    const { productsList, brands, pages, loading, error } = useSelector(state => state.listProducts);
+    const [lowPrice, setLowPrice] = useState(0);
+    const [highPrice, setHighPrice] = useState(7600);
+    const [filteredBrands, setFilteredBrands] = useState([]);
+    const { productsList, brands, currentPickedBrands, pages, loading, error } = useSelector(state => state.listProducts);
     
     useEffect(() => {
         async function setCat(){
@@ -88,17 +88,51 @@ const ListScreen = () => {
     }, []);
 
     useEffect(() => {
-        dispatch(getListOfProductsBasedOnCategory( category, 0)); 
-    }, [dispatch, category]);
+        dispatch(getListOfProductsBasedOnCategory( category, 0, lowPrice, highPrice, filteredBrands)); 
+    }, [dispatch, category, lowPrice, highPrice]);
+
+    useEffect(() => {
+        const brandsCheckedArray = [];
+
+        for (let i = 0; i < brands.length; i++) {
+            brandsCheckedArray.push({
+                id: i,
+                value: brands[i],
+                isChecked: false
+            });
+        }
+
+        
+        for ( let i = 0; i < brandsCheckedArray.length; i++) {
+            for (let u = 0; u < currentPickedBrands.length; u++) {
+                if (brandsCheckedArray[i].value == currentPickedBrands[u]) {
+                    brandsCheckedArray[i].isChecked = true;
+                }
+            }
+        }
+        console.log(brandsCheckedArray);
+        setFilteredBrands(brandsCheckedArray);
+    }, [brands, currentPickedBrands]);
 
     const getNextSetOfReviews = (e, nextpage) => {
         e.preventDefault();
-        dispatch(getListOfProductsBasedOnCategory(category, nextpage-1, lowPrice, highPrice));
+        dispatch(getListOfProductsBasedOnCategory(category, nextpage-1, lowPrice, highPrice, filteredBrands));
     }
 
     const onFilterPriceHandler = (e) => {
         e.preventDefault();
-        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice));
+        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands));
+    }
+
+    const filterByBrandHandler = (e) => {
+        let currentBrands = filteredBrands;
+        currentBrands.forEach((brand) => {
+            if (brand.value === e.target.value) {
+                brand.isChecked = e.target.checked;
+            }
+        });
+        setFilteredBrands([...currentBrands]);
+        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands));
     }
 
     return(
@@ -127,11 +161,19 @@ const ListScreen = () => {
                             <FilterPriceInbox>
                                <Form>
                                    {
-                                       brands ? brands.map((brand) => (
-                                            <div key={brand}>
-                                                <Form.Check type="checkbox" id={brand} label={`${brand}`} />
+                                       filteredBrands ? filteredBrands.map((brand) => {
+                                            return(
+                                            <div key={brand.id}>
+                                                <Form.Check 
+                                                    type="checkbox" 
+                                                    id={brand.id} 
+                                                    label={`${brand.value}`}
+                                                    checked={brand.isChecked ? "checked" : null}
+                                                    value={brand.value}
+                                                    onChange={(e) => filterByBrandHandler(e)} 
+                                                    />
                                             </div>
-                                       )) : null
+                                       )}) : null
                                    }
                                </Form>
                             </FilterPriceInbox>

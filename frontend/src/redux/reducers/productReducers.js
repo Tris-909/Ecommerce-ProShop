@@ -498,6 +498,7 @@ export const setReviewsReducer = (state = setReviewsInitialState, action) => {
 const productListBasedOnCategory = {
     productsList: [],
     brands: [],
+    currentPickedBrands: [],
     page: null,
     pages: null,
     loading: false,
@@ -517,6 +518,7 @@ export const getListOfProductsBasedOnCategory = (state = productListBasedOnCateg
                 loading: false,
                 productsList: [...action.payload.listItems],
                 brands: [...action.payload.brands],
+                currentPickedBrands: [...action.payload.currentPickedBrands],
                 page: action.payload.page,
                 pages: action.payload.pages
             }

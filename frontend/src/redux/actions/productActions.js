@@ -96,13 +96,26 @@ export const getSetOfReviewsOfCurrentProductBasedOnPageNumber = (productId, page
     }
 }
 
-export const getListOfProductsBasedOnCategory = (category, page, lowPrice, highPrice) => async(dispatch, getState) => {
+export const getListOfProductsBasedOnCategory = (category, page, lowPrice, highPrice, filteredBrands) => async(dispatch, getState) => {
     try {
         dispatch({
             type: GET_LIST_PRODUCTS_PENDING
         });
 
-        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}`);
+        let BrandsArray = [];
+        for (let i = 0; i < filteredBrands.length ; i++) {
+            if (filteredBrands[i].isChecked) {
+                BrandsArray.push(filteredBrands[i].value);
+            }
+        }
+        console.log(BrandsArray);
+
+        let brandArrayQuery = `&brands=`;
+        for (let i = 0; i < BrandsArray.length; i++) {
+            brandArrayQuery += `${BrandsArray[i]},`;
+        }
+
+        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}`);
 
         dispatch({
             type: GET_LIST_PRODUCTS_SUCCESS,
