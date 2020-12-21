@@ -30,7 +30,8 @@ const initialState = {
         postalCode: '',
         country: ''
     },
-    paymentMethod: ''
+    paymentMethod: '',
+    error: null
 }
 
 export const cartReducer = (state = initialState, action) => {

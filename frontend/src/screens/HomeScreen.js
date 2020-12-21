@@ -26,7 +26,7 @@ const HomeScreen = () => {
     const { topHeadphone, loading: topHeadphoneLoading } = useSelector(state => state.topHeadphone);
     const { topGames, loading: topGamesLoading } = useSelector(state => state.topGames);
     const { wishList } = useSelector(state => state.wishList);
-    const { cartItems } = useSelector(state => state.cart);
+    const { cartItems, addItemSuccess } = useSelector(state => state.cart);
     const { success: addItemToWishListSuccess} = useSelector(state => state.addItemToWishList);
     const { success: removeItemFromWishListSuccess} = useSelector(state => state.removeItemFromWishList);
 
@@ -78,6 +78,10 @@ const HomeScreen = () => {
             dispatch(getWishList());
         } 
     }, [dispatch, addItemToWishListSuccess, removeItemFromWishListSuccess]);
+
+    useEffect(() => {
+        dispatch(getAllItemsCart());
+    }, [addItemSuccess])
 
     const checkIfErrorExisted = () => {
         if (topLaptopError) {

@@ -64,20 +64,27 @@ const Product = (props) => {
     const { success: addItemToWishListSuccess } = useSelector(state => state.addItemToWishList);
 
     useEffect(() => {
+        //TODO: Compare ID to show Heart Icon
         wishList.map((item) => {
             if (item.itemId === product._id) {
                 setIsLoved(true);
                 setWishListID(item._id);
             }
-        })
+        });
+
+        //TODO: Switch addItemSuccess to false to not going to cart page
+        dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
     }, [wishList, product]);
 
-    const onAddItemToCartHandler = (e, id, productName, productImage, productPrice, countInStock) => {
+    const onAddItemToCartHandler = async (e, id, productName, productImage, productPrice, countInStock) => {
         e.preventDefault();
 
         if (user) {
             dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
-            dispatch(addItemToCart(id, productName, productImage, productPrice, countInStock, 1));
+            await dispatch(addItemToCart(id, productName, productImage, productPrice, countInStock, 1));
+        
+            props.history.push('/cart')
+
         } else {
             props.history.push('/login')
         }
@@ -131,7 +138,9 @@ const Product = (props) => {
                     <CardMoneyText>
                         $ {product.price}
                     </CardMoneyText>
-
+                    {
+                        
+                    }
                     <ButtonContainer>
                         <i className="fas fa-cart-plus" 
                             style={{ fontSize: '1.5rem', marginRight: '1.5rem', cursor: 'pointer' }}
