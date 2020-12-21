@@ -72,10 +72,6 @@ const Product = (props) => {
         })
     }, [wishList, product]);
 
-    useEffect(() => {
-        dispatch(getAllItemsCart());
-    }, [dispatch, addItemSuccess]);
-
     const onAddItemToCartHandler = (e, id, productName, productImage, productPrice, countInStock) => {
         e.preventDefault();
 
@@ -130,17 +126,7 @@ const Product = (props) => {
                         text={`${product.numReviews} reviews`}
                     />
                 </Card.Text>
-                {
-                    addItemSuccess ? cartItems.map((item) => {
-                        if (item.itemId == product._id) {
-                            return(
-                            <div style={{marginTop: '1rem'}}>
-                                <Message variant="success" content="Add Item To Cart Successfully" addToCart={true} /> 
-                            </div>
-                            );
-                        }
-                    }) : null
-                }
+
                 <FootProductContainer>
                     <CardMoneyText>
                         $ {product.price}

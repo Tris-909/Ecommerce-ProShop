@@ -141,7 +141,7 @@ const HomeScreen = () => {
                                 itemArray={topHeadphone}
                                 title="Great Headphones for You"
                                 itemLink="/product"
-                                listItemLink="/headphones"
+                                listItemLink="/headphone"
                             />
                         ) : null  
                     }
@@ -153,7 +153,7 @@ const HomeScreen = () => {
                                 itemArray={topGames}
                                 title="For Game Lovers"
                                 itemLink="/product"
-                                listItemLink="/gaming"
+                                listItemLink="/game"
                             />
                         ) : null  
                     }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Row, Col, ListGroup, Image, Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { REMOVE_PRODUCT_FROM_CART_RESET } from '../redux/actions/actionTypes';
 import { removeItemFromCart, getAllItemsCart } from '../redux/actions/cartActions';
 import Helmet from '../components/Helmet';
 import styled from 'styled-components';
@@ -105,14 +106,13 @@ const CartScreen = ({ match, location, history }) => {
     }, [dispatch, removeCartItemSuccess]);
 
     useEffect(() => {
-        if (user) {
-            history.push('/shipping');
-        } else {
+        if (!user) {
             history.push('/login');
-        }
+        } 
     }, []);
 
     const removeFromCartHandler = (id) => {
+        dispatch({ type: REMOVE_PRODUCT_FROM_CART_RESET });
         dispatch(removeItemFromCart(id));
     }
 
