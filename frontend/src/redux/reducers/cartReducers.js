@@ -72,6 +72,29 @@ export const cartReducer = (state = initialState, action) => {
                 ...state,
                 cartItems: []
             }
+        case GET_ALL_ITEMS_FROM_CART_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_ALL_ITEMS_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                cartItems: [...action.payload]
+            }
+        case GET_ALL_ITEMS_FROM_CART_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case GET_ALL_ITEMS_FROM_CART_RESET:
+            return {
+                cartItems: [],
+                loading: false,
+                error: null
+            }
         default:
             return state;
     }
@@ -109,42 +132,6 @@ export const removeItemFromCart = (state = initialRemoveItemCartState, action) =
                 error: null
             }
         default: 
-            return state;
-    }
-}
-
-const allItemsFromCart = {
-    cartItems: [],
-    loading: false,
-    error: null
-}
-
-export const cartItems = (state = allItemsFromCart, action) => {
-    switch(action.type) {
-        case GET_ALL_ITEMS_FROM_CART_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
-        case GET_ALL_ITEMS_FROM_CART_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                cartItems: [...action.payload]
-            }
-        case GET_ALL_ITEMS_FROM_CART_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case GET_ALL_ITEMS_FROM_CART_RESET:
-            return {
-                cartItems: [],
-                loading: false,
-                error: null
-            }
-        default:
             return state;
     }
 }

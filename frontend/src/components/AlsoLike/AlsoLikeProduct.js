@@ -17,7 +17,6 @@ import {
     REMOVE_ITEM_FROM_WISH_LIST_RESET
 } from '../../redux/actions/actionTypes';
 
-import Rating from '../Rating';
 import Message from '../Message';
 
 const Container = styled.div`
@@ -73,8 +72,7 @@ const AlsoLikeProduct = (props) => {
     const [wishListID, setWishListID] = useState(null);
 
     const dispatch = useDispatch();
-    const { addItemSuccess } = useSelector(state => state.cart);
-    const { cartItems } = useSelector(state => state.cartList);
+    const { cartItems, addItemSuccess } = useSelector(state => state.cart);
     const { user } = useSelector(state => state.user);
     const { wishList } = useSelector(state => state.wishList);
     const { success: addItemToWishListSuccess } = useSelector(state => state.addItemToWishList);

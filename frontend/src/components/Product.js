@@ -58,8 +58,7 @@ const Product = (props) => {
     const [wishListID, setWishListID] = useState(null);
 
     const dispatch = useDispatch();
-    const { addItemSuccess } = useSelector(state => state.cart);
-    const { cartItems } = useSelector(state => state.cartList);
+    const { cartItems, addItemSuccess } = useSelector(state => state.cart);
     const { user } = useSelector(state => state.user);
     const { wishList } = useSelector(state => state.wishList);
     const { success: addItemToWishListSuccess } = useSelector(state => state.addItemToWishList);

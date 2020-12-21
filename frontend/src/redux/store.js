@@ -14,7 +14,6 @@ import {
 import { 
     cartReducer, 
     removeItemFromCart, 
-    cartItems 
 } from './reducers/cartReducers';
 import {
     getWishListReducer,
@@ -73,7 +72,6 @@ const reducer = combineReducers({
     deleteProduct: deleteProductAsAdmin,
     cart: cartReducer,
     removeCart: removeItemFromCart,
-    cartList: cartItems,
     user: userReducer,
     userDetails: userDetailsReducer,
     orders: ordersReducer,

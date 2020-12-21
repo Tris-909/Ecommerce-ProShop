@@ -96,13 +96,21 @@ const CartEmptyText = styled.div`
 
 const CartScreen = ({ match, location, history }) => {
     const dispatch = useDispatch();
-    const { cartItems } = useSelector(state => state.cartList);
+    const { cartItems } = useSelector(state => state.cart);
     const { success: removeCartItemSuccess } = useSelector(state => state.removeCart);
     const { user } = useSelector(state => state.user);
 
     useEffect(() => {
         dispatch(getAllItemsCart());
     }, [dispatch, removeCartItemSuccess]);
+
+    useEffect(() => {
+        if (user) {
+            history.push('/shipping');
+        } else {
+            history.push('/login');
+        }
+    }, []);
 
     const removeFromCartHandler = (id) => {
         dispatch(removeItemFromCart(id));

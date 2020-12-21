@@ -10,7 +10,7 @@ import Helmet from '../components/Helmet';
 
 const PlaceOrderScreen = ({ history }) => {
     const dispatch = useDispatch();
-    const { shippingAddress, cartItems, paymentMethod } = useSelector(state => state.cart);
+    const { cartItems, shippingAddress, paymentMethod } = useSelector(state => state.cart);
     const { orders, success, error } = useSelector(state => state.orders);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const PlaceOrderScreen = ({ history }) => {
         return (Math.round(num*100)/100).toFixed(2);
     }
 
-    let itemsPrice = cartItems.reduce((acc, curItem) => acc + curItem.price * curItem.qty, 0);
+    let itemsPrice = cartItems.reduce((acc, curItem) => acc + curItem.productPrice * 1, 0);
     let shippingPrice = itemsPrice > 200 ? 0 : 10;
     let taxPrice = addDecimals(Number((itemsPrice/100)*5).toFixed(2));
     let totalPrice = Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice);
@@ -74,15 +74,15 @@ const PlaceOrderScreen = ({ history }) => {
                                     <ListGroup.Item key={index}>
                                         <Row>
                                             <Col md={1}>
-                                                <Image src={item.image} alt={item.name} fluid rounded />
+                                                <Image src={item.productImage} alt={item.productName} fluid rounded />
                                             </Col>
                                             <Col>
-                                                <Link to={`/product/${item.product}`}>
-                                                    {item.name}
+                                                <Link to={`/product/${item.itemId}`}>
+                                                    {item.productName}
                                                 </Link>
                                             </Col>
                                             <Col md={4}>
-                                                {item.qty} x ${item.price} = ${item.qty * item.price}
+                                                1 x ${item.productPrice} = ${1 * item.productPrice}
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>

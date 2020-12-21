@@ -110,15 +110,15 @@ const OrderScreen = ({ match }) => {
                             <ListGroup.Item key={index}>
                                 <Row>
                                     <Col md={1}>
-                                        <Image src={item.image} alt={item.name} fluid rounded />
+                                        <Image src={item.productImage} alt={item.productName} fluid rounded />
                                     </Col>
                                     <Col>
-                                        <Link to={`/product/${item.product}`}>
-                                            {item.name}
+                                        <Link to={`/product/${item.itemId}`}>
+                                            {item.productName}
                                         </Link>
                                     </Col>
                                     <Col md={4}>
-                                        {item.qty} x ${item.price} = ${item.qty * item.price}
+                                        {item.qty} x ${item.productPrice} = ${item.qty * item.productPrice}
                                     </Col>
                                 </Row>
                             </ListGroup.Item>
