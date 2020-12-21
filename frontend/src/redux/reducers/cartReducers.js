@@ -25,10 +25,10 @@ const initialState = {
     addItemSuccess: false,
     addItemError: null,
     shippingAddress: {
-        address: '',
-        city: '',
-        postalCode: '',
-        country: ''
+        address: 'No Info',
+        city: 'No Info',
+        postalCode: 'No Info',
+        country: 'No Info'
     },
     paymentMethod: '',
     error: null
