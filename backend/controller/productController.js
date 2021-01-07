@@ -568,7 +568,14 @@ const getAllLaptops = AsyncHandler(async(req, res) => {
 //? GET /api/products/laptops/toptier
 //? public routes
 const getTopTierLaptops = AsyncHandler(async (req, res) => {
-    const topLaptops = await Product.find({category: 'laptops'}).sort({price: -1}).limit(3);
+    const topLaptops = await Product.find({category: 'laptops'}).sort({price: -1}).select({
+        "_id": 1,
+        "image": 1,
+        "name": 1,
+        "rating": 1,
+        "numReviews": 1,
+        "price": 1
+    }).limit(3);
 
     res.send(topLaptops);
 });
