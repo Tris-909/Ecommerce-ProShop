@@ -18,12 +18,7 @@ import {
     updateProduct,
     createReview ,
     deleteReviewProduct,
-    getTopRatedProducts,
-    getLaptopsReccommendation,
-    getTVSRecommendation,
-    getPhonesRecommendation,
-    getHeadPhonesRecommendation,
-    getGamesRecommendation
+    getTopRatedProducts
 } from '../controller/productController.js';
 import { getTopProducts } from '../controller/HomeScreenController/topProducts.js';
 import { getAlsoLikeProductsBasedOnCategory } from '../controller/AProductScreenController/youMayAlsoLike.js';
@@ -33,11 +28,6 @@ import { admin } from '../middlewares/admin.js';
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/toptier').get(getTopProducts);
 router.route('/alsolike').get(getAlsoLikeProductsBasedOnCategory);
-router.route('/laptops/alsolike').get(getLaptopsReccommendation);
-router.route('/tvs/alsolike').get(getTVSRecommendation);
-router.route('/phones/alsolike').get(getPhonesRecommendation);
-router.route('/headphones/alsolike').get(getHeadPhonesRecommendation);
-router.route('/games/alsolike').get(getGamesRecommendation);
 router.route('/carousel').get(getTopRatedProducts);
 router.route('/reviews/agree').post(protect, stickAReviewAsAgree);
 router.route('/reviews/disagree').post(protect, stickAReviewAsDisAgree);
