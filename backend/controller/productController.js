@@ -37,7 +37,7 @@ const getProductById = AsyncHandler(async (req, res) => {
     }
 })
 
-//? Get a list of product based on it category combined with pagination system
+//? Get a list of product based on it category combined with pagination system and filter system
 //? /api/products/:category?page=0
 //? Public Route
 const getListOfProducts = AsyncHandler(async (req, res) => {
@@ -541,101 +541,6 @@ const getTopRatedProducts = AsyncHandler(async(req, res) => {
     res.json(products);
 });
 
-//?   Fetch All Laptops from databases
-//?   GET /api/products/laptops?page=1;
-//?   Public Route
-const getAllLaptops = AsyncHandler(async(req, res) => {
-    const pageSize = 6;
-    const currentPage = req.query.page || 0;
-    
-    const numberOfLaptops = await Product.count({ category: 'laptops' });
-    const laptops = await Product.find({
-        category: 'laptops'
-    }).select({
-        "rating": 1,
-        "numReviews": 1,
-        "price": 1,
-        "countInStock": 1,
-        "_id": 1,
-        "name": 1,
-        "image": 1,
-    }).skip(currentPage*pageSize).limit(pageSize);
-    
-    res.json({laptops, page: currentPage, pages: Math.ceil(numberOfLaptops/pageSize)});
-});
-
-
-//? GET All TVs from databases 
-//? GET /api/products/tvs
-//? Public Route
-const getAllTVs = AsyncHandler(async(req, res) => {
-    const pageSize = 6;
-    const currentPage = Number(req.query.page) || 0;
-
-    const numOfTVs = await Product.count({ category: "tvs" });
-    const AllTVs = await Product.find({
-        category: 'tvs'
-    }).select({
-        "rating": 1,
-        "numReviews": 1,
-        "price": 1,
-        "countInStock": 1,
-        "_id": 1,
-        "name": 1,
-        "image": 1,
-    }).skip(pageSize*currentPage).limit(pageSize);
-
-    res.status(200).json({AllTVs, page: currentPage, pages: Math.ceil(numOfTVs/ pageSize)});
-});
-
-
-
-//? GET All Phones from databases
-//? GET /api/products/phones
-//? Public Route
-const getAllPhones = AsyncHandler(async(req, res) => {
-    const allPhones = await Product.find({ category: 'phones' });
-
-    if (allPhones) {
-        res.status(200);
-        res.send(allPhones);
-    } else {
-        res.status(404);
-        throw new Error('Something is wrong, cant fetch phones from databases');
-    }
-});
-
-
-//? GET All Headphones
-//? /api/products/headphones
-//? public 
-const getAllHeadphones = AsyncHandler(async(req, res) => {
-    const allHeadphones = await Product.find({ category: 'headphone' });
-
-    if (allHeadphones) {
-        res.status(200);
-        res.send(allHeadphones);
-    } else {
-        res.status(404);
-        throw new Error("Can't fetch all headphones");
-    }
-});
-
-
-//? GET All Games
-//? /api/products/games
-//? public
-const getAllGames = AsyncHandler(async(req, res) => {
-    const allGames = await Product.find({ category: 'game' });
-
-    if (allGames) {
-        res.status(200).send(allGames);
-    } else {
-        res.status(404);
-        throw new Error('Something is wrong, cant fetch Games');
-    }
-});
-
 //? "YOU MAY ALSO LIKE" GET 6 cheapest laptops to serve on the carousel of you may also like function
 //? /api/products/laptops/alsolike
 //? public
@@ -772,11 +677,6 @@ export {
     createReview,
     deleteReviewProduct,
     getTopRatedProducts,
-    getAllLaptops,
-    getAllTVs,
-    getAllPhones,
-    getAllHeadphones,
-    getAllGames,
     getLaptopsReccommendation,
     getTVSRecommendation,
     getPhonesRecommendation,

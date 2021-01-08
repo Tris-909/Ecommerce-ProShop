@@ -19,11 +19,6 @@ import {
     createReview ,
     deleteReviewProduct,
     getTopRatedProducts,
-    getAllLaptops,
-    getAllTVs,
-    getAllPhones,
-    getAllHeadphones,
-    getAllGames,
     getLaptopsReccommendation,
     getTVSRecommendation,
     getPhonesRecommendation,
@@ -42,11 +37,6 @@ router.route('/phones/alsolike').get(getPhonesRecommendation);
 router.route('/headphones/alsolike').get(getHeadPhonesRecommendation);
 router.route('/games/alsolike').get(getGamesRecommendation);
 router.route('/carousel').get(getTopRatedProducts);
-router.route('/laptops').get(getAllLaptops);
-router.route('/tvs').get(getAllTVs);
-router.route('/phones').get(getAllPhones);
-router.route('/headphones').get(getAllHeadphones);
-router.route('/games').get(getAllGames);
 router.route('/reviews/agree').post(protect, stickAReviewAsAgree);
 router.route('/reviews/disagree').post(protect, stickAReviewAsDisAgree);
 router.route('/createReview').post(protect, createReview);
