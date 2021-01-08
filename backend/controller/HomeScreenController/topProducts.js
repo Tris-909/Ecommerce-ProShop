@@ -6,7 +6,7 @@ import Product from '../../models/product.js';
 //? public
 const getTopProducts = AsyncHandler(async(req, res) => {
     const category = req.query.category;
-    console.log(category);
+
     const topProducts = await Product.find({ category: category }).sort({ price: -1 }).select({
         "_id": 1,
         "image": 1,
