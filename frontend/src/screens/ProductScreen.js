@@ -4,6 +4,7 @@ import { Row, Col, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../redux/actions/productActions';
 import {
+    getAlsoLikeProducts,
     getAlsoLikeLaptops,
     getAlsoLikeTVs,
     getAlsoLikePhones,
@@ -66,15 +67,15 @@ const ProductScreen = ({ match }) => {
     useEffect(() => {
         if (singleProduct) {
             if (singleProduct.category === 'laptops') {
-                dispatch(getAlsoLikeLaptops());
+                dispatch(getAlsoLikeProducts('laptops'));
             } else if (singleProduct.category === 'tvs') {
-                dispatch(getAlsoLikeTVs());
+                dispatch(getAlsoLikeProducts('tvs'));
             } else if (singleProduct.category === 'phones') {
-                dispatch(getAlsoLikePhones());
+                dispatch(getAlsoLikeProducts('phones'));
             } else if (singleProduct.category === 'headphone') {
-                dispatch(getAlsoLikeHeadPhones());
+                dispatch(getAlsoLikeProducts('headphone'));
             } else {
-                dispatch(getAlsoLikeGames());
+                dispatch(getAlsoLikeProducts('game'));
             }
         }
     }, [dispatch, singleProduct, addItemToWishListSuccess, removeItemFromWishListSuccess]);

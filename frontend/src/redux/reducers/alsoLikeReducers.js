@@ -1,4 +1,8 @@
 import {
+    GET_ALSOLIKE_PRODUCTS_PENDING,
+    GET_ALSOLIKE_PRODUCTS_SUCCESS,
+    GET_ALSOLIKE_PRODUCTS_FAIL,
+
     GET_ALSOLIKE_LAPTOPS_PENDING,
     GET_ALSOLIKE_LAPTOPS_SUCCESS,
     GET_ALSOLIKE_LAPTOPS_FAIL,
@@ -31,6 +35,18 @@ const alsoLikeInitialState = {
 
 export const alsoLikeReducer = (state = alsoLikeInitialState, action) => {
     switch(action.type) {
+        case GET_ALSOLIKE_PRODUCTS_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_ALSOLIKE_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                alsoLikeItems: [...action.payload],
+                success: true
+            }
         case GET_ALSOLIKE_LAPTOPS_PENDING:
             return {
                 ...state,
@@ -118,6 +134,11 @@ export const alsoLikeReducer = (state = alsoLikeInitialState, action) => {
             return {
                 ...state,
                 loading: false,
+                error: action.payload
+            }
+        case GET_ALSOLIKE_PRODUCTS_FAIL:
+            return {
+                ...state,
                 error: action.payload
             }
         case GET_ALSOLIKE_RESET:

@@ -26,11 +26,13 @@ import {
     getGamesRecommendation
 } from '../controller/productController.js';
 import { getTopProducts } from '../controller/HomeScreenController/topProducts.js';
+import { getAlsoLikeProductsBasedOnCategory } from '../controller/AProductScreenController/youMayAlsoLike.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/toptier').get(getTopProducts);
+router.route('/alsolike').get(getAlsoLikeProductsBasedOnCategory);
 router.route('/laptops/alsolike').get(getLaptopsReccommendation);
 router.route('/tvs/alsolike').get(getTVSRecommendation);
 router.route('/phones/alsolike').get(getPhonesRecommendation);
