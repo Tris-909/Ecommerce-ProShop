@@ -1,275 +1,155 @@
-import {
-    LOGIN_USER_PENDING,
-    LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAIL,
-
-    LOGOUT_USER,
-
-    CREATE_USER_PENDING,
-    CREATE_USER_SUCCESS,
-    CREATE_USER_FAIL,
-
-    CLEAR_ERROR_SUBMIT,
-
-    GET_USER_DETAILS_PENDING,
-    GET_USER_DETAILS_SUCCESS,
-    GET_USER_DETAILS_FAIL,
-    GET_USER_DETAILS_RESET,
-
-    UPDATE_USER_DETAIL_PENDING,
-    UPDATE_USER_DETAIL_SUCCESS,
-    UPDATE_USER_DETAIL_FAIL,
-    UPDATE_USER_DETAIL_RESET,
-
-    CREATE_REVIEW_PENDING,
-    CREATE_REVIEW_SUCCESS,
-    CREATE_REVIEW_FAIL,
-    CREATE_REVIEW_RESET,
-
-    DELETE_REVIEW_REQUEST,
-    DELETE_REVIEW_SUCCESS,
-    DELETE_REVIEW_FAIL,
-    DELETE_REVIEW_RESET,
-
-    GET_USER_CURRENT_STATUS_PENDING,
-    GET_USER_CURRENT_STATUS_SUCCESS,
-    GET_USER_CURRENT_STATUS_FAIL,
-    GET_USER_CURRENT_STATUS_RESET
-} from '../actions/actionTypes';
-
-const initialUserState = {
+"use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+exports.__esModule = true;
+exports.currentUserStatusReducer = exports.deleteReviewReducer = exports.userReviewReducer = exports.userDetailsReducer = exports.userReducer = void 0;
+var actionTypes_1 = require("../actions/actionTypes");
+var initialUserState = {
     user: null,
     loading: false,
     error: null
-}
-
-const userReducer = (state = initialUserState, action) => {
-    switch(action.type) {
-        case LOGIN_USER_PENDING:
-            return {
-                ...state,
-                loading: true
-            }
-        case LOGIN_USER_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case LOGIN_USER_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                user: action.payload,
-                error: null
-            }
-        case LOGOUT_USER:
-            return {
-                ...state,
-                user: null
-            }
-        case CREATE_USER_PENDING:
-            return {
-                ...state,
-                loading: false
-            }
-        case CREATE_USER_SUCCESS:
-            return {
-                ...state,
-                user: action.payload,
-                error: null
-            }
-        case CREATE_USER_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
-        case CLEAR_ERROR_SUBMIT:    
-            return {
-                ...state,
-                error: null
-            }
-        case UPDATE_USER_DETAIL_RESET: 
-            return {
-                ...state,
-                user: action.payload
-            }
+};
+var userReducer = function (state, action) {
+    if (state === void 0) { state = initialUserState; }
+    switch (action.type) {
+        case actionTypes_1.LOGIN_USER_PENDING:
+            return __assign(__assign({}, state), { loading: true });
+        case actionTypes_1.LOGIN_USER_FAIL:
+            return __assign(__assign({}, state), { loading: false, error: action.payload });
+        case actionTypes_1.LOGIN_USER_SUCCESS:
+            return __assign(__assign({}, state), { loading: false, user: action.payload, error: null });
+        case actionTypes_1.LOGOUT_USER:
+            return __assign(__assign({}, state), { user: null });
+        case actionTypes_1.CREATE_USER_PENDING:
+            return __assign(__assign({}, state), { loading: false });
+        case actionTypes_1.CREATE_USER_SUCCESS:
+            return __assign(__assign({}, state), { user: action.payload, error: null });
+        case actionTypes_1.CREATE_USER_FAIL:
+            return __assign(__assign({}, state), { error: action.payload });
+        case actionTypes_1.CLEAR_ERROR_SUBMIT:
+            return __assign(__assign({}, state), { error: null });
+        case actionTypes_1.UPDATE_USER_DETAIL_RESET:
+            return __assign(__assign({}, state), { user: action.payload });
         default:
-            return {
-                ...state
-            }
+            return __assign({}, state);
     }
-}
-
-const initialDetailState = {
+};
+exports.userReducer = userReducer;
+//! USER PROFILE 
+var initialDetailState = {
     details: {},
     loading: false,
     detailError: null,
     success: false
-}
-
-const userDetailsReducer = (state = initialDetailState, action) => {
-    switch(action.type) {
-        case GET_USER_DETAILS_PENDING :
-            return {
-                ...state,
-                loading: true
-            }
-        case GET_USER_DETAILS_SUCCESS :
-            return {
-                ...state,
-                loading: false,
-                details: action.payload
-            }
-        case GET_USER_DETAILS_FAIL :
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case UPDATE_USER_DETAIL_PENDING:
-            return {
-                ...state,
-                loading: true
-            }
-        case UPDATE_USER_DETAIL_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                success: true,
-                details: action.payload
-            }
-        case UPDATE_USER_DETAIL_FAIL:
-            return {
-                ...state,
-                detailError: action.payload
-            }   
-        case GET_USER_DETAILS_RESET: 
+};
+var userDetailsReducer = function (state, action) {
+    if (state === void 0) { state = initialDetailState; }
+    switch (action.type) {
+        case actionTypes_1.GET_USER_DETAILS_PENDING:
+            return __assign(__assign({}, state), { loading: true });
+        case actionTypes_1.GET_USER_DETAILS_SUCCESS:
+            return __assign(__assign({}, state), { loading: false, details: action.payload });
+        case actionTypes_1.GET_USER_DETAILS_FAIL:
+            return __assign(__assign({}, state), { loading: false, error: action.payload });
+        case actionTypes_1.UPDATE_USER_DETAIL_PENDING:
+            return __assign(__assign({}, state), { loading: true });
+        case actionTypes_1.UPDATE_USER_DETAIL_SUCCESS:
+            return __assign(__assign({}, state), { loading: false, success: true, details: action.payload });
+        case actionTypes_1.UPDATE_USER_DETAIL_FAIL:
+            return __assign(__assign({}, state), { detailError: action.payload });
+        case actionTypes_1.GET_USER_DETAILS_RESET:
             return {
                 details: {},
                 loading: false,
                 detailError: null,
-                success: false   
-            }
-        default : 
-            return {
-                ...state
-            }
+                success: false
+            };
+        default:
+            return __assign({}, state);
     }
-}
-
-const initialReviewState = {
+};
+exports.userDetailsReducer = userDetailsReducer;
+var initialReviewState = {
     loading: false,
     success: false,
     error: null
-}
-
-const userReviewReducer = (state = initialReviewState, action) => {
-    switch(action.type) {
-        case CREATE_REVIEW_PENDING:
-            return {
-                ...state,
-                loading: true
-            }
-        case CREATE_REVIEW_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                success: true
-            }
-        case CREATE_REVIEW_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case CREATE_REVIEW_RESET: 
+};
+var userReviewReducer = function (state, action) {
+    if (state === void 0) { state = initialReviewState; }
+    switch (action.type) {
+        case actionTypes_1.CREATE_REVIEW_PENDING:
+            return __assign(__assign({}, state), { loading: true });
+        case actionTypes_1.CREATE_REVIEW_SUCCESS:
+            return __assign(__assign({}, state), { loading: false, success: true });
+        case actionTypes_1.CREATE_REVIEW_FAIL:
+            return __assign(__assign({}, state), { loading: false, error: action.payload });
+        case actionTypes_1.CREATE_REVIEW_RESET:
             return {
                 loading: false,
                 success: false,
                 error: null
-            }
+            };
         default:
             return state;
     }
-}
-
-const deleteReviewInitalState = {
+};
+exports.userReviewReducer = userReviewReducer;
+var deleteReviewInitalState = {
     loading: false,
     error: null,
     success: false
-}
-
-const deleteReviewReducer = (state = deleteReviewInitalState, action) => {
-    switch(action.type) {
-        case DELETE_REVIEW_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
-        case DELETE_REVIEW_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                success: true
-            }
-        case DELETE_REVIEW_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case DELETE_REVIEW_RESET:
+};
+var deleteReviewReducer = function (state, action) {
+    if (state === void 0) { state = deleteReviewInitalState; }
+    switch (action.type) {
+        case actionTypes_1.DELETE_REVIEW_REQUEST:
+            return __assign(__assign({}, state), { loading: true });
+        case actionTypes_1.DELETE_REVIEW_SUCCESS:
+            return __assign(__assign({}, state), { loading: false, success: true });
+        case actionTypes_1.DELETE_REVIEW_FAIL:
+            return __assign(__assign({}, state), { loading: false, error: action.payload });
+        case actionTypes_1.DELETE_REVIEW_RESET:
             return {
                 loading: false,
                 error: null,
-                success: false  
-            }
-        default: 
+                success: false
+            };
+        default:
             return state;
     }
-}
-
-const currentUserStatusState = {
+};
+exports.deleteReviewReducer = deleteReviewReducer;
+var currentUserStatusState = {
     userStatus: null,
     loading: false,
     error: null
-}
-
-const currentUserStatusReducer = (state = currentUserStatusState, action) => {
-    switch(action.type) {
-        case GET_USER_CURRENT_STATUS_PENDING: 
-            return {
-                ...state,
-                loading: true
-            }
-        case GET_USER_CURRENT_STATUS_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                userStatus: action.payload
-            }
-        case GET_USER_CURRENT_STATUS_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case GET_USER_CURRENT_STATUS_RESET:
+};
+var currentUserStatusReducer = function (state, action) {
+    if (state === void 0) { state = currentUserStatusState; }
+    switch (action.type) {
+        case actionTypes_1.GET_USER_CURRENT_STATUS_PENDING:
+            return __assign(__assign({}, state), { loading: true });
+        case actionTypes_1.GET_USER_CURRENT_STATUS_SUCCESS:
+            return __assign(__assign({}, state), { loading: false, userStatus: action.payload });
+        case actionTypes_1.GET_USER_CURRENT_STATUS_FAIL:
+            return __assign(__assign({}, state), { loading: false, error: action.payload });
+        case actionTypes_1.GET_USER_CURRENT_STATUS_RESET:
             return {
                 userStatus: null,
                 loading: false,
                 error: null
-            }
-        default: 
+            };
+        default:
             return state;
     }
-}
-
-export {
-    userReducer,
-    userDetailsReducer,
-    userReviewReducer,
-    deleteReviewReducer,
-    currentUserStatusReducer
-}
+};
+exports.currentUserStatusReducer = currentUserStatusReducer;
