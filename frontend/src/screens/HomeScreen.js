@@ -4,13 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 //TODO: Actions
 import {getCarouselProducts} from '../redux/actions/productActions';
-import {getTopTiersLaptop} from '../redux/actions/laptopActions';
-import {getTopTVs} from '../redux/actions/tvActions';
-import {getTopPhones} from '../redux/actions/phoneActions';
-import {getTopHeadphone} from '../redux/actions/headphoneActions';
-import {getTopGames} from '../redux/actions/gameActions';
 import {getWishList} from '../redux/actions/wishListActions';
 import {getAllItemsCart} from '../redux/actions/cartActions';
+import {getTopProductsForHomeScreen} from '../redux/actions/topProductsAction';
 
 //TODO: Components
 import TopProduct from '../components/TopProduct (Home)/TopProduct';
@@ -20,13 +16,16 @@ import Helmet from '../components/Helmet';
 const HomeScreen = () => {
     const dispatch = useDispatch();
     const { carouselProducts, loading: carouselLoading, error: carouselError } = useSelector(state => state.carouselProducts);
-    const { topLaptops, loading: topLaptopLoading, error: topLaptopError } = useSelector(state => state.topLaptops);
-    const { topTV, loading: topTVLoading } = useSelector(state => state.topTVs);
-    const { topPhones, loading: topPhonesLoading } = useSelector(state => state.topPhones);
-    const { topHeadphone, loading: topHeadphoneLoading } = useSelector(state => state.topHeadphone);
-    const { topGames, loading: topGamesLoading } = useSelector(state => state.topGames);
     const { wishList } = useSelector(state => state.wishList);
     const { cartItems, addItemSuccess } = useSelector(state => state.cart);
+    const { 
+        loading: topProductsLoading, 
+        topPhones, 
+        topLaptops, 
+        topTVs, 
+        topHeadphones, 
+        topGames, 
+        error } = useSelector(state => state.topProductsReducer);
     const { success: addItemToWishListSuccess} = useSelector(state => state.addItemToWishList);
     const { success: removeItemFromWishListSuccess} = useSelector(state => state.removeItemFromWishList);
 
@@ -40,35 +39,35 @@ const HomeScreen = () => {
     useEffect(() => {
         //TODO: Get top laptops for the first time 
         if (topLaptops.length === 0) {
-            dispatch(getTopTiersLaptop());
+            dispatch(getTopProductsForHomeScreen('laptops'));
         }
     }, [dispatch, topLaptops]);
 
     useEffect(() => {
         //TODO: Get top tvs for the first time 
-        if (topTV.length === 0) {
-            dispatch(getTopTVs());
+        if (topTVs.length === 0) {
+            dispatch(getTopProductsForHomeScreen('tvs'));
         }
-    }, [dispatch, topTV]);
+    }, [dispatch, topTVs]);
 
     useEffect(() => {
         //TODO: Fetch top-phone for the first time
         if (topPhones.length === 0) {
-            dispatch(getTopPhones());
+            dispatch(getTopProductsForHomeScreen('phones'));
         }
     }, [dispatch, topPhones]);
 
     useEffect(() => {
         //TODO: Fetch top-headphone for the first time
-        if (topHeadphone.length === 0) {
-            dispatch(getTopHeadphone());
+        if (topHeadphones.length === 0) {
+            dispatch(getTopProductsForHomeScreen('headphone'));
         }
-    }, [dispatch, topHeadphone]);
+    }, [dispatch, topHeadphones]);
 
     useEffect(() => {
         //TODO: Fetch top-games for the first time
         if (topGames.length === 0) {
-            dispatch(getTopGames());
+            dispatch(getTopProductsForHomeScreen('game'));
         }
     }, [dispatch, topGames]);
 
@@ -84,11 +83,11 @@ const HomeScreen = () => {
     }, [addItemSuccess])
 
     const checkIfErrorExisted = () => {
-        if (topLaptopError) {
+        if (error) {
             return (
                 <Alert variant="danger" dismissible>
                     <Alert.Heading>Something went wrong :(</Alert.Heading>
-                    <p> {topLaptopError.message} </p>
+                    <p> {error.message} </p>
                 </Alert>
             );
         } else {
@@ -105,7 +104,7 @@ const HomeScreen = () => {
                     {
                         topLaptops.length !== 0 ? (
                             <TopProduct 
-                                loading={topLaptopLoading} 
+                                loading={topProductsLoading} 
                                 itemArray={topLaptops} 
                                 title="Our Top Tier MSI Laptops" 
                                 itemLink="/product"
@@ -115,10 +114,10 @@ const HomeScreen = () => {
                     }
 
                     {
-                        topTV.length !== 0 ? (      
+                        topTVs.length !== 0 ? (      
                             <TopProduct 
-                                loading={topTVLoading} 
-                                itemArray={topTV} 
+                                loading={topProductsLoading} 
+                                itemArray={topTVs} 
                                 title="Best TVs for 2020" 
                                 itemLink="/product"
                                 listItemLink="/tvs"
@@ -129,7 +128,7 @@ const HomeScreen = () => {
                     {
                         topPhones.length !== 0 ? (
                             <TopProduct 
-                                loading={topPhonesLoading}
+                                loading={topProductsLoading}
                                 itemArray={topPhones}
                                 title="New Phones 2020"
                                 itemLink="/product"
@@ -139,10 +138,10 @@ const HomeScreen = () => {
                     }
 
                     {
-                        topHeadphone.length !== 0 ? (
+                        topHeadphones.length !== 0 ? (
                             <TopProduct 
-                                loading={topHeadphoneLoading}
-                                itemArray={topHeadphone}
+                                loading={topProductsLoading}
+                                itemArray={topHeadphones}
                                 title="Great Headphones for You"
                                 itemLink="/product"
                                 listItemLink="/headphone"
@@ -153,7 +152,7 @@ const HomeScreen = () => {
                     {
                         topGames.length !== 0 ? (
                             <TopProduct 
-                                loading={topGamesLoading}
+                                loading={topProductsLoading}
                                 itemArray={topGames}
                                 title="For Game Lovers"
                                 itemLink="/product"

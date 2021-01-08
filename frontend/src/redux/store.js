@@ -45,23 +45,11 @@ import {
     update_Product_Admin_Reducer 
 } from './reducers/adminReducers';
 import {
-    topLaptopReducer
-} from './reducers/laptopReducer';
-import {
-    getTopTVs
-} from './reducers/tvReducers';
-import {
-    topPhonesReducer
-} from './reducers/phoneReducers';
-import {
-    topHeadphoneReducer
-} from './reducers/headphoneReducer';
-import {
-    topGameReducer
-} from './reducers/gameReducer';
-import {
     alsoLikeReducer
 } from './reducers/alsoLikeReducers';
+import {
+    topProductsReducer
+} from './reducers/topProductsReducer';
 
 const reducer = combineReducers({
     productsList: productListReducer,
@@ -89,11 +77,7 @@ const reducer = combineReducers({
     userReview: userReviewReducer,
     deleteReview: deleteReviewReducer,
     carouselProducts: carouselProductReducer,
-    topLaptops: topLaptopReducer,
-    topTVs: getTopTVs,
-    topPhones: topPhonesReducer,
-    topHeadphone: topHeadphoneReducer,
-    topGames: topGameReducer,
+    topProductsReducer: topProductsReducer,
     wishList: getWishListReducer,
     addItemToWishList: addItemToWishListReducer,
     removeItemFromWishList: removeItemFromWishListReducer,

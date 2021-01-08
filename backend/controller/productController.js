@@ -564,21 +564,6 @@ const getAllLaptops = AsyncHandler(async(req, res) => {
     res.json({laptops, page: currentPage, pages: Math.ceil(numberOfLaptops/pageSize)});
 });
 
-//? Fetch 3 most expensive laptops from databases to render to HomeScreen
-//? GET /api/products/laptops/toptier
-//? public routes
-const getTopTierLaptops = AsyncHandler(async (req, res) => {
-    const topLaptops = await Product.find({category: 'laptops'}).sort({price: -1}).select({
-        "_id": 1,
-        "image": 1,
-        "name": 1,
-        "rating": 1,
-        "numReviews": 1,
-        "price": 1
-    }).limit(3);
-
-    res.send(topLaptops);
-});
 
 //? GET All TVs from databases 
 //? GET /api/products/tvs
@@ -603,33 +588,7 @@ const getAllTVs = AsyncHandler(async(req, res) => {
     res.status(200).json({AllTVs, page: currentPage, pages: Math.ceil(numOfTVs/ pageSize)});
 });
 
-//? GET Top 3 Most Expensive TVs from databases 
-//? GET /api/products/tvs/toptier
-//? Public Route
-const getTopTierTVs = AsyncHandler(async(req, res) => {
-    const TopTierTVs = await Product.find({
-        category: 'tvs'
-    }).sort({ price: -1 }).limit(3);
 
-    res.status(200).json(TopTierTVs);
-});
-
-//? GET Top 3 Most Expensive Phones from databases
-//? GET /api/products/phones/toptier
-//? Public Route
-const getTopPhones = AsyncHandler(async(req, res) => {
-    const topPhones = await Product.find({
-        category: 'phones'
-    }).sort({ price: -1 }).limit(3);
-
-    if (topPhones) {
-        res.status(200);
-        res.send(topPhones);
-    } else {
-        res.status(404);
-        throw new Error("Can't find top phones");
-    }
-});
 
 //? GET All Phones from databases
 //? GET /api/products/phones
@@ -646,22 +605,6 @@ const getAllPhones = AsyncHandler(async(req, res) => {
     }
 });
 
-//? GET Top 3 Headphones
-//? /api/products/headphones/toptier
-//? public
-const getTopHeadphone = AsyncHandler(async(req, res) => {
-    const topHeadphones = await Product.find({
-        category: 'headphone'
-    }).sort({ price: -1 }).limit(3);
-
-    if (topHeadphones) {
-        res.status(200);
-        res.send(topHeadphones);
-    } else {
-        res.status(404);
-        throw new Error("Can't find top headphones");
-    }
-});
 
 //? GET All Headphones
 //? /api/products/headphones
@@ -678,19 +621,6 @@ const getAllHeadphones = AsyncHandler(async(req, res) => {
     }
 });
 
-//? GET Top Games
-//? /api/products/games/toptier
-//? public
-const getTopGames = AsyncHandler(async(req, res) => {
-    const topGames = await Product.find({ category: 'game' }).sort({ price: -1 }).limit(3);
-
-    if (topGames) {
-        res.status(200).send(topGames);
-    } else {
-        res.status(404);
-        throw new Error('Something is wrong, cant fetch top Games');
-    }
-});
 
 //? GET All Games
 //? /api/products/games
@@ -702,7 +632,7 @@ const getAllGames = AsyncHandler(async(req, res) => {
         res.status(200).send(allGames);
     } else {
         res.status(404);
-        throw new Error('Something is wrong, cant fetch top Games');
+        throw new Error('Something is wrong, cant fetch Games');
     }
 });
 
@@ -843,14 +773,9 @@ export {
     deleteReviewProduct,
     getTopRatedProducts,
     getAllLaptops,
-    getTopTierLaptops,
     getAllTVs,
-    getTopTierTVs,
-    getTopPhones,
     getAllPhones,
-    getTopHeadphone,
     getAllHeadphones,
-    getTopGames,
     getAllGames,
     getLaptopsReccommendation,
     getTVSRecommendation,

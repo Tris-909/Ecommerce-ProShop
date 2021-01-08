@@ -20,14 +20,9 @@ import {
     deleteReviewProduct,
     getTopRatedProducts,
     getAllLaptops,
-    getTopTierLaptops,
     getAllTVs,
-    getTopTierTVs,
-    getTopPhones,
     getAllPhones,
-    getTopHeadphone,
     getAllHeadphones,
-    getTopGames,
     getAllGames,
     getLaptopsReccommendation,
     getTVSRecommendation,
@@ -35,10 +30,12 @@ import {
     getHeadPhonesRecommendation,
     getGamesRecommendation
 } from '../controller/productController.js';
+import { getTopProducts } from '../controller/HomeScreenController/topProducts.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
 router.route('/').get(getProducts).post(protect, admin, createProduct);
+router.route('/toptier').get(getTopProducts);
 router.route('/laptops/alsolike').get(getLaptopsReccommendation);
 router.route('/tvs/alsolike').get(getTVSRecommendation);
 router.route('/phones/alsolike').get(getPhonesRecommendation);
@@ -46,14 +43,9 @@ router.route('/headphones/alsolike').get(getHeadPhonesRecommendation);
 router.route('/games/alsolike').get(getGamesRecommendation);
 router.route('/carousel').get(getTopRatedProducts);
 router.route('/laptops').get(getAllLaptops);
-router.route('/laptops/toptier').get(getTopTierLaptops);
 router.route('/tvs').get(getAllTVs);
-router.route('/tvs/toptier').get(getTopTierTVs);
 router.route('/phones').get(getAllPhones);
-router.route('/phones/toptier').get(getTopPhones);
 router.route('/headphones').get(getAllHeadphones);
-router.route('/headphones/toptier').get(getTopHeadphone);
-router.route('/games/toptier').get(getTopGames);
 router.route('/games').get(getAllGames);
 router.route('/reviews/agree').post(protect, stickAReviewAsAgree);
 router.route('/reviews/disagree').post(protect, stickAReviewAsDisAgree);
