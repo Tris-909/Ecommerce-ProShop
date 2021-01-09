@@ -4,7 +4,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 //! REDUCERS
 import { 
-    SingleProductReducer, 
     deleteProductAsAdmin,
     carouselProductReducer,
     setReviewsReducer,
@@ -52,6 +51,9 @@ import {
 import {
     searchProductsListReducer
 } from './reducers/Products/SearchProducts/search';
+import {
+    SingleProductReducer
+} from './reducers/Products/SingleProduct/singleProduct';
 
 const reducer = combineReducers({
     productsList: searchProductsListReducer,

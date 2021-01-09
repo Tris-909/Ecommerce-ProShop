@@ -1,8 +1,4 @@
 import { 
-    GET_SINGLE_PRODUCT_PENDING,
-    GET_SINGLE_PRODUCT_SUCCESS,
-    GET_SINGLE_PRODUCT_FAIL,
-
     DELETE_PRODUCT_AS_ADMIN_REQUEST,
     DELETE_PRODUCT_AS_ADMIN_SUCCESS,
     DELETE_PRODUCT_AS_ADMIN_FAIL,
@@ -60,39 +56,6 @@ import {
     GET_LIST_PRODUCTS_FAIL,
     GET_LIST_PRODUCTS_RESET
 } from '../actions/actionTypes';
-
-const initlaStateSingleProduct = {
-    singleProduct: null,
-    loading: false,
-    error: null
-}
-
-export const SingleProductReducer = (state = initlaStateSingleProduct, action) => {
-    switch(action.type) {
-        case GET_SINGLE_PRODUCT_PENDING:
-            return {
-                ...state,
-                loading: true
-            }
-        case GET_SINGLE_PRODUCT_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                error: null,
-                singleProduct: action.payload
-            }
-        case GET_SINGLE_PRODUCT_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        default:
-            return {
-                ...state
-            }
-    }
-}
 
 const delete_Product_InitialState = {
     success: false,
