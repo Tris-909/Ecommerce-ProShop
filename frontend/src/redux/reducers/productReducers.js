@@ -1,8 +1,4 @@
 import { 
-    GET_ALL_PRODUCTS_PENDING, 
-    GET_ALL_PRODUCTS_SUCCESS, 
-    GET_ALL_PRODUCTS_FAIL,
-
     GET_SINGLE_PRODUCT_PENDING,
     GET_SINGLE_PRODUCT_SUCCESS,
     GET_SINGLE_PRODUCT_FAIL,
@@ -64,40 +60,6 @@ import {
     GET_LIST_PRODUCTS_FAIL,
     GET_LIST_PRODUCTS_RESET
 } from '../actions/actionTypes';
-
-const initialState = {
-    products: [],
-    pages: null,
-    page: null,
-    loading: false,
-    error: null
-}
-
-export const productListReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case GET_ALL_PRODUCTS_PENDING:
-            return {
-                ...state,
-                loading: true
-            }
-        case GET_ALL_PRODUCTS_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                products: action.payload.products,
-                pages: action.payload.pages,
-                page: action.payload.page
-            }
-        case GET_ALL_PRODUCTS_FAIL: 
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        default:
-            return state;
-    }
-}
 
 const initlaStateSingleProduct = {
     singleProduct: null,

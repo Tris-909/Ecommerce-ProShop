@@ -4,10 +4,9 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 //! REDUCERS
 import { 
-    productListReducer, 
     SingleProductReducer, 
     deleteProductAsAdmin,
-    carouselProductReducer ,
+    carouselProductReducer,
     setReviewsReducer,
     getListOfProductsBasedOnCategory
 } from './reducers/productReducers';
@@ -50,9 +49,12 @@ import {
 import {
     topProductsReducer
 } from './reducers/topProductsReducer';
+import {
+    searchProductsListReducer
+} from './reducers/Products/SearchProducts/search';
 
 const reducer = combineReducers({
-    productsList: productListReducer,
+    productsList: searchProductsListReducer,
     singleProduct: SingleProductReducer,
     listProducts: getListOfProductsBasedOnCategory,
     setOfReviews: setReviewsReducer,

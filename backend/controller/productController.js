@@ -19,7 +19,14 @@ const getProducts = AsyncHandler(async (req, res) => {
     } : {};
     
     const count = await Product.countDocuments({ ...keyword });
-    const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1));
+    const products = await Product.find({ ...keyword }).select({
+        "rating": 1,
+        "numReviews": 1,
+        "price": 1,
+        "_id": 1,
+        "name": 1,
+        "image": 1,
+    }).limit(pageSize).skip(pageSize * (page - 1));
     res.send({ products, page, pages: Math.ceil(count / pageSize) });
 }) 
 

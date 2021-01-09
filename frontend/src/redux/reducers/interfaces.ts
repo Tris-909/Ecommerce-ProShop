@@ -3,6 +3,15 @@ export interface Action {
     payload?: any[] | string
 }
 
+export interface singleProduct {
+    _id: string,
+    name: string,
+    price: number,
+    image: string,
+    rating: number,
+    numReviews: number
+}
+
 export interface singleWishListItem {
     _id: string,
     itemId: string,

@@ -35,7 +35,7 @@ export const getProductsList = (keyword = '', pageNumber = '') => async (dispatc
     } catch(error) {
         dispatch({
             type: GET_ALL_PRODUCTS_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data : null
+            payload: {error: error.response && error.response.data.message ? error.response.data : null} 
         });
     }
 }
