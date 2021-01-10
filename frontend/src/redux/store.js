@@ -4,8 +4,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 //! REDUCERS
 import { 
-    setReviewsReducer,
-    getListOfProductsBasedOnCategory
+    setReviewsReducer
 } from './reducers/productReducers';
 import { 
     cartReducer, 
@@ -56,7 +55,9 @@ import {
 import {
     carouselProductReducer
 } from './reducers/Products/CarouselProduct/carousel';
-
+import {
+    getListOfProductsBasedOnCategory
+} from './reducers/Products/ProductListWithBrands/productsWBrands';
 const reducer = combineReducers({
     productsList: searchProductsListReducer,
     singleProduct: SingleProductReducer,

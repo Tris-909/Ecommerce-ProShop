@@ -124,7 +124,7 @@ export const getListOfProductsBasedOnCategory = (category, page, lowPrice, highP
     } catch(error) {
         dispatch({
             type: GET_LIST_PRODUCTS_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : null
+            payload: { error: error.response && error.response.data.message ? error.response.data.message : null }
         })
     }
 }

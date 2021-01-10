@@ -1,8 +1,4 @@
 import { 
-    GET_CAROUSEL_PRODUCTS_REQUEST,
-    GET_CAROUSEL_PRODUCTS_SUCCESS,
-    GET_CAROUSEL_PRODUCTS_FAIL,
-
     GET_SET_REVIEWS_PENDING,
     GET_SET_REVIEWS_SUCCESS,
     GET_SET_REVIEWS_FAIL,
@@ -47,11 +43,6 @@ import {
     GET_REVIEWS_LTHDA_SUCCESS,
     GET_REVIEWS_LTHDA_FAIL,
     GET_REVIEWS_LTHDA_RESET,
-
-    GET_LIST_PRODUCTS_PENDING,
-    GET_LIST_PRODUCTS_SUCCESS,
-    GET_LIST_PRODUCTS_FAIL,
-    GET_LIST_PRODUCTS_RESET
 } from '../actions/actionTypes';
 
 const setReviewsInitialState = {
@@ -344,52 +335,6 @@ export const setReviewsReducer = (state = setReviewsInitialState, action) => {
                 loading: false,
                 setDisAgreeSuccess: false,
                 setDisAgreeError: null
-            }
-        default:
-            return state;
-    }
-}
-
-const productListBasedOnCategory = {
-    productsList: [],
-    brands: [],
-    currentPickedBrands: [],
-    page: null,
-    pages: null,
-    loading: false,
-    error: null
-}
-
-export const getListOfProductsBasedOnCategory = (state = productListBasedOnCategory, action) => {
-    switch(action.type) {
-        case GET_LIST_PRODUCTS_PENDING:
-            return {
-                ...state,
-                loading: true
-            }
-        case GET_LIST_PRODUCTS_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                productsList: [...action.payload.listItems],
-                brands: [...action.payload.brands],
-                currentPickedBrands: [...action.payload.currentPickedBrands],
-                page: action.payload.page,
-                pages: action.payload.pages
-            }
-        case GET_LIST_PRODUCTS_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case GET_LIST_PRODUCTS_RESET:
-            return {
-                productsList: [],
-                page: null,
-                pages: null,
-                loading: false,
-                error: null
             }
         default:
             return state;
