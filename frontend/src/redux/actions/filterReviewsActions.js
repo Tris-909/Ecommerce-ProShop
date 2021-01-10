@@ -39,7 +39,9 @@ const getReviewsHTLR = (productId, pageReviewNumber) => async(dispatch, getState
     } catch(error) {
         dispatch({
             type: GET_REVIEWS_HTLR_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: {
+                error: error.response && error.response.data.message ? error.response.data.message : error.message
+            } 
         })
     }
 }
@@ -58,7 +60,9 @@ const getReviewsLTHR = (productId, pageReviewNumber) => async(dispatch, getState
     } catch(error) {
         dispatch({
             type: GET_REVIEWS_LTHR_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: {
+                error: error.response && error.response.data.message ? error.response.data.message : error.message
+            } 
         })
     }
 }
@@ -77,7 +81,9 @@ const getReviewsHTLA = (productId, pageReviewNumber) => async(dispatch, getState
     } catch(error) {
         dispatch({
             type: GET_REVIEWS_HTLA_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: {
+                error: error.response && error.response.data.message ? error.response.data.message : error.message
+            } 
         })
     }
 }
@@ -96,7 +102,9 @@ const getReviewsLTHA = (productId, pageReviewNumber) => async(dispatch, getState
     } catch(error) {
         dispatch({
             type: GET_REVIEWS_LTHA_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: {
+                error: error.response && error.response.data.message ? error.response.data.message : error.message
+            } 
         })
     }
 }
@@ -115,7 +123,9 @@ const getReviewsHTLDA = (productId, pageReviewNumber) => async(dispatch, getStat
     } catch(error) {
         dispatch({
             type: GET_REVIEWS_HTLDA_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: {
+                error: error.response && error.response.data.message ? error.response.data.message : error.message
+            } 
         })
     }
 }
@@ -134,7 +144,9 @@ const getReviewsLTHDA = (productId, pageReviewNumber) => async(dispatch, getStat
     } catch(error) {
         dispatch({
             type: GET_REVIEWS_LTHDA_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: {
+                error: error.response && error.response.data.message ? error.response.data.message : error.message
+            } 
         })
     }
 }
