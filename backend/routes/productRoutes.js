@@ -17,10 +17,10 @@ import {
     createProduct, 
     updateProduct,
     createReview ,
-    deleteReviewProduct,
-    getTopRatedProducts
+    deleteReviewProduct
 } from '../controller/productController.js';
 import { getTopProducts } from '../controller/HomeScreenController/topProducts.js';
+import { getTopRatedProducts } from '../controller/HomeScreenController/carouselProducts.js';
 import { getAlsoLikeProductsBasedOnCategory } from '../controller/AProductScreenController/youMayAlsoLike.js';
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';

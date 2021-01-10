@@ -4,8 +4,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 //! REDUCERS
 import { 
-    deleteProductAsAdmin,
-    carouselProductReducer,
     setReviewsReducer,
     getListOfProductsBasedOnCategory
 } from './reducers/productReducers';
@@ -35,6 +33,7 @@ import {
     putIsDeliveredStatus 
 } from './reducers/orderReducer.js';
 import { 
+    deleteProductAsAdmin,
     users_List_Admin_Reducer, 
     deleted_user_admin_Reducer, 
     get_userInfo_admin_Reducer, 
@@ -54,6 +53,9 @@ import {
 import {
     SingleProductReducer
 } from './reducers/Products/SingleProduct/singleProduct';
+import {
+    carouselProductReducer
+} from './reducers/Products/CarouselProduct/carousel';
 
 const reducer = combineReducers({
     productsList: searchProductsListReducer,

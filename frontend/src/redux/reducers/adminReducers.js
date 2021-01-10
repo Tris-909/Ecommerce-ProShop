@@ -1,4 +1,9 @@
 import {
+    DELETE_PRODUCT_AS_ADMIN_REQUEST,
+    DELETE_PRODUCT_AS_ADMIN_SUCCESS,
+    DELETE_PRODUCT_AS_ADMIN_FAIL,
+    DELETE_PRODUCT_AS_ADMIN_RESET,
+
     GET_ALL_USERS,
     GET_ALL_USERS_SUCCESS,
     GET_ALL_USERS_FAIL,
@@ -26,6 +31,44 @@ import {
     UPDATE_PRODUCT_AS_ADMIN_FAIL,
     UPDATE_PRODUCT_AS_ADMIN_RESET
 } from '../actions/actionTypes';
+
+
+const delete_Product_InitialState = {
+    success: false,
+    loading: false,
+    error: null
+}
+
+export const deleteProductAsAdmin = (state = delete_Product_InitialState, action) => {
+    switch(action.type) {
+        case DELETE_PRODUCT_AS_ADMIN_REQUEST: 
+            return {
+                ...state,
+                loading: true
+            }
+        case DELETE_PRODUCT_AS_ADMIN_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true
+            }
+        case DELETE_PRODUCT_AS_ADMIN_FAIL: 
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case DELETE_PRODUCT_AS_ADMIN_RESET:
+            return {
+                success: false,
+                loading: false,
+                error: null
+            }
+        default: 
+            return state;
+    }
+
+}
 
 const users_List_Admin_Initial_State = {
     usersList: [],

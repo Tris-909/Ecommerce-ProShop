@@ -539,15 +539,6 @@ const deleteReviewProduct = AsyncHandler(async(req, res) => {
     }
 });
 
-//? Get 3 top rated products 
-//? GET /api/products/carousel
-//? public 
-const getTopRatedProducts = AsyncHandler(async(req, res) => {
-    const products = await Product.find({}).sort({ price: -1 }).limit(3);
-
-    res.json(products);
-});
-
 export {
     getProducts,
     getListOfProducts,
@@ -565,6 +556,5 @@ export {
     createProduct,
     updateProduct,
     createReview,
-    deleteReviewProduct,
-    getTopRatedProducts
+    deleteReviewProduct
 }

@@ -1,12 +1,8 @@
 import { 
-    DELETE_PRODUCT_AS_ADMIN_REQUEST,
-    DELETE_PRODUCT_AS_ADMIN_SUCCESS,
-    DELETE_PRODUCT_AS_ADMIN_FAIL,
-    DELETE_PRODUCT_AS_ADMIN_RESET,
-
     GET_CAROUSEL_PRODUCTS_REQUEST,
     GET_CAROUSEL_PRODUCTS_SUCCESS,
     GET_CAROUSEL_PRODUCTS_FAIL,
+
     GET_SET_REVIEWS_PENDING,
     GET_SET_REVIEWS_SUCCESS,
     GET_SET_REVIEWS_FAIL,
@@ -51,78 +47,12 @@ import {
     GET_REVIEWS_LTHDA_SUCCESS,
     GET_REVIEWS_LTHDA_FAIL,
     GET_REVIEWS_LTHDA_RESET,
+
     GET_LIST_PRODUCTS_PENDING,
     GET_LIST_PRODUCTS_SUCCESS,
     GET_LIST_PRODUCTS_FAIL,
     GET_LIST_PRODUCTS_RESET
 } from '../actions/actionTypes';
-
-const delete_Product_InitialState = {
-    success: false,
-    loading: false,
-    error: null
-}
-
-export const deleteProductAsAdmin = (state = delete_Product_InitialState, action) => {
-    switch(action.type) {
-        case DELETE_PRODUCT_AS_ADMIN_REQUEST: 
-            return {
-                ...state,
-                loading: true
-            }
-        case DELETE_PRODUCT_AS_ADMIN_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                success: true
-            }
-        case DELETE_PRODUCT_AS_ADMIN_FAIL: 
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case DELETE_PRODUCT_AS_ADMIN_RESET:
-            return {
-                success: false,
-                loading: false,
-                error: null
-            }
-        default: 
-            return state;
-    }
-
-}
-
-const carouselProductInitialState = {
-    carouselProducts: [],
-    loading: false,
-    error: null
-}
-
-export const carouselProductReducer = (state = carouselProductInitialState, action) => {
-    switch(action.type) {
-        case GET_CAROUSEL_PRODUCTS_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
-        case GET_CAROUSEL_PRODUCTS_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                carouselProducts: action.payload
-            }
-        case GET_CAROUSEL_PRODUCTS_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        default: 
-            return state;
-    }
-} 
 
 const setReviewsInitialState = {
     currentReviews: [],
