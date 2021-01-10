@@ -145,7 +145,7 @@ const Product = (props) => {
                         <i className="fas fa-cart-plus" 
                             style={{ fontSize: '1.5rem', marginRight: '1.5rem', cursor: 'pointer' }}
                             onClick={(e) => 
-                            onAddItemToCartHandler(e, product._id, product.name, product.image, product.price, product.countInStock, 1)}></i>
+                            onAddItemToCartHandler(e, product._id, product.name, product.image, product.price, 1, 1)}></i>
                         {
                             isLoved ? (
                                 //TODO: Full Heart

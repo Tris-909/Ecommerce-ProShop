@@ -286,7 +286,7 @@ export const putIsDeliveredStatusAsAdmin = (id) => async(dispatch, getState) => 
     } catch(error) {
         dispatch({
             type: PUT_IS_DELIVERED_AS_ADMIN_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }
 }

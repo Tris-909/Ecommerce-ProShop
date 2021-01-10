@@ -49,7 +49,7 @@ export const createOrder = ( orderItems, shippingAddress, paymentMethod, itemsPr
     } catch(error) {
         dispatch({
             type: ORDER_CREATE_REQUEST_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
@@ -77,7 +77,7 @@ export const getOrderById = (id) => async(dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: GET_ORDER_BY_ID_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }
 }
@@ -104,7 +104,7 @@ export const payOrder = (orderID, paymentResult) => async(dispatch, getState) =>
     } catch(error) {
         dispatch({
             type: PUT_ISPAID_STATUS_ORDER_REQUEST_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
@@ -131,7 +131,7 @@ export const getOrdersByUserId = () => async(dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: GET_ORDERS_OF_USERS_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
