@@ -10,6 +10,7 @@ import { getSingleProduct } from '../redux/actions/productActions';
 import { updateProductAsAdmin } from '../redux/actions/adminActions';
 import { UPDATE_PRODUCT_AS_ADMIN_RESET } from '../redux/actions/actionTypes';
 import HeadphoneInput from '../components/ProductDetail/HeadphoneTable/HeadPhoneInput';
+import GameInput from '../components/ProductDetail/GameTable/GameInput';
 
 const ProductEditScreen = ({ history, match }) => {
     const dispatch = useDispatch();
@@ -36,6 +37,14 @@ const ProductEditScreen = ({ history, match }) => {
     const [BuiltInMicrophone, setBuiltInMicrophone] = useState('');
     const [Warranty, setWarranty] = useState('');
 
+    //! GAME
+    const [Platform, setPlatform] = useState('');
+    const [GamingGerne, setGamingGerne] = useState('');
+    const [Rating, setRating] = useState('');
+    const [ConsumerAdvice, setConsumerAdvice] = useState('');
+    const [GameDeveloper, setGameDeveloper] = useState('');
+    const [GamePublisher, setGamePublisher] = useState('');
+
     useEffect(() => {
         if (user && user.isAdmin) {
             dispatch(getSingleProduct(productID));
@@ -59,6 +68,13 @@ const ProductEditScreen = ({ history, match }) => {
                 setNoiseReductionType(singleProduct.headphoneDetail.NoiseReductionType);
                 setBuiltInMicrophone(singleProduct.headphoneDetail.BuiltInMicrophone);
                 setWarranty(singleProduct.headphoneDetail.Warranty);
+            } else if (singleProduct.category === 'game') {
+                setPlatform(singleProduct.gameDetail.Platform);
+                setGamingGerne(singleProduct.gameDetail.GamingGerne);
+                setRating(singleProduct.gameDetail.Rating);
+                setConsumerAdvice(singleProduct.gameDetail.ConsumerAdvice);
+                setGameDeveloper(singleProduct.gameDetail.GameDeveloper);
+                setGamePublisher(singleProduct.gameDetail.GamePublisher);
             }
         }
     }, [singleProduct])
@@ -210,6 +226,28 @@ const ProductEditScreen = ({ history, match }) => {
                     ) : null
                 }
                
+                {
+                    category === 'game' ? (
+                        <Form.Group controlId='gameDetail'>
+                            <Form.Label> Game Detail : </Form.Label>
+                            <GameInput 
+                                 Platform={Platform}
+                                 setPlatform={(value) => setPlatform(value)}
+                                 GamingGerne={GamingGerne}
+                                 setGamingGerne={(value) => setGamingGerne(value)}
+                                 Rating={Rating}
+                                 setRating={(value) => setRating(value)}
+                                 ConsumerAdvice={ConsumerAdvice}
+                                 setConsumerAdvice={(value) => setConsumerAdvice(value)}
+                                 GameDeveloper={GameDeveloper}
+                                 setGameDeveloper={(value) => setGameDeveloper(value)}
+                                 GamePublisher={GamePublisher}
+                                 setGamePublisher={(value) => setGamePublisher(value)}
+                            />
+                        </Form.Group>
+                    ) : null
+                }
+
                 <Form.Group controlId='description'>
                     <Form.Label>Description :</Form.Label>
                     <Form.Control 
