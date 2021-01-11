@@ -4,12 +4,7 @@ import { Row, Col, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../redux/actions/productActions';
 import {
-    getAlsoLikeProducts,
-    getAlsoLikeLaptops,
-    getAlsoLikeTVs,
-    getAlsoLikePhones,
-    getAlsoLikeHeadPhones,
-    getAlsoLikeGames  
+    getAlsoLikeProducts
 } from '../redux/actions/youMayAlsoLike';
 import {
     GET_ALSOLIKE_RESET

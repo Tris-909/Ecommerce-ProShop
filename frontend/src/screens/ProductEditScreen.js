@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 import { getSingleProduct } from '../redux/actions/productActions';
 import { updateProductAsAdmin } from '../redux/actions/adminActions';
 import { UPDATE_PRODUCT_AS_ADMIN_RESET } from '../redux/actions/actionTypes';
+import HeadphoneInput from '../components/ProductDetail/HeadphoneTable/HeadPhoneInput';
 
 const ProductEditScreen = ({ history, match }) => {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ProductEditScreen = ({ history, match }) => {
     const { success: updatedSuccess, loading: updatedLoading, error: updatedError } = useSelector(state => state.updatedProduct);
     const { user } = useSelector(state => state.user);
 
+    //! ALL PRODUCT 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
     const [image, setImage] = useState('');
@@ -25,6 +27,14 @@ const ProductEditScreen = ({ history, match }) => {
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [uploading, setUploading] = useState(false);
+
+    //! HEADPHONE 
+    const [HeadphoneType, setHeadphoneType] = useState('');
+    const [Colour, setHeadphoneColour] = useState('');
+    const [VoiceControl, setVoiceControl] = useState('');
+    const [NoiseReductionType, setNoiseReductionType] = useState('');
+    const [BuiltInMicrophone, setBuiltInMicrophone] = useState('');
+    const [Warranty, setWarranty] = useState('');
 
     useEffect(() => {
         if (user && user.isAdmin) {
@@ -41,12 +51,45 @@ const ProductEditScreen = ({ history, match }) => {
             setCountInStock(singleProduct.countInStock);
             setCategory(singleProduct.category);
             setDescription(singleProduct.description);
+
+            if (singleProduct.category === 'headphone') {
+                setHeadphoneType(singleProduct.headphoneDetail.HeadphoneType);
+                setHeadphoneColour(singleProduct.headphoneDetail.Colour);
+                setVoiceControl(singleProduct.headphoneDetail.VoiceControl);
+                setNoiseReductionType(singleProduct.headphoneDetail.NoiseReductionType);
+                setBuiltInMicrophone(singleProduct.headphoneDetail.BuiltInMicrophone);
+                setWarranty(singleProduct.headphoneDetail.Warranty);
+            }
         }
     }, [singleProduct])
 
-    const submitHandler = () => {
+    const submitHandler = (e) => {
+        e.preventDefault();
         dispatch({ type: UPDATE_PRODUCT_AS_ADMIN_RESET });
-        dispatch(updateProductAsAdmin(name, price, image, brand, category, countInStock, description, productID));
+
+        let headphoneDetail;
+        if (category === 'headphone') {
+            headphoneDetail = {
+                HeadphoneType,
+                Colour,
+                VoiceControl,
+                NoiseReductionType,
+                BuiltInMicrophone,
+                Warranty
+            }
+        }
+
+        dispatch(updateProductAsAdmin(
+            name, 
+            price, 
+            image, 
+            brand, 
+            category, 
+            countInStock, 
+            description, 
+            productID,
+            headphoneDetail
+        ));
     }
 
     const uploadFileHandler = async (e) => {
@@ -78,7 +121,7 @@ const ProductEditScreen = ({ history, match }) => {
             Go Back
         </Link>
         <FormContainer>
-            <h1>Edit User :</h1>
+            <h1>CREATE / EDIT PRODUCT :</h1>
             { error ? <Message variant="danger" content={error} /> : null }
             { loading ? <Loading /> : (
             <Form onSubmit={submitHandler}>
@@ -133,16 +176,45 @@ const ProductEditScreen = ({ history, match }) => {
                 <Form.Group controlId='category'>
                     <Form.Label>Category :</Form.Label>
                     <Form.Control 
-                        type="text" 
-                        placeholder="Category" 
-                        value={category} 
-                        onChange={(e) => setCategory(e.target.value)} />
+                        as="select"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}>
+                            <option value=''>Select Category...</option>
+                            <option value='laptops'> laptops </option>
+                            <option value='tvs'> tvs </option>
+                            <option value='phones'> phones </option>
+                            <option value='headphone'> headphone </option>
+                            <option value='game'> game </option>
+                    </Form.Control>
                 </Form.Group>
-
+                
+                {
+                    category === 'headphone' ? (
+                    <Form.Group controlId='headphoneDetail'>
+                        <Form.Label> HeadPhone Detail : </Form.Label>
+                        <HeadphoneInput 
+                            HeadphoneType={HeadphoneType} 
+                            setHeadphoneType={(value) => setHeadphoneType(value)}
+                            Colour={Colour}
+                            setHeadphoneColour={(value) => setHeadphoneColour(value)}
+                            VoiceControl={VoiceControl}
+                            setVoiceControl={(value) => setVoiceControl(value)}
+                            NoiseReductionType={NoiseReductionType}
+                            setNoiseReductionType={(value) => setNoiseReductionType(value)}
+                            BuiltInMicrophone={BuiltInMicrophone}
+                            setBuiltInMicrophone={(value) => setBuiltInMicrophone(value)}
+                            Warranty={Warranty}
+                            setWarranty={(value) => setWarranty(value)}
+                        />
+                    </Form.Group>
+                    ) : null
+                }
+               
                 <Form.Group controlId='description'>
                     <Form.Label>Description :</Form.Label>
                     <Form.Control 
-                        type="text" 
+                        as="textarea"
+                        row={10} 
                         placeholder="Description..." 
                         value={description} 
                         onChange={(e) => setDescription(e.target.value)} />

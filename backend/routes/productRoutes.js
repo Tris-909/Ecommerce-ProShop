@@ -25,6 +25,7 @@ import { getAlsoLikeProductsBasedOnCategory } from '../controller/AProductScreen
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
+
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/toptier').get(getTopProducts);
 router.route('/alsolike').get(getAlsoLikeProductsBasedOnCategory);

@@ -404,8 +404,14 @@ const updateProduct = AsyncHandler(async (req, res) => {
         product.countInStock = req.body.countInStock || product.countInStock;
         product.numReviews = req.body.numReviews || product.numReviews;
         product.description = req.body.description || product.description;
+       
+        if (req.body.headphoneDetail.HeadphoneType) {
+            product.headphoneDetail = req.body.headphoneDetail || product.headphoneDetail;
+        }
 
         const updatedProduct = await product.save();
+        console.log(updatedProduct);
+
         res.status(201).send(updatedProduct);
     } else {
         res.status(404);

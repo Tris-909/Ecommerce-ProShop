@@ -8,6 +8,7 @@ import Paginate from '../components/Paginate';
 import { getProductsList } from '../redux/actions/productActions';
 import { deleteProductAsAdmin, createProductAsAdmin } from '../redux/actions/adminActions';
 import { DELETE_PRODUCT_AS_ADMIN_RESET, CREATE_SAMPLE_PRODUCT_RESET } from '../redux/actions/actionTypes';
+import {withRouter} from 'react-router'
 
 const ProductListAdminScreen = ({ history, match }) => {
     const pageNumber = match.params.pageNumber || 1;
@@ -45,6 +46,10 @@ const ProductListAdminScreen = ({ history, match }) => {
         dispatch(createProductAsAdmin());
     }
 
+    const redirect = (id) => {
+        history.push(`/admin/products/${id}/edit`);
+    }
+
     return (
         <>
             <Row className="align-items-center">
@@ -79,11 +84,9 @@ const ProductListAdminScreen = ({ history, match }) => {
                                 <td>{product.category}</td>
                                 <td>{product.brand}</td>
                                 <td>
-                                    <LinkContainer to={`products/${product._id}/edit`}>
-                                        <Button variant="light" className="btn-sm">
-                                            <i className="fas fa-edit"></i>
-                                        </Button>
-                                    </LinkContainer>
+                                    <Button variant="light" className="btn-sm" onClick={() => redirect(product._id)}>
+                                        <i className="fas fa-edit"></i>
+                                    </Button>
                                     <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(product._id)}>
                                         <i className="fas fa-trash"></i>
                                     </Button>
@@ -99,4 +102,4 @@ const ProductListAdminScreen = ({ history, match }) => {
     )
 }
 
-export default ProductListAdminScreen;
+export default withRouter(ProductListAdminScreen);
