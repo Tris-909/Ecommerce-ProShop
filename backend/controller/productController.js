@@ -7,7 +7,7 @@ import User from '../models/user.js';
 //?   Public Route
 const getProducts = AsyncHandler(async (req, res) => {
     //TODO: Pagination Size 
-    const pageSize = 3;
+    const pageSize = 10;
     const page = Number(req.query.pageNumber) || 1;
     
     //TODO: search function for search bar
@@ -26,6 +26,8 @@ const getProducts = AsyncHandler(async (req, res) => {
         "_id": 1,
         "name": 1,
         "image": 1,
+        "category": 1,
+        "brand": 1
     }).limit(pageSize).skip(pageSize * (page - 1));
     res.send({ products, page, pages: Math.ceil(count / pageSize) });
 }) 
@@ -360,15 +362,27 @@ const deleteProductByIdAsAdmin = AsyncHandler(async (req, res) => {
 //? private/admin
 const createProduct = AsyncHandler(async (req, res) => {
     const product = new Product({
-        name: 'Sample Name',
-        price: 0,
         user: req.user._id,
+        name: 'Sample Name',
         image: '/images/sample.jpg',
         brand: 'sample brand',
         category: 'Text',
+        description: 'text',
+        youtube: 'youtubelink',
+        details: {exist: true},
+        tvsDetail: {exist: true},
+        phoneDetail: {exist: true},
+        headphoneDetail: {exist: true},
+        gameDetail: {exist: true},
+        rating: 0,
+        price: 0,
         countInStock: 0,
         numReviews: 0,
-        description: 'text'
+        numOf5StarsReviews: 0,
+        numOf4StarsReviews: 0,
+        numOf3StarsReviews: 0,
+        numOf2StarsReviews: 0,
+        numOf1StarsReviews: 0,
     });
 
     await product.save();

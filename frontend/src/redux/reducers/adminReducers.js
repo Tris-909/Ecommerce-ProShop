@@ -1,9 +1,4 @@
 import {
-    DELETE_PRODUCT_AS_ADMIN_REQUEST,
-    DELETE_PRODUCT_AS_ADMIN_SUCCESS,
-    DELETE_PRODUCT_AS_ADMIN_FAIL,
-    DELETE_PRODUCT_AS_ADMIN_RESET,
-
     GET_ALL_USERS,
     GET_ALL_USERS_SUCCESS,
     GET_ALL_USERS_FAIL,
@@ -19,56 +14,8 @@ import {
 
     UPDATE_USER_AS_ADMIN_REQUEST,
     UPDATE_USER_AS_ADMIN_SUCCESS,
-    UPDATE_USER_AS_ADMIN_FAIL,
-
-    CREATE_SAMPLE_PRODUCT_AS_ADMIN_REQUEST,
-    CREATE_SAMPLE_PRODUCT_AS_ADMIN_SUCCESS,
-    CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL,
-    CREATE_SAMPLE_PRODUCT_RESET,
-
-    UPDATE_PRODUCT_AS_ADMIN_REQUEST,
-    UPDATE_PRODUCT_AS_ADMIN_SUCCESS,
-    UPDATE_PRODUCT_AS_ADMIN_FAIL,
-    UPDATE_PRODUCT_AS_ADMIN_RESET
+    UPDATE_USER_AS_ADMIN_FAIL
 } from '../actions/actionTypes';
-
-
-const delete_Product_InitialState = {
-    success: false,
-    loading: false,
-    error: null
-}
-
-export const deleteProductAsAdmin = (state = delete_Product_InitialState, action) => {
-    switch(action.type) {
-        case DELETE_PRODUCT_AS_ADMIN_REQUEST: 
-            return {
-                ...state,
-                loading: true
-            }
-        case DELETE_PRODUCT_AS_ADMIN_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                success: true
-            }
-        case DELETE_PRODUCT_AS_ADMIN_FAIL: 
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case DELETE_PRODUCT_AS_ADMIN_RESET:
-            return {
-                success: false,
-                loading: false,
-                error: null
-            }
-        default: 
-            return state;
-    }
-
-}
 
 const users_List_Admin_Initial_State = {
     usersList: [],
@@ -195,80 +142,6 @@ export const update_userInfo_Admin_Reducer = (state = update_User_Admin_Reducer_
                 ...state,
                 loading: false,
                 error: action.payload
-            }
-        default:
-            return state;
-    }
-}
-
-const create_Product_Admin_Reducer_InitialState = {
-    createdProduct: null,
-    loading: false,
-    error: null,
-    success: false
-}
-
-export const created_Product_Admin_Reducer = (state = create_Product_Admin_Reducer_InitialState, action) => {
-    switch(action.type) {
-        case CREATE_SAMPLE_PRODUCT_AS_ADMIN_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
-        case CREATE_SAMPLE_PRODUCT_AS_ADMIN_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                createdProduct: action.payload,
-                success: true
-            }
-        case CREATE_SAMPLE_PRODUCT_AS_ADMIN_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        case CREATE_SAMPLE_PRODUCT_RESET: 
-            return {
-                ...state,
-                loading: false,
-                error: null,
-                success: false
-            }
-        default: 
-            return state;
-    }
-}
-
-const updated_Product_Admin_Reducer_InitialState = {
-    loading: false,
-    success: false,
-    error: null 
-}
-
-export const update_Product_Admin_Reducer = (state = updated_Product_Admin_Reducer_InitialState, action) => {
-    switch(action.type) {
-        case UPDATE_PRODUCT_AS_ADMIN_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
-        case UPDATE_PRODUCT_AS_ADMIN_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                success: true
-            }
-        case UPDATE_PRODUCT_AS_ADMIN_FAIL:
-            return {
-                ...state,
-                loading: false,
-                errro: action.payload
-            }
-        case UPDATE_PRODUCT_AS_ADMIN_RESET:
-            return {
-                ...state,
-                success: false
             }
         default:
             return state;

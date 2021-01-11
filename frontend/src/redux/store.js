@@ -29,14 +29,14 @@ import {
     putIsDeliveredStatus 
 } from './reducers/orderReducer.js';
 import { 
-    deleteProductAsAdmin,
     users_List_Admin_Reducer, 
     deleted_user_admin_Reducer, 
     get_userInfo_admin_Reducer, 
     update_userInfo_Admin_Reducer,
-    created_Product_Admin_Reducer,
-    update_Product_Admin_Reducer 
 } from './reducers/adminReducers';
+import {
+    deleteProductAsAdmin
+} from './reducers/Admin/Product/deleteProduct';
 import {
     alsoLikeReducer
 } from './reducers/alsoLikeReducers';
@@ -58,6 +58,12 @@ import {
 import {
     setReviewsReducer
 } from './reducers/Products/ReviewProduct/Review';
+import {
+    created_Product_Admin_Reducer
+} from './reducers/Admin/Product/createProductSample';
+import {
+    update_Product_Admin_Reducer 
+} from './reducers/Admin/Product/updateProduct';
 
 const reducer = combineReducers({
     productsList: searchProductsListReducer,
