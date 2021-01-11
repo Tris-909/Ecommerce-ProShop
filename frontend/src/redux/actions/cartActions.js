@@ -53,7 +53,7 @@ export const addItemToCart = (itemId, productName, productImage, productPrice, c
     } catch(error) {
         dispatch({
             type: ADD_PRODUCT_TO_CART_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            addItemError: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     } 
 }
@@ -101,11 +101,12 @@ export const getAllItemsCart = () => async (dispatch, getState) => {
 
         dispatch({
             type: GET_ALL_ITEMS_FROM_CART_SUCCESS,
-            payload: data
+            cartItems: data
         });
     } catch(error) {
         dispatch({
-            type: GET_ALL_ITEMS_FROM_CART_FAIL
+            type: GET_ALL_ITEMS_FROM_CART_FAIL,
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
@@ -113,7 +114,7 @@ export const getAllItemsCart = () => async (dispatch, getState) => {
 export const saveShippingAddress = (data) => async (dispatch) => {
     dispatch({
         type: SAVE_SHIPPING_ADDRESS_CART,
-        payload: data
+        shippingAddress: data
     });
 
     localStorage.setItem('shippingAddress', JSON.stringify(data));
@@ -122,7 +123,7 @@ export const saveShippingAddress = (data) => async (dispatch) => {
 export const savePaymentMethod = (paymentMethod) => async (dispatch) => {
     dispatch({
         type: SAVE_PAYMENT_METHOD,
-        payload: paymentMethod
+        paymentMethod: paymentMethod
     });
 
     localStorage.setItem('paymentMethod', JSON.stringify(paymentMethod));
