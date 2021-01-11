@@ -405,13 +405,15 @@ const updateProduct = AsyncHandler(async (req, res) => {
         product.numReviews = req.body.numReviews || product.numReviews;
         product.description = req.body.description || product.description;
        
-        if (req.body.headphoneDetail.HeadphoneType) {
+        if (req.body.headphoneDetail !== undefined) {
             product.headphoneDetail = req.body.headphoneDetail || product.headphoneDetail;
+        } 
+        
+        if (req.body.gameDetail !== undefined) {
+            product.gameDetail = req.body.gameDetail || product.gameDetail;
         }
 
         const updatedProduct = await product.save();
-        console.log(updatedProduct);
-
         res.status(201).send(updatedProduct);
     } else {
         res.status(404);

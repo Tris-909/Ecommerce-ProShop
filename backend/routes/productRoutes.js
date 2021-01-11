@@ -26,7 +26,6 @@ import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
 
-router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/toptier').get(getTopProducts);
 router.route('/alsolike').get(getAlsoLikeProductsBasedOnCategory);
 router.route('/carousel').get(getTopRatedProducts);
@@ -47,9 +46,7 @@ router.route('/getreviews/LtHDA/:id').get(getReviewsFilteredLowToHighDisAgree);
 
 router.route('/deletereview/:productid/:reviewid').delete(protect, deleteReviewProduct);
 router.route('/list/:category').get(getListOfProducts);
-router.route('/:id')
-.get(getProductById)
-.delete(protect, admin, deleteProductByIdAsAdmin)
-.put(protect, admin, updateProduct);
+router.route('/:id').get(getProductById).delete(protect, admin, deleteProductByIdAsAdmin).put(protect, admin, updateProduct);
+router.route('/').get(getProducts).post(protect, admin, createProduct);
 
 export default router;

@@ -203,8 +203,7 @@ export const createProductAsAdmin = () => async(dispatch, getState) => {
     }
 }
 
-export const updateProductAsAdmin = (
-    name, 
+export const updateProductAsAdmin = ( name, 
     price,
     image, 
     brand, 
@@ -212,9 +211,8 @@ export const updateProductAsAdmin = (
     countInStock, 
     description, 
     id,
-    headphoneDetail) => async(dispatch, getState) => {
-
-    console.log(headphoneDetail);
+    headphoneDetail,
+    gameDetail) => async(dispatch, getState) => {
 
     try {
         dispatch({ type:  UPDATE_PRODUCT_AS_ADMIN_REQUEST });
@@ -227,8 +225,6 @@ export const updateProductAsAdmin = (
             }
         }
 
-        console.log('trigger');
-
         await axios.put(`/api/products/${id}`, {
             name, 
             price,
@@ -237,7 +233,8 @@ export const updateProductAsAdmin = (
             category,
             countInStock, 
             description,
-            headphoneDetail
+            headphoneDetail,
+            gameDetail
         }, config);
 
         dispatch({

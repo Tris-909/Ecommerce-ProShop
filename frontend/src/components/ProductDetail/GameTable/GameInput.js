@@ -20,7 +20,6 @@ const GameInput = (props) => {
     return (
         <Row style={{ marginBottom: '2rem', marginTop: '2rem' }}>
             <Col md={8}>
-                <h2> Details : </h2>
                 <Table striped bordered hover>
                   <thead></thead>
                   <tbody>

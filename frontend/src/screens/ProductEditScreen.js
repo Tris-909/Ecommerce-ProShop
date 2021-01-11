@@ -83,7 +83,7 @@ const ProductEditScreen = ({ history, match }) => {
         e.preventDefault();
         dispatch({ type: UPDATE_PRODUCT_AS_ADMIN_RESET });
 
-        let headphoneDetail;
+        let headphoneDetail, gameDetail;
         if (category === 'headphone') {
             headphoneDetail = {
                 HeadphoneType,
@@ -92,6 +92,15 @@ const ProductEditScreen = ({ history, match }) => {
                 NoiseReductionType,
                 BuiltInMicrophone,
                 Warranty
+            }
+        } else if (category === 'game') {
+            gameDetail = {
+                Platform,
+                GamingGerne,
+                Rating,
+                ConsumerAdvice,
+                GameDeveloper,
+                GamePublisher
             }
         }
 
@@ -104,7 +113,8 @@ const ProductEditScreen = ({ history, match }) => {
             countInStock, 
             description, 
             productID,
-            headphoneDetail
+            headphoneDetail,
+            gameDetail
         ));
     }
 
