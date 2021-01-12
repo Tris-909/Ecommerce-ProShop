@@ -13,6 +13,7 @@ import HeadphoneInput from '../components/ProductDetail/HeadphoneTable/HeadPhone
 import GameInput from '../components/ProductDetail/GameTable/GameInput';
 import TVInput from '../components/ProductDetail/TvTable/TVInput';
 import PhoneInput from '../components/ProductDetail/PhoneTable/PhoneInput';
+import LaptopInput from '../components/ProductDetail/LaptopTable/LaptopInput';
 
 const ProductEditScreen = ({ history, match }) => {
     const dispatch = useDispatch();
@@ -30,6 +31,27 @@ const ProductEditScreen = ({ history, match }) => {
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [uploading, setUploading] = useState(false);
+
+    //! LAPTOP
+    const [displaySizeInches, setdisplaySizeInches] = useState('');
+    const [resolutionPixels, setresolutionPixels] = useState('');
+    const [laptopscreenResolution, setlaptopscreenResolution] = useState('');
+    const [displayType, setdisplayType] = useState('');
+    const [proccessorType, setproccessorType] = useState('');
+    const [proccessorCores, setproccessorCores] = useState('');    
+    const [processorMemoryCache, setprocessorMemoryCache] = useState('');
+    const [processorClockSpeed, setprocessorClockSpeed] = useState('');
+    const [processorMaxClockSpeed, setprocessorMaxClockSpeed] = useState('');
+    const [graphicsProcessor, setgraphicsProcessor] = useState('');
+    const [ram, setram] = useState('');
+    const [ssdStorage, setssdStorage] = useState('');
+    const [usbTwoPointOPorts, setusbTwoPointOPorts] = useState('');
+    const [usbCPorts, setusbCPorts] = useState('');
+    const [cardReader, setcardReader] = useState('');
+    const [webCam, setwebCam] = useState('');
+    const [laptopwifi, setlaptopwifi] = useState('');
+    const [operatingSystem, setoperatingSystem] = useState('');
+    const [manufacturersWarantty, setmanufacturersWarantty] = useState('');
 
     //! PHONE
     const [phoneOperatingSystem, setphoneOperatingSystem] = useState('');
@@ -125,6 +147,26 @@ const ProductEditScreen = ({ history, match }) => {
                 setProcessor(singleProduct.phoneDetail.Processor);
                 setphoneWifi(singleProduct.phoneDetail.Wifi);
                 setphoneWarranty(singleProduct.phoneDetail.Warranty);
+            } else if (singleProduct.category === 'laptops') {
+                setdisplaySizeInches(singleProduct.details.displaySizeInches);
+                setresolutionPixels(singleProduct.details.resolutionPixels);
+                setlaptopscreenResolution(singleProduct.details.screenResolution);
+                setdisplayType(singleProduct.details.displayType);
+                setproccessorType(singleProduct.details.proccessorType);
+                setproccessorCores(singleProduct.details.proccessorCores);
+                setprocessorMemoryCache(singleProduct.details.processorMemoryCache);
+                setprocessorClockSpeed(singleProduct.details.processorClockSpeed);
+                setprocessorMaxClockSpeed(singleProduct.details.processorMaxClockSpeed);
+                setgraphicsProcessor(singleProduct.details.graphicsProcessor);
+                setram(singleProduct.details.ram);
+                setssdStorage(singleProduct.details.ssdStorage);
+                setusbTwoPointOPorts(singleProduct.details.usbTwoPointOPorts);
+                setusbCPorts(singleProduct.details.usbCPorts);
+                setcardReader(singleProduct.details.cardReader);
+                setwebCam(singleProduct.details.webCam);
+                setlaptopwifi(singleProduct.details.wifi);
+                setoperatingSystem(singleProduct.details.operatingSystem);
+                setmanufacturersWarantty(singleProduct.details.manufacturersWarantty);
             }
 
         }
@@ -134,7 +176,7 @@ const ProductEditScreen = ({ history, match }) => {
         e.preventDefault();
         dispatch({ type: UPDATE_PRODUCT_AS_ADMIN_RESET });
 
-        let headphoneDetail, gameDetail, tvsDetail, phoneDetail;
+        let headphoneDetail, gameDetail, tvsDetail, phoneDetail, details;
         if (category === 'headphone') {
             headphoneDetail = {
                 HeadphoneType,
@@ -180,6 +222,28 @@ const ProductEditScreen = ({ history, match }) => {
                 Wifi: phoneWifi,
                 Warranty: phoneWarranty
             }
+        } else if (category === 'laptops') {
+            details = {
+                displaySizeInches,
+                resolutionPixels,
+                screenResolution: laptopscreenResolution,
+                displayType,
+                proccessorType,
+                proccessorCores,
+                processorMemoryCache,
+                processorClockSpeed,
+                processorMaxClockSpeed,
+                graphicsProcessor,
+                ram,
+                ssdStorage,
+                usbTwoPointOPorts,
+                usbCPorts,
+                cardReader,
+                webCam,
+                wifi: laptopwifi,
+                operatingSystem,
+                manufacturersWarantty
+            }
         }
 
         dispatch(updateProductAsAdmin(
@@ -191,6 +255,7 @@ const ProductEditScreen = ({ history, match }) => {
             countInStock, 
             description, 
             productID,
+            details,
             tvsDetail,
             phoneDetail,
             headphoneDetail,
@@ -293,6 +358,53 @@ const ProductEditScreen = ({ history, match }) => {
                             <option value='game'> game </option>
                     </Form.Control>
                 </Form.Group>
+
+                {
+                    category === 'laptops' ? (
+                        <Form.Group controlId='details'>
+                        <LaptopInput 
+                           displaySizeInches={displaySizeInches}
+                           setdisplaySizeInches={(value) => setdisplaySizeInches(value)}
+                           resolutionPixels={resolutionPixels}
+                           setresolutionPixels={(value) => setresolutionPixels(value)}
+                           screenResolution={laptopscreenResolution}
+                           setlaptopscreenResolution={(value) => setlaptopscreenResolution(value)}
+                           displayType={displayType}
+                           setdisplayType={(value) => setdisplayType(value)}
+                           proccessorType={proccessorType}
+                           setproccessorType={(value) => setproccessorType(value)}
+                           proccessorCores={proccessorCores}
+                           setproccessorCores={(value) => setproccessorCores(value)}
+                           processorMemoryCache={processorMemoryCache}
+                           setprocessorMemoryCache={(value) => setprocessorMemoryCache(value)}
+                           processorClockSpeed={processorClockSpeed}
+                           setprocessorClockSpeed={(value) => setprocessorClockSpeed(value)}
+                           processorMaxClockSpeed={processorMaxClockSpeed}
+                           setprocessorMaxClockSpeed={(value) => setprocessorMaxClockSpeed(value)}
+                           graphicsProcessor={graphicsProcessor}
+                           setgraphicsProcessor={(value) => setgraphicsProcessor(value)}
+                           ram={ram}
+                           setram={(value) => setram(value)}
+                           ssdStorage={ssdStorage}
+                           setssdStorage={(value) => setssdStorage(value)}
+                           usbTwoPointOPorts={usbTwoPointOPorts} 
+                           setusbTwoPointOPorts={(value) => setusbTwoPointOPorts(value)}
+                           usbCPorts={usbCPorts}
+                           setusbCPorts={(value) => setusbCPorts(value)}
+                           cardReader={cardReader} 
+                           setcardReader={(value) => setcardReader(value)}
+                           webCam={webCam}
+                           setwebCam={(value) => setwebCam(value)}
+                           wifi={laptopwifi}
+                           setlaptopwifi={(value) => setlaptopwifi(value)}
+                           operatingSystem={operatingSystem}
+                           setoperatingSystem={(value) => setoperatingSystem(value)}
+                           manufacturersWarantty={manufacturersWarantty}
+                           setmanufacturersWarantty={(value) => setmanufacturersWarantty(value)}
+                        />
+                    </Form.Group>
+                    ) : null
+                }
 
                 {
                     category === 'phones' ? (

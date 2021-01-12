@@ -405,6 +405,10 @@ const updateProduct = AsyncHandler(async (req, res) => {
         product.numReviews = req.body.numReviews || product.numReviews;
         product.description = req.body.description || product.description;
 
+        if (req.body.details !== undefined) {
+            product.details = req.body.details || product.details;
+        }
+
         if (req.body.tvsDetail !== undefined) {
             product.tvsDetail = req.body.tvsDetail || product.tvsDetail;
         }
