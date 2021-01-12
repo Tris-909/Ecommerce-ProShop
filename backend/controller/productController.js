@@ -409,6 +409,10 @@ const updateProduct = AsyncHandler(async (req, res) => {
             product.tvsDetail = req.body.tvsDetail || product.tvsDetail;
         }
 
+        if (req.body.phoneDetail !== undefined) {
+            product.phoneDetail = req.body.phoneDetail || product.phoneDetail;
+        }
+
         if (req.body.headphoneDetail !== undefined) {
             product.headphoneDetail = req.body.headphoneDetail || product.headphoneDetail;
         } 
@@ -416,7 +420,6 @@ const updateProduct = AsyncHandler(async (req, res) => {
         if (req.body.gameDetail !== undefined) {
             product.gameDetail = req.body.gameDetail || product.gameDetail;
         }
-
 
         const updatedProduct = await product.save();
         res.status(201).send(updatedProduct);

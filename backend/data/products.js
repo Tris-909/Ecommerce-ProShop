@@ -547,18 +547,23 @@ const products = [
       displaySizeInches: '15.6"',
       resolutionPixels: '1920 x 1080',
       screenResolution: 'Full HD',
+
       displayType: 'No Info',
       proccessorType: 'Intel Core i7',
       proccessorCores: 'Hexa Core',
+
       processorMemoryCache: '12',
       processorClockSpeed: 'No Info',
       processorMaxClockSpeed: '5.1 GHz',
+
       graphicsProcessor: 'NVIDIA GeForce RTX 2070',
       ram: '16GB',
       ssdStorage: '512GB',
+
       usbTwoPointOPorts: 'No Info',
       usbCPorts: '1',
       cardReader: 'yes',
+
       webCam: 'yes',
       wifi: 'yes',
       operatingSystem: 'Windows 10 Home',
@@ -1078,12 +1083,15 @@ const products = [
     phoneOperatingSystem: 'Android',
     networkCompability: '5G',
     DualSim: 'Yes',
+
     Colour: 'Multi - Color',
     DeviceScreen: '6.6 Inches',
     Resolution: '2340 x 1080 pixels',
+
     InternalMemory: '512 GB',
     FrontCamera: '24MP',
     RearCamera: '64MP + 13MP (Ultra-wide) + 5MP (Macro)',
+    
     Processor: 'Qualcomm Snapdragon 865 PLUS SM8250, Qcta-core CPUs, 3.1GHz',
     Wifi: 'yes',
     Warranty: '1 Year'

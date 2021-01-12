@@ -12,6 +12,7 @@ import { UPDATE_PRODUCT_AS_ADMIN_RESET } from '../redux/actions/actionTypes';
 import HeadphoneInput from '../components/ProductDetail/HeadphoneTable/HeadPhoneInput';
 import GameInput from '../components/ProductDetail/GameTable/GameInput';
 import TVInput from '../components/ProductDetail/TvTable/TVInput';
+import PhoneInput from '../components/ProductDetail/PhoneTable/PhoneInput';
 
 const ProductEditScreen = ({ history, match }) => {
     const dispatch = useDispatch();
@@ -30,14 +31,28 @@ const ProductEditScreen = ({ history, match }) => {
     const [description, setDescription] = useState('');
     const [uploading, setUploading] = useState(false);
 
+    //! PHONE
+    const [phoneOperatingSystem, setphoneOperatingSystem] = useState('');
+    const [networkCompability, setnetworkCompability] = useState('');
+    const [DualSim, setDualSim] = useState('');
+    const [phoneColour, setphoneColour] = useState('');
+    const [DeviceScreen, setDeviceScreen] = useState('');
+    const [Resolution, setResolution] = useState('');
+    const [InternalMemory, setInternalMemory] = useState('');
+    const [FrontCamera, setFrontCamera] = useState('');
+    const [RearCamera, setRearCamera] = useState('');
+    const [Processor, setProcessor] = useState('');
+    const [phoneWifi, setphoneWifi] = useState('');
+    const [phoneWarranty, setphoneWarranty] = useState('');
+
     //! TV
     const [ screenSizes, setscreenSizes] = useState('');
     const [screenType, setscreenType] = useState('');
     const [screenResolution, setscreenResolution] = useState('');
     const [resolutionInPixel, setresolutionInPixel] = useState('');
     const [refreshRate, setrefreshRate] = useState('');
-    const [ wifi, setwifi] = useState('');
-    const [ usbPorts, setusbPorts] = useState('');
+    const [wifi, setwifi] = useState('');
+    const [usbPorts, setusbPorts] = useState('');
     const [sizeHeightWidthDepth, setsizeHeightWidthDepth] = useState('');
     const [tvswarranty, settvswarranty] = useState('');
 
@@ -97,6 +112,19 @@ const ProductEditScreen = ({ history, match }) => {
                 setusbPorts(singleProduct.tvsDetail.usbPorts);
                 setsizeHeightWidthDepth(singleProduct.tvsDetail.sizeHeightWidthDepth);
                 settvswarranty(singleProduct.tvsDetail.warranty);
+            } else if (singleProduct.category === 'phones') {
+                setphoneOperatingSystem(singleProduct.phoneDetail.phoneOperatingSystem);
+                setnetworkCompability(singleProduct.phoneDetail.networkCompability);
+                setDualSim(singleProduct.phoneDetail.DualSim);
+                setphoneColour(singleProduct.phoneDetail.Colour);
+                setDeviceScreen(singleProduct.phoneDetail.DeviceScreen);
+                setResolution(singleProduct.phoneDetail.Resolution);
+                setInternalMemory(singleProduct.phoneDetail.InternalMemory);
+                setFrontCamera(singleProduct.phoneDetail.FrontCamera);
+                setRearCamera(singleProduct.phoneDetail.RearCamera);
+                setProcessor(singleProduct.phoneDetail.Processor);
+                setphoneWifi(singleProduct.phoneDetail.Wifi);
+                setphoneWarranty(singleProduct.phoneDetail.Warranty);
             }
 
         }
@@ -106,7 +134,7 @@ const ProductEditScreen = ({ history, match }) => {
         e.preventDefault();
         dispatch({ type: UPDATE_PRODUCT_AS_ADMIN_RESET });
 
-        let headphoneDetail, gameDetail, tvsDetail;
+        let headphoneDetail, gameDetail, tvsDetail, phoneDetail;
         if (category === 'headphone') {
             headphoneDetail = {
                 HeadphoneType,
@@ -136,6 +164,21 @@ const ProductEditScreen = ({ history, match }) => {
                 usbPorts,
                 sizeHeightWidthDepth,
                 tvswarranty
+            } 
+        } else if (category === 'phones') {
+            phoneDetail = {
+                phoneOperatingSystem,
+                networkCompability,
+                DualSim,
+                Colour: phoneColour,
+                DeviceScreen,
+                Resolution, 
+                InternalMemory, 
+                FrontCamera,
+                RearCamera,
+                Processor,
+                Wifi: phoneWifi,
+                Warranty: phoneWarranty
             }
         }
 
@@ -149,6 +192,7 @@ const ProductEditScreen = ({ history, match }) => {
             description, 
             productID,
             tvsDetail,
+            phoneDetail,
             headphoneDetail,
             gameDetail
         ));
@@ -249,7 +293,40 @@ const ProductEditScreen = ({ history, match }) => {
                             <option value='game'> game </option>
                     </Form.Control>
                 </Form.Group>
-                
+
+                {
+                    category === 'phones' ? (
+                        <Form.Group controlId='phoneDetail'>
+                        <PhoneInput 
+                            phoneOperatingSystem={phoneOperatingSystem} 
+                            setphoneOperatingSystem={(value) => setphoneOperatingSystem(value)}
+                            networkCompability={networkCompability}
+                            setnetworkCompability={(value) => setnetworkCompability(value)}
+                            DualSim={DualSim}
+                            setDualSim={(value) => setDualSim(value)}
+                            phoneColour={phoneColour}
+                            setphoneColour={(value) => setphoneColour(value)}
+                            DeviceScreen={DeviceScreen}
+                            setDeviceScreen={(value) => setDeviceScreen(value)}
+                            Resolution={Resolution}
+                            setResolution={(value) => setResolution(value)}
+                            InternalMemory={InternalMemory}
+                            setInternalMemory={(value) => setInternalMemory(value)}
+                            FrontCamera={FrontCamera}
+                            setFrontCamera={(value) => setFrontCamera(value)}
+                            RearCamera={RearCamera}
+                            setRearCamera={(value) => setRearCamera(value)}
+                            Processor={Processor}
+                            setProcessor={(value) => setProcessor(value)}
+                            phoneWifi={phoneWifi}
+                            setphoneWifi={(value) => setphoneWifi(value)}
+                            phoneWarranty={phoneWarranty}
+                            setphoneWarranty={(value) => setphoneWarranty(value)}
+                        />
+                    </Form.Group>
+                    ) : null
+                }
+
                 {
                     category === 'tvs' ? (
                     <Form.Group controlId='tvsDetail'>

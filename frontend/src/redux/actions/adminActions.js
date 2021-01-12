@@ -212,6 +212,7 @@ export const updateProductAsAdmin = ( name,
     description, 
     id,
     tvsDetail,
+    phoneDetail,
     headphoneDetail,
     gameDetail) => async(dispatch, getState) => {
 
@@ -235,6 +236,7 @@ export const updateProductAsAdmin = ( name,
             countInStock, 
             description,
             tvsDetail,
+            phoneDetail,
             headphoneDetail,
             gameDetail
         }, config);
