@@ -11,6 +11,7 @@ import { updateProductAsAdmin } from '../redux/actions/adminActions';
 import { UPDATE_PRODUCT_AS_ADMIN_RESET } from '../redux/actions/actionTypes';
 import HeadphoneInput from '../components/ProductDetail/HeadphoneTable/HeadPhoneInput';
 import GameInput from '../components/ProductDetail/GameTable/GameInput';
+import TVInput from '../components/ProductDetail/TvTable/TVInput';
 
 const ProductEditScreen = ({ history, match }) => {
     const dispatch = useDispatch();
@@ -28,6 +29,17 @@ const ProductEditScreen = ({ history, match }) => {
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [uploading, setUploading] = useState(false);
+
+    //! TV
+    const [ screenSizes, setscreenSizes] = useState('');
+    const [screenType, setscreenType] = useState('');
+    const [screenResolution, setscreenResolution] = useState('');
+    const [resolutionInPixel, setresolutionInPixel] = useState('');
+    const [refreshRate, setrefreshRate] = useState('');
+    const [ wifi, setwifi] = useState('');
+    const [ usbPorts, setusbPorts] = useState('');
+    const [sizeHeightWidthDepth, setsizeHeightWidthDepth] = useState('');
+    const [tvswarranty, settvswarranty] = useState('');
 
     //! HEADPHONE 
     const [HeadphoneType, setHeadphoneType] = useState('');
@@ -75,7 +87,18 @@ const ProductEditScreen = ({ history, match }) => {
                 setConsumerAdvice(singleProduct.gameDetail.ConsumerAdvice);
                 setGameDeveloper(singleProduct.gameDetail.GameDeveloper);
                 setGamePublisher(singleProduct.gameDetail.GamePublisher);
+            } else if (singleProduct.category === 'tvs') {
+                setscreenSizes(singleProduct.tvsDetail.screenSizes);
+                setscreenType(singleProduct.tvsDetail.screenType);
+                setscreenResolution(singleProduct.tvsDetail.screenResolution);
+                setresolutionInPixel(singleProduct.tvsDetail.resolutionInPixel);
+                setrefreshRate(singleProduct.tvsDetail.refreshRate);
+                setwifi(singleProduct.tvsDetail.wifi);
+                setusbPorts(singleProduct.tvsDetail.usbPorts);
+                setsizeHeightWidthDepth(singleProduct.tvsDetail.sizeHeightWidthDepth);
+                settvswarranty(singleProduct.tvsDetail.warranty);
             }
+
         }
     }, [singleProduct])
 
@@ -83,7 +106,7 @@ const ProductEditScreen = ({ history, match }) => {
         e.preventDefault();
         dispatch({ type: UPDATE_PRODUCT_AS_ADMIN_RESET });
 
-        let headphoneDetail, gameDetail;
+        let headphoneDetail, gameDetail, tvsDetail;
         if (category === 'headphone') {
             headphoneDetail = {
                 HeadphoneType,
@@ -102,6 +125,18 @@ const ProductEditScreen = ({ history, match }) => {
                 GameDeveloper,
                 GamePublisher
             }
+        } else if (category === 'tvs') {
+            tvsDetail = {
+                screenSizes,
+                screenType,
+                screenResolution,
+                resolutionInPixel,
+                refreshRate,
+                wifi,
+                usbPorts,
+                sizeHeightWidthDepth,
+                tvswarranty
+            }
         }
 
         dispatch(updateProductAsAdmin(
@@ -113,6 +148,7 @@ const ProductEditScreen = ({ history, match }) => {
             countInStock, 
             description, 
             productID,
+            tvsDetail,
             headphoneDetail,
             gameDetail
         ));
@@ -215,9 +251,35 @@ const ProductEditScreen = ({ history, match }) => {
                 </Form.Group>
                 
                 {
+                    category === 'tvs' ? (
+                    <Form.Group controlId='tvsDetail'>
+                        <TVInput 
+                            screenSizes={screenSizes} 
+                            setscreenSizes={(value) => setscreenSizes(value)}
+                            screenType={screenType}
+                            setscreenType={(value) => setscreenType(value)}
+                            screenResolution={screenResolution}
+                            setscreenResolution={(value) => setscreenResolution(value)}
+                            resolutionInPixel={resolutionInPixel}
+                            setresolutionInPixel={(value) => setresolutionInPixel(value)}
+                            refreshRate={refreshRate}
+                            setrefreshRate={(value) => setrefreshRate(value)}
+                            wifi={wifi}
+                            setwifi={(value) => setwifi(value)}
+                            usbPorts={usbPorts}
+                            setusbPorts={(value) => setusbPorts(value)}
+                            sizeHeightWidthDepth={sizeHeightWidthDepth}
+                            setsizeHeightWidthDepth={(value) => setsizeHeightWidthDepth(value)}
+                            warranty={tvswarranty}
+                            setwarranty={(value) => settvswarranty(value)}
+                        />
+                    </Form.Group>
+                    ) : null
+                }
+
+                {
                     category === 'headphone' ? (
                     <Form.Group controlId='headphoneDetail'>
-                        <Form.Label> HeadPhone Detail : </Form.Label>
                         <HeadphoneInput 
                             HeadphoneType={HeadphoneType} 
                             setHeadphoneType={(value) => setHeadphoneType(value)}
@@ -239,7 +301,6 @@ const ProductEditScreen = ({ history, match }) => {
                 {
                     category === 'game' ? (
                         <Form.Group controlId='gameDetail'>
-                            <Form.Label> Game Detail : </Form.Label>
                             <GameInput 
                                  Platform={Platform}
                                  setPlatform={(value) => setPlatform(value)}
@@ -262,7 +323,7 @@ const ProductEditScreen = ({ history, match }) => {
                     <Form.Label>Description :</Form.Label>
                     <Form.Control 
                         as="textarea"
-                        row={10} 
+                        rows={7} 
                         placeholder="Description..." 
                         value={description} 
                         onChange={(e) => setDescription(e.target.value)} />

@@ -19,7 +19,8 @@ const HeadphoneInput = (props) => {
 
     return (
         <Row style={{ marginBottom: '2rem', marginTop: '2rem' }}>
-            <Col md={8}>
+            <Col md={12}>
+              <h2> Headphone Details : </h2>
                 <Table striped bordered hover>
                   <thead>
                   </thead>

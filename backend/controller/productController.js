@@ -404,7 +404,11 @@ const updateProduct = AsyncHandler(async (req, res) => {
         product.countInStock = req.body.countInStock || product.countInStock;
         product.numReviews = req.body.numReviews || product.numReviews;
         product.description = req.body.description || product.description;
-       
+
+        if (req.body.tvsDetail !== undefined) {
+            product.tvsDetail = req.body.tvsDetail || product.tvsDetail;
+        }
+
         if (req.body.headphoneDetail !== undefined) {
             product.headphoneDetail = req.body.headphoneDetail || product.headphoneDetail;
         } 
@@ -412,6 +416,7 @@ const updateProduct = AsyncHandler(async (req, res) => {
         if (req.body.gameDetail !== undefined) {
             product.gameDetail = req.body.gameDetail || product.gameDetail;
         }
+
 
         const updatedProduct = await product.save();
         res.status(201).send(updatedProduct);

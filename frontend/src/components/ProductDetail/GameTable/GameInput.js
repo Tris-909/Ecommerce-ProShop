@@ -19,9 +19,11 @@ const GameInput = (props) => {
 
     return (
         <Row style={{ marginBottom: '2rem', marginTop: '2rem' }}>
-            <Col md={8}>
+            <Col md={12}>
                 <Table striped bordered hover>
-                  <thead></thead>
+                  <thead>
+                    <h2> Game Details : </h2>
+                  </thead>
                   <tbody>
                     <tr>
                       <td>Platform</td>
