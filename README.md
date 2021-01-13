@@ -1,5 +1,8 @@
 # Project Name : E-commerce Proshop 
 - LIVE DEMO : [E-commerce Proshop](https://proshop-tris.herokuapp.com/)
+    - Please use this Paypal SandBox Account to test Paypal APIs : 
+      - Account : sb-uj3sb3898726@personal.example.com 
+      - Password : ZRy:}9n+
 
 ## What is this project about ?
 - This is an e-commerce websites to sell electronics that I have built to demonstrate my skills as a developer. I got inspired by E-commerce websites like JB-Hifi so I decided to build an e-commerce websites that looks similar to them.
@@ -35,6 +38,9 @@
   - Can delete their own reviews 
   - Can change their user information account 
   - Proceed to buy a item using credit card or Paypal 
+    - Please use this Paypal SandBox Account to test Paypal APIs : 
+      - Account : sb-uj3sb3898726@personal.example.com 
+      - Password : ZRy:}9n+
  
 - As **Admin** : 
   - Have all the privileges above 
