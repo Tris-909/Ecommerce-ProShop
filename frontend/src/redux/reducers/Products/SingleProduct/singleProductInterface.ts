@@ -94,7 +94,7 @@ export interface SingleProduct {
     headphoneDetail: HeadphoneDetail,
     gameDetail: GameDetail,
     user: string,
-    reviews: any[],
+    reviews?: any[],
     createdAt: Date,
     updatedAt: Date
 }

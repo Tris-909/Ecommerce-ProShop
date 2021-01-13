@@ -25,6 +25,16 @@ export interface singleAgreeOrDisAgreeVote {
     agree: boolean
 }
 
+export interface SingleTopProduct {
+    _id: string,
+    image: string,
+    name: string,
+    rating: number,
+    numReviews: number,
+    price: number,
+    category: string
+}
+
 export interface User {
     _id: string,
     name: string,

@@ -50,7 +50,7 @@ interface AgreeOrDisAgree {
     userId: string
 }
 
-interface SingleReview {
+export interface SingleReview {
     numOfAgrees: number,
     numOfDisAgrees: number,
     _id: string,
