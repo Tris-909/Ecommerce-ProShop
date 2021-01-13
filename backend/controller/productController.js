@@ -304,7 +304,7 @@ const stickAReviewAsDisAgree = AsyncHandler(async (req, res) => {
     const product = await Product.findById(productId);
     const user = await User.findById(req.user._id);
 
-    if (product) {        
+    if (product) {      
         for (let i = 0; i < req.user.agreeAndDisAgree.length; i++) {
             if (reviewId == req.user.agreeAndDisAgree[i].reviewId ) {
                 res.status(400);

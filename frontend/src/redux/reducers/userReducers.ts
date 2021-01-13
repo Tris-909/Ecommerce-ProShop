@@ -130,7 +130,7 @@ interface Details {
     _id?: string,
     name?: string,
     email?: string,
-    isAdmin?: BooleanLiteral
+    isAdmin?: boolean
 }
 
 interface DetailState {

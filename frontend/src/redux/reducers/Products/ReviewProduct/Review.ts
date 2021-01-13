@@ -67,9 +67,7 @@ interface SingleReview {
 interface ReviewState {
     currentReviews: SingleReview[],
     setAgreeSuccess: boolean,
-    setAgreeError: string | null,
     setDisAgreeSuccess: boolean,
-    setDisAgreeError: string | null,
 
     getReviewsHTLRSuccess: boolean,
     getReviewsHTLRError: string | null,
@@ -99,9 +97,7 @@ interface ReviewState {
 const setReviewsInitialState: ReviewState = {
     currentReviews: [],
     setAgreeSuccess: false,
-    setAgreeError: null,
     setDisAgreeSuccess: false,
-    setDisAgreeError: null,
 
     getReviewsHTLRSuccess: false,
     getReviewsHTLRError: null,
@@ -385,8 +381,7 @@ export const setReviewsReducer = (state = setReviewsInitialState, action: Curren
         case SET_A_REVIEW_AS_AGREE_FAIL:
             return {
                 ...state,
-                loading: false,
-                setAgreeError: action.payload.error
+                loading: false
             }
         case SET_A_REVIEW_AS_AGREE_RESET:
             return {
@@ -409,15 +404,13 @@ export const setReviewsReducer = (state = setReviewsInitialState, action: Curren
         case SET_A_REVIEW_AS_DISAGREE_FAIL:
             return {
                 ...state,
-                loading: false,
-                setDisAgreeError: action.payload.error
+                loading: false
             }
         case SET_A_REVIEW_AS_DISAGREE_RESET:
             return {
                 ...state,
                 loading: false,
-                setDisAgreeSuccess: false,
-                setDisAgreeError: null
+                setDisAgreeSuccess: false
             }
         default:
             return state;

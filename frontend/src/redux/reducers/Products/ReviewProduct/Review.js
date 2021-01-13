@@ -23,9 +23,7 @@ var actionTypes_1 = require("../../../actions/actionTypes");
 var setReviewsInitialState = {
     currentReviews: [],
     setAgreeSuccess: false,
-    setAgreeError: null,
     setDisAgreeSuccess: false,
-    setDisAgreeError: null,
     getReviewsHTLRSuccess: false,
     getReviewsHTLRError: null,
     getReviewsLTHRSuccess: false,
@@ -136,7 +134,7 @@ var setReviewsReducer = function (state, action) {
         case actionTypes_1.SET_A_REVIEW_AS_AGREE_SUCCESS:
             return __assign(__assign({}, state), { loading: false, setAgreeSuccess: true });
         case actionTypes_1.SET_A_REVIEW_AS_AGREE_FAIL:
-            return __assign(__assign({}, state), { loading: false, setAgreeError: action.payload.error });
+            return __assign(__assign({}, state), { loading: false });
         case actionTypes_1.SET_A_REVIEW_AS_AGREE_RESET:
             return __assign(__assign({}, state), { loading: false, setAgreeError: null, setAgreeSuccess: false });
         case actionTypes_1.SET_A_REVIEW_AS_DISAGREE_PENDING:
@@ -144,9 +142,9 @@ var setReviewsReducer = function (state, action) {
         case actionTypes_1.SET_A_REVIEW_AS_DISAGREE_SUCCESS:
             return __assign(__assign({}, state), { loading: false, setDisAgreeSuccess: true });
         case actionTypes_1.SET_A_REVIEW_AS_DISAGREE_FAIL:
-            return __assign(__assign({}, state), { loading: false, setDisAgreeError: action.payload.error });
+            return __assign(__assign({}, state), { loading: false });
         case actionTypes_1.SET_A_REVIEW_AS_DISAGREE_RESET:
-            return __assign(__assign({}, state), { loading: false, setDisAgreeSuccess: false, setDisAgreeError: null });
+            return __assign(__assign({}, state), { loading: false, setDisAgreeSuccess: false });
         default:
             return state;
     }

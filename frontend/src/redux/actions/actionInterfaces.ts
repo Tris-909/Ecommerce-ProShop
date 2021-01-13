@@ -30,8 +30,8 @@ export interface User {
     name: string,
     email: string,
     isAdmin: boolean,
-    wishList: SingleWishListItem[],
-    cartList: SingleCartItem[],
-    agreeAndDisAgree: singleAgreeOrDisAgreeVote[],
+    wishList?: SingleWishListItem[],
+    cartList?: SingleCartItem[],
+    agreeAndDisAgree?: singleAgreeOrDisAgreeVote[],
     token: string
 }
