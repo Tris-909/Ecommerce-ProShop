@@ -19,6 +19,8 @@ import {
 
 const users_List_Admin_Initial_State = {
     usersList: [],
+    page: 1,
+    pages: 10,
     loading: false,
     success: false,
     error: null
@@ -36,7 +38,9 @@ export const users_List_Admin_Reducer = (state = users_List_Admin_Initial_State,
                 ...state,
                 loading: false,
                 success: true,
-                usersList: action.payload
+                usersList: action.payload.users,
+                pages: action.payload.pages, 
+                page: action.payload.page
             }
         case GET_ALL_USERS_FAIL:
             return {

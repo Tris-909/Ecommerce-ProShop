@@ -129,17 +129,27 @@ const createUser = AsyncHandler(async (req, res) => {
 }); 
 
 //?   @description : Get all users for Admin Screen
-//?   @method : GET /api/users
+//?   @method : GET /api/users?pageNumber=
 //?   @access : private/admin 
 const getAllUsers = AsyncHandler(async (req, res) => {
-    const users = await User.find();
+    const totalPageSize = 10;
+    const currentPage = Number(req.query.pageNumber) || 1;
+
+    const count = await User.countDocuments();
+
+    const users = await User.find().select({
+        "_id": 1,
+        "name": 1,
+        "email": 1,
+        "isAdmin": 1
+    }).limit(totalPageSize).skip((currentPage-1)*totalPageSize);
 
     if (!users) {
         res.status(400);
         throw new Error("There are no users in the databases");
     }
 
-    res.status(200).send(users);
+    res.status(200).send({page: currentPage, pages: Math.ceil(count/totalPageSize), users});
 }); 
 
 //?   @description : Delete a user based on it ID

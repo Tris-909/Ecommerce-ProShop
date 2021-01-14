@@ -28,7 +28,7 @@ import {
 } from '../actions/actionTypes';
 
 //TODO: CREATING AN ORDER
-interface SingleOrderItem {
+export interface SingleOrderItem {
     qty: number,
     _id: string,
     itemId: string,
@@ -37,7 +37,7 @@ interface SingleOrderItem {
     productPrice: number
 }
 
-interface SingleOrder {
+export interface SingleOrder {
     taxPrice?: number,
     shipping_price?: number,
     totalPrice?: number,

@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react'
+import React, {useEffect} from 'react';
+import {GET_ALL_USERS_RESET} from '../redux/actions/actionTypes';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,16 +7,18 @@ import Message from '../components/Message';
 import Loading from '../components/Loading';
 import { getAllUsers, deleteUserAsAdmin } from '../redux/actions/adminActions'; 
 import Helmet from '../components/Helmet';
+import Paginate from '../components/Paginate';
 
 const AdminScreen = ({ history }) => {
     const dispatch = useDispatch();
-    const { usersList, loading, error } = useSelector(state => state.adminUsersList);
+    const { usersList, pages, page, loading, error } = useSelector(state => state.adminUsersList);
     const { user } = useSelector(state => state.user);
     const { success } = useSelector(state => state.deletedAdmin);
 
     useEffect(() => {
         if (user && user.isAdmin) {
-            dispatch(getAllUsers());
+            dispatch({ type: GET_ALL_USERS_RESET });
+            dispatch(getAllUsers(page));
         } else {
             history.push('/');
         }
@@ -31,6 +34,7 @@ const AdminScreen = ({ history }) => {
             <Helmet title={`Admin Users List | ProShop`} href="/admin/usersList" />
             <h1>Users</h1>
             {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please try again" /> : (
+                <>
                 <Table striped bordered hover responsive className="table-sm">
                     <thead>
                         <tr>
@@ -62,6 +66,8 @@ const AdminScreen = ({ history }) => {
                         ))}
                     </tbody>
                 </Table>
+                <Paginate page={page} pages={pages} isAdmin={true}/>
+                </>
             )}   
         </>
     )

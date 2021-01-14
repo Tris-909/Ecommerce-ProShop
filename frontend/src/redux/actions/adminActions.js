@@ -37,7 +37,7 @@ import {
 } from './actionTypes';
 import axios from 'axios';
 
-export const getAllUsers = () => async(dispatch, getState) => {
+export const getAllUsers = (pageNumber) => async(dispatch, getState) => {
     try {
         dispatch({
             type: GET_ALL_USERS
@@ -50,12 +50,16 @@ export const getAllUsers = () => async(dispatch, getState) => {
                 'Authorization': `Bearer ${user.token}`
             }
         }
-
-        const { data } = await axios.get('/api/users', config);
-
+        console.log(`/api/users?pageNumber=${pageNumber}`);
+        const { data } = await axios.get(`/api/users?pageNumber=${pageNumber}`, config);
+        console.log(data);
         dispatch({
             type: GET_ALL_USERS_SUCCESS,
-            payload: data
+            payload: {
+                users: data.users,
+                page: data.page,
+                pages: data.pages
+            }
         });
     } catch(error) {
         dispatch({
