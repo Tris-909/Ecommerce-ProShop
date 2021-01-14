@@ -28,12 +28,6 @@ import {
     getOrdersAsAdmin,
     putIsDeliveredStatus 
 } from './reducers/orderReducer.js';
-import { 
-    users_List_Admin_Reducer, 
-    deleted_user_admin_Reducer, 
-    get_userInfo_admin_Reducer, 
-    update_userInfo_Admin_Reducer,
-} from './reducers/adminReducers';
 import {
     deleteProductAsAdmin
 } from './reducers/Admin/Product/deleteProduct';
@@ -64,6 +58,18 @@ import {
 import {
     update_Product_Admin_Reducer 
 } from './reducers/Admin/Product/updateProduct';
+import {
+    users_List_Admin_Reducer
+} from './reducers/Admin/User/getUserList';
+import {
+    deleted_user_admin_Reducer
+} from './reducers/Admin/User/deleteAUserFromList';
+import {
+    get_userInfo_admin_Reducer
+} from './reducers/Admin/User/getUserDetail';
+import {
+    update_userInfo_Admin_Reducer
+} from './reducers/Admin/User/updateAUserInfo';
 
 const reducer = combineReducers({
     productsList: searchProductsListReducer,

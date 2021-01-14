@@ -36,7 +36,8 @@ const AdminUserInfoScreen = ({ match }) => {
         dispatch(loadUserInfo(userId));
     }, [success]);
 
-    const submitHandler = () => {
+    const submitHandler = (e) => {
+        e.preventDefault();
         dispatch(updateUserInfo(name, email, admin, userId));
     }
 

@@ -50,7 +50,7 @@ export const getAllUsers = (pageNumber) => async(dispatch, getState) => {
                 'Authorization': `Bearer ${user.token}`
             }
         }
-        console.log(`/api/users?pageNumber=${pageNumber}`);
+
         const { data } = await axios.get(`/api/users?pageNumber=${pageNumber}`, config);
         console.log(data);
         dispatch({
@@ -88,12 +88,12 @@ export const deleteUserAsAdmin = (id) => async(dispatch, getState) => {
 
         dispatch({
             type: DELETE_USER_AS_ADMIN_SUCCESS,
-            payload: 'User has been deleted successfully.'
+            messages: 'User has been deleted successfully.'
         });
     } catch (error) {
         dispatch({ 
             type: DELETE_USER_AS_ADMIN_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
@@ -121,7 +121,7 @@ export const loadUserInfo = (id) => async(dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: GET_USER_AS_ADMIN_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
@@ -149,7 +149,7 @@ export const updateUserInfo = (name, email, isAdmin, id) => async(dispatch, getS
     } catch(error) {
         dispatch({
             type: UPDATE_USER_AS_ADMIN_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }

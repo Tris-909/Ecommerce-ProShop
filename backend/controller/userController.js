@@ -172,7 +172,12 @@ const deleteUserAdmin = AsyncHandler(async (req, res) => {
 //?   @method : GET /api/users/:id
 //?   @access : private/admin 
 const getSingleUserAdmin = AsyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id).select('-password');
+    const user = await User.findById(req.params.id).select({
+        "_id": 1,
+        "name": 1,
+        "email": 1,
+        "isAdmin": 1
+    });
 
     if (!user) {
         res.status(400);
