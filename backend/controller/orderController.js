@@ -12,7 +12,8 @@ const addOrder = AsyncHandler(async (req, res) => {
         itemsPrice, 
         taxPrice, 
         shippingPrice, 
-        totalPrice } = req.body;
+        totalPrice, 
+        onSale } = req.body;
 
         if (orderItems && orderItems.length === 0) {
         res.status(400);
@@ -26,7 +27,8 @@ const addOrder = AsyncHandler(async (req, res) => {
             itemsPrice, 
             taxPrice, 
             shippingPrice, 
-            totalPrice 
+            totalPrice,
+            onSale 
         });
 
         const createdOrder = await order.save();

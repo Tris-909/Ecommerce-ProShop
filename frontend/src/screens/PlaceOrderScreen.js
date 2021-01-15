@@ -24,10 +24,14 @@ const PlaceOrderScreen = ({ history }) => {
         return (Math.round(num*100)/100).toFixed(2);
     }
 
-    let itemsPrice = cartItems.reduce((acc, curItem) => acc + curItem.productPrice * 1, 0);
-    let shippingPrice = itemsPrice > 200 ? 0 : 10;
-    let taxPrice = addDecimals(Number((itemsPrice/100)*5).toFixed(2));
-    let totalPrice = Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice);
+    let itemsPrice, totalOnSale, shippingPrice, taxPrice, totalPrice;
+    if (cartItems !== undefined) {
+        itemsPrice = cartItems.reduce((acc, curItem) => acc + (curItem.productPrice - curItem.onSale) * 1, 0);
+        totalOnSale = cartItems.reduce((acc, curItem) => acc + curItem.onSale, 0);
+        shippingPrice = itemsPrice > 200 ? 0 : 10;
+        taxPrice = addDecimals(Number((itemsPrice/100)*5).toFixed(2));
+        totalPrice = Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice);
+    }
 
     const onPlaceOrderHandler = () => {
         dispatch(createOrder(
@@ -37,7 +41,8 @@ const PlaceOrderScreen = ({ history }) => {
             itemsPrice,
             taxPrice,
             shippingPrice,
-            totalPrice
+            totalPrice,
+            totalOnSale
         ));
 
         dispatch(removeProductsInCartAfterBuy());
@@ -68,7 +73,7 @@ const PlaceOrderScreen = ({ history }) => {
 
                         <ListGroup.Item>
                             <h2>Order Items</h2>
-                            { !cartItems.length ? <Message content="Your cart is empty" variant="secondary" /> : (
+                            { cartItems !== undefined ? !cartItems.length ? <Message content="Your cart is empty" variant="secondary" /> : (
                               <ListGroup variant="flush">
                                 {cartItems.map((item, index) => (
                                     <ListGroup.Item key={index}>
@@ -82,13 +87,13 @@ const PlaceOrderScreen = ({ history }) => {
                                                 </Link>
                                             </Col>
                                             <Col md={4}>
-                                                1 x ${item.productPrice} = ${1 * item.productPrice}
+                                                1 x ${item.productPrice - item.onSale} = ${1 * item.productPrice} - ${item.onSale}
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
                                 ))}
                               </ListGroup>  
-                            ) }
+                            ) : null}
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
@@ -102,6 +107,12 @@ const PlaceOrderScreen = ({ history }) => {
                                 <Row>
                                     <Col> Items </Col>
                                     <Col> ${itemsPrice} </Col>
+                                </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col> OnSale </Col>
+                                    <Col> ${totalOnSale} </Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>

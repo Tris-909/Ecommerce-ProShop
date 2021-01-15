@@ -98,7 +98,7 @@ const WishListProductHorizontal = ({ product }) => {
     const onAddItemToCartHandler = (e, id) => {
         e.preventDefault();
         dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
-        dispatch(addItemToCart(id, 1));
+        dispatch(addItemToCart(id, product.name, product.image, product.price, product.onSale, product.countInStock, 1));
     }
 
     const onAddItemToWishList = (e) => {
@@ -131,7 +131,16 @@ const WishListProductHorizontal = ({ product }) => {
             </Link>
             <CardBototmContainer>
                 <CardMoneyText>
-                    $ {product.productPrice}
+                    { product.onSale !== 0 ? (
+                            <>
+                            <span style={{textDecoration: 'line-through'}}>$ {product.price}</span>
+                            <span> $ {product.price - product.onSale} </span>
+                            </>
+                        ) : ( 
+                            <span> 
+                                $ {product.price} 
+                            </span> 
+                        )} 
                 </CardMoneyText>
                 <CardButtonContainer>
                     <div>

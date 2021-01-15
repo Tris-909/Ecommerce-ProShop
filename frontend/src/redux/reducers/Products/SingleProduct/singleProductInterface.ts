@@ -75,6 +75,7 @@ export interface SingleProduct {
     rating: number,
     numReviews: number,
     price: number,
+    onSale: number,
     countInStock: number,
     numOf5StarsReviews: number,
     numOf4StarsReviews: number,

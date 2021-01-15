@@ -14,7 +14,8 @@ const getTopProducts = AsyncHandler(async(req, res) => {
         "rating": 1,
         "numReviews": 1,
         "price": 1,
-        "category": 1
+        "category": 1,
+        "onSale": 1
     }).limit(3);
 
     if (topProducts) {

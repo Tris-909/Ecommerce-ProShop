@@ -72,6 +72,7 @@ export const cartReducer = (state = initialState, action: CartAction) => {
                 loading: true
             }
         case ADD_PRODUCT_TO_CART_SUCCESS:
+            localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
             return {
                 ...state,
                 addItemSuccess: true

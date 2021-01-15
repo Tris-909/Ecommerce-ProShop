@@ -25,10 +25,10 @@ export const addItemToCart = (
     productName: string,
     productImage: string, 
     productPrice: number, 
+    onSale: number,
     countInStock: number, 
     qty: number
     ) => async (dispatch: Dispatch, getState: Function) => {
-    
     try {
         dispatch({
             type: ADD_PRODUCT_TO_CART
@@ -47,6 +47,7 @@ export const addItemToCart = (
             productName, 
             productImage, 
             productPrice, 
+            onSale,
             countInStock: countInStock, 
             quantity: qty
         }, config);
@@ -103,6 +104,8 @@ export const getAllItemsCart = () => async (dispatch: Dispatch, getState: Functi
 
         const { data } = await axios.get<singleCartItem[]>('/api/users/cart', config);
 
+        localStorage.setItem('cartItems', JSON.stringify(data));
+        
         dispatch({
             type: GET_ALL_ITEMS_FROM_CART_SUCCESS,
             cartItems: data
@@ -142,4 +145,5 @@ export const removeProductsInCartAfterBuy = () => async (dispatch: Dispatch) => 
     dispatch({
         type: REMOVE_PRODUCTS_FROM_CART_AFTERBUY
     });
+    localStorage.setItem('cartItems', JSON.stringify([]));
 }

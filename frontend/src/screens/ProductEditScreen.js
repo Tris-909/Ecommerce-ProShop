@@ -25,6 +25,7 @@ const ProductEditScreen = ({ history, match }) => {
     //! ALL PRODUCT 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
+    const [onSale, setOnSale] = useState(0);
     const [image, setImage] = useState('');
     const [brand, setBrand] = useState('');
     const [countInStock, setCountInStock] = useState(0);
@@ -104,6 +105,7 @@ const ProductEditScreen = ({ history, match }) => {
         if (singleProduct) {
             setName(singleProduct.name);
             setPrice(singleProduct.price);
+            setOnSale(singleProduct.onSale);
             setImage(singleProduct.image);
             setBrand(singleProduct.brand);
             setCountInStock(singleProduct.countInStock);
@@ -249,6 +251,7 @@ const ProductEditScreen = ({ history, match }) => {
         dispatch(updateProductAsAdmin(
             name, 
             price, 
+            onSale,
             image, 
             brand, 
             category, 
@@ -312,6 +315,15 @@ const ProductEditScreen = ({ history, match }) => {
                         placeholder="Product Price" 
                         value={price} 
                         onChange={(e) => setPrice(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group controlId='onSale'>
+                    <Form.Label>Discount :</Form.Label>
+                    <Form.Control 
+                        type="number" 
+                        placeholder="Product Discount as Number" 
+                        value={onSale} 
+                        onChange={(e) => setOnSale(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group controlId='image'>

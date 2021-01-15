@@ -301,8 +301,7 @@ const deleteAllItemsFromWishList = AsyncHandler(async (req, res) => {
 //?   @access : private
 const addItemToCart = AsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    const { itemId, productName, productImage, productPrice, countInStock, quantity } = req.body;
-    console.log(req.body);
+    const { itemId, productName, productImage, productPrice, onSale, countInStock, quantity } = req.body;
     
     if (user) {
         const item = {
@@ -310,6 +309,7 @@ const addItemToCart = AsyncHandler(async (req, res) => {
             productName, 
             productImage, 
             productPrice, 
+            onSale,
             countInStock, 
             quantity
         }
@@ -320,11 +320,14 @@ const addItemToCart = AsyncHandler(async (req, res) => {
             throw new Error("This item is already in the cart");
         }
 
+        console.log(user.cartList);
+
         user.cartList.push({
             itemId,
             productName, 
             productImage, 
             productPrice, 
+            onSale,
             countInStock, 
             quantity
         });
@@ -335,8 +338,6 @@ const addItemToCart = AsyncHandler(async (req, res) => {
         res.status(404);
         throw new Error('Cant find the user')
     }
-
-
 });
 
 //?   @description : Remove an Item from the Cart

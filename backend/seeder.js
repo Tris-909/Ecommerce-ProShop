@@ -36,8 +36,14 @@ const importData = async () => {
             }
         });
 
+        const bindingOnSale = sampleProducts.map((product) => {
+            return {
+                ...product,
+                onSale: 0
+            }
+        });
 
-        await Product.insertMany(sampleProducts);
+        await Product.insertMany(bindingOnSale);
         console.log('Data Imported'.green.inverse);
         process.exit();
     } catch(error) {

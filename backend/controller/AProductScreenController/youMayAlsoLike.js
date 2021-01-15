@@ -14,7 +14,8 @@ const getAlsoLikeProductsBasedOnCategory = AsyncHandler(async (req, res) => {
         "name": 1,
         "price": 1,
         "image": 1,
-        "numReviews": 1
+        "numReviews": 1,
+        "onSale": 1
     }).sort({ price: 1 });
 
     if (product) {

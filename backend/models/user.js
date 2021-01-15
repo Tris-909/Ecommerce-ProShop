@@ -68,6 +68,10 @@ const userSchema = mongoose.Schema({
                 type: Number,
                 required: true
             },
+            onSale: {
+                type: Number,
+                required: true
+            },
             countInStock: {
                 type: Number,
                 required: true

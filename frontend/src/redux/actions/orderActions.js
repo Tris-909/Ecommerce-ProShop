@@ -39,7 +39,7 @@ exports.__esModule = true;
 exports.getOrdersByUserId = exports.payOrder = exports.getOrderById = exports.createOrder = void 0;
 var actionTypes_1 = require("./actionTypes");
 var axios_1 = require("axios");
-var createOrder = function (orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice) { return function (dispatch, getState) { return __awaiter(void 0, void 0, void 0, function () {
+var createOrder = function (orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice, totalOnSale) { return function (dispatch, getState) { return __awaiter(void 0, void 0, void 0, function () {
     var user, config, createdOrder, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -63,7 +63,8 @@ var createOrder = function (orderItems, shippingAddress, paymentMethod, itemsPri
                         taxPrice: taxPrice,
                         shippingPrice: shippingPrice,
                         totalPrice: totalPrice,
-                        user: user
+                        user: user,
+                        onSale: totalOnSale
                     }, config)];
             case 1:
                 createdOrder = _a.sent();

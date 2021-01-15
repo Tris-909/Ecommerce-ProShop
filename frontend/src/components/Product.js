@@ -52,6 +52,25 @@ const ButtonContainer = styled.div`
     }
 `;
 
+const CrossPrice = styled.div`
+    position: relative;
+    &:before {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 45%;
+        right: 0;
+        border-top: 5px solid red;
+        border-color: red;
+      
+        -webkit-transform:rotate(-10deg);
+        -moz-transform:rotate(-10deg);
+        -ms-transform:rotate(-10deg);
+        -o-transform:rotate(-10deg);
+        transform:rotate(-10deg);
+    }
+`;
+
 const Product = (props) => {
     const { product, link = '/product' } = props;
     const [isLoved, setIsLoved] = useState(false);
@@ -76,12 +95,12 @@ const Product = (props) => {
         dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
     }, [wishList, product]);
 
-    const onAddItemToCartHandler = async (e, id, productName, productImage, productPrice, countInStock) => {
+    const onAddItemToCartHandler = async (e, id, productName, productImage, productPrice, onSale , countInStock, qty) => {
         e.preventDefault();
 
         if (user) {
             dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
-            await dispatch(addItemToCart(id, productName, productImage, productPrice, countInStock, 1));
+            await dispatch(addItemToCart(id, productName, productImage, productPrice, onSale, countInStock, 1));
         
             props.history.push('/cart')
 
@@ -136,16 +155,22 @@ const Product = (props) => {
 
                 <FootProductContainer>
                     <CardMoneyText>
-                        $ {product.price}
+                    { product.onSale !== 0 ? (
+                            <>
+                            <CrossPrice>$ {product.price}</CrossPrice>
+                            <p> $ {product.price - product.onSale} </p>
+                            </>
+                        ) : ( 
+                            <span> 
+                                $ {product.price} 
+                            </span> 
+                        )} 
                     </CardMoneyText>
-                    {
-                        
-                    }
                     <ButtonContainer>
                         <i className="fas fa-cart-plus" 
                             style={{ fontSize: '1.5rem', marginRight: '1.5rem', cursor: 'pointer' }}
                             onClick={(e) => 
-                            onAddItemToCartHandler(e, product._id, product.name, product.image, product.price, 1, 1)}></i>
+                            onAddItemToCartHandler(e, product._id, product.name, product.image, product.price, product.onSale, 1, 1)}></i>
                         {
                             isLoved ? (
                                 //TODO: Full Heart

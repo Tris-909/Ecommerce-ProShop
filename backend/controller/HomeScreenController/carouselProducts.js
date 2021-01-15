@@ -12,6 +12,7 @@ const getTopRatedProducts = AsyncHandler(async(req, res) => {
         "_id": 1,
         "name": 1,
         "image": 1,
+        "onSale": 1
     }).limit(3);
 
     res.json(products);

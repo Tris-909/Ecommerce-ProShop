@@ -9,7 +9,8 @@ export interface singleProduct {
     price: number,
     image: string,
     rating: number,
-    numReviews: number
+    numReviews: number,
+    onSale: number
 }
 
 export interface singleWishListItem {
@@ -28,6 +29,7 @@ export interface singleCartItem {
     productName: string,
     productImage: string,
     productPrice: number,
+    onSale: number,
     countInStock: number,
     quantity: number
 }

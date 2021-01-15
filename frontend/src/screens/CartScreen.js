@@ -95,6 +95,25 @@ const CartEmptyText = styled.div`
     margin-top: 2rem;
 `;
 
+const CrossPrice = styled.div`
+    position: relative;
+    &:before {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 45%;
+        right: 0;
+        border-top: 5px solid red;
+        border-color: red;
+      
+        -webkit-transform:rotate(-10deg);
+        -moz-transform:rotate(-10deg);
+        -ms-transform:rotate(-10deg);
+        -o-transform:rotate(-10deg);
+        transform:rotate(-10deg);
+    }
+`;
+
 const CartScreen = ({ match, location, history }) => {
     const dispatch = useDispatch();
     const { cartItems } = useSelector(state => state.cart);
@@ -145,7 +164,17 @@ const CartScreen = ({ match, location, history }) => {
 
                                         <CardBottomContainer>
                                             <CardProductPrice>
-                                                ${item.productPrice}
+                                                {
+                                                    item.onSale ? (
+                                                        <>
+                                                           <CrossPrice>${item.productPrice}</CrossPrice> 
+                                                           ${item.productPrice - item.onSale}
+                                                        </>
+                                                    ) : (
+                                                        <span>${item.productPrice}</span>
+                                                    )
+                                                }
+                                                
                                             </CardProductPrice>
 
                                             <RemoveButton onClick={() => removeFromCartHandler(item.itemId)}>
@@ -163,14 +192,18 @@ const CartScreen = ({ match, location, history }) => {
                 <Card>
                     <ListGroup variant="flush">
                         <ListGroup.Item>
-                            <p style={{fontSize: '1.2rem', padding: '1rem 0'}}> Count Items: {cartItems.reduce((acc, item) => acc + item.quantity, 0)} items</p>
-                            <p style={{fontSize: '1.2rem'}}> Total: ${cartItems.reduce((acc, item) => acc + item.quantity*item.productPrice, 0)} </p>
+                            <p style={{fontSize: '1.2rem', padding: '1rem 0'}}> 
+                                Count Items : {cartItems.reduce((acc, item) => acc + item.quantity, 0)}  
+                            </p>
+                            <p style={{fontSize: '1.2rem'}}> 
+                                Total : ${cartItems.reduce((acc, item) => acc + item.quantity*(item.productPrice - item.onSale), 0)} 
+                            </p>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Button 
                                 type="button" 
                                 className='btn-block' 
-                                disabled={cartItems.length === 0}
+                                disabled={cartItems !== undefined ? cartItems.length === 0 : false}
                                 onClick={() => checkOutHandler()}>
                                     CHECK OUT
                             </Button>

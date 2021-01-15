@@ -39,7 +39,7 @@ exports.__esModule = true;
 exports.removeProductsInCartAfterBuy = exports.savePaymentMethod = exports.saveShippingAddress = exports.getAllItemsCart = exports.removeItemFromCart = exports.addItemToCart = void 0;
 var actionTypes_1 = require("./actionTypes");
 var axios_1 = require("axios");
-var addItemToCart = function (itemId, productName, productImage, productPrice, countInStock, qty) { return function (dispatch, getState) { return __awaiter(void 0, void 0, void 0, function () {
+var addItemToCart = function (itemId, productName, productImage, productPrice, onSale, countInStock, qty) { return function (dispatch, getState) { return __awaiter(void 0, void 0, void 0, function () {
     var user, config, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -60,6 +60,7 @@ var addItemToCart = function (itemId, productName, productImage, productPrice, c
                         productName: productName,
                         productImage: productImage,
                         productPrice: productPrice,
+                        onSale: onSale,
                         countInStock: countInStock,
                         quantity: qty
                     }, config)];
@@ -133,6 +134,7 @@ var getAllItemsCart = function () { return function (dispatch, getState) { retur
                 return [4 /*yield*/, axios_1["default"].get('/api/users/cart', config)];
             case 1:
                 data = (_a.sent()).data;
+                localStorage.setItem('cartItems', JSON.stringify(data));
                 dispatch({
                     type: actionTypes_1.GET_ALL_ITEMS_FROM_CART_SUCCESS,
                     cartItems: data
@@ -177,6 +179,7 @@ var removeProductsInCartAfterBuy = function () { return function (dispatch) { re
         dispatch({
             type: actionTypes_1.REMOVE_PRODUCTS_FROM_CART_AFTERBUY
         });
+        localStorage.setItem('cartItems', JSON.stringify([]));
         return [2 /*return*/];
     });
 }); }; };

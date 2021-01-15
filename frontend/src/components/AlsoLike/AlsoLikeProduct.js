@@ -66,8 +66,27 @@ const ButtonContainer = styled.div`
     }
 `;
 
+const CrossPrice = styled.div`
+    position: relative;
+    &:before {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 45%;
+        right: 0;
+        border-top: 5px solid red;
+        border-color: red;
+      
+        -webkit-transform:rotate(-10deg);
+        -moz-transform:rotate(-10deg);
+        -ms-transform:rotate(-10deg);
+        -o-transform:rotate(-10deg);
+        transform:rotate(-10deg);
+    }
+`;
+
 const AlsoLikeProduct = (props) => {
-    const {itemId, productName, productPrice, productImage, numReviews, rating} = props.product;
+    const {itemId, productName, productPrice, productImage, numReviews, rating, onSale} = props.product;
     const [isLoved, setIsLoved] = useState(false);
     const [wishListID, setWishListID] = useState(null);
 
@@ -90,12 +109,12 @@ const AlsoLikeProduct = (props) => {
         dispatch(getAllItemsCart());
     }, [dispatch, addItemSuccess]);
 
-    const onAddItemToCartHandler = (e, id, productName, productImage, productPrice, countInStock) => {
+    const onAddItemToCartHandler = (e, id, productName, productImage, productPrice, onSale, countInStock, qty) => {
         e.preventDefault();
 
         if (user) {
             dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
-            dispatch(addItemToCart(id, productName, productImage, productPrice, countInStock, 1));
+            dispatch(addItemToCart(id, productName, productImage, productPrice, onSale, countInStock, 1));
         } else {
             props.history.push('/login')
         }
@@ -147,12 +166,23 @@ const AlsoLikeProduct = (props) => {
                     }) : null
                 }
                 <BottomContainer>
-                    <MoneyText>$ {productPrice}</MoneyText>
+                    <MoneyText>
+                        { onSale !== 0 ? (
+                            <>
+                            <CrossPrice>$ {productPrice}</CrossPrice>
+                            <span> $ {productPrice - onSale} </span>
+                            </>
+                        ) : ( 
+                            <span> 
+                                $ {productPrice} 
+                            </span> 
+                        )} 
+                    </MoneyText>
                     <ButtonContainer>
                         <i className="fas fa-cart-plus" 
                             style={{ fontSize: '1.5rem', marginRight: '1.5rem', cursor: 'pointer' }}
                             onClick={(e) => 
-                            onAddItemToCartHandler(e, itemId, productName, productImage, productPrice, 10, 1)}></i>
+                            onAddItemToCartHandler(e, itemId, productName, productImage, productPrice, onSale, 10, 1)}></i>
                         {
                             isLoved ? (
                                 //TODO: Full Heart

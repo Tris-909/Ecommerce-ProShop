@@ -118,7 +118,7 @@ const OrderScreen = ({ match }) => {
                                         </Link>
                                     </Col>
                                     <Col md={4}>
-                                        {item.qty} x ${item.productPrice} = ${item.qty * item.productPrice}
+                                        {item.qty} x ${item.qty*(item.productPrice - item.onSale)} = PRICE : ${item.qty * item.productPrice} - DISCOUNT : ${item.qty * item.onSale}
                                     </Col>
                                 </Row>
                             </ListGroup.Item>

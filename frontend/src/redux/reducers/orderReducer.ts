@@ -41,6 +41,7 @@ export interface SingleOrder {
     taxPrice?: number,
     shipping_price?: number,
     totalPrice?: number,
+    onSale?: number,
     isPaid?: boolean,
     isDelivered?: boolean,
     _id?: string,

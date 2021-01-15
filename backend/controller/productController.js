@@ -27,7 +27,8 @@ const getProducts = AsyncHandler(async (req, res) => {
         "name": 1,
         "image": 1,
         "category": 1,
-        "brand": 1
+        "brand": 1,
+        "onSale": 1
     }).limit(pageSize).skip(pageSize * (page - 1));
     res.send({ products, page, pages: Math.ceil(count / pageSize) });
 }) 
@@ -90,6 +91,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             "_id": 1,
             "name": 1,
             "image": 1,
+            "onSale": 1
         }).skip(pageSize * currentPage).limit(pageSize);
 
         if (productListNoBrand) {
@@ -124,6 +126,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             "_id": 1,
             "name": 1,
             "image": 1,
+            "onSale": 1
         }).skip(pageSize * currentPage).limit(pageSize);
 
         if (productListWithBrands) {
@@ -376,6 +379,7 @@ const createProduct = AsyncHandler(async (req, res) => {
         gameDetail: {exist: true},
         rating: 0,
         price: 0,
+        onSale: 0,
         countInStock: 0,
         numReviews: 0,
         numOf5StarsReviews: 0,
@@ -394,10 +398,11 @@ const createProduct = AsyncHandler(async (req, res) => {
 //? private/admin
 const updateProduct = AsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
-
+    console.log(req.body);
     if (product) {
         product.name = req.body.name || product.name;
         product.price = req.body.price || product.price;
+        product.onSale = req.body.onSale || product.onSale;
         product.image = req.body.image || product.image;
         product.brand = req.body.brand || product.brand;
         product.category = req.body.category || product.category;

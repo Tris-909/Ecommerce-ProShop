@@ -32,7 +32,8 @@ export const createOrder = (
     itemsPrice: number, 
     taxPrice: number, 
     shippingPrice: number, 
-    totalPrice: number) => async (dispatch: Dispatch, getState: Function) => {
+    totalPrice: number,
+    totalOnSale: number) => async (dispatch: Dispatch, getState: Function) => {
     
     try {
         dispatch({
@@ -55,7 +56,8 @@ export const createOrder = (
             taxPrice, 
             shippingPrice, 
             totalPrice,
-            user
+            user,
+            onSale: totalOnSale
         }, config);
 
         dispatch({

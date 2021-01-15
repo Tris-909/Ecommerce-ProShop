@@ -156,6 +156,7 @@ const ProductScreen = ({ match }) => {
                                     itemId: item._id,
                                     productName: item.name,
                                     productPrice: item.price,
+                                    onSale: item.onSale,
                                     productImage: item.image,
                                     numReviews: item.numReviews,
                                     rating: item.rating

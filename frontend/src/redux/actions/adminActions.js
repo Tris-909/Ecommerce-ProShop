@@ -209,6 +209,7 @@ export const createProductAsAdmin = () => async(dispatch, getState) => {
 
 export const updateProductAsAdmin = ( name, 
     price,
+    onSale,
     image, 
     brand, 
     category, 
@@ -232,9 +233,12 @@ export const updateProductAsAdmin = ( name,
             }
         }
 
+        onSale = Number(onSale);
+
         await axios.put(`/api/products/${id}`, {
             name, 
             price,
+            onSale,
             image,
             brand,
             category,
