@@ -47,6 +47,7 @@
   - Have Admin Page to control on products, orders, users 
   - Can create a new product visually through an interface
   - Can change information about a product like : name, price, image, description, tech details,... through an interface
+  - Update discount price for a specific item thourgh an UI
   
 ## What did I do in this project ? 
 - FrontEnd :  <br/>
@@ -59,6 +60,7 @@
   _ Building Product Screen that change detail table based on category <br />
   _ Integrating with Paypal APIs to proceed online payment <br />
   _ Building Admin Page <br />
+  _ Building Custom Discount Function and give admin the ability to discount any items as wish thourgh an user interface <br /> 
   _ Using Redux, Redux-Thunk, Redux Dev Tool to manage state of the whole application <br />
   _ Using TypeScript to help demonstrate data-flow in web-application through interfaces <br />
   _ Working with more than 30+ APIs from the backend using axios with different methods <br />
