@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap';
-import { Row, Col, Table, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Table, Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loading from '../components/Loading';
@@ -13,6 +12,7 @@ import {withRouter} from 'react-router'
 const ProductListAdminScreen = ({ history, match }) => {
     const pageNumber = match.params.pageNumber || 1;
     const dispatch = useDispatch();
+    const [keyword, Setkeyword] = useState('');
     const { products, loading, error, pages, page } = useSelector(state => state.productsList);
     const { createdProduct, success: createSuccess } = useSelector(state => state.createdProduct);
     const { user } = useSelector(state => state.user);
@@ -46,6 +46,13 @@ const ProductListAdminScreen = ({ history, match }) => {
         dispatch(createProductAsAdmin());
     }
 
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        if (user && user.isAdmin) {
+            dispatch(getProductsList(keyword, pageNumber));
+        }
+    }
+
     const redirect = (id) => {
         history.push(`/admin/products/${id}/edit`);
     }
@@ -54,12 +61,22 @@ const ProductListAdminScreen = ({ history, match }) => {
         <>
             <Row className="align-items-center">
                 <Col>
-                    <h1>Products</h1>
+                    <h1>Products :</h1>
                 </Col>
                 <Col className="text-right">
                     <Button onClick={createHandler} className="btn btn-dark my-3" style={{ 'right': 0 }}>
                         + Create Product 
                     </Button>
+                    <Form onSubmit={onSubmitHandler}>
+                        <Form.Group>
+                            <Form.Control 
+                                type='text'
+                                placeholder="Product Name"
+                                value={keyword}
+                                onChange={(e) => Setkeyword(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
                 </Col>
             </Row>
             {loading ? <Loading /> : error ? <Message variant="danger" content="Something is wrong, please try again" /> : (
