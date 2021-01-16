@@ -19,6 +19,7 @@
   - Express + Express Async Handler + Nodemon
   - Datebases Interaction ( Mongoose )
   - Server-Side Scriptting ( JSONWebToken and bcryptjs )
+  - Sending mails : Nodemailer
   - Postman ( API testing ) 
  - Databases : MongoDB ( free-tier AWS )
  - Deployment : Heroku 
@@ -41,7 +42,8 @@
     - Please use this Paypal SandBox Account to test Paypal APIs : 
       - Account : sb-uj3sb3898726@personal.example.com 
       - Password : ZRy:}9n+
- 
+   - Be able to reset their password if they register with their gmail 
+   
 - As **Admin** : 
   - Have all the privileges above 
   - Have Admin Page to control on products, orders, users 
@@ -74,6 +76,7 @@
   _ Create APIs using Express-Async-Handler with Mongoose Model <br /> 
   _ Testing APIs using POSTMAN <br /> 
   _ Returning just enough data in each APIs like a good back-end engineer <br /> 
+  _ Implementing reset password functions using nodemailer <br /> 
   _ Writting code with comments (Example) : <br />
     ```javascript
     //?   PUT update order.isPaid to true
