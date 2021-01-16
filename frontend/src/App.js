@@ -20,6 +20,7 @@ import AdminOrdersScreen from './screens/AdminOrdersScreen';
 import SearchScreen from './screens/SearchScreen';
 import WishListScreen from './screens/WishListScreen';
 import ListScreen from './screens/ListScreen';
+import ForgotPasswordScreen from './screens/ForgotPassword';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -50,6 +51,7 @@ function App() {
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/login" component={LoginScreen} exact /> 
           <Route path="/register" component={RegisterScreen} exact />
+          <Route path="/forgotpassword" component={ForgotPasswordScreen} exact />
           <Route path="/profile" component={ProfileScreen} exact />
           <Route path="/shipping" component={ShippingScreen} exact />
           <Route path="/payment" component={PaymentScreen} exact />

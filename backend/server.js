@@ -26,6 +26,11 @@ import ordersRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import { notFound, errorHandler } from './middlewares/error.js';
 
+//? Forgot password
+import crypto from 'crypto';
+import User from './models/user.js';
+import nodemailer from 'nodemailer';
+
 //!--------------------- EXPRESS START -----------------------------------------------------//
 const app = express();
 
@@ -41,8 +46,10 @@ app.use('/api/users', usersRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/upload', uploadRoutes);
 
+//! PAYPAL INTEGRATION -----------------------------------------------------------------
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENTID));
 
+//! SAVE IMAGES BY STATIC PATH ---------------------------------------------------------
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
@@ -56,6 +63,55 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
+//! FORGOT PASSWORD --------------------------------------------------------------------
+app.post('/forgotpassword',async (req, res) => {
+    if (req.body.email === '') {
+        res.status(400).send('email required');
+    }
+
+    const user = await User.findOne({
+        email: req.body.email
+    });
+
+    if (user === null) {
+        res.status(403).send('email not in db');
+    }
+
+    const token = crypto.randomBytes(20).toString('hex');
+    user.update({
+        resetPasswordToken: token,
+        resetPasswordExpires: Date.now() + 3600000
+    });
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: `${process.env.EMAIL_ADDRESS}`,
+            pass: `${process.env.EMAIL_PASSWORD}`
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+    });
+
+    const mailOptions = {
+        from: 'Proshop@business.com',
+        to: `${user.email}`,
+        subject: 'Link to Reset Your Password',
+        text: 
+        'Hi this is ProShop Manager, Please click on the link below to reset your password : \n \n' +
+        `http://localhost:3000/reset/${token} \n \n` + 
+        `If you did not request this email, please ignore this and your password will remain the same \n \n`
+    };
+
+    transporter.sendMail(mailOptions, function(err, response) {
+        if (err) {
+            console.log('Error : ' + err);
+        }  else {
+            res.status(200).json('recovery email sent');
+        }
+    });
+})
 
 app.use(notFound);
 app.use(errorHandler);

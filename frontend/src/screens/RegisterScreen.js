@@ -42,6 +42,7 @@ const RegisterScreen = ({ location, history }) => {
         <FormContainer>
             <Helmet title="Register | Proshop" />
             <h1>Sign Up With Us</h1>
+            <h5>Make sure you choose your email the same as your gmail account name to retrieve your password if you ever lost it </h5>
             { formError ? <Message content={formError} /> : null }
             { error ? <Message variant="danger" content={error} /> : null }
             { loading ? <Loading /> : null }
@@ -82,14 +83,20 @@ const RegisterScreen = ({ location, history }) => {
                         onChange={(e) => setConfirmPassword(e.target.value)} />
                 </Form.Group>
 
+                <Row className="py-3">
+                    <Col>
+                        Already have an account ? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Log In</Link>
+                    </Col>
+                </Row>
+
+                <Row className="py-3">
+                    <Col>
+                        <Link to={'/forgotpassword'}> Forgot your password ?</Link>
+                    </Col>
+                </Row>
+
                 <Button type="submit" variant='primary'>Submit</Button>
             </Form>
-
-            <Row className="py-3">
-                <Col>
-                    Already have an account ? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Log In</Link>
-                </Col>
-            </Row>
         </FormContainer>  
     )
 }

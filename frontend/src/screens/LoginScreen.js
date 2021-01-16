@@ -53,14 +53,20 @@ const LoginScreen = ({ location, history }) => {
                         onChange={(e) => setPassword(e.target.value)} />
                 </Form.Group>
                  
-                 <Button type="submit" variant='primary'>Sign In</Button>
-                </Form>
+                <Row>
+                    <Col>
+                        <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}> Don't have an account ?</Link>
+                    </Col>
+                </Row>
 
                 <Row className="py-3">
                     <Col>
-                        Don't have an account ? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Click Here !</Link>
+                        <Link to={'/forgotpassword'}> Forgot your password ?</Link>
                     </Col>
                 </Row>
+
+                 <Button type="submit" variant='primary'>Sign In</Button>
+                </Form>
                 </>
             ) }
         </FormContainer>    
