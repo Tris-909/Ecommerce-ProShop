@@ -78,10 +78,11 @@ app.post('/forgotpassword',async (req, res) => {
     }
 
     const token = crypto.randomBytes(20).toString('hex');
-    user.update({
-        resetPasswordToken: token,
-        resetPasswordExpires: Date.now() + 3600000
-    });
+
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000;
+
+    await user.save();
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -94,13 +95,20 @@ app.post('/forgotpassword',async (req, res) => {
         }
     });
 
+    let websitesLink;
+    if (process.env.NODE_ENV === 'DEVELOPMENT') {
+        websitesLink = `http://localhost:3000`;
+    } else {
+        websitesLink = `https://proshop-tris.herokuapp.com`;
+    }
+
     const mailOptions = {
         from: 'Proshop@business.com',
         to: `${user.email}`,
         subject: 'Link to Reset Your Password',
         text: 
         'Hi this is ProShop Manager, Please click on the link below to reset your password : \n \n' +
-        `http://localhost:3000/reset/${token} \n \n` + 
+        `${websitesLink}/reset/${token} \n \n` + 
         `If you did not request this email, please ignore this and your password will remain the same \n \n`
     };
 
@@ -111,6 +119,43 @@ app.post('/forgotpassword',async (req, res) => {
             res.status(200).json('recovery email sent');
         }
     });
+});
+
+app.get('/reset',async (req, res) => {
+    const user = await User.findOne({
+        resetPasswordToken: req.query.resetPasswordToken,
+        resetPasswordToken: { $gt: Date.now() } 
+    });
+
+    console.log(req.query.resetPasswordToken);
+
+    if (user === null) {
+        res.json('Link have expired !');
+    }
+
+    res.status(200).send({
+        email: user.email,
+        message: 'password reset link a-ok'
+    });
+});
+
+app.put('/updatePasswordViaEmail', async (req, res) => {
+    const user = await User.findOne({
+        email: req.body.email
+    });
+
+    if (user === null) {
+        res.status(404);
+        throw new Error('This user is not existed');
+    }
+
+    user.password = req.body.password;
+    // Hashing function is in model file
+    await user.save();
+
+    res.status(200).send({
+        message: 'password updated'
+    })
 })
 
 app.use(notFound);
