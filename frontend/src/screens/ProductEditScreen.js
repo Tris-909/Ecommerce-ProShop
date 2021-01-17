@@ -14,6 +14,7 @@ import GameInput from '../components/ProductDetail/GameTable/GameInput';
 import TVInput from '../components/ProductDetail/TvTable/TVInput';
 import PhoneInput from '../components/ProductDetail/PhoneTable/PhoneInput';
 import LaptopInput from '../components/ProductDetail/LaptopTable/LaptopInput';
+import CKEditor from 'ckeditor4-react';
 
 const ProductEditScreen = ({ history, match }) => {
     const dispatch = useDispatch();
@@ -520,17 +521,13 @@ const ProductEditScreen = ({ history, match }) => {
                     ) : null
                 }
 
-                <Form.Group controlId='description'>
-                    <Form.Label>Description :</Form.Label>
-                    <Form.Control 
-                        as="textarea"
-                        rows={7} 
-                        placeholder="Description..." 
-                        value={description} 
-                        onChange={(e) => setDescription(e.target.value)} />
-                </Form.Group>
+                <h4> Description : </h4>
+                <CKEditor 
+                    data={description}
+                    onChange={(evt) => setDescription(evt.editor.getData())}
+                />
 
-                <Button type="submit" variant='primary'>Update</Button>
+                <Button type="submit" variant='primary' style={{marginTop: '1rem'}}>Update</Button>
             </Form>
             ) }
         </FormContainer>

@@ -15,8 +15,10 @@ const ProductInfo = (props) => {
                 <ListGroup.Item>
                     <Rating rating={rating} text={`${numReviews} reviews`} />
                 </ListGroup.Item>
-                <ListGroup.Item>
-                    Description: {description}
+                <ListGroup.Item style={{marginBottom: '1rem'}}>
+                    <div className="editor-preview">
+                        <div dangerouslySetInnerHTML={ { __html: description } }></div>
+                    </div>
                 </ListGroup.Item>
             </ListGroup>
         </Col>
