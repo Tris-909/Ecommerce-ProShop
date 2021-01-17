@@ -29,6 +29,8 @@ import { notFound, errorHandler } from './middlewares/error.js';
 //? Forgot password
 import crypto from 'crypto';
 import User from './models/user.js';
+import handlebars  from 'handlebars';
+import * as fs from 'fs';
 import nodemailer from 'nodemailer';
 
 //!--------------------- EXPRESS START -----------------------------------------------------//
@@ -95,29 +97,48 @@ app.post('/forgotpassword',async (req, res) => {
         }
     });
 
-    let websitesLink;
-    if (process.env.NODE_ENV === 'DEVELOPMENT') {
-        websitesLink = `http://localhost:3000`;
-    } else {
-        websitesLink = `https://proshop-tris.herokuapp.com`;
-    }
-
-    const mailOptions = {
-        from: 'Proshop@business.com',
-        to: `${user.email}`,
-        subject: 'Link to Reset Your Password',
-        text: 
-        'Hi this is ProShop Manager, Please click on the link below to reset your password : \n \n' +
-        `${websitesLink}/reset/${token} \n \n` + 
-        `If you did not request this email, please ignore this and your password will remain the same \n \n`
+    var readHTMLFile = function(path, callback) {
+        fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+            if (err) {
+                throw err;
+                callback(err);
+            }
+            else {
+                callback(null, html);
+            }
+        });
     };
 
-    transporter.sendMail(mailOptions, function(err, response) {
-        if (err) {
-            console.log('Error : ' + err);
-        }  else {
-            res.status(200).json('recovery email sent');
+    readHTMLFile(__dirname + '/backend/emails/forgetPassword.hbs', function(err, html) {
+        let websitesLink;
+        if (process.env.NODE_ENV === 'DEVELOPMENT') {
+            websitesLink = `http://localhost:3000`;
+        } else {
+            websitesLink = `https://proshop-tris.herokuapp.com`;
         }
+
+        var template = handlebars.compile(html);
+        var replacements = {
+             username: `${user.email}`,
+             websitesLink: `${websitesLink}`,
+             token: `${token}`
+        };
+        var htmlToSend = template(replacements);
+
+        const mailOptions = {
+            from: 'Proshop@business.com',
+            to: `${user.email}`,
+            subject: 'Link to Reset Your Password',
+            html: htmlToSend
+        };
+
+        transporter.sendMail(mailOptions, function(err, response) {
+            if (err) {
+                console.log('Error : ' + err);
+            }  else {
+                res.status(200).json('recovery email sent');
+            }
+        });
     });
 });
 

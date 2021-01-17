@@ -22,6 +22,7 @@ import WishListScreen from './screens/WishListScreen';
 import ListScreen from './screens/ListScreen';
 import ForgotPasswordScreen from './screens/ForgotPassword';
 import ResetPasswordAfterLink from './screens/ResetPassword';
+import ErrorHandlerPage from './screens/ErrorPage';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -71,6 +72,7 @@ function App() {
           <Route path="/search/:keyword/page/:pageNumber" component={SearchScreen} />
           <Route path="/" component={HomeScreen} exact />
         </MarginContainer>
+        <Route component={ErrorHandlerPage} />
       </main>
       <Footer/>
       </ScrollToTop>
