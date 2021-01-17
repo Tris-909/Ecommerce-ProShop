@@ -24,7 +24,7 @@ import ForgotPasswordScreen from './screens/ForgotPassword';
 import ResetPasswordAfterLink from './screens/ResetPassword';
 import ErrorHandlerPage from './screens/ErrorPage';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import styled from 'styled-components';
 
@@ -44,6 +44,8 @@ function App() {
         <SubNavbar />
       <main className='py-3'>
         <MarginContainer>  
+          <Switch> 
+          <Route path="/" component={HomeScreen} exact />
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/laptops" component={ListScreen} exact />
           <Route path="/tvs" component={ListScreen} exact />
@@ -70,9 +72,9 @@ function App() {
           <Route path="/search/:keyword" component={SearchScreen} exact />
           <Route path="/page/:pageNumber" component={SearchScreen} />
           <Route path="/search/:keyword/page/:pageNumber" component={SearchScreen} />
-          <Route path="/" component={HomeScreen} exact />
+          <Route path="*" component={ErrorHandlerPage} />
+          </Switch>
         </MarginContainer>
-        <Route component={ErrorHandlerPage} />
       </main>
       <Footer/>
       </ScrollToTop>
