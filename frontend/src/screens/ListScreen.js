@@ -85,7 +85,7 @@ const ListScreen = () => {
         }
 
         setCat(); 
-    }, []);
+    }, [window.location.pathname]);
 
     useEffect(() => {
         dispatch(getListOfProductsBasedOnCategory( category, 0, lowPrice, highPrice, filteredBrands)); 
