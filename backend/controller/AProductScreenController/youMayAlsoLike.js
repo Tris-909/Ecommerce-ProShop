@@ -1,11 +1,12 @@
 import AsyncHandler from 'express-async-handler';
 import Product from '../../models/product.js';
+import { AppError } from '../../utils/appError.js';
 
 //? "YOU MAY ALSO LIKE" GET 6 cheapest products 
 //? /api/products/alsolike?category=
 //? public
 
-const getAlsoLikeProductsBasedOnCategory = AsyncHandler(async (req, res) => {
+const getAlsoLikeProductsBasedOnCategory = AsyncHandler(async (req, res, next) => {
     const category = req.query.category;
 
     const product = await Product.find({ category: category }).select({
@@ -23,8 +24,7 @@ const getAlsoLikeProductsBasedOnCategory = AsyncHandler(async (req, res) => {
         res.status(200);
         res.send(productsSliced);
     } else {
-        res.status(404);
-        throw new Error("Can't fetch recommended Games !");
+        next(new AppError("Can't fetch recommended Games !", 404));
     }
 });
 

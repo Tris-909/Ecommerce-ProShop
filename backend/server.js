@@ -179,7 +179,8 @@ app.put('/updatePasswordViaEmail', async (req, res) => {
     })
 })
 
-app.use(notFound);
+// ERROR HANDLER
+app.all('*', notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;

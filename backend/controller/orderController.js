@@ -1,10 +1,11 @@
 import AsyncHandler from 'express-async-handler';
 import Order from '../models/order.js';
+import { AppError } from '../utils/appError.js';
 
 //?   Create an order
 //?   /api/orders
 //?   Private Route
-const addOrder = AsyncHandler(async (req, res) => {
+const addOrder = AsyncHandler(async (req, res, next) => {
     const { 
         orderItems, 
         shippingAddress, 
@@ -15,9 +16,8 @@ const addOrder = AsyncHandler(async (req, res) => {
         totalPrice, 
         onSale } = req.body;
 
-        if (orderItems && orderItems.length === 0) {
-        res.status(400);
-        throw new Error('No order items'); 
+    if (orderItems && orderItems.length === 0) {
+        next(new AppError('No order items', 400));
     } else {
         const order = new Order({
             orderItems,
@@ -39,22 +39,21 @@ const addOrder = AsyncHandler(async (req, res) => {
 //?   GET an order by ID
 //?   /api/orders/:id
 //?   Private Route
-const getOrderById = AsyncHandler(async (req, res) => {
+const getOrderById = AsyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const fetchedOrder = await Order.findById(id).populate('user', 'name email');
 
     if (fetchedOrder) {
         res.status(200).json(fetchedOrder);
     } else {    
-        res.status(404);
-        throw new Error('Can\'t find the Order, please try again');
+        next(new AppError('Can\'t find the Order, please try again', 404))
     }
 });
 
 //?   PUT update order.isPaid to true
 //?   /api/orders/:id
 //?   Private Route
-const updateOrderIsPaidStatus = AsyncHandler(async (req, res) => {
+const updateOrderIsPaidStatus = AsyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const fetchedOrder = await Order.findById(id);
 
@@ -72,8 +71,7 @@ const updateOrderIsPaidStatus = AsyncHandler(async (req, res) => {
 
         res.status(200).json(updatedOrder);
     } else {    
-        res.status(404);
-        throw new Error('Can\'t find the Order, please try again');
+        next(new AppError('Can\'t find the Order, please try again', 404));
     }
 });
 
@@ -90,21 +88,20 @@ const getOrdersByUserId = AsyncHandler(async (req, res) => {
 //?   GET all orders
 //?   /api/orders/allorders
 //?   Private Route /Admin Route
-const getAllOrders = AsyncHandler(async (req, res) => {
+const getAllOrders = AsyncHandler(async (req, res, next) => {
     const orders = await Order.find();
 
     if (orders) {
         res.status(200).send(orders);
     } else {
-        res.status(400);
-        throw new Error('Something is wrong, please try again');
+        next(new AppError("Can't fetch all order as Admin", 500));
     }
 });
 
 //? PUT orders isDelivered based on that Order ID
 //? /api/orders/toggleIsDelivered
 //? Private Route /Admin Route
-const changeIsDeliveredStatus = AsyncHandler(async (req, res) => {
+const changeIsDeliveredStatus = AsyncHandler(async (req, res, next) => {
     const { id } = req.params;
 
     const fetchedOrder = await Order.findById(id);
@@ -116,8 +113,7 @@ const changeIsDeliveredStatus = AsyncHandler(async (req, res) => {
         const updatedOrder = await fetchedOrder.save();
         res.status(200).send(updatedOrder);
     } else {
-        res.status(400);
-        throw new Error('This Order is not existed !');
+        next(new AppError(`This Order is not existed based on this ID : ${id}!`, 404));
     }
 });
 
