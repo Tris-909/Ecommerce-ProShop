@@ -155,8 +155,8 @@ var getSetOfReviewsOfCurrentProductBasedOnPageNumber = function (productId, page
     });
 }); }; };
 exports.getSetOfReviewsOfCurrentProductBasedOnPageNumber = getSetOfReviewsOfCurrentProductBasedOnPageNumber;
-var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
-    var BrandsArray, i, brandArrayQuery, i, data, error_5;
+var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
+    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, data, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -170,14 +170,25 @@ var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highP
                         BrandsArray.push(filteredBrands[i].value);
                     }
                 }
-                console.log(BrandsArray);
                 brandArrayQuery = "&brands=";
                 for (i = 0; i < BrandsArray.length; i++) {
                     brandArrayQuery += BrandsArray[i] + ",";
                 }
-                return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery)];
+                ScreenSizesArray = [];
+                for (i = 0; i < laptopScreenSizes.length; i++) {
+                    if (laptopScreenSizes[i].isChecked) {
+                        ScreenSizesArray.push(laptopScreenSizes[i].value);
+                    }
+                }
+                screenSizesQuery = "&screenSizes=";
+                for (i = 0; i < ScreenSizesArray.length; i++) {
+                    screenSizesQuery += ScreenSizesArray[i] + ",";
+                }
+                return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + screenSizesQuery)];
             case 1:
                 data = (_a.sent()).data;
+                console.log("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + screenSizesQuery);
+                console.log(data);
                 dispatch({
                     type: actionTypes_1.GET_LIST_PRODUCTS_SUCCESS,
                     payload: data

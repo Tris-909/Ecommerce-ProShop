@@ -77,7 +77,17 @@ const ListScreen = () => {
     const [lowPrice, setLowPrice] = useState(0);
     const [highPrice, setHighPrice] = useState(7600);
     const [filteredBrands, setFilteredBrands] = useState([]);
-    const { productsList, brands, currentPickedBrands, pages, loading, error } = useSelector(state => state.listProducts);
+    const [laptopScreenSizes, setLaptopScreenSizes] = useState([]);
+    const { 
+        productsList, 
+        brands, 
+        screenSizes,
+        currentPickedBrands,
+        currentPickedLaptopScreenSizes, 
+        pages, 
+        loading, 
+        error } 
+    = useSelector(state => state.listProducts);
     
     useEffect(() => {
         async function setCat(){
@@ -88,10 +98,11 @@ const ListScreen = () => {
     }, [window.location.pathname]);
 
     useEffect(() => {
-        dispatch(getListOfProductsBasedOnCategory( category, 0, lowPrice, highPrice, filteredBrands)); 
+        dispatch(getListOfProductsBasedOnCategory( category, 0, lowPrice, highPrice, filteredBrands, laptopScreenSizes)); 
     }, [dispatch, category, lowPrice, highPrice]);
 
     useEffect(() => {
+        //TODO: Check if server send back any picked brands, if yes, apply these changes to state to provide accurate frontend
         const brandsCheckedArray = [];
 
         for (let i = 0; i < brands.length; i++) {
@@ -102,7 +113,6 @@ const ListScreen = () => {
             });
         }
 
-        
         for ( let i = 0; i < brandsCheckedArray.length; i++) {
             for (let u = 0; u < currentPickedBrands.length; u++) {
                 if (brandsCheckedArray[i].value == currentPickedBrands[u]) {
@@ -110,18 +120,36 @@ const ListScreen = () => {
                 }
             }
         }
-        console.log(brandsCheckedArray);
         setFilteredBrands(brandsCheckedArray);
-    }, [brands, currentPickedBrands]);
+
+        //TODO: The same but this time check for laptopScreenSizes
+        const laptopScreenSizesCheckedArray = [];
+        for (let i = 0; i < screenSizes.length; i++) {
+            laptopScreenSizesCheckedArray.push({
+                id: i,
+                value: screenSizes[i],
+                isChecked: false
+            });
+        }
+        for ( let i = 0; i < laptopScreenSizesCheckedArray.length; i++) {
+            for (let u = 0; u < currentPickedLaptopScreenSizes.length; u++) {
+                if (laptopScreenSizesCheckedArray[i].value === currentPickedLaptopScreenSizes[u]) {
+                    laptopScreenSizesCheckedArray[i].isChecked = true;
+                }
+            }
+        }
+        setLaptopScreenSizes(laptopScreenSizesCheckedArray);
+
+    }, [brands, currentPickedBrands, screenSizes, currentPickedLaptopScreenSizes]);
 
     const getNextSetOfReviews = (e, nextpage) => {
         e.preventDefault();
-        dispatch(getListOfProductsBasedOnCategory(category, nextpage-1, lowPrice, highPrice, filteredBrands));
+        dispatch(getListOfProductsBasedOnCategory(category, nextpage-1, lowPrice, highPrice, filteredBrands, laptopScreenSizes));
     }
 
     const onFilterPriceHandler = (e) => {
         e.preventDefault();
-        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands));
+        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands, laptopScreenSizes));
     }
 
     const filterByBrandHandler = (e) => {
@@ -132,7 +160,16 @@ const ListScreen = () => {
             }
         });
         setFilteredBrands([...currentBrands]);
-        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands));
+
+        let currentLaptopScreens = laptopScreenSizes;
+        currentLaptopScreens.forEach((screen) => {
+            if (screen.value === e.target.value) {
+                screen.isChecked = e.target.checked;
+            }
+        });
+        setLaptopScreenSizes(currentLaptopScreens);
+
+        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands, laptopScreenSizes));
     }
 
     return(
@@ -178,6 +215,35 @@ const ListScreen = () => {
                                </Form>
                             </FilterPriceInbox>
                         </FilterPriceCard>
+                        {
+                            category === 'laptops' ? (
+                                <FilterPriceCard>
+                                    <FilterPriceName>
+                                            Laptop ScreenSizes
+                                    </FilterPriceName>
+                                    <FilterPriceInbox>
+                                       <Form>
+                                           {
+                                               laptopScreenSizes ? laptopScreenSizes.map((screenSize) => {
+                                                    return(
+                                                    <div key={screenSize.id}>
+                                                        <Form.Check 
+                                                            type="checkbox" 
+                                                            id={screenSize.id} 
+                                                            label={`${screenSize.value}`}
+                                                            checked={screenSize.isChecked ? "checked" : null}
+                                                            value={screenSize.value}
+                                                            onChange={(e) => filterByBrandHandler(e)} 
+                                                            />
+                                                    </div>
+                                               )}) : null
+                                           }
+                                       </Form>
+                                    </FilterPriceInbox>
+                                </FilterPriceCard>
+                            ) : null
+                        }
+                        
                     </FilterCard>
                 </Col>
                 <Col sm={12} md={9} lg={9} xl={9}>

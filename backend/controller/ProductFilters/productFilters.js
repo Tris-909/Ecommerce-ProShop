@@ -53,7 +53,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
     
     if (pickedBrands[0] == '' && 
         pickedLaptopScreenSizes == undefined) {
-
+        console.log('No filters');
         //! No filters applied
         const totalProductsOfThatCategoryWithNoBrands = await Product.countDocuments({ 
             category: req.params.category
@@ -79,7 +79,8 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 listItems: productListNoBrand, 
                 brands: ArrayOfBrands,
                 screenSizes: arrayOfLaptopScreenSizes,
-                currentPickedBrands: pickedBrands,
+                currentPickedBrands: [],
+                currentPickedLaptopScreenSizes: [],
                 page: pageSize, 
                 pages: Math.ceil(totalProductsOfThatCategoryWithNoBrands/pageSize)
             });
@@ -88,6 +89,19 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             throw new Error("Can't find the list of product");
         }
     } else {
+        console.log('Has filters');
+        console.log(pickedLaptopScreenSizes);
+        console.log(pickedBrands);
+
+        //TODO: Check if pickedLaptopScreenSizes and pickedBrands is empty or not
+        //TODO: If it empty mean that we want to search for everything, everyscreens, everybrands,...
+        if (pickedLaptopScreenSizes == undefined) {
+            pickedLaptopScreenSizes = arrayOfLaptopScreenSizes;
+        }
+        if (pickedBrands[0] == "") {
+            pickedBrands = ArrayOfBrands;
+        }
+
         const totalProductsOfThatCategoryWithFilter = await Product.countDocuments({ 
             category: req.params.category,
             price: { $gt: lowPrice, $lt: highPrice },
@@ -96,6 +110,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 $in: pickedLaptopScreenSizes
             }
         });
+        console.log(totalProductsOfThatCategoryWithFilter);
 
         const productListWithBrands = await Product.find({ 
             category: req.params.category,
@@ -115,6 +130,15 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             "image": 1,
             "onSale": 1
         }).skip(pageSize * currentPage).limit(pageSize);
+
+        //TODO: We have this 2 `if` because we don't want to send the signal to make all the 
+        //TODO: box checked on the front-end. Here we return what we receive in the start
+        if (pickedLaptopScreenSizes.length == arrayOfLaptopScreenSizes.length) {
+            pickedLaptopScreenSizes = [];
+        }
+        if (pickedBrands.length == ArrayOfBrands.length) {
+            pickedBrands = [];
+        }
 
         if (productListWithBrands) {
             res.status(200).send({ 

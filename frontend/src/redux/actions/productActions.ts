@@ -127,7 +127,14 @@ interface filteredBrandsSingleItem {
     value: string
 }
 
-export const getListOfProductsBasedOnCategory = (category: string, page: string, lowPrice: number, highPrice: number, filteredBrands: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
+export const getListOfProductsBasedOnCategory = (
+    category: string, 
+    page: string, 
+    lowPrice: number, 
+    highPrice: number, 
+    filteredBrands: filteredBrandsSingleItem[],
+    laptopScreenSizes: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
+    
     try {
         dispatch({
             type: GET_LIST_PRODUCTS_PENDING
@@ -139,19 +146,32 @@ export const getListOfProductsBasedOnCategory = (category: string, page: string,
                 BrandsArray.push(filteredBrands[i].value);
             }
         }
-        console.log(BrandsArray);
-
         let brandArrayQuery = `&brands=`;
         for (let i = 0; i < BrandsArray.length; i++) {
             brandArrayQuery += `${BrandsArray[i]},`;
         }
 
-        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}`);
+        let ScreenSizesArray = [];
+        for (let i = 0; i < laptopScreenSizes.length; i++) {
+            if (laptopScreenSizes[i].isChecked) {
+                ScreenSizesArray.push(laptopScreenSizes[i].value);
+            }
+        }
+        let screenSizesQuery = `&screenSizes=`;
+        for (let i = 0; i < ScreenSizesArray.length; i++) {
+            screenSizesQuery += `${ScreenSizesArray[i]},`;
+        }
+
+        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}`);
+        
+        console.log(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}`);
+        console.log(data);
 
         dispatch({
             type: GET_LIST_PRODUCTS_SUCCESS,
             payload: data
         });
+
     } catch(error) {
         dispatch({
             type: GET_LIST_PRODUCTS_FAIL,
