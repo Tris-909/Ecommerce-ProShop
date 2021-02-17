@@ -2,7 +2,6 @@ import express from 'express';
 const router = express.Router();
 import { 
     getProducts, 
-    getListOfProducts,
     getProductById, 
     stickAReviewAsAgree,
     stickAReviewAsDisAgree,
@@ -19,6 +18,7 @@ import {
     createReview ,
     deleteReviewProduct
 } from '../controller/productController.js';
+import { getListOfProducts } from '../controller/ProductFilters/productFilters.js';
 import { getTopProducts } from '../controller/HomeScreenController/topProducts.js';
 import { getTopRatedProducts } from '../controller/HomeScreenController/carouselProducts.js';
 import { getAlsoLikeProductsBasedOnCategory } from '../controller/AProductScreenController/youMayAlsoLike.js';
