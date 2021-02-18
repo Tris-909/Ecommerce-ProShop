@@ -33,15 +33,24 @@ const FilterPriceCard = styled.div`
     border: 0.5px solid rgba(0, 0, 0, 0.125);
 `;
 
-const FilterPriceName = styled.div`
+const FilterName = styled.div`
     font-size: 1rem;
     font-weight: 800;
     padding-left: 1rem;
     color: black;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    & i {
+        cursor: pointer;
+    }
 `;
 
-const FilterPriceInbox = styled.div`
-    display: flex;
+const FilterBox = styled.div`
+    display: ${props => props.open ? "flex" : "none"};
     align-items: center;
     margin-top: 1rem;
     margin-left: 1rem;
@@ -73,11 +82,20 @@ const CurrentPageName = styled.div`
 
 const ListScreen = () => {
     const dispatch = useDispatch();
+    //TODO: Inner State
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [category, setCategory] = useState(null);
     const [lowPrice, setLowPrice] = useState(0);
     const [highPrice, setHighPrice] = useState(7600);
     const [filteredBrands, setFilteredBrands] = useState([]);
     const [laptopScreenSizes, setLaptopScreenSizes] = useState([]);
+
+    //TODO: Toggle filters Options
+    const [filterPriceOpen, setFilterPriceOpen] = useState(true);
+    const [filterBrandsOpen, setFilterBrandsOpen] = useState(true);
+    const [filterLaptopScreenSize, setFilterLaptopScreenSize] = useState(true);
+
+    //TODO: Data from Redux Store
     const { 
         productsList, 
         brands, 
@@ -86,9 +104,25 @@ const ListScreen = () => {
         currentPickedLaptopScreenSizes, 
         pages, 
         loading, 
-        error } 
-    = useSelector(state => state.listProducts);
+        error 
+    } = useSelector(state => state.listProducts);
     
+    //TODO: Hide filter options if screenSizeWidth is smaller than 700
+    const updateMedia = () => {
+        setScreenWidth(window.innerWidth);
+      };
+    useEffect(() => {
+        window.addEventListener("resize", updateMedia);
+        return () => window.removeEventListener("resize", updateMedia);
+    });
+    useEffect(() => {
+        if (screenWidth < 700) {
+            setFilterPriceOpen(false);
+            setFilterBrandsOpen(false);
+            setFilterLaptopScreenSize(false);
+        } 
+    })
+
     useEffect(() => {
         async function setCat(){
             await setCategory(window.location.pathname.split('/')[1]);
@@ -172,6 +206,16 @@ const ListScreen = () => {
         dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands, laptopScreenSizes));
     }
 
+    const toggleFilterOptions = (filterName) => {
+        if (filterName === 'price') {
+            setFilterPriceOpen(!filterPriceOpen);
+        } else if (filterName === 'brands') {
+            setFilterBrandsOpen(!filterBrandsOpen);
+        } else if (filterName === 'screenSizes') {
+            setFilterLaptopScreenSize(!filterLaptopScreenSize);
+        }
+    }
+
     return(
         <>
             {category ? <Helmet title={`${category.toUpperCase()} | ProShop`} /> : null}
@@ -181,21 +225,24 @@ const ListScreen = () => {
                     <FilterCard>
                         <FilterTop>Filters</FilterTop>
                         <FilterPriceCard>
-                            <FilterPriceName>
-                                Price
-                            </FilterPriceName>
-                            <FilterPriceInbox>
+                            <FilterName>
+                                <span>Price</span>
+                                <i class="fas fa-angle-down" onClick={(e) => toggleFilterOptions('price')}></i>
+                            </FilterName>
+                            <FilterBox open={filterPriceOpen}>
                                 <InputFilter placeholder="0" value={lowPrice} onChange={(e) => setLowPrice(e.target.value)}/> 
                                 to 
                                 <InputFilter placeholder="7600" value={highPrice} onChange={(e) => setHighPrice(e.target.value)} /> 
                                 <PriceGoButton onClick={(e) => onFilterPriceHandler(e)}> Go </PriceGoButton>
-                            </FilterPriceInbox>
+                            </FilterBox>
                         </FilterPriceCard>
                         <FilterPriceCard>
-                            <FilterPriceName>
-                                Brand
-                            </FilterPriceName>
-                            <FilterPriceInbox>
+                            <FilterName>
+                                <span>Brand</span>
+                                
+                                <i class="fas fa-angle-down" onClick={(e) => toggleFilterOptions('brands')}></i>
+                            </FilterName>
+                            <FilterBox open={filterBrandsOpen}>
                                <Form>
                                    {
                                        filteredBrands ? filteredBrands.map((brand) => {
@@ -213,15 +260,17 @@ const ListScreen = () => {
                                        )}) : null
                                    }
                                </Form>
-                            </FilterPriceInbox>
+                            </FilterBox>
                         </FilterPriceCard>
-                        {
+                        {   
                             category === 'laptops' ? (
                                 <FilterPriceCard>
-                                    <FilterPriceName>
-                                            Laptop ScreenSizes
-                                    </FilterPriceName>
-                                    <FilterPriceInbox>
+                                    <FilterName>
+                                            <span> Laptop ScreenSizes </span>
+
+                                            <i class="fas fa-angle-down" onClick={(e) => toggleFilterOptions('screenSizes')}></i>
+                                    </FilterName>
+                                    <FilterBox open={filterLaptopScreenSize}>
                                        <Form>
                                            {
                                                laptopScreenSizes ? laptopScreenSizes.map((screenSize) => {
@@ -239,11 +288,10 @@ const ListScreen = () => {
                                                )}) : null
                                            }
                                        </Form>
-                                    </FilterPriceInbox>
+                                    </FilterBox>
                                 </FilterPriceCard>
                             ) : null
-                        }
-                        
+                        }    
                     </FilterCard>
                 </Col>
                 <Col sm={12} md={9} lg={9} xl={9}>
