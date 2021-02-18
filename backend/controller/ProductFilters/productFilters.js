@@ -23,12 +23,16 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             ArrayOfBrands.push(listOfBrands[i].brand);
         }
     }
-
+    
     //! LAPTOP FILTERS 
     //TODO : Filter laptops based on screen sizes
     const arrayOfLaptopScreenSizes = [];
+    //TODO: Filter Laptops based on RAM Sizes
+    const arrayOfLaptopRAMSize = [];
+    
     if (req.params.category === 'laptops') {
-        const listOfScreenSizes = await Product.find({ category: req.params.category }).select({
+        //TODO: Fetch list of screenSizes and push it to array above
+        const listOfScreenSizes = await Product.find({ category: 'laptops' }).select({
             "details": {
                 "displaySizeInches": 1
             }
@@ -38,21 +42,43 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 arrayOfLaptopScreenSizes.push(listOfScreenSizes[i].details.displaySizeInches);
             }
         }
+
+        //TODO: Fetch list of RAM and push it to array above
+        const listOfRAMSizes = await Product.find({ category: 'laptops' }).select({
+            "details": {
+                "ram": 1
+            }
+        });
+        for (let i = 0; i < listOfRAMSizes.length; i++) {
+            if (!arrayOfLaptopRAMSize.includes(listOfRAMSizes[i].details.ram)) {
+                arrayOfLaptopRAMSize.push(listOfRAMSizes[i].details.ram);
+            }
+        }
     } 
     //! END OF LAPTOP FILTERS
 
     //TODO: Brands Filter
+    let pickedBrands = req.query.brands.split(',');
 
     //TODO: lAPTOP filters summary 
     let pickedLaptopScreenSizes;
     if (req.query.screenSizes) {
         pickedLaptopScreenSizes = req.query.screenSizes.split(',');
     }
-
-    let pickedBrands = req.query.brands.split(',');
+    let pickedRAMSizes;
+    if (req.query.ramSize) {
+        pickedRAMSizes = req.query.ramSize.split(',');
+    }
     
+
+
+
+
+    //TODO Start query based on it has no filters or has at least 1 filter
     if (pickedBrands[0] == '' && 
-        pickedLaptopScreenSizes == undefined) {
+        pickedLaptopScreenSizes == undefined &&
+        pickedRAMSizes == undefined) {
+
         console.log('No filters');
         //! No filters applied
         const totalProductsOfThatCategoryWithNoBrands = await Product.countDocuments({ 
@@ -79,8 +105,10 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 listItems: productListNoBrand, 
                 brands: ArrayOfBrands,
                 screenSizes: arrayOfLaptopScreenSizes,
+                rams: arrayOfLaptopRAMSize,
                 currentPickedBrands: [],
                 currentPickedLaptopScreenSizes: [],
+                currentPickedRam: [],
                 page: pageSize, 
                 pages: Math.ceil(totalProductsOfThatCategoryWithNoBrands/pageSize)
             });
@@ -91,15 +119,19 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
     } else {
         console.log('Has filters');
         console.log(pickedLaptopScreenSizes);
+        console.log(pickedRAMSizes);
         console.log(pickedBrands);
 
         //TODO: Check if pickedLaptopScreenSizes and pickedBrands is empty or not
         //TODO: If it empty mean that we want to search for everything, everyscreens, everybrands,...
+        if (pickedBrands[0] == "") {
+            pickedBrands = ArrayOfBrands;
+        }
         if (pickedLaptopScreenSizes == undefined) {
             pickedLaptopScreenSizes = arrayOfLaptopScreenSizes;
         }
-        if (pickedBrands[0] == "") {
-            pickedBrands = ArrayOfBrands;
+        if (pickedRAMSizes == undefined) {
+            pickedRAMSizes = arrayOfLaptopRAMSize;
         }
 
         const totalProductsOfThatCategoryWithFilter = await Product.countDocuments({ 
@@ -108,6 +140,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             brand: { $in: pickedBrands },
             "details.displaySizeInches": {
                 $in: pickedLaptopScreenSizes
+            },
+            "details.ram": {
+                $in: pickedRAMSizes
             }
         });
         console.log(totalProductsOfThatCategoryWithFilter);
@@ -118,6 +153,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             brand: { $in: pickedBrands },
             "details.displaySizeInches": {
                 $in: pickedLaptopScreenSizes
+            },
+            "details.ram": {
+                $in: pickedRAMSizes
             }
             })
             .select({
@@ -131,7 +169,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             "onSale": 1
         }).skip(pageSize * currentPage).limit(pageSize);
 
-        //TODO: We have this 2 `if` because we don't want to send the signal to make all the 
+        //TODO: We have these `if`s because we don't want to send the signal to make all the 
         //TODO: box checked on the front-end. Here we return what we receive in the start
         if (pickedLaptopScreenSizes.length == arrayOfLaptopScreenSizes.length) {
             pickedLaptopScreenSizes = [];
@@ -139,14 +177,19 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         if (pickedBrands.length == ArrayOfBrands.length) {
             pickedBrands = [];
         }
+        if (pickedRAMSizes.length == arrayOfLaptopRAMSize.length) {
+            pickedRAMSizes = [];
+        }
 
         if (productListWithBrands) {
             res.status(200).send({ 
                 listItems: productListWithBrands, 
                 brands: ArrayOfBrands,
                 screenSizes: arrayOfLaptopScreenSizes,
+                rams: arrayOfLaptopRAMSize,
                 currentPickedBrands: pickedBrands,
                 currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
+                currentPickedRam: pickedRAMSizes,
                 page: pageSize, 
                 pages: Math.ceil(totalProductsOfThatCategoryWithFilter/pageSize)
             });
