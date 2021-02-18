@@ -59,23 +59,39 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
 
     //TODO: Brands Filter
     let pickedBrands = req.query.brands.split(',');
+    for (let i = 0; i < pickedBrands.length; i++) {
+        if (pickedBrands[i] == "") {
+            pickedBrands.splice(i, 1);
+        }
+    }
 
     //TODO: lAPTOP filters summary 
     let pickedLaptopScreenSizes;
     if (req.query.screenSizes) {
         pickedLaptopScreenSizes = req.query.screenSizes.split(',');
+        for (let i = 0; i < pickedLaptopScreenSizes.length; i++) {
+            if (pickedLaptopScreenSizes[i] == "") {
+                pickedLaptopScreenSizes.splice(i, 1);
+            }
+        }
     }
     let pickedRAMSizes;
     if (req.query.ramSize) {
         pickedRAMSizes = req.query.ramSize.split(',');
+        for (let i = 0; i < pickedRAMSizes.length; i++) {
+            if (pickedRAMSizes[i] == "") {
+                pickedRAMSizes.splice(i, 1);
+            }
+        }
     }
+
     
 
 
 
 
     //TODO Start query based on it has no filters or has at least 1 filter
-    if (pickedBrands[0] == '' && 
+    if (pickedBrands[0] == undefined && 
         pickedLaptopScreenSizes == undefined &&
         pickedRAMSizes == undefined) {
 
@@ -118,20 +134,25 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         }
     } else {
         console.log('Has filters');
-        console.log(pickedLaptopScreenSizes);
-        console.log(pickedRAMSizes);
-        console.log(pickedBrands);
 
         //TODO: Check if pickedLaptopScreenSizes and pickedBrands is empty or not
         //TODO: If it empty mean that we want to search for everything, everyscreens, everybrands,...
-        if (pickedBrands[0] == "") {
+        let noBrandFilters = false;
+        if (pickedBrands[0] == undefined) {
             pickedBrands = ArrayOfBrands;
+            noBrandFilters = true;
         }
+
+        let noLaptopScreenSizesFilter = false;
         if (pickedLaptopScreenSizes == undefined) {
             pickedLaptopScreenSizes = arrayOfLaptopScreenSizes;
+            noLaptopScreenSizesFilter = true;
         }
+
+        let noLaptopRAMSize = false;
         if (pickedRAMSizes == undefined) {
             pickedRAMSizes = arrayOfLaptopRAMSize;
+            noLaptopRAMSize = true;
         }
 
         const totalProductsOfThatCategoryWithFilter = await Product.countDocuments({ 
@@ -145,7 +166,6 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 $in: pickedRAMSizes
             }
         });
-        console.log(totalProductsOfThatCategoryWithFilter);
 
         const productListWithBrands = await Product.find({ 
             category: req.params.category,
@@ -171,15 +191,16 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
 
         //TODO: We have these `if`s because we don't want to send the signal to make all the 
         //TODO: box checked on the front-end. Here we return what we receive in the start
-        if (pickedLaptopScreenSizes.length == arrayOfLaptopScreenSizes.length) {
-            pickedLaptopScreenSizes = [];
-        }
-        if (pickedBrands.length == ArrayOfBrands.length) {
+        if (noBrandFilters) {
             pickedBrands = [];
         }
-        if (pickedRAMSizes.length == arrayOfLaptopRAMSize.length) {
+        if (noLaptopScreenSizesFilter) {
+            pickedLaptopScreenSizes = [];
+        }
+        if (noLaptopRAMSize) {
             pickedRAMSizes = [];
         }
+
 
         if (productListWithBrands) {
             res.status(200).send({ 

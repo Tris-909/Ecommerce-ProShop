@@ -10,8 +10,10 @@ interface ProductListAndBrandsState {
     productsList: singleProduct[],
     brands: string[],
     screenSizes: string[],
+    rams: string[],
     currentPickedBrands: string[],
     currentPickedLaptopScreenSizes: string[],
+    currentPickedRam: string[],
     page: number | null,
     pages: number | null,
     loading: boolean,
@@ -22,8 +24,10 @@ const productListBasedOnCategory: ProductListAndBrandsState = {
     productsList: [],
     brands: [],
     screenSizes: [],
+    rams: [],
     currentPickedBrands: [],
     currentPickedLaptopScreenSizes: [],
+    currentPickedRam: [],
     pages: null,
     page: null,
     loading: false,
@@ -36,8 +40,10 @@ interface CurrentAction {
         listItems?: singleProduct[],
         brands?: string[],
         screenSizes?: string[],
+        rams?: string[],
         currentPickedBrands?: string[],
         currentPickedLaptopScreenSizes?: string[],
+        currentPickedRam?: string[],
         page?: number,
         pages?: number,
         error? : string
@@ -54,17 +60,21 @@ export const getListOfProductsBasedOnCategory = (state = productListBasedOnCateg
         case GET_LIST_PRODUCTS_SUCCESS:
             if ( action.payload.listItems instanceof Array &&
                  action.payload.brands instanceof Array &&
+                 action.payload.rams instanceof Array &&
                  action.payload.currentPickedBrands instanceof Array &&
                  action.payload.currentPickedLaptopScreenSizes instanceof  Array &&
-                 action.payload.screenSizes instanceof  Array) {
+                 action.payload.screenSizes instanceof  Array &&
+                 action.payload.currentPickedRam instanceof Array) {
                     return {
                         ...state,
                         loading: false,
                         productsList: [...action.payload.listItems],
                         brands: [...action.payload.brands],
                         screenSizes: [...action.payload.screenSizes],
+                        rams: [...action.payload.rams],
                         currentPickedBrands: [...action.payload.currentPickedBrands],
                         currentPickedLaptopScreenSizes: [...action.payload.currentPickedLaptopScreenSizes],
+                        currentPickedRam: [...action.payload.currentPickedRam],
                         page: action.payload.page,
                         pages: action.payload.pages
                     }

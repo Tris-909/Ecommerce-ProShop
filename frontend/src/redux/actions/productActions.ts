@@ -133,7 +133,8 @@ export const getListOfProductsBasedOnCategory = (
     lowPrice: number, 
     highPrice: number, 
     filteredBrands: filteredBrandsSingleItem[],
-    laptopScreenSizes: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
+    laptopScreenSizes: filteredBrandsSingleItem[],
+    laptopRAMs: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
     
     try {
         dispatch({
@@ -162,9 +163,20 @@ export const getListOfProductsBasedOnCategory = (
             screenSizesQuery += `${ScreenSizesArray[i]},`;
         }
 
-        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}`);
+        let RAMSizeArray = [];
+        for (let i = 0; i < laptopRAMs.length; i++) {
+            if (laptopRAMs[i].isChecked) {
+                RAMSizeArray.push(laptopRAMs[i].value);
+            }
+        }
+        let RAMSizeQuery = `&ramSize=`;
+        for (let i = 0; i < RAMSizeArray.length; i++) {
+            RAMSizeQuery += `${RAMSizeArray[i]},`;
+        }
+
+        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}`);
         
-        console.log(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}`);
+        console.log(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}`);
         console.log(data);
 
         dispatch({

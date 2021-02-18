@@ -89,19 +89,23 @@ const ListScreen = () => {
     const [highPrice, setHighPrice] = useState(7600);
     const [filteredBrands, setFilteredBrands] = useState([]);
     const [laptopScreenSizes, setLaptopScreenSizes] = useState([]);
+    const [laptopRAMs, setLaptopRAMs] = useState([]);
 
     //TODO: Toggle filters Options
     const [filterPriceOpen, setFilterPriceOpen] = useState(true);
     const [filterBrandsOpen, setFilterBrandsOpen] = useState(true);
     const [filterLaptopScreenSize, setFilterLaptopScreenSize] = useState(true);
+    const [filterLaptopRAM, setFilterLaptopRAM] = useState(true);
 
     //TODO: Data from Redux Store
     const { 
         productsList, 
         brands, 
         screenSizes,
+        rams,
         currentPickedBrands,
         currentPickedLaptopScreenSizes, 
+        currentPickedRam,
         pages, 
         loading, 
         error 
@@ -120,6 +124,7 @@ const ListScreen = () => {
             setFilterPriceOpen(false);
             setFilterBrandsOpen(false);
             setFilterLaptopScreenSize(false);
+            setFilterLaptopRAM(false);
         } 
     })
 
@@ -132,7 +137,16 @@ const ListScreen = () => {
     }, [window.location.pathname]);
 
     useEffect(() => {
-        dispatch(getListOfProductsBasedOnCategory( category, 0, lowPrice, highPrice, filteredBrands, laptopScreenSizes)); 
+
+        dispatch(getListOfProductsBasedOnCategory(
+            category, 
+            0, 
+            lowPrice, 
+            highPrice, 
+            filteredBrands, 
+            laptopScreenSizes, 
+            laptopRAMs));
+
     }, [dispatch, category, lowPrice, highPrice]);
 
     useEffect(() => {
@@ -149,7 +163,7 @@ const ListScreen = () => {
 
         for ( let i = 0; i < brandsCheckedArray.length; i++) {
             for (let u = 0; u < currentPickedBrands.length; u++) {
-                if (brandsCheckedArray[i].value == currentPickedBrands[u]) {
+                if (brandsCheckedArray[i].value === currentPickedBrands[u]) {
                     brandsCheckedArray[i].isChecked = true;
                 }
             }
@@ -174,19 +188,55 @@ const ListScreen = () => {
         }
         setLaptopScreenSizes(laptopScreenSizesCheckedArray);
 
-    }, [brands, currentPickedBrands, screenSizes, currentPickedLaptopScreenSizes]);
+        //TODO: The same but this time check for laptopRAMSizes
+        const laptopRAMsCheckedArray = [];
+        for (let i = 0; i < rams.length; i++) {
+            laptopRAMsCheckedArray.push({
+                id: i,
+                value: rams[i],
+                isChecked: false
+            });
+        }
+
+        for ( let i = 0; i < laptopRAMsCheckedArray.length; i++) {
+            for (let u = 0; u < currentPickedRam.length; u++) {
+                if (laptopRAMsCheckedArray[i].value === currentPickedRam[u]) {
+                    console.log('before', laptopRAMsCheckedArray[i].isChecked);
+                    laptopRAMsCheckedArray[i].isChecked = true;
+                    console.log('after', laptopRAMsCheckedArray[i].isChecked);
+                }
+            }
+        }
+        setLaptopRAMs(laptopRAMsCheckedArray);
+
+    }, [brands, currentPickedBrands, screenSizes, currentPickedLaptopScreenSizes, currentPickedRam]);
 
     const getNextSetOfReviews = (e, nextpage) => {
         e.preventDefault();
-        dispatch(getListOfProductsBasedOnCategory(category, nextpage-1, lowPrice, highPrice, filteredBrands, laptopScreenSizes));
+        dispatch(getListOfProductsBasedOnCategory(
+            category, 
+            nextpage-1, 
+            lowPrice, 
+            highPrice, 
+            filteredBrands, 
+            laptopScreenSizes,
+            laptopRAMs));
     }
 
     const onFilterPriceHandler = (e) => {
         e.preventDefault();
-        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands, laptopScreenSizes));
+        dispatch(getListOfProductsBasedOnCategory(
+            category, 
+            0, 
+            lowPrice, 
+            highPrice, 
+            filteredBrands, 
+            laptopScreenSizes,
+            laptopRAMs));
     }
 
     const filterByBrandHandler = (e) => {
+        //TODO: to check filter boxes
         let currentBrands = filteredBrands;
         currentBrands.forEach((brand) => {
             if (brand.value === e.target.value) {
@@ -203,7 +253,22 @@ const ListScreen = () => {
         });
         setLaptopScreenSizes(currentLaptopScreens);
 
-        dispatch(getListOfProductsBasedOnCategory(category, 0, lowPrice, highPrice, filteredBrands, laptopScreenSizes));
+        let currentRAMSizes = laptopRAMs;
+        currentRAMSizes.forEach((ram) => {
+            if (ram.value === e.target.value) {
+                ram.isChecked = e.target.checked;
+            }
+        });
+        setLaptopRAMs([...currentRAMSizes]);
+
+        dispatch(getListOfProductsBasedOnCategory(
+            category, 
+            0, 
+            lowPrice, 
+            highPrice, 
+            filteredBrands, 
+            laptopScreenSizes,
+            laptopRAMs));
     }
 
     const toggleFilterOptions = (filterName) => {
@@ -213,6 +278,8 @@ const ListScreen = () => {
             setFilterBrandsOpen(!filterBrandsOpen);
         } else if (filterName === 'screenSizes') {
             setFilterLaptopScreenSize(!filterLaptopScreenSize);
+        } else if (filterName === 'ram') {
+            setFilterLaptopRAM(!filterLaptopRAM);
         }
     }
 
@@ -223,11 +290,13 @@ const ListScreen = () => {
             <Row>
                 <Col sm={12} md={3} lg={3} xl={3}>
                     <FilterCard>
+
                         <FilterTop>Filters</FilterTop>
+
                         <FilterPriceCard>
                             <FilterName>
                                 <span>Price</span>
-                                <i class="fas fa-angle-down" onClick={(e) => toggleFilterOptions('price')}></i>
+                                <i className="fas fa-angle-down" onClick={(e) => toggleFilterOptions('price')}></i>
                             </FilterName>
                             <FilterBox open={filterPriceOpen}>
                                 <InputFilter placeholder="0" value={lowPrice} onChange={(e) => setLowPrice(e.target.value)}/> 
@@ -236,11 +305,12 @@ const ListScreen = () => {
                                 <PriceGoButton onClick={(e) => onFilterPriceHandler(e)}> Go </PriceGoButton>
                             </FilterBox>
                         </FilterPriceCard>
+                        
                         <FilterPriceCard>
                             <FilterName>
                                 <span>Brand</span>
                                 
-                                <i class="fas fa-angle-down" onClick={(e) => toggleFilterOptions('brands')}></i>
+                                <i className="fas fa-angle-down" onClick={(e) => toggleFilterOptions('brands')}></i>
                             </FilterName>
                             <FilterBox open={filterBrandsOpen}>
                                <Form>
@@ -264,11 +334,12 @@ const ListScreen = () => {
                         </FilterPriceCard>
                         {   
                             category === 'laptops' ? (
+                                <>
                                 <FilterPriceCard>
                                     <FilterName>
                                             <span> Laptop ScreenSizes </span>
 
-                                            <i class="fas fa-angle-down" onClick={(e) => toggleFilterOptions('screenSizes')}></i>
+                                            <i className="fas fa-angle-down" onClick={(e) => toggleFilterOptions('screenSizes')}></i>
                                     </FilterName>
                                     <FilterBox open={filterLaptopScreenSize}>
                                        <Form>
@@ -290,6 +361,33 @@ const ListScreen = () => {
                                        </Form>
                                     </FilterBox>
                                 </FilterPriceCard>
+                                <FilterPriceCard>
+                                    <FilterName>
+                                            <span> RAM Sizes </span>
+
+                                            <i className="fas fa-angle-down" onClick={(e) => toggleFilterOptions('ram')}></i>
+                                    </FilterName>
+                                    <FilterBox open={filterLaptopRAM}>
+                                       <Form>
+                                           {
+                                               laptopRAMs ? laptopRAMs.map((ramSize) => {
+                                                    return(
+                                                    <div key={ramSize.id}>
+                                                        <Form.Check 
+                                                            type="checkbox" 
+                                                            id={ramSize.id} 
+                                                            label={`${ramSize.value}`}
+                                                            checked={ramSize.isChecked ? "checked" : null}
+                                                            value={ramSize.value}
+                                                            onChange={(e) => filterByBrandHandler(e)} 
+                                                            />
+                                                    </div>
+                                               )}) : null
+                                           }
+                                       </Form>
+                                    </FilterBox>
+                                </FilterPriceCard>
+                                </>
                             ) : null
                         }    
                     </FilterCard>
