@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Row, Col, Pagination, Form } from 'react-bootstrap';
+import { Row, Col, Pagination } from 'react-bootstrap';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -140,7 +140,7 @@ const ListScreen = () => {
     }, [window.location.pathname]);
 
     useEffect(() => {
-
+        //TODO: Fetch new products based on every change in price list box and price list box only
         dispatch(getListOfProductsBasedOnCategory(
             category, 
             0, 
@@ -148,7 +148,8 @@ const ListScreen = () => {
             highPrice, 
             filteredBrands, 
             laptopScreenSizes, 
-            laptopRAMs));
+            laptopRAMs
+        ));
 
     }, [dispatch, category, lowPrice, highPrice]);
 
@@ -212,7 +213,14 @@ const ListScreen = () => {
         }
         setLaptopRAMs(laptopRAMsCheckedArray);
 
-    }, [brands, currentPickedBrands, screenSizes, currentPickedLaptopScreenSizes, currentPickedRam]);
+    }, [
+        brands, 
+        currentPickedBrands, 
+        screenSizes, 
+        rams,
+        currentPickedLaptopScreenSizes, 
+        currentPickedRam
+    ]);
 
     const getNextSetOfReviews = (e, nextpage) => {
         e.preventDefault();

@@ -29,7 +29,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
     const arrayOfLaptopScreenSizes = [];
     //TODO: Filter Laptops based on RAM Sizes
     const arrayOfLaptopRAMSize = [];
-    
+    //TODO: Filter Laptops based on Proccessor Type
+    const arrayOfLaptopProcessorType = [];
+
     if (req.params.category === 'laptops') {
         //TODO: Fetch list of screenSizes and push it to array above
         const listOfScreenSizes = await Product.find({ category: 'laptops' }).select({
@@ -52,6 +54,18 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         for (let i = 0; i < listOfRAMSizes.length; i++) {
             if (!arrayOfLaptopRAMSize.includes(listOfRAMSizes[i].details.ram)) {
                 arrayOfLaptopRAMSize.push(listOfRAMSizes[i].details.ram);
+            }
+        }
+
+        //TODO: Fetch list of proccessor types and push it to array above
+        const listOfProcessorTypes = await Product.find({ category: 'laptops' }).select({
+            "details": {
+                "proccessorType": 1
+            }
+        });
+        for (let i = 0; i < listOfProcessorTypes.length; i++) {
+            if (!arrayOfLaptopProcessorType.includes(listOfProcessorTypes[i].details.proccessorType)) {
+                arrayOfLaptopProcessorType.push(listOfProcessorTypes[i].details.proccessorType);
             }
         }
     } 
@@ -84,7 +98,15 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             }
         }
     }
-
+    let pickedProccessorTypes;
+    if (req.query.processorType) {
+        pickedProccessorTypes = req.query.processorType.split(',');
+        for (let i = 0; i < pickedProccessorTypes.length; i++) {
+            if (pickedProccessorTypes[i] == "") {
+                pickedProccessorTypes.splice(i, 1);
+            }
+        }
+    }
     
 
 
@@ -93,7 +115,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
     //TODO Start query based on it has no filters or has at least 1 filter
     if (pickedBrands[0] == undefined && 
         pickedLaptopScreenSizes == undefined &&
-        pickedRAMSizes == undefined) {
+        pickedRAMSizes == undefined &&
+        pickedProccessorTypes == undefined &&
+        lowPrice === 0) {
 
         console.log('No filters');
         //! No filters applied
@@ -122,9 +146,11 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 brands: ArrayOfBrands,
                 screenSizes: arrayOfLaptopScreenSizes,
                 rams: arrayOfLaptopRAMSize,
+                processorTypes: arrayOfLaptopProcessorType,
                 currentPickedBrands: [],
                 currentPickedLaptopScreenSizes: [],
                 currentPickedRam: [],
+                currentPickedProcessorType: [],
                 page: pageSize, 
                 pages: Math.ceil(totalProductsOfThatCategoryWithNoBrands/pageSize)
             });
@@ -155,6 +181,12 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             noLaptopRAMSize = true;
         }
 
+        let noProcessorTypes = false;
+        if (pickedProccessorTypes == undefined) {
+            pickedProccessorTypes = arrayOfLaptopProcessorType;
+            noProcessorTypes = true;
+        }
+
         const totalProductsOfThatCategoryWithFilter = await Product.countDocuments({ 
             category: req.params.category,
             price: { $gt: lowPrice, $lt: highPrice },
@@ -164,6 +196,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             },
             "details.ram": {
                 $in: pickedRAMSizes
+            },
+            "details.proccessorType": {
+                $in: pickedProccessorTypes
             }
         });
 
@@ -176,6 +211,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             },
             "details.ram": {
                 $in: pickedRAMSizes
+            },
+            "details.proccessorType": {
+                $in: pickedProccessorTypes
             }
             })
             .select({
@@ -200,7 +238,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         if (noLaptopRAMSize) {
             pickedRAMSizes = [];
         }
-
+        if (noProcessorTypes) {
+            pickedProccessorTypes = [];
+        }
 
         if (productListWithBrands) {
             res.status(200).send({ 
@@ -208,9 +248,11 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 brands: ArrayOfBrands,
                 screenSizes: arrayOfLaptopScreenSizes,
                 rams: arrayOfLaptopRAMSize,
+                processorTypes: arrayOfLaptopProcessorType,
                 currentPickedBrands: pickedBrands,
                 currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
                 currentPickedRam: pickedRAMSizes,
+                currentPickedProcessorType: pickedProccessorTypes,
                 page: pageSize, 
                 pages: Math.ceil(totalProductsOfThatCategoryWithFilter/pageSize)
             });
