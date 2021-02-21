@@ -161,75 +161,19 @@ const ListScreen = () => {
 
     useEffect(() => {
         //TODO: Check if server send back any picked brands, if yes, apply these changes to state to provide accurate frontend
-        const brandsCheckedArray = [];
-        for (let i = 0; i < brands.length; i++) {
-            brandsCheckedArray.push({
-                id: i,
-                value: brands[i],
-                isChecked: false
-            });
-        }
-        for ( let i = 0; i < brandsCheckedArray.length; i++) {
-            for (let u = 0; u < currentPickedBrands.length; u++) {
-                if (brandsCheckedArray[i].value === currentPickedBrands[u]) {
-                    brandsCheckedArray[i].isChecked = true;
-                }
-            }
-        }
+        const brandsCheckedArray = checkIfFilterIsCheckedOrNot(brands, currentPickedBrands);
         setFilteredBrands(brandsCheckedArray);
 
         //TODO: The same but this time check for laptopScreenSizes
-        const laptopScreenSizesCheckedArray = [];
-        for (let i = 0; i < screenSizes.length; i++) {
-            laptopScreenSizesCheckedArray.push({
-                id: i,
-                value: screenSizes[i],
-                isChecked: false
-            });
-        }
-        for ( let i = 0; i < laptopScreenSizesCheckedArray.length; i++) {
-            for (let u = 0; u < currentPickedLaptopScreenSizes.length; u++) {
-                if (laptopScreenSizesCheckedArray[i].value === currentPickedLaptopScreenSizes[u]) {
-                    laptopScreenSizesCheckedArray[i].isChecked = true;
-                }
-            }
-        }
+        const laptopScreenSizesCheckedArray = checkIfFilterIsCheckedOrNot(screenSizes, currentPickedLaptopScreenSizes);
         setLaptopScreenSizes(laptopScreenSizesCheckedArray);
 
         //TODO: The same but this time check for laptopRAMSizes
-        const laptopRAMsCheckedArray = [];
-        for (let i = 0; i < rams.length; i++) {
-            laptopRAMsCheckedArray.push({
-                id: i,
-                value: rams[i],
-                isChecked: false
-            });
-        }
-        for ( let i = 0; i < laptopRAMsCheckedArray.length; i++) {
-            for (let u = 0; u < currentPickedRam.length; u++) {
-                if (laptopRAMsCheckedArray[i].value === currentPickedRam[u]) {
-                    laptopRAMsCheckedArray[i].isChecked = true;
-                }
-            }
-        }
+        const laptopRAMsCheckedArray = checkIfFilterIsCheckedOrNot(rams, currentPickedRam);
         setLaptopRAMs(laptopRAMsCheckedArray);
 
         //TODO: The same but this time check for laptopRAMSizes
-        const laptopProcessorTypesCheckedArray = [];
-        for (let i = 0; i < processorTypes.length; i++) {
-            laptopProcessorTypesCheckedArray.push({
-                id: i,
-                value: processorTypes[i],
-                isChecked: false
-            });
-        }
-        for ( let i = 0; i < laptopProcessorTypesCheckedArray.length; i++) {
-            for (let u = 0; u < currentPickedProcessorType.length; u++) {
-                if (laptopProcessorTypesCheckedArray[i].value === currentPickedProcessorType[u]) {
-                    laptopProcessorTypesCheckedArray[i].isChecked = true;
-                }
-            }
-        }
+        const laptopProcessorTypesCheckedArray = checkIfFilterIsCheckedOrNot(processorTypes, currentPickedProcessorType);
         setLaptopProcessorTypes(laptopProcessorTypesCheckedArray);
 
     }, [
@@ -242,6 +186,25 @@ const ListScreen = () => {
         currentPickedRam,
         currentPickedProcessorType
     ]);
+
+    const checkIfFilterIsCheckedOrNot = (listOfFilters, currentPickedFilterOfThisTypeOfFilter) => {
+        const filterCheckedArray = [];
+        for (let i = 0; i < listOfFilters.length; i++) {
+            filterCheckedArray.push({
+                id: i,
+                value: listOfFilters[i],
+                isChecked: false
+            });
+        }
+        for ( let i = 0; i < filterCheckedArray.length; i++) {
+            for (let u = 0; u < currentPickedFilterOfThisTypeOfFilter.length; u++) {
+                if (filterCheckedArray[i].value === currentPickedFilterOfThisTypeOfFilter[u]) {
+                    filterCheckedArray[i].isChecked = true;
+                }
+            }
+        }
+        return filterCheckedArray;
+    }
 
     const getNextSetOfReviews = (e, nextpage) => {
         e.preventDefault();
@@ -269,38 +232,29 @@ const ListScreen = () => {
             laptopProcessorTypes));
     }
 
+
+    
+    const filterByBrandHelperFunction = (e, listOfCurrentFilters) => {
+        let currentFilters = listOfCurrentFilters;
+        currentFilters.forEach((filter) => {
+            if (filter.value === e.target.value) {
+                filter.isChecked = e.target.checked;
+            }
+        });
+        return currentFilters;
+    }
     const filterByBrandHandler = (e) => {
         //TODO: to check filter boxes
-        let currentBrands = filteredBrands;
-        currentBrands.forEach((brand) => {
-            if (brand.value === e.target.value) {
-                brand.isChecked = e.target.checked;
-            }
-        });
+        let currentBrands = filterByBrandHelperFunction(e, filteredBrands);
         setFilteredBrands([...currentBrands]);
 
-        let currentLaptopScreens = laptopScreenSizes;
-        currentLaptopScreens.forEach((screen) => {
-            if (screen.value === e.target.value) {
-                screen.isChecked = e.target.checked;
-            }
-        });
+        let currentLaptopScreens = filterByBrandHelperFunction(e, laptopScreenSizes);
         setLaptopScreenSizes(currentLaptopScreens);
 
-        let currentRAMSizes = laptopRAMs;
-        currentRAMSizes.forEach((ram) => {
-            if (ram.value === e.target.value) {
-                ram.isChecked = e.target.checked;
-            }
-        });
+        let currentRAMSizes = filterByBrandHelperFunction(e, laptopRAMs);
         setLaptopRAMs([...currentRAMSizes]);
 
-        let currentProcessorTypes = laptopProcessorTypes;
-        currentProcessorTypes.forEach((processorType) => {
-            if (processorType.value === e.target.value) {
-                processorType.isChecked = e.target.checked;
-            }
-        });
+        let currentProcessorTypes = filterByBrandHelperFunction(e, laptopProcessorTypes);
         setLaptopProcessorTypes([...currentProcessorTypes]);
 
         dispatch(getListOfProductsBasedOnCategory(
@@ -315,16 +269,24 @@ const ListScreen = () => {
     }
 
     const toggleFilterOptions = (filterName) => {
-        if (filterName === 'price') {
-            setFilterPriceOpen(!filterPriceOpen);
-        } else if (filterName === 'brands') {
-            setFilterBrandsOpen(!filterBrandsOpen);
-        } else if (filterName === 'screenSizes') {
-            setFilterLaptopScreenSize(!filterLaptopScreenSize);
-        } else if (filterName === 'ram') {
-            setFilterLaptopRAM(!filterLaptopRAM);
-        } else if (filterName === 'processorType') {
-            setFilterLaptopProcessorTypes(!filterLaptopProcessorType);
+        switch(filterName) {
+            case 'price': 
+                setFilterPriceOpen(!filterPriceOpen);
+                break;
+            case 'brands':
+                setFilterBrandsOpen(!filterBrandsOpen);
+                break;
+            case 'screenSizes':
+                setFilterLaptopScreenSize(!filterLaptopScreenSize);
+                break;
+            case 'ram':
+                setFilterLaptopRAM(!filterLaptopRAM);
+                break;
+            case 'processorType':
+                setFilterLaptopProcessorTypes(!filterLaptopProcessorType);
+                break;
+            default: 
+                break;
         }
     }
 
