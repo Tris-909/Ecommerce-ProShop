@@ -25,9 +25,11 @@ var productListBasedOnCategory = {
     brands: [],
     screenSizes: [],
     rams: [],
+    processorTypes: [],
     currentPickedBrands: [],
     currentPickedLaptopScreenSizes: [],
     currentPickedRam: [],
+    currentPickedProcessorType: [],
     pages: null,
     page: null,
     loading: false,
@@ -42,11 +44,13 @@ var getListOfProductsBasedOnCategory = function (state, action) {
             if (action.payload.listItems instanceof Array &&
                 action.payload.brands instanceof Array &&
                 action.payload.rams instanceof Array &&
+                action.payload.processorTypes instanceof Array &&
                 action.payload.currentPickedBrands instanceof Array &&
                 action.payload.currentPickedLaptopScreenSizes instanceof Array &&
                 action.payload.screenSizes instanceof Array &&
-                action.payload.currentPickedRam instanceof Array) {
-                return __assign(__assign({}, state), { loading: false, productsList: __spreadArrays(action.payload.listItems), brands: __spreadArrays(action.payload.brands), screenSizes: __spreadArrays(action.payload.screenSizes), rams: __spreadArrays(action.payload.rams), currentPickedBrands: __spreadArrays(action.payload.currentPickedBrands), currentPickedLaptopScreenSizes: __spreadArrays(action.payload.currentPickedLaptopScreenSizes), currentPickedRam: __spreadArrays(action.payload.currentPickedRam), page: action.payload.page, pages: action.payload.pages });
+                action.payload.currentPickedRam instanceof Array &&
+                action.payload.currentPickedProcessorType instanceof Array) {
+                return __assign(__assign({}, state), { loading: false, productsList: __spreadArrays(action.payload.listItems), brands: __spreadArrays(action.payload.brands), screenSizes: __spreadArrays(action.payload.screenSizes), rams: __spreadArrays(action.payload.rams), processorTypes: __spreadArrays(action.payload.processorTypes), currentPickedBrands: __spreadArrays(action.payload.currentPickedBrands), currentPickedLaptopScreenSizes: __spreadArrays(action.payload.currentPickedLaptopScreenSizes), currentPickedRam: __spreadArrays(action.payload.currentPickedRam), currentPickedProcessorType: __spreadArrays(action.payload.currentPickedProcessorType), page: action.payload.page, pages: action.payload.pages });
             }
             break;
         case actionTypes_1.GET_LIST_PRODUCTS_FAIL:

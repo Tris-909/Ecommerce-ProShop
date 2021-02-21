@@ -134,7 +134,8 @@ export const getListOfProductsBasedOnCategory = (
     highPrice: number, 
     filteredBrands: filteredBrandsSingleItem[],
     laptopScreenSizes: filteredBrandsSingleItem[],
-    laptopRAMs: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
+    laptopRAMs: filteredBrandsSingleItem[],
+    laptopProcessorTypes: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
     
     try {
         dispatch({
@@ -174,10 +175,20 @@ export const getListOfProductsBasedOnCategory = (
             RAMSizeQuery += `${RAMSizeArray[i]},`;
         }
 
-        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}`);
-        
-        console.log(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}`);
-        console.log(data);
+        let ProcessorTypeArray = [];
+        for (let i = 0; i < laptopProcessorTypes.length; i++) {
+            if (laptopProcessorTypes[i].isChecked) {
+                ProcessorTypeArray.push(laptopProcessorTypes[i].value);
+            }
+        }
+        let ProcessorTypeQuery = `&processorType=`;
+        for (let i = 0; i < ProcessorTypeArray.length; i++) {
+            ProcessorTypeQuery += `${ProcessorTypeArray[i]},`;
+        }
+
+        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}${ProcessorTypeQuery}`);
+        console.log(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}${ProcessorTypeQuery}`);
+
 
         dispatch({
             type: GET_LIST_PRODUCTS_SUCCESS,

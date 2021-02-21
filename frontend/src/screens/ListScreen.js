@@ -93,12 +93,14 @@ const ListScreen = () => {
     const [filteredBrands, setFilteredBrands] = useState([]);
     const [laptopScreenSizes, setLaptopScreenSizes] = useState([]);
     const [laptopRAMs, setLaptopRAMs] = useState([]);
+    const [laptopProcessorTypes, setLaptopProcessorTypes] = useState([]);
 
     //TODO: Toggle filters Options
     const [filterPriceOpen, setFilterPriceOpen] = useState(true);
     const [filterBrandsOpen, setFilterBrandsOpen] = useState(true);
     const [filterLaptopScreenSize, setFilterLaptopScreenSize] = useState(true);
     const [filterLaptopRAM, setFilterLaptopRAM] = useState(true);
+    const [filterLaptopProcessorType, setFilterLaptopProcessorTypes] = useState(true);
 
     //TODO: Data from Redux Store
     const { 
@@ -106,9 +108,11 @@ const ListScreen = () => {
         brands, 
         screenSizes,
         rams,
+        processorTypes,
         currentPickedBrands,
         currentPickedLaptopScreenSizes, 
         currentPickedRam,
+        currentPickedProcessorType,
         pages, 
         loading, 
         error 
@@ -128,6 +132,7 @@ const ListScreen = () => {
             setFilterBrandsOpen(false);
             setFilterLaptopScreenSize(false);
             setFilterLaptopRAM(false);
+            setFilterLaptopProcessorTypes(false);
         } 
     }, [])
 
@@ -148,7 +153,8 @@ const ListScreen = () => {
             highPrice, 
             filteredBrands, 
             laptopScreenSizes, 
-            laptopRAMs
+            laptopRAMs,
+            laptopProcessorTypes
         ));
 
     }, [dispatch, category, lowPrice, highPrice]);
@@ -156,7 +162,6 @@ const ListScreen = () => {
     useEffect(() => {
         //TODO: Check if server send back any picked brands, if yes, apply these changes to state to provide accurate frontend
         const brandsCheckedArray = [];
-
         for (let i = 0; i < brands.length; i++) {
             brandsCheckedArray.push({
                 id: i,
@@ -164,7 +169,6 @@ const ListScreen = () => {
                 isChecked: false
             });
         }
-
         for ( let i = 0; i < brandsCheckedArray.length; i++) {
             for (let u = 0; u < currentPickedBrands.length; u++) {
                 if (brandsCheckedArray[i].value === currentPickedBrands[u]) {
@@ -201,25 +205,42 @@ const ListScreen = () => {
                 isChecked: false
             });
         }
-
         for ( let i = 0; i < laptopRAMsCheckedArray.length; i++) {
             for (let u = 0; u < currentPickedRam.length; u++) {
                 if (laptopRAMsCheckedArray[i].value === currentPickedRam[u]) {
-                    console.log('before', laptopRAMsCheckedArray[i].isChecked);
                     laptopRAMsCheckedArray[i].isChecked = true;
-                    console.log('after', laptopRAMsCheckedArray[i].isChecked);
                 }
             }
         }
         setLaptopRAMs(laptopRAMsCheckedArray);
 
+        //TODO: The same but this time check for laptopRAMSizes
+        const laptopProcessorTypesCheckedArray = [];
+        for (let i = 0; i < processorTypes.length; i++) {
+            laptopProcessorTypesCheckedArray.push({
+                id: i,
+                value: processorTypes[i],
+                isChecked: false
+            });
+        }
+        for ( let i = 0; i < laptopProcessorTypesCheckedArray.length; i++) {
+            for (let u = 0; u < currentPickedProcessorType.length; u++) {
+                if (laptopProcessorTypesCheckedArray[i].value === currentPickedProcessorType[u]) {
+                    laptopProcessorTypesCheckedArray[i].isChecked = true;
+                }
+            }
+        }
+        setLaptopProcessorTypes(laptopProcessorTypesCheckedArray);
+
     }, [
         brands, 
         currentPickedBrands, 
         screenSizes, 
+        processorTypes,
         rams,
         currentPickedLaptopScreenSizes, 
-        currentPickedRam
+        currentPickedRam,
+        currentPickedProcessorType
     ]);
 
     const getNextSetOfReviews = (e, nextpage) => {
@@ -231,7 +252,8 @@ const ListScreen = () => {
             highPrice, 
             filteredBrands, 
             laptopScreenSizes,
-            laptopRAMs));
+            laptopRAMs,
+            laptopProcessorTypes));
     }
 
     const onFilterPriceHandler = (e) => {
@@ -243,7 +265,8 @@ const ListScreen = () => {
             highPrice, 
             filteredBrands, 
             laptopScreenSizes,
-            laptopRAMs));
+            laptopRAMs,
+            laptopProcessorTypes));
     }
 
     const filterByBrandHandler = (e) => {
@@ -272,6 +295,14 @@ const ListScreen = () => {
         });
         setLaptopRAMs([...currentRAMSizes]);
 
+        let currentProcessorTypes = laptopProcessorTypes;
+        currentProcessorTypes.forEach((processorType) => {
+            if (processorType.value === e.target.value) {
+                processorType.isChecked = e.target.checked;
+            }
+        });
+        setLaptopProcessorTypes([...currentProcessorTypes]);
+
         dispatch(getListOfProductsBasedOnCategory(
             category, 
             0, 
@@ -279,7 +310,8 @@ const ListScreen = () => {
             highPrice, 
             filteredBrands, 
             laptopScreenSizes,
-            laptopRAMs));
+            laptopRAMs,
+            laptopProcessorTypes));
     }
 
     const toggleFilterOptions = (filterName) => {
@@ -291,6 +323,8 @@ const ListScreen = () => {
             setFilterLaptopScreenSize(!filterLaptopScreenSize);
         } else if (filterName === 'ram') {
             setFilterLaptopRAM(!filterLaptopRAM);
+        } else if (filterName === 'processorType') {
+            setFilterLaptopProcessorTypes(!filterLaptopProcessorType);
         }
     }
 
@@ -345,6 +379,14 @@ const ListScreen = () => {
                                         listOfFilters={laptopRAMs}
                                         filterProduct={filterByBrandHandler}
                                     />
+                                    <LaptopFilterComponent 
+                                        filterName="Processor Types"
+                                        toggleFilterOptions={toggleFilterOptions}
+                                        toggleFilterOptionsArgument="processorType"
+                                        filterIsActive={filterLaptopProcessorType}
+                                        listOfFilters={laptopProcessorTypes}
+                                        filterProduct={filterByBrandHandler}
+                                    />
                                 </>
                             ) : null
                         }    
@@ -352,13 +394,21 @@ const ListScreen = () => {
                 </Col>
                 <Col sm={12} md={9} lg={9} xl={9}>
                 <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
-                    {loading ? <LoadingScreen /> : error ? <Message variant="danger" content="Something is wrong, please reload the webpage" /> : productsList.map((item) => {
-                        return(
-                            <Col sm={12} md={6} lg={6} xl={4} key={item._id}>
-                                <Product product={item} link={`/product`}/>
-                            </Col>
-                        );
-                    })}
+                    {loading ? 
+                        <LoadingScreen /> : error ?
+                             <Message variant="danger" content="Something is wrong, please reload the webpage" /> : 
+                             productsList.length === 0 ? (
+                                <h1>Can't find the product you are looking for</h1>
+                             ) : (
+                                productsList.map((item) => {
+                                    return(
+                                        <Col sm={12} md={6} lg={6} xl={4} key={item._id}>
+                                            <Product product={item} link={`/product`}/>
+                                        </Col>
+                                    );
+                                })
+                             )
+                    }
                 </Row>
                 <Row style={{display: 'flex', justifyContent: 'center'}}>
                     { !loading ? 

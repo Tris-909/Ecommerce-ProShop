@@ -155,8 +155,8 @@ var getSetOfReviewsOfCurrentProductBasedOnPageNumber = function (productId, page
     });
 }); }; };
 exports.getSetOfReviewsOfCurrentProductBasedOnPageNumber = getSetOfReviewsOfCurrentProductBasedOnPageNumber;
-var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes, laptopRAMs) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
-    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, RAMSizeArray, i, RAMSizeQuery, i, data, error_5;
+var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes, laptopRAMs, laptopProcessorTypes) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
+    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, RAMSizeArray, i, RAMSizeQuery, i, ProcessorTypeArray, i, ProcessorTypeQuery, i, data, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -194,10 +194,21 @@ var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highP
                 for (i = 0; i < RAMSizeArray.length; i++) {
                     RAMSizeQuery += RAMSizeArray[i] + ",";
                 }
-                return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + screenSizesQuery + RAMSizeQuery)];
+                ProcessorTypeArray = [];
+                for (i = 0; i < laptopProcessorTypes.length; i++) {
+                    if (laptopProcessorTypes[i].isChecked) {
+                        ProcessorTypeArray.push(laptopProcessorTypes[i].value);
+                    }
+                }
+                ProcessorTypeQuery = "&processorType=";
+                for (i = 0; i < ProcessorTypeArray.length; i++) {
+                    ProcessorTypeQuery += ProcessorTypeArray[i] + ",";
+                }
+                console.log(ProcessorTypeQuery);
+                return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + screenSizesQuery + RAMSizeQuery + ProcessorTypeQuery)];
             case 1:
                 data = (_a.sent()).data;
-                console.log("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + screenSizesQuery + RAMSizeQuery);
+                console.log("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + screenSizesQuery + RAMSizeQuery + ProcessorTypeQuery);
                 console.log(data);
                 dispatch({
                     type: actionTypes_1.GET_LIST_PRODUCTS_SUCCESS,
