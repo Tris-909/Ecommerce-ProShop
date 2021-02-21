@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import { Row, Col, Pagination, Form } from 'react-bootstrap';
-import Product from '../components/Product';
-import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import Helmet from '../components/Helmet';
-import {getListOfProductsBasedOnCategory} from '../redux/actions/productActions';
-import LoadingScreen from '../components/LoadingScreen';
 import styled from 'styled-components';
+
+import { useDispatch, useSelector } from 'react-redux';
+import {getListOfProductsBasedOnCategory} from '../redux/actions/productActions';
+
+import LaptopFilterComponent from '../components/Filters/Laptops/LaptopFiltersComponent';
+import Product from '../components/Product';
+import Message from '../components/Message';
+import LoadingScreen from '../components/LoadingScreen';
+import Helmet from '../components/Helmet';
 
 const FilterCard = styled.div`
     border: 1px solid rgba(0,0,0,0.125);
@@ -126,7 +129,7 @@ const ListScreen = () => {
             setFilterLaptopScreenSize(false);
             setFilterLaptopRAM(false);
         } 
-    })
+    }, [])
 
     useEffect(() => {
         async function setCat(){
@@ -306,87 +309,34 @@ const ListScreen = () => {
                             </FilterBox>
                         </FilterPriceCard>
                         
-                        <FilterPriceCard>
-                            <FilterName>
-                                <span>Brand</span>
-                                
-                                <i className="fas fa-angle-down" onClick={(e) => toggleFilterOptions('brands')}></i>
-                            </FilterName>
-                            <FilterBox open={filterBrandsOpen}>
-                               <Form>
-                                   {
-                                       filteredBrands ? filteredBrands.map((brand) => {
-                                            return(
-                                            <div key={brand.id}>
-                                                <Form.Check 
-                                                    type="checkbox" 
-                                                    id={brand.id} 
-                                                    label={`${brand.value}`}
-                                                    checked={brand.isChecked ? "checked" : null}
-                                                    value={brand.value}
-                                                    onChange={(e) => filterByBrandHandler(e)} 
-                                                    />
-                                            </div>
-                                       )}) : null
-                                   }
-                               </Form>
-                            </FilterBox>
-                        </FilterPriceCard>
+                        <LaptopFilterComponent 
+                            filterName="Brands"
+                            toggleFilterOptions={toggleFilterOptions}
+                            toggleFilterOptionsArgument="brands"
+                            filterIsActive={filterBrandsOpen}
+                            listOfFilters={filteredBrands}
+                            filterProduct={filterByBrandHandler}
+                        />
+
                         {   
                             category === 'laptops' ? (
                                 <>
-                                <FilterPriceCard>
-                                    <FilterName>
-                                            <span> Laptop ScreenSizes </span>
-
-                                            <i className="fas fa-angle-down" onClick={(e) => toggleFilterOptions('screenSizes')}></i>
-                                    </FilterName>
-                                    <FilterBox open={filterLaptopScreenSize}>
-                                       <Form>
-                                           {
-                                               laptopScreenSizes ? laptopScreenSizes.map((screenSize) => {
-                                                    return(
-                                                    <div key={screenSize.id}>
-                                                        <Form.Check 
-                                                            type="checkbox" 
-                                                            id={screenSize.id} 
-                                                            label={`${screenSize.value}`}
-                                                            checked={screenSize.isChecked ? "checked" : null}
-                                                            value={screenSize.value}
-                                                            onChange={(e) => filterByBrandHandler(e)} 
-                                                            />
-                                                    </div>
-                                               )}) : null
-                                           }
-                                       </Form>
-                                    </FilterBox>
-                                </FilterPriceCard>
-                                <FilterPriceCard>
-                                    <FilterName>
-                                            <span> RAM Sizes </span>
-
-                                            <i className="fas fa-angle-down" onClick={(e) => toggleFilterOptions('ram')}></i>
-                                    </FilterName>
-                                    <FilterBox open={filterLaptopRAM}>
-                                       <Form>
-                                           {
-                                               laptopRAMs ? laptopRAMs.map((ramSize) => {
-                                                    return(
-                                                    <div key={ramSize.id}>
-                                                        <Form.Check 
-                                                            type="checkbox" 
-                                                            id={ramSize.id} 
-                                                            label={`${ramSize.value}`}
-                                                            checked={ramSize.isChecked ? "checked" : null}
-                                                            value={ramSize.value}
-                                                            onChange={(e) => filterByBrandHandler(e)} 
-                                                            />
-                                                    </div>
-                                               )}) : null
-                                           }
-                                       </Form>
-                                    </FilterBox>
-                                </FilterPriceCard>
+                                    <LaptopFilterComponent 
+                                        filterName="Laptop ScreenSizes"
+                                        toggleFilterOptions={toggleFilterOptions}
+                                        toggleFilterOptionsArgument="screenSizes"
+                                        filterIsActive={filterLaptopScreenSize}
+                                        listOfFilters={laptopScreenSizes}
+                                        filterProduct={filterByBrandHandler}
+                                    />
+                                    <LaptopFilterComponent 
+                                        filterName="RAM Sizes"
+                                        toggleFilterOptions={toggleFilterOptions}
+                                        toggleFilterOptionsArgument="ram"
+                                        filterIsActive={filterLaptopRAM}
+                                        listOfFilters={laptopRAMs}
+                                        filterProduct={filterByBrandHandler}
+                                    />
                                 </>
                             ) : null
                         }    
