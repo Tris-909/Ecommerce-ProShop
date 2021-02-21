@@ -71,6 +71,26 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
     } 
     //! END OF LAPTOP FILTERS
 
+    //! TV Filters
+    //TODO: Filter tvs based on screenSizes
+    const arrayOfTVScreenSizes = [];
+    if (req.params.category === 'tvs') {
+        //TODO: Fetch all screenSizes of TVS and push it to array above
+        const listOfTVScreenSizes = await Product.find({ category: 'tvs' }).select({
+            "tvsDetail": {
+                "screenSizes": 1
+            }
+        });
+        for (let i = 0; i < listOfTVScreenSizes.length; i++) {
+            if (!arrayOfTVScreenSizes.includes(listOfTVScreenSizes[i].tvsDetail.screenSizes)) {
+                arrayOfTVScreenSizes.push(listOfTVScreenSizes[i].tvsDetail.screenSizes);
+            }
+        }
+    }
+
+
+    //! END OF TV FILTER
+
     //TODO: Brands Filter
     let pickedBrands = req.query.brands.split(',');
     for (let i = 0; i < pickedBrands.length; i++) {
@@ -108,7 +128,16 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         }
     }
     
-
+    //TODO: TV filters summary 
+    let pickedTVScreenSize;
+    if (req.query.tvScreenSize) {
+        pickedTVScreenSize = req.query.tvScreenSize.split(',');
+        for (let i = 0; i < pickedTVScreenSize.length; i++) {
+            if (pickedTVScreenSize[i] == "") {
+                pickedTVScreenSize.splice(i, 1);
+            }
+        }
+    }
 
 
 
@@ -117,6 +146,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         pickedLaptopScreenSizes == undefined &&
         pickedRAMSizes == undefined &&
         pickedProccessorTypes == undefined &&
+        pickedTVScreenSize == undefined && 
         lowPrice === 0) {
 
         console.log('No filters');
@@ -147,10 +177,12 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 screenSizes: arrayOfLaptopScreenSizes,
                 rams: arrayOfLaptopRAMSize,
                 processorTypes: arrayOfLaptopProcessorType,
+                tvScreenSize: arrayOfTVScreenSizes,
                 currentPickedBrands: [],
                 currentPickedLaptopScreenSizes: [],
                 currentPickedRam: [],
                 currentPickedProcessorType: [],
+                currentPickedTVScreenSize: [],
                 page: pageSize, 
                 pages: Math.ceil(totalProductsOfThatCategoryWithNoBrands/pageSize)
             });
@@ -169,96 +201,175 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             noBrandFilters = true;
         }
 
-        let noLaptopScreenSizesFilter = false;
-        if (pickedLaptopScreenSizes == undefined) {
-            pickedLaptopScreenSizes = arrayOfLaptopScreenSizes;
-            noLaptopScreenSizesFilter = true;
-        }
+        switch(req.params.category) {
+            case 'laptops':
+                let noLaptopScreenSizesFilter = false;
+                if (pickedLaptopScreenSizes == undefined) {
+                    pickedLaptopScreenSizes = arrayOfLaptopScreenSizes;
+                    noLaptopScreenSizesFilter = true;
+                }
+        
+                let noLaptopRAMSize = false;
+                if (pickedRAMSizes == undefined) {
+                    pickedRAMSizes = arrayOfLaptopRAMSize;
+                    noLaptopRAMSize = true;
+                }
+        
+                let noProcessorTypes = false;
+                if (pickedProccessorTypes == undefined) {
+                    pickedProccessorTypes = arrayOfLaptopProcessorType;
+                    noProcessorTypes = true;
+                }
 
-        let noLaptopRAMSize = false;
-        if (pickedRAMSizes == undefined) {
-            pickedRAMSizes = arrayOfLaptopRAMSize;
-            noLaptopRAMSize = true;
-        }
+                const totalProductsOfThatCategoryWithFilter = await Product.countDocuments({ 
+                    category: req.params.category,
+                    price: { $gt: lowPrice, $lt: highPrice },
+                    brand: { $in: pickedBrands },
+                    "details.displaySizeInches": {
+                        $in: pickedLaptopScreenSizes
+                    },
+                    "details.ram": {
+                        $in: pickedRAMSizes
+                    },
+                    "details.proccessorType": {
+                        $in: pickedProccessorTypes
+                    }
+                });
 
-        let noProcessorTypes = false;
-        if (pickedProccessorTypes == undefined) {
-            pickedProccessorTypes = arrayOfLaptopProcessorType;
-            noProcessorTypes = true;
-        }
+                const productListWithBrands = await Product.find({ 
+                    category: req.params.category,
+                    price: { $gt: lowPrice, $lt: highPrice },
+                    brand: { $in: pickedBrands },
+                    "details.displaySizeInches": {
+                        $in: pickedLaptopScreenSizes
+                    },
+                    "details.ram": {
+                        $in: pickedRAMSizes
+                    },
+                    "details.proccessorType": {
+                        $in: pickedProccessorTypes
+                    }
+                    })
+                    .select({
+                    "rating": 1,
+                    "numReviews": 1,
+                    "price": 1,
+                    "countInStock": 1,
+                    "_id": 1,
+                    "name": 1,
+                    "image": 1,
+                    "onSale": 1
+                }).skip(pageSize * currentPage).limit(pageSize);
 
-        const totalProductsOfThatCategoryWithFilter = await Product.countDocuments({ 
-            category: req.params.category,
-            price: { $gt: lowPrice, $lt: highPrice },
-            brand: { $in: pickedBrands },
-            "details.displaySizeInches": {
-                $in: pickedLaptopScreenSizes
-            },
-            "details.ram": {
-                $in: pickedRAMSizes
-            },
-            "details.proccessorType": {
-                $in: pickedProccessorTypes
+            //TODO: We have these `if`s because we don't want to send the signal to make all the 
+            //TODO: box checked on the front-end. Here we return what we receive in the start
+            if (noBrandFilters) {
+                pickedBrands = [];
             }
-        });
-
-        const productListWithBrands = await Product.find({ 
-            category: req.params.category,
-            price: { $gt: lowPrice, $lt: highPrice },
-            brand: { $in: pickedBrands },
-            "details.displaySizeInches": {
-                $in: pickedLaptopScreenSizes
-            },
-            "details.ram": {
-                $in: pickedRAMSizes
-            },
-            "details.proccessorType": {
-                $in: pickedProccessorTypes
+            if (noLaptopScreenSizesFilter) {
+                pickedLaptopScreenSizes = [];
             }
-            })
-            .select({
-            "rating": 1,
-            "numReviews": 1,
-            "price": 1,
-            "countInStock": 1,
-            "_id": 1,
-            "name": 1,
-            "image": 1,
-            "onSale": 1
-        }).skip(pageSize * currentPage).limit(pageSize);
+            if (noLaptopRAMSize) {
+                pickedRAMSizes = [];
+            }
+            if (noProcessorTypes) {
+                pickedProccessorTypes = [];
+            }
+            if (noTVScreenSizes) {
+                pickedTVScreenSize = [];
+            }
 
-        //TODO: We have these `if`s because we don't want to send the signal to make all the 
-        //TODO: box checked on the front-end. Here we return what we receive in the start
-        if (noBrandFilters) {
-            pickedBrands = [];
-        }
-        if (noLaptopScreenSizesFilter) {
-            pickedLaptopScreenSizes = [];
-        }
-        if (noLaptopRAMSize) {
-            pickedRAMSizes = [];
-        }
-        if (noProcessorTypes) {
-            pickedProccessorTypes = [];
-        }
+            if (productListWithBrands) {
+                res.status(200).send({ 
+                    listItems: productListWithBrands, 
+                    brands: ArrayOfBrands,
+                    screenSizes: arrayOfLaptopScreenSizes,
+                    rams: arrayOfLaptopRAMSize,
+                    processorTypes: arrayOfLaptopProcessorType,
+                    tvScreenSize: arrayOfTVScreenSizes,
+                    currentPickedBrands: pickedBrands,
+                    currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
+                    currentPickedRam: pickedRAMSizes,
+                    currentPickedProcessorType: pickedProccessorTypes,
+                    currentPickedTVScreenSize: pickedTVScreenSize,
+                    page: pageSize, 
+                    pages: Math.ceil(totalProductsOfThatCategoryWithFilter/pageSize)
+                });
+            } else {
+                res.status(404);
+                throw new Error("Can't find the list of product");
+            };
+            break;
+            
+            case 'tvs':
+                let noTVScreenSizes = false;
+                if (pickedTVScreenSize == undefined) {
+                    pickedTVScreenSize = arrayOfTVScreenSizes;
+                    noTVScreenSizes = true;
+                }
 
-        if (productListWithBrands) {
-            res.status(200).send({ 
-                listItems: productListWithBrands, 
-                brands: ArrayOfBrands,
-                screenSizes: arrayOfLaptopScreenSizes,
-                rams: arrayOfLaptopRAMSize,
-                processorTypes: arrayOfLaptopProcessorType,
-                currentPickedBrands: pickedBrands,
-                currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
-                currentPickedRam: pickedRAMSizes,
-                currentPickedProcessorType: pickedProccessorTypes,
-                page: pageSize, 
-                pages: Math.ceil(totalProductsOfThatCategoryWithFilter/pageSize)
-            });
-        } else {
-            res.status(404);
-            throw new Error("Can't find the list of product");
+                const totalProductsOfTVWithFilter = await Product.countDocuments({ 
+                    category: req.params.category,
+                    price: { $gt: lowPrice, $lt: highPrice },
+                    brand: { $in: pickedBrands },
+                    "tvsDetail.screenSizes": {
+                        $in: pickedTVScreenSize
+                    }
+                });
+
+                const tvListWithBrands = await Product.find({ 
+                    category: req.params.category,
+                    price: { $gt: lowPrice, $lt: highPrice },
+                    brand: { $in: pickedBrands },
+                    "tvsDetail.screenSizes": {
+                        $in: pickedTVScreenSize
+                    }
+                    })
+                    .select({
+                    "rating": 1,
+                    "numReviews": 1,
+                    "price": 1,
+                    "countInStock": 1,
+                    "_id": 1,
+                    "name": 1,
+                    "image": 1,
+                    "onSale": 1
+                }).skip(pageSize * currentPage).limit(pageSize);
+
+                //TODO: We have these `if`s because we don't want to send the signal to make all the 
+                //TODO: box checked on the front-end. Here we return what we receive in the start
+                if (noBrandFilters) {
+                    pickedBrands = [];
+                }
+                if (noTVScreenSizes) {
+                    pickedTVScreenSize = [];
+                }
+
+                if (tvListWithBrands) {
+                    res.status(200).send({ 
+                        listItems: tvListWithBrands, 
+                        brands: ArrayOfBrands,
+                        screenSizes: arrayOfLaptopScreenSizes,
+                        rams: arrayOfLaptopRAMSize,
+                        processorTypes: arrayOfLaptopProcessorType,
+                        tvScreenSize: arrayOfTVScreenSizes,
+                        currentPickedBrands: pickedBrands,
+                        currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
+                        currentPickedRam: pickedRAMSizes,
+                        currentPickedProcessorType: pickedProccessorTypes,
+                        currentPickedTVScreenSize: pickedTVScreenSize,
+                        page: pageSize, 
+                        pages: Math.ceil(totalProductsOfTVWithFilter/pageSize)
+                    });
+                } else {
+                    res.status(404);
+                    throw new Error("Can't find the list of product");
+                };        
+
+
+                break;
+            default:
+                break;
         }
     }
 });
