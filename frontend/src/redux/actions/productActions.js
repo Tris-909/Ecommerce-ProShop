@@ -155,12 +155,12 @@ var getSetOfReviewsOfCurrentProductBasedOnPageNumber = function (productId, page
     });
 }); }; };
 exports.getSetOfReviewsOfCurrentProductBasedOnPageNumber = getSetOfReviewsOfCurrentProductBasedOnPageNumber;
-var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes, laptopRAMs, laptopProcessorTypes) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
-    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, RAMSizeArray, i, RAMSizeQuery, i, ProcessorTypeArray, i, ProcessorTypeQuery, i, data, error_5;
+var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes, laptopRAMs, laptopProcessorTypes, tvScreenSizes) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
+    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, RAMSizeArray, i, RAMSizeQuery, i, ProcessorTypeArray, i, ProcessorTypeQuery, i, data, TVScreenSizesArray, i, TVscreenSizesQuery, i, TVData, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 5, , 6]);
                 dispatch({
                     type: actionTypes_1.GET_LIST_PRODUCTS_PENDING
                 });
@@ -174,6 +174,7 @@ var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highP
                 for (i = 0; i < BrandsArray.length; i++) {
                     brandArrayQuery += BrandsArray[i] + ",";
                 }
+                if (!(category === 'laptops')) return [3 /*break*/, 2];
                 ScreenSizesArray = [];
                 for (i = 0; i < laptopScreenSizes.length; i++) {
                     if (laptopScreenSizes[i].isChecked) {
@@ -204,25 +205,47 @@ var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highP
                 for (i = 0; i < ProcessorTypeArray.length; i++) {
                     ProcessorTypeQuery += ProcessorTypeArray[i] + ",";
                 }
-                console.log(ProcessorTypeQuery);
                 return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + screenSizesQuery + RAMSizeQuery + ProcessorTypeQuery)];
             case 1:
                 data = (_a.sent()).data;
-                console.log("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + screenSizesQuery + RAMSizeQuery + ProcessorTypeQuery);
-                console.log(data);
                 dispatch({
                     type: actionTypes_1.GET_LIST_PRODUCTS_SUCCESS,
                     payload: data
                 });
-                return [3 /*break*/, 3];
+                return [3 /*break*/, 4];
             case 2:
+                if (!(category === 'tvs')) return [3 /*break*/, 4];
+                console.log(tvScreenSizes);
+                TVScreenSizesArray = [];
+                for (i = 0; i < tvScreenSizes.length; i++) {
+                    if (tvScreenSizes[i].isChecked) {
+                        TVScreenSizesArray.push(tvScreenSizes[i].value);
+                    }
+                }
+                console.log('theArray', TVScreenSizesArray);
+                TVscreenSizesQuery = "&tvScreenSize=";
+                for (i = 0; i < TVScreenSizesArray.length; i++) {
+                    TVscreenSizesQuery += TVScreenSizesArray[i] + ",";
+                }
+                console.log(TVscreenSizesQuery);
+                return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + TVscreenSizesQuery)];
+            case 3:
+                TVData = (_a.sent()).data;
+                console.log(TVData);
+                dispatch({
+                    type: actionTypes_1.GET_LIST_PRODUCTS_SUCCESS,
+                    payload: TVData
+                });
+                _a.label = 4;
+            case 4: return [3 /*break*/, 6];
+            case 5:
                 error_5 = _a.sent();
                 dispatch({
                     type: actionTypes_1.GET_LIST_PRODUCTS_FAIL,
                     payload: { error: error_5.response && error_5.response.data.message ? error_5.response.data.message : null }
                 });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); }; };

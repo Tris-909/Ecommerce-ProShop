@@ -26,10 +26,12 @@ var productListBasedOnCategory = {
     screenSizes: [],
     rams: [],
     processorTypes: [],
+    tvScreenSize: [],
     currentPickedBrands: [],
     currentPickedLaptopScreenSizes: [],
     currentPickedRam: [],
     currentPickedProcessorType: [],
+    currentPickedTVScreenSize: [],
     pages: null,
     page: null,
     loading: false,
@@ -41,17 +43,32 @@ var getListOfProductsBasedOnCategory = function (state, action) {
         case actionTypes_1.GET_LIST_PRODUCTS_PENDING:
             return __assign(__assign({}, state), { loading: true });
         case actionTypes_1.GET_LIST_PRODUCTS_SUCCESS:
+            // console.log(action.payload.listItems instanceof Array);
+            // console.log(action.payload.brands instanceof Array);
+            // console.log(action.payload.rams instanceof Array);
+            // console.log(action.payload.processorTypes instanceof Array);
+            // console.log(action.payload.tvScreenSize instanceof Array);
+            // console.log(action.payload.currentPickedBrands instanceof Array);
+            // console.log(action.payload.currentPickedLaptopScreenSizes instanceof Array);
+            // console.log(action.payload.screenSizes instanceof Array);
+            // console.log(action.payload.currentPickedRam instanceof Array);
+            // console.log(action.payload.currentPickedProcessorType instanceof Array);
+            // console.log(action.payload.currentPickedTVScreenSize instanceof Array);
             if (action.payload.listItems instanceof Array &&
                 action.payload.brands instanceof Array &&
                 action.payload.rams instanceof Array &&
                 action.payload.processorTypes instanceof Array &&
+                action.payload.tvScreenSize instanceof Array &&
                 action.payload.currentPickedBrands instanceof Array &&
                 action.payload.currentPickedLaptopScreenSizes instanceof Array &&
                 action.payload.screenSizes instanceof Array &&
                 action.payload.currentPickedRam instanceof Array &&
-                action.payload.currentPickedProcessorType instanceof Array) {
-                return __assign(__assign({}, state), { loading: false, productsList: __spreadArrays(action.payload.listItems), brands: __spreadArrays(action.payload.brands), screenSizes: __spreadArrays(action.payload.screenSizes), rams: __spreadArrays(action.payload.rams), processorTypes: __spreadArrays(action.payload.processorTypes), currentPickedBrands: __spreadArrays(action.payload.currentPickedBrands), currentPickedLaptopScreenSizes: __spreadArrays(action.payload.currentPickedLaptopScreenSizes), currentPickedRam: __spreadArrays(action.payload.currentPickedRam), currentPickedProcessorType: __spreadArrays(action.payload.currentPickedProcessorType), page: action.payload.page, pages: action.payload.pages });
+                action.payload.currentPickedProcessorType instanceof Array &&
+                action.payload.currentPickedTVScreenSize instanceof Array) {
+                console.log(action.payload.listItems);
+                return __assign(__assign({}, state), { loading: false, productsList: __spreadArrays(action.payload.listItems), brands: __spreadArrays(action.payload.brands), screenSizes: __spreadArrays(action.payload.screenSizes), rams: __spreadArrays(action.payload.rams), processorTypes: __spreadArrays(action.payload.processorTypes), tvScreenSize: __spreadArrays(action.payload.tvScreenSize), currentPickedBrands: __spreadArrays(action.payload.currentPickedBrands), currentPickedLaptopScreenSizes: __spreadArrays(action.payload.currentPickedLaptopScreenSizes), currentPickedRam: __spreadArrays(action.payload.currentPickedRam), currentPickedProcessorType: __spreadArrays(action.payload.currentPickedProcessorType), currentPickedTVScreenSize: __spreadArrays(action.payload.currentPickedTVScreenSize), page: action.payload.page, pages: action.payload.pages });
             }
+            console.log('SUCESS NOT RUN');
             break;
         case actionTypes_1.GET_LIST_PRODUCTS_FAIL:
             return __assign(__assign({}, state), { loading: false, error: action.payload.error });

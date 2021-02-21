@@ -135,7 +135,8 @@ export const getListOfProductsBasedOnCategory = (
     filteredBrands: filteredBrandsSingleItem[],
     laptopScreenSizes: filteredBrandsSingleItem[],
     laptopRAMs: filteredBrandsSingleItem[],
-    laptopProcessorTypes: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
+    laptopProcessorTypes: filteredBrandsSingleItem[],
+    tvScreenSizes: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
     
     try {
         dispatch({
@@ -153,48 +154,69 @@ export const getListOfProductsBasedOnCategory = (
             brandArrayQuery += `${BrandsArray[i]},`;
         }
 
-        let ScreenSizesArray = [];
-        for (let i = 0; i < laptopScreenSizes.length; i++) {
-            if (laptopScreenSizes[i].isChecked) {
-                ScreenSizesArray.push(laptopScreenSizes[i].value);
+        if (category === 'laptops') {
+            let ScreenSizesArray = [];
+            for (let i = 0; i < laptopScreenSizes.length; i++) {
+                if (laptopScreenSizes[i].isChecked) {
+                    ScreenSizesArray.push(laptopScreenSizes[i].value);
+                }
             }
-        }
-        let screenSizesQuery = `&screenSizes=`;
-        for (let i = 0; i < ScreenSizesArray.length; i++) {
-            screenSizesQuery += `${ScreenSizesArray[i]},`;
-        }
-
-        let RAMSizeArray = [];
-        for (let i = 0; i < laptopRAMs.length; i++) {
-            if (laptopRAMs[i].isChecked) {
-                RAMSizeArray.push(laptopRAMs[i].value);
+            let screenSizesQuery = `&screenSizes=`;
+            for (let i = 0; i < ScreenSizesArray.length; i++) {
+                screenSizesQuery += `${ScreenSizesArray[i]},`;
             }
-        }
-        let RAMSizeQuery = `&ramSize=`;
-        for (let i = 0; i < RAMSizeArray.length; i++) {
-            RAMSizeQuery += `${RAMSizeArray[i]},`;
-        }
-
-        let ProcessorTypeArray = [];
-        for (let i = 0; i < laptopProcessorTypes.length; i++) {
-            if (laptopProcessorTypes[i].isChecked) {
-                ProcessorTypeArray.push(laptopProcessorTypes[i].value);
+    
+            let RAMSizeArray = [];
+            for (let i = 0; i < laptopRAMs.length; i++) {
+                if (laptopRAMs[i].isChecked) {
+                    RAMSizeArray.push(laptopRAMs[i].value);
+                }
             }
+            let RAMSizeQuery = `&ramSize=`;
+            for (let i = 0; i < RAMSizeArray.length; i++) {
+                RAMSizeQuery += `${RAMSizeArray[i]},`;
+            }
+    
+            let ProcessorTypeArray = [];
+            for (let i = 0; i < laptopProcessorTypes.length; i++) {
+                if (laptopProcessorTypes[i].isChecked) {
+                    ProcessorTypeArray.push(laptopProcessorTypes[i].value);
+                }
+            }
+            let ProcessorTypeQuery = `&processorType=`;
+            for (let i = 0; i < ProcessorTypeArray.length; i++) {
+                ProcessorTypeQuery += `${ProcessorTypeArray[i]},`;
+            }
+            
+            const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}${ProcessorTypeQuery}`);        
+            dispatch({
+                type: GET_LIST_PRODUCTS_SUCCESS,
+                payload: data
+            });
+        } else if (category === 'tvs') {
+            console.log(tvScreenSizes);
+            let TVScreenSizesArray = [];
+            for (let i = 0; i < tvScreenSizes.length; i++) {
+                if (tvScreenSizes[i].isChecked) {
+                    TVScreenSizesArray.push(tvScreenSizes[i].value);
+                }
+            }
+            console.log('theArray', TVScreenSizesArray);
+            let TVscreenSizesQuery = `&tvScreenSize=`;
+            for (let i = 0; i < TVScreenSizesArray.length; i++) {
+                TVscreenSizesQuery += `${TVScreenSizesArray[i]},`;
+            }
+
+            console.log(TVscreenSizesQuery);
+            const { data: TVData } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${TVscreenSizesQuery}`);        
+            
+            console.log(TVData);
+            
+            dispatch({
+                type: GET_LIST_PRODUCTS_SUCCESS,
+                payload: TVData
+            });
         }
-        let ProcessorTypeQuery = `&processorType=`;
-        for (let i = 0; i < ProcessorTypeArray.length; i++) {
-            ProcessorTypeQuery += `${ProcessorTypeArray[i]},`;
-        }
-
-        const { data } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}${ProcessorTypeQuery}`);
-        console.log(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${screenSizesQuery}${RAMSizeQuery}${ProcessorTypeQuery}`);
-
-
-        dispatch({
-            type: GET_LIST_PRODUCTS_SUCCESS,
-            payload: data
-        });
-
     } catch(error) {
         dispatch({
             type: GET_LIST_PRODUCTS_FAIL,

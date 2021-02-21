@@ -14,13 +14,17 @@ interface ProductListAndBrandsState {
     screenSizes: string[],
     rams: string[],
     processorTypes: string[],
-    
+
+    tvScreenSize: string[],
+
     currentPickedBrands: string[],
 
     currentPickedLaptopScreenSizes: string[],
     currentPickedRam: string[],
     currentPickedProcessorType: string[],
     
+    currentPickedTVScreenSize: string[],
+
     page: number | null,
     pages: number | null,
     
@@ -34,10 +38,12 @@ const productListBasedOnCategory: ProductListAndBrandsState = {
     screenSizes: [],
     rams: [],
     processorTypes: [],
+    tvScreenSize: [],
     currentPickedBrands: [],
     currentPickedLaptopScreenSizes: [],
     currentPickedRam: [],
     currentPickedProcessorType: [],
+    currentPickedTVScreenSize: [],
     pages: null,
     page: null,
     loading: false,
@@ -52,10 +58,12 @@ interface CurrentAction {
         screenSizes?: string[],
         rams?: string[],
         processorTypes?: [],
+        tvScreenSize?: [],
         currentPickedBrands?: string[],
         currentPickedLaptopScreenSizes?: string[],
         currentPickedRam?: string[],
         currentPickedProcessorType?: string[],
+        currentPickedTVScreenSize?: string[],
         page?: number,
         pages?: number,
         error? : string
@@ -70,15 +78,30 @@ export const getListOfProductsBasedOnCategory = (state = productListBasedOnCateg
                 loading: true
             }
         case GET_LIST_PRODUCTS_SUCCESS:
+            // console.log(action.payload.listItems instanceof Array);
+            // console.log(action.payload.brands instanceof Array);
+            // console.log(action.payload.rams instanceof Array);
+            // console.log(action.payload.processorTypes instanceof Array);
+            // console.log(action.payload.tvScreenSize instanceof Array);
+            // console.log(action.payload.currentPickedBrands instanceof Array);
+            // console.log(action.payload.currentPickedLaptopScreenSizes instanceof Array);
+            // console.log(action.payload.screenSizes instanceof Array);
+            // console.log(action.payload.currentPickedRam instanceof Array);
+            // console.log(action.payload.currentPickedProcessorType instanceof Array);
+            // console.log(action.payload.currentPickedTVScreenSize instanceof Array);
+
             if ( action.payload.listItems instanceof Array &&
                  action.payload.brands instanceof Array &&
                  action.payload.rams instanceof Array &&
                  action.payload.processorTypes instanceof Array &&
+                 action.payload.tvScreenSize instanceof Array &&
                  action.payload.currentPickedBrands instanceof Array &&
                  action.payload.currentPickedLaptopScreenSizes instanceof  Array &&
                  action.payload.screenSizes instanceof  Array &&
                  action.payload.currentPickedRam instanceof Array &&
-                 action.payload.currentPickedProcessorType instanceof Array) {
+                 action.payload.currentPickedProcessorType instanceof Array &&
+                 action.payload.currentPickedTVScreenSize instanceof Array) {
+                     console.log(action.payload.listItems);
                     return {
                         ...state,
                         loading: false,
@@ -89,16 +112,17 @@ export const getListOfProductsBasedOnCategory = (state = productListBasedOnCateg
                         screenSizes: [...action.payload.screenSizes],
                         rams: [...action.payload.rams],
                         processorTypes: [...action.payload.processorTypes],
-
+                        tvScreenSize: [...action.payload.tvScreenSize],
                         currentPickedBrands: [...action.payload.currentPickedBrands],
                         currentPickedLaptopScreenSizes: [...action.payload.currentPickedLaptopScreenSizes],
                         currentPickedRam: [...action.payload.currentPickedRam],
                         currentPickedProcessorType: [...action.payload.currentPickedProcessorType],
-                        
+                        currentPickedTVScreenSize: [...action.payload.currentPickedTVScreenSize],
                         page: action.payload.page,
                         pages: action.payload.pages
                     }
                 }
+                console.log('SUCESS NOT RUN');
                 break;
         case GET_LIST_PRODUCTS_FAIL:
             return {

@@ -139,7 +139,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         }
     }
 
-
+    console.log(req.query.tvScreenSize);
 
     //TODO Start query based on it has no filters or has at least 1 filter
     if (pickedBrands[0] == undefined && 
@@ -275,10 +275,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             if (noProcessorTypes) {
                 pickedProccessorTypes = [];
             }
-            if (noTVScreenSizes) {
-                pickedTVScreenSize = [];
-            }
 
+            console.log(productListWithBrands);
+            console.log(pickedTVScreenSize);
             if (productListWithBrands) {
                 res.status(200).send({ 
                     listItems: productListWithBrands, 
@@ -286,12 +285,12 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     screenSizes: arrayOfLaptopScreenSizes,
                     rams: arrayOfLaptopRAMSize,
                     processorTypes: arrayOfLaptopProcessorType,
-                    tvScreenSize: arrayOfTVScreenSizes,
+                    tvScreenSize: [],
                     currentPickedBrands: pickedBrands,
                     currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
                     currentPickedRam: pickedRAMSizes,
                     currentPickedProcessorType: pickedProccessorTypes,
-                    currentPickedTVScreenSize: pickedTVScreenSize,
+                    currentPickedTVScreenSize: [],
                     page: pageSize, 
                     pages: Math.ceil(totalProductsOfThatCategoryWithFilter/pageSize)
                 });
@@ -302,11 +301,13 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             break;
             
             case 'tvs':
+                console.log('tvs');
                 let noTVScreenSizes = false;
                 if (pickedTVScreenSize == undefined) {
                     pickedTVScreenSize = arrayOfTVScreenSizes;
                     noTVScreenSizes = true;
                 }
+                console.log(pickedBrands);
 
                 const totalProductsOfTVWithFilter = await Product.countDocuments({ 
                     category: req.params.category,
@@ -316,6 +317,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                         $in: pickedTVScreenSize
                     }
                 });
+                console.log(totalProductsOfTVWithFilter);
 
                 const tvListWithBrands = await Product.find({ 
                     category: req.params.category,
@@ -335,6 +337,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     "image": 1,
                     "onSale": 1
                 }).skip(pageSize * currentPage).limit(pageSize);
+                console.log(tvListWithBrands);
 
                 //TODO: We have these `if`s because we don't want to send the signal to make all the 
                 //TODO: box checked on the front-end. Here we return what we receive in the start
@@ -354,9 +357,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                         processorTypes: arrayOfLaptopProcessorType,
                         tvScreenSize: arrayOfTVScreenSizes,
                         currentPickedBrands: pickedBrands,
-                        currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
-                        currentPickedRam: pickedRAMSizes,
-                        currentPickedProcessorType: pickedProccessorTypes,
+                        currentPickedLaptopScreenSizes: [],
+                        currentPickedRam: [],
+                        currentPickedProcessorType: [],
                         currentPickedTVScreenSize: pickedTVScreenSize,
                         page: pageSize, 
                         pages: Math.ceil(totalProductsOfTVWithFilter/pageSize)
