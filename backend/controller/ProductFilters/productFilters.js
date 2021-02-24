@@ -372,6 +372,52 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
 
                 break;
             default:
+                const otherTotalProductsOfThatCategoryWithFilter = await Product.countDocuments({ 
+                    category: req.params.category,
+                    price: { $gt: lowPrice, $lt: highPrice },
+                    brand: { $in: pickedBrands }
+                });
+
+                const otherProductListWithBrands = await Product.find({ 
+                    category: req.params.category,
+                    price: { $gt: lowPrice, $lt: highPrice },
+                    brand: { $in: pickedBrands }}).select({
+                    "rating": 1,
+                    "numReviews": 1,
+                    "price": 1,
+                    "countInStock": 1,
+                    "_id": 1,
+                    "name": 1,
+                    "image": 1,
+                    "onSale": 1
+                }).skip(pageSize * currentPage).limit(pageSize);
+
+                if (noBrandFilters) {
+                    pickedBrands = [];
+                }
+
+                if (otherProductListWithBrands) {
+                    res.status(200).send({ 
+                        listItems: otherProductListWithBrands, 
+                        brands: ArrayOfBrands,
+                        screenSizes: [],
+                        rams: [],
+                        processorTypes: [],
+                        tvScreenSize: [],
+                        currentPickedBrands: pickedBrands,
+                        currentPickedLaptopScreenSizes: [],
+                        currentPickedRam: [],
+                        currentPickedProcessorType: [],
+                        currentPickedTVScreenSize: [],
+                        page: pageSize, 
+                        pages: Math.ceil(otherTotalProductsOfThatCategoryWithFilter/pageSize)
+                    });
+                } else {
+                    res.status(404);
+                    throw new Error("Can't find the list of product");
+                };        
+
+
                 break;
         }
     }

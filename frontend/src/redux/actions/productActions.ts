@@ -216,6 +216,14 @@ export const getListOfProductsBasedOnCategory = (
                 type: GET_LIST_PRODUCTS_SUCCESS,
                 payload: TVData
             });
+        } else {
+            console.log(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}`);
+            const { data: otherData } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}`);        
+            console.log(otherData);
+            dispatch({
+                type: GET_LIST_PRODUCTS_SUCCESS,
+                payload: otherData
+            });
         }
     } catch(error) {
         dispatch({
