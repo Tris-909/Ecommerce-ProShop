@@ -28,6 +28,7 @@
 ## Web Features :
 - As **User** : 
   - Browsing through the websites and see different type of products.
+  - Be able to filter product based on there specs like filter laptops using ScreenSizes and ProcessorTypes,...
   - Be able to create an account without worrying about leaking information due to encrypted info saved databases.
   - Have a section to keep track of their orders.
   - Have their own Wish List and Cart List with saved data into a databases.
@@ -56,7 +57,7 @@
   _ Building webpages and re-usable components using React <br />
   _ Design and build responsive layout and render different components for websites based on screen-width ( mobile-first design ) <br />
   _ Building pagination system for lists of product, lists of review, ... to help saving web-performance <br />
-  _ Building dynamic filters for products based on brands <br />
+  _ Building dynamic filters for products based on brands, tech specs, ... <br />
   _ Building 6 type of filters for reviews section <br />
   _ Building CartList and WishList connected to a databases <br />
   _ Building Product Screen that change detail table based on category <br />
