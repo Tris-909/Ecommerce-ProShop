@@ -27,11 +27,13 @@ var productListBasedOnCategory = {
     rams: [],
     processorTypes: [],
     tvScreenSize: [],
+    tvScreenSolutions: [],
     currentPickedBrands: [],
     currentPickedLaptopScreenSizes: [],
     currentPickedRam: [],
     currentPickedProcessorType: [],
     currentPickedTVScreenSize: [],
+    currentPickedTVScreenSolution: [],
     pages: null,
     page: null,
     loading: false,
@@ -59,14 +61,16 @@ var getListOfProductsBasedOnCategory = function (state, action) {
                 action.payload.rams instanceof Array &&
                 action.payload.processorTypes instanceof Array &&
                 action.payload.tvScreenSize instanceof Array &&
+                action.payload.tvScreenSolutions instanceof Array &&
                 action.payload.currentPickedBrands instanceof Array &&
                 action.payload.currentPickedLaptopScreenSizes instanceof Array &&
                 action.payload.screenSizes instanceof Array &&
                 action.payload.currentPickedRam instanceof Array &&
                 action.payload.currentPickedProcessorType instanceof Array &&
-                action.payload.currentPickedTVScreenSize instanceof Array) {
+                action.payload.currentPickedTVScreenSize instanceof Array &&
+                action.payload.currentPickedTVScreenSolution instanceof Array) {
                 console.log(action.payload.listItems);
-                return __assign(__assign({}, state), { loading: false, productsList: __spreadArrays(action.payload.listItems), brands: __spreadArrays(action.payload.brands), screenSizes: __spreadArrays(action.payload.screenSizes), rams: __spreadArrays(action.payload.rams), processorTypes: __spreadArrays(action.payload.processorTypes), tvScreenSize: __spreadArrays(action.payload.tvScreenSize), currentPickedBrands: __spreadArrays(action.payload.currentPickedBrands), currentPickedLaptopScreenSizes: __spreadArrays(action.payload.currentPickedLaptopScreenSizes), currentPickedRam: __spreadArrays(action.payload.currentPickedRam), currentPickedProcessorType: __spreadArrays(action.payload.currentPickedProcessorType), currentPickedTVScreenSize: __spreadArrays(action.payload.currentPickedTVScreenSize), page: action.payload.page, pages: action.payload.pages });
+                return __assign(__assign({}, state), { loading: false, productsList: __spreadArrays(action.payload.listItems), brands: __spreadArrays(action.payload.brands), screenSizes: __spreadArrays(action.payload.screenSizes), rams: __spreadArrays(action.payload.rams), processorTypes: __spreadArrays(action.payload.processorTypes), tvScreenSize: __spreadArrays(action.payload.tvScreenSize), tvScreenSolutions: __spreadArrays(action.payload.tvScreenSolutions), currentPickedBrands: __spreadArrays(action.payload.currentPickedBrands), currentPickedLaptopScreenSizes: __spreadArrays(action.payload.currentPickedLaptopScreenSizes), currentPickedRam: __spreadArrays(action.payload.currentPickedRam), currentPickedProcessorType: __spreadArrays(action.payload.currentPickedProcessorType), currentPickedTVScreenSize: __spreadArrays(action.payload.currentPickedTVScreenSize), currentPickedTVScreenSolution: __spreadArrays(action.payload.currentPickedTVScreenSolution), page: action.payload.page, pages: action.payload.pages });
             }
             console.log('SUCESS NOT RUN');
             break;

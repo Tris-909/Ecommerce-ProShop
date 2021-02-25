@@ -136,7 +136,8 @@ export const getListOfProductsBasedOnCategory = (
     laptopScreenSizes: filteredBrandsSingleItem[],
     laptopRAMs: filteredBrandsSingleItem[],
     laptopProcessorTypes: filteredBrandsSingleItem[],
-    tvScreenSizes: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
+    tvScreenSizes: filteredBrandsSingleItem[],
+    tvScreenSolution: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
     
     try {
         dispatch({
@@ -194,21 +195,29 @@ export const getListOfProductsBasedOnCategory = (
                 payload: data
             });
         } else if (category === 'tvs') {
-            console.log(tvScreenSizes);
             let TVScreenSizesArray = [];
             for (let i = 0; i < tvScreenSizes.length; i++) {
                 if (tvScreenSizes[i].isChecked) {
                     TVScreenSizesArray.push(tvScreenSizes[i].value);
                 }
             }
-            console.log('theArray', TVScreenSizesArray);
             let TVscreenSizesQuery = `&tvScreenSize=`;
             for (let i = 0; i < TVScreenSizesArray.length; i++) {
                 TVscreenSizesQuery += `${TVScreenSizesArray[i]},`;
             }
 
-            console.log(TVscreenSizesQuery);
-            const { data: TVData } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${TVscreenSizesQuery}`);        
+            let TVScreenSolutionArray = [];
+            for (let i = 0; i < tvScreenSolution.length; i++) {
+                if (tvScreenSolution[i].isChecked) {
+                    TVScreenSolutionArray.push(tvScreenSolution[i].value);
+                }
+            }
+            let TVscreenSolutionQuery = `&tvScreenSolution=`;
+            for (let i = 0; i < TVScreenSolutionArray.length; i++) {
+                TVscreenSolutionQuery += `${TVScreenSolutionArray[i]},`;
+            }
+    
+            const { data: TVData } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${TVscreenSizesQuery}${TVscreenSolutionQuery}`);        
             
             console.log(TVData);
             

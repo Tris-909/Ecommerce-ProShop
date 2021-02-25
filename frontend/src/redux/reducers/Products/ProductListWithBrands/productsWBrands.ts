@@ -16,7 +16,8 @@ interface ProductListAndBrandsState {
     processorTypes: string[],
 
     tvScreenSize: string[],
-
+    tvScreenSolutions: string[],
+    
     currentPickedBrands: string[],
 
     currentPickedLaptopScreenSizes: string[],
@@ -24,6 +25,7 @@ interface ProductListAndBrandsState {
     currentPickedProcessorType: string[],
     
     currentPickedTVScreenSize: string[],
+    currentPickedTVScreenSolution: string[],
 
     page: number | null,
     pages: number | null,
@@ -39,11 +41,13 @@ const productListBasedOnCategory: ProductListAndBrandsState = {
     rams: [],
     processorTypes: [],
     tvScreenSize: [],
+    tvScreenSolutions: [],
     currentPickedBrands: [],
     currentPickedLaptopScreenSizes: [],
     currentPickedRam: [],
     currentPickedProcessorType: [],
     currentPickedTVScreenSize: [],
+    currentPickedTVScreenSolution: [],
     pages: null,
     page: null,
     loading: false,
@@ -59,11 +63,13 @@ interface CurrentAction {
         rams?: string[],
         processorTypes?: [],
         tvScreenSize?: [],
+        tvScreenSolutions?: [],
         currentPickedBrands?: string[],
         currentPickedLaptopScreenSizes?: string[],
         currentPickedRam?: string[],
         currentPickedProcessorType?: string[],
         currentPickedTVScreenSize?: string[],
+        currentPickedTVScreenSolution?: string[],
         page?: number,
         pages?: number,
         error? : string
@@ -95,12 +101,15 @@ export const getListOfProductsBasedOnCategory = (state = productListBasedOnCateg
                  action.payload.rams instanceof Array &&
                  action.payload.processorTypes instanceof Array &&
                  action.payload.tvScreenSize instanceof Array &&
+                 action.payload.tvScreenSolutions instanceof Array &&
                  action.payload.currentPickedBrands instanceof Array &&
                  action.payload.currentPickedLaptopScreenSizes instanceof  Array &&
                  action.payload.screenSizes instanceof  Array &&
                  action.payload.currentPickedRam instanceof Array &&
                  action.payload.currentPickedProcessorType instanceof Array &&
-                 action.payload.currentPickedTVScreenSize instanceof Array) {
+                 action.payload.currentPickedTVScreenSize instanceof Array && 
+                 action.payload.currentPickedTVScreenSolution instanceof Array) {
+
                      console.log(action.payload.listItems);
                     return {
                         ...state,
@@ -113,11 +122,13 @@ export const getListOfProductsBasedOnCategory = (state = productListBasedOnCateg
                         rams: [...action.payload.rams],
                         processorTypes: [...action.payload.processorTypes],
                         tvScreenSize: [...action.payload.tvScreenSize],
+                        tvScreenSolutions: [...action.payload.tvScreenSolutions],
                         currentPickedBrands: [...action.payload.currentPickedBrands],
                         currentPickedLaptopScreenSizes: [...action.payload.currentPickedLaptopScreenSizes],
                         currentPickedRam: [...action.payload.currentPickedRam],
                         currentPickedProcessorType: [...action.payload.currentPickedProcessorType],
                         currentPickedTVScreenSize: [...action.payload.currentPickedTVScreenSize],
+                        currentPickedTVScreenSolution: [...action.payload.currentPickedTVScreenSolution],
                         page: action.payload.page,
                         pages: action.payload.pages
                     }

@@ -155,8 +155,8 @@ var getSetOfReviewsOfCurrentProductBasedOnPageNumber = function (productId, page
     });
 }); }; };
 exports.getSetOfReviewsOfCurrentProductBasedOnPageNumber = getSetOfReviewsOfCurrentProductBasedOnPageNumber;
-var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes, laptopRAMs, laptopProcessorTypes, tvScreenSizes) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
-    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, RAMSizeArray, i, RAMSizeQuery, i, ProcessorTypeArray, i, ProcessorTypeQuery, i, data, TVScreenSizesArray, i, TVscreenSizesQuery, i, TVData, otherData, error_5;
+var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes, laptopRAMs, laptopProcessorTypes, tvScreenSizes, tvScreenSolution) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
+    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, RAMSizeArray, i, RAMSizeQuery, i, ProcessorTypeArray, i, ProcessorTypeQuery, i, data, TVScreenSizesArray, i, TVscreenSizesQuery, i, TVScreenSolutionArray, i, TVscreenSolutionQuery, i, TVData, otherData, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -215,20 +215,27 @@ var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highP
                 return [3 /*break*/, 6];
             case 2:
                 if (!(category === 'tvs')) return [3 /*break*/, 4];
-                console.log(tvScreenSizes);
                 TVScreenSizesArray = [];
                 for (i = 0; i < tvScreenSizes.length; i++) {
                     if (tvScreenSizes[i].isChecked) {
                         TVScreenSizesArray.push(tvScreenSizes[i].value);
                     }
                 }
-                console.log('theArray', TVScreenSizesArray);
                 TVscreenSizesQuery = "&tvScreenSize=";
                 for (i = 0; i < TVScreenSizesArray.length; i++) {
                     TVscreenSizesQuery += TVScreenSizesArray[i] + ",";
                 }
-                console.log(TVscreenSizesQuery);
-                return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + TVscreenSizesQuery)];
+                TVScreenSolutionArray = [];
+                for (i = 0; i < tvScreenSolution.length; i++) {
+                    if (tvScreenSolution[i].isChecked) {
+                        TVScreenSolutionArray.push(tvScreenSolution[i].value);
+                    }
+                }
+                TVscreenSolutionQuery = "&tvScreenSolution=";
+                for (i = 0; i < TVScreenSolutionArray.length; i++) {
+                    TVscreenSolutionQuery += TVScreenSolutionArray[i] + ",";
+                }
+                return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + TVscreenSizesQuery + TVscreenSolutionQuery)];
             case 3:
                 TVData = (_a.sent()).data;
                 console.log(TVData);

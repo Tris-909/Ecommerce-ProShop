@@ -87,7 +87,19 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             }
         }
     }
-
+    const arrayOfTVScreenSolution = [];
+    if (req.params.category === 'tvs') {
+        const listOfTVScreenSolution = await Product.find({ category: 'tvs' }).select({
+            "tvsDetail": {
+                "screenResolution": 1
+            }
+        });
+        for (let i = 0; i < listOfTVScreenSolution.length; i++) {
+            if (!arrayOfTVScreenSolution.includes(listOfTVScreenSolution[i].tvsDetail.screenResolution)) {
+                arrayOfTVScreenSolution.push(listOfTVScreenSolution[i].tvsDetail.screenResolution);
+            }
+        }
+    }
 
     //! END OF TV FILTER
 
@@ -129,6 +141,8 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
     }
     
     //TODO: TV filters summary 
+    //TODO: input => ["12inch", ","] 
+    //TODO: output => ["12inch"]
     let pickedTVScreenSize;
     if (req.query.tvScreenSize) {
         pickedTVScreenSize = req.query.tvScreenSize.split(',');
@@ -138,8 +152,16 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             }
         }
     }
+    let pickedTVScreenSolution;
+    if (req.query.tvScreenSolution) {
+        pickedTVScreenSolution = req.query.tvScreenSolution.split(',');
+        for (let i = 0; i < pickedTVScreenSolution.length; i++) {
+            if (pickedTVScreenSolution[i] == "") {
+                pickedTVScreenSolution.splice(i, 1);
+            }
+        }
+    }
 
-    console.log(req.query.tvScreenSize);
 
     //TODO Start query based on it has no filters or has at least 1 filter
     if (pickedBrands[0] == undefined && 
@@ -147,6 +169,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         pickedRAMSizes == undefined &&
         pickedProccessorTypes == undefined &&
         pickedTVScreenSize == undefined && 
+        pickedTVScreenSolution == undefined &&
         lowPrice === 0) {
 
         console.log('No filters');
@@ -178,11 +201,13 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 rams: arrayOfLaptopRAMSize,
                 processorTypes: arrayOfLaptopProcessorType,
                 tvScreenSize: arrayOfTVScreenSizes,
+                tvScreenSolutions: arrayOfTVScreenSolution,
                 currentPickedBrands: [],
                 currentPickedLaptopScreenSizes: [],
                 currentPickedRam: [],
                 currentPickedProcessorType: [],
                 currentPickedTVScreenSize: [],
+                currentPickedTVScreenSolution: [],
                 page: pageSize, 
                 pages: Math.ceil(totalProductsOfThatCategoryWithNoBrands/pageSize)
             });
@@ -286,11 +311,13 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     rams: arrayOfLaptopRAMSize,
                     processorTypes: arrayOfLaptopProcessorType,
                     tvScreenSize: [],
+                    tvScreenSolutions: [],
                     currentPickedBrands: pickedBrands,
                     currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
                     currentPickedRam: pickedRAMSizes,
                     currentPickedProcessorType: pickedProccessorTypes,
                     currentPickedTVScreenSize: [],
+                    currentPickedTVScreenSolution: [],
                     page: pageSize, 
                     pages: Math.ceil(totalProductsOfThatCategoryWithFilter/pageSize)
                 });
@@ -307,7 +334,11 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     pickedTVScreenSize = arrayOfTVScreenSizes;
                     noTVScreenSizes = true;
                 }
-                console.log(pickedBrands);
+                let noTVScreenSolution = false;
+                if (pickedTVScreenSolution == undefined) {
+                    pickedTVScreenSolution = arrayOfTVScreenSolution;
+                    noTVScreenSolution = true;
+                }
 
                 const totalProductsOfTVWithFilter = await Product.countDocuments({ 
                     category: req.params.category,
@@ -315,6 +346,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     brand: { $in: pickedBrands },
                     "tvsDetail.screenSizes": {
                         $in: pickedTVScreenSize
+                    },
+                    "tvsDetail.screenResolution": {
+                        $in: pickedTVScreenSolution
                     }
                 });
                 console.log(totalProductsOfTVWithFilter);
@@ -325,6 +359,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     brand: { $in: pickedBrands },
                     "tvsDetail.screenSizes": {
                         $in: pickedTVScreenSize
+                    },
+                    "tvsDetail.screenResolution": {
+                        $in: pickedTVScreenSolution
                     }
                     })
                     .select({
@@ -347,20 +384,25 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 if (noTVScreenSizes) {
                     pickedTVScreenSize = [];
                 }
+                if (noTVScreenSolution) {
+                    pickedTVScreenSolution = [];
+                }
 
                 if (tvListWithBrands) {
                     res.status(200).send({ 
                         listItems: tvListWithBrands, 
                         brands: ArrayOfBrands,
-                        screenSizes: arrayOfLaptopScreenSizes,
-                        rams: arrayOfLaptopRAMSize,
-                        processorTypes: arrayOfLaptopProcessorType,
+                        screenSizes: [],
+                        rams: [],
+                        processorTypes: [],
                         tvScreenSize: arrayOfTVScreenSizes,
+                        tvScreenSolutions: arrayOfTVScreenSolution,
                         currentPickedBrands: pickedBrands,
                         currentPickedLaptopScreenSizes: [],
                         currentPickedRam: [],
                         currentPickedProcessorType: [],
                         currentPickedTVScreenSize: pickedTVScreenSize,
+                        currentPickedTVScreenSolution: pickedTVScreenSolution,
                         page: pageSize, 
                         pages: Math.ceil(totalProductsOfTVWithFilter/pageSize)
                     });
@@ -404,11 +446,13 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                         rams: [],
                         processorTypes: [],
                         tvScreenSize: [],
+                        tvScreenSolutions: [],
                         currentPickedBrands: pickedBrands,
                         currentPickedLaptopScreenSizes: [],
                         currentPickedRam: [],
                         currentPickedProcessorType: [],
                         currentPickedTVScreenSize: [],
+                        currentPickedTVScreenSolution: [],
                         page: pageSize, 
                         pages: Math.ceil(otherTotalProductsOfThatCategoryWithFilter/pageSize)
                     });

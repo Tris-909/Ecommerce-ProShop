@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {getListOfProductsBasedOnCategory} from '../redux/actions/productActions';
 
-import LaptopFilterComponent from '../components/Filters/Laptops/LaptopFiltersComponent';
+import FilterComponent from '../components/Filters/Laptops/LaptopFiltersComponent';
 import Product from '../components/Product';
 import Message from '../components/Message';
 import LoadingScreen from '../components/LoadingScreen';
@@ -95,6 +95,7 @@ const ListScreen = () => {
     const [laptopRAMs, setLaptopRAMs] = useState([]);
     const [laptopProcessorTypes, setLaptopProcessorTypes] = useState([]);
     const [tvScreenSizes, setTVScreenSizes] = useState([]);
+    const [tvScreenSolution, setTVScreenSolution] = useState([]);
 
     //TODO: Toggle filters Options
     const [filterPriceOpen, setFilterPriceOpen] = useState(true);
@@ -103,6 +104,7 @@ const ListScreen = () => {
     const [filterLaptopRAM, setFilterLaptopRAM] = useState(true);
     const [filterLaptopProcessorType, setFilterLaptopProcessorTypes] = useState(true);
     const [filterTVScreenSize, setFilterTVScreenSize] = useState(true);
+    const [filterTVScreenSolution, setFilterTVScreenSolution] = useState(true);
 
     //TODO: Data from Redux Store
     const { 
@@ -112,11 +114,13 @@ const ListScreen = () => {
         rams,
         processorTypes,
         tvScreenSize,
+        tvScreenSolutions,
         currentPickedBrands,
         currentPickedLaptopScreenSizes, 
         currentPickedRam,
         currentPickedProcessorType,
         currentPickedTVScreenSize,
+        currentPickedTVScreenSolution,
         pages, 
         loading, 
         error 
@@ -138,6 +142,7 @@ const ListScreen = () => {
             setFilterLaptopRAM(false);
             setFilterLaptopProcessorTypes(false);
             setFilterTVScreenSize(false);
+            setFilterTVScreenSolution(false);
         } 
     }, [])
 
@@ -160,10 +165,35 @@ const ListScreen = () => {
             laptopScreenSizes, 
             laptopRAMs,
             laptopProcessorTypes,
-            tvScreenSizes
+            tvScreenSizes,
+            tvScreenSolution
         ));
 
     }, [dispatch, category, lowPrice, highPrice]);
+
+    useEffect(() => {
+        //TODO: Unchecking all filter when switch category
+        setLowPrice(0);
+        setHighPrice(7600);
+        unCheckAllFilter(filteredBrands);
+        unCheckAllFilter(laptopScreenSizes);
+        unCheckAllFilter(laptopRAMs);
+        unCheckAllFilter(laptopProcessorTypes);
+        unCheckAllFilter(tvScreenSizes);
+        unCheckAllFilter(tvScreenSolution);
+
+        dispatch(getListOfProductsBasedOnCategory(
+            category, 
+            0, 
+            lowPrice, 
+            highPrice, 
+            filteredBrands, 
+            laptopScreenSizes,
+            laptopRAMs,
+            laptopProcessorTypes,
+            tvScreenSizes,
+            tvScreenSolution));
+    }, [dispatch, category]);
 
     useEffect(() => {
         //TODO: Check if server send back any picked brands, if yes, apply these changes to state to provide accurate frontend
@@ -184,6 +214,9 @@ const ListScreen = () => {
 
         const tvScreenSizeCheckedArray = checkIfFilterIsCheckedOrNot(tvScreenSize, currentPickedTVScreenSize);
         setTVScreenSizes(tvScreenSizeCheckedArray);
+
+        const tvScreenSolutionCheckedArray = checkIfFilterIsCheckedOrNot(tvScreenSolutions, currentPickedTVScreenSolution);
+        setTVScreenSolution(tvScreenSolutionCheckedArray);
     }, [
         brands, 
         currentPickedBrands, 
@@ -191,11 +224,21 @@ const ListScreen = () => {
         processorTypes,
         rams,
         tvScreenSize,
+        tvScreenSolutions,
         currentPickedLaptopScreenSizes, 
         currentPickedRam,
         currentPickedProcessorType,
-        currentPickedTVScreenSize
+        currentPickedTVScreenSize,
+        currentPickedTVScreenSolution
     ]);
+
+    const unCheckAllFilter = (filterList) => {
+        for (let i = 0; i < filterList.length; i++) {
+            if (filterList[i].isChecked === true) {
+                filterList[i].isChecked = false;
+            }
+        }
+    }
 
     const checkIfFilterIsCheckedOrNot = (listOfFilters, currentPickedFilterOfThisTypeOfFilter) => {
         const filterCheckedArray = [];
@@ -227,7 +270,8 @@ const ListScreen = () => {
             laptopScreenSizes,
             laptopRAMs,
             laptopProcessorTypes,
-            tvScreenSizes));
+            tvScreenSizes,
+            tvScreenSolution));
     }
 
     const onFilterPriceHandler = (e) => {
@@ -241,10 +285,9 @@ const ListScreen = () => {
             laptopScreenSizes,
             laptopRAMs,
             laptopProcessorTypes,
-            tvScreenSizes));
+            tvScreenSizes,
+            tvScreenSolution));
     }
-
-
 
     const filterByBrandHelperFunction = (e, listOfCurrentFilters) => {
         let currentFilters = listOfCurrentFilters;
@@ -272,6 +315,9 @@ const ListScreen = () => {
         let currentTVScreenSize = filterByBrandHelperFunction(e, tvScreenSizes);
         setTVScreenSizes([...currentTVScreenSize]);
 
+        let currentTVScreenSolution = filterByBrandHelperFunction(e, tvScreenSolution);
+        setTVScreenSolution([...currentTVScreenSolution]);
+
         dispatch(getListOfProductsBasedOnCategory(
             category, 
             0, 
@@ -281,7 +327,8 @@ const ListScreen = () => {
             laptopScreenSizes,
             laptopRAMs,
             laptopProcessorTypes,
-            tvScreenSizes));
+            tvScreenSizes,
+            tvScreenSolution));
     }
 
     const toggleFilterOptions = (filterName) => {
@@ -303,6 +350,9 @@ const ListScreen = () => {
                 break;
             case 'tvScreenSize':
                 setFilterTVScreenSize(!filterTVScreenSize);
+                break;
+            case 'tvScreenSolution':
+                setFilterTVScreenSolution(!filterTVScreenSolution);
                 break;
             default: 
                 break;
@@ -332,7 +382,7 @@ const ListScreen = () => {
                             </FilterBox>
                         </FilterPriceCard>
                         
-                        <LaptopFilterComponent 
+                        <FilterComponent 
                             filterName="Brands"
                             toggleFilterOptions={toggleFilterOptions}
                             toggleFilterOptionsArgument="brands"
@@ -344,7 +394,7 @@ const ListScreen = () => {
                         {   
                             category === 'laptops' ? (
                                 <>
-                                    <LaptopFilterComponent 
+                                    <FilterComponent 
                                         filterName="Laptop ScreenSizes"
                                         toggleFilterOptions={toggleFilterOptions}
                                         toggleFilterOptionsArgument="screenSizes"
@@ -352,7 +402,7 @@ const ListScreen = () => {
                                         listOfFilters={laptopScreenSizes}
                                         filterProduct={filterByBrandHandler}
                                     />
-                                    <LaptopFilterComponent 
+                                    <FilterComponent 
                                         filterName="RAM Sizes"
                                         toggleFilterOptions={toggleFilterOptions}
                                         toggleFilterOptionsArgument="ram"
@@ -360,7 +410,7 @@ const ListScreen = () => {
                                         listOfFilters={laptopRAMs}
                                         filterProduct={filterByBrandHandler}
                                     />
-                                    <LaptopFilterComponent 
+                                    <FilterComponent 
                                         filterName="Processor Types"
                                         toggleFilterOptions={toggleFilterOptions}
                                         toggleFilterOptionsArgument="processorType"
@@ -374,12 +424,20 @@ const ListScreen = () => {
                         {
                             category === 'tvs' ? (
                                 <>
-                                    <LaptopFilterComponent 
+                                    <FilterComponent 
                                         filterName="Screen Sizes"
                                         toggleFilterOptions={toggleFilterOptions}
                                         toggleFilterOptionsArgument="tvScreenSize"
                                         filterIsActive={filterTVScreenSize}
                                         listOfFilters={tvScreenSizes}
+                                        filterProduct={filterByBrandHandler}
+                                    />
+                                    <FilterComponent 
+                                        filterName="Screen Solutions"
+                                        toggleFilterOptions={toggleFilterOptions}
+                                        toggleFilterOptionsArgument="tvScreenSolution"
+                                        filterIsActive={filterTVScreenSolution}
+                                        listOfFilters={tvScreenSolution}
                                         filterProduct={filterByBrandHandler}
                                     />
                                 </>
