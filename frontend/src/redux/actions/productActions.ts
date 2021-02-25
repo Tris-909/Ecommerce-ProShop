@@ -137,7 +137,8 @@ export const getListOfProductsBasedOnCategory = (
     laptopRAMs: filteredBrandsSingleItem[],
     laptopProcessorTypes: filteredBrandsSingleItem[],
     tvScreenSizes: filteredBrandsSingleItem[],
-    tvScreenSolution: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
+    tvScreenSolution: filteredBrandsSingleItem[],
+    phoneCoulours: filteredBrandsSingleItem[]) => async(dispatch: Dispatch) => {
     
     try {
         dispatch({
@@ -224,6 +225,26 @@ export const getListOfProductsBasedOnCategory = (
             dispatch({
                 type: GET_LIST_PRODUCTS_SUCCESS,
                 payload: TVData
+            });
+        } else if (category === 'phones') {
+            let PhoneColourArray = [];
+            for (let i = 0; i < phoneCoulours.length; i++) {
+                if (phoneCoulours[i].isChecked) {
+                    PhoneColourArray.push(phoneCoulours[i].value);
+                }
+            }
+            let PhoneColourQuery = `&phoneColour=`;
+            for (let i = 0; i < PhoneColourArray.length; i++) {
+                PhoneColourQuery += `${PhoneColourArray[i]},`;
+            }
+    
+            const { data: PhoneData } = await axios.get(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}${PhoneColourQuery}`);        
+            
+            console.log(PhoneData);
+            
+            dispatch({
+                type: GET_LIST_PRODUCTS_SUCCESS,
+                payload: PhoneData
             });
         } else {
             console.log(`/api/products/list/${category}?page=${page}&lowPrice=${Number(lowPrice)}&highPrice=${Number(highPrice)}${brandArrayQuery}`);

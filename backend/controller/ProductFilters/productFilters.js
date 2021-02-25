@@ -103,6 +103,22 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
 
     //! END OF TV FILTER
 
+    //! Phones Filters
+    const arrayOfPhoneColour = [];
+    if (req.params.category === 'phones') {
+        const listOfPhoneColour = await Product.find({ category: 'phones' }).select({
+            "phoneDetail": {
+                "Colour": 1
+            }
+        });
+        for (let i = 0; i < listOfPhoneColour.length; i++) {
+            if (!arrayOfPhoneColour.includes(listOfPhoneColour[i].phoneDetail.Colour)) {
+                arrayOfPhoneColour.push(listOfPhoneColour[i].phoneDetail.Colour);
+            }
+        }
+    }
+    //! End of phones Filters
+
     //TODO: Brands Filter
     let pickedBrands = req.query.brands.split(',');
     for (let i = 0; i < pickedBrands.length; i++) {
@@ -162,6 +178,16 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         }
     }
 
+    //TODO: PHones Filters summary
+    let pickedPhoneColour;
+    if (req.query.phoneColour) {
+        pickedPhoneColour = req.query.phoneColour.split(',');
+        for (let i = 0; i < pickedPhoneColour.length; i++) {
+            if (pickedPhoneColour[i] == "") {
+                pickedPhoneColour.splice(i, 1);
+            }
+        }
+    }
 
     //TODO Start query based on it has no filters or has at least 1 filter
     if (pickedBrands[0] == undefined && 
@@ -170,6 +196,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
         pickedProccessorTypes == undefined &&
         pickedTVScreenSize == undefined && 
         pickedTVScreenSolution == undefined &&
+        pickedPhoneColour == undefined &&
         lowPrice === 0) {
 
         console.log('No filters');
@@ -202,12 +229,14 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 processorTypes: arrayOfLaptopProcessorType,
                 tvScreenSize: arrayOfTVScreenSizes,
                 tvScreenSolutions: arrayOfTVScreenSolution,
+                phoneColour: arrayOfPhoneColour,
                 currentPickedBrands: [],
                 currentPickedLaptopScreenSizes: [],
                 currentPickedRam: [],
                 currentPickedProcessorType: [],
                 currentPickedTVScreenSize: [],
                 currentPickedTVScreenSolution: [],
+                currentPickedPhoneColour: [],
                 page: pageSize, 
                 pages: Math.ceil(totalProductsOfThatCategoryWithNoBrands/pageSize)
             });
@@ -312,12 +341,14 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     processorTypes: arrayOfLaptopProcessorType,
                     tvScreenSize: [],
                     tvScreenSolutions: [],
+                    phoneColour: [],
                     currentPickedBrands: pickedBrands,
                     currentPickedLaptopScreenSizes: pickedLaptopScreenSizes,
                     currentPickedRam: pickedRAMSizes,
                     currentPickedProcessorType: pickedProccessorTypes,
                     currentPickedTVScreenSize: [],
                     currentPickedTVScreenSolution: [],
+                    currentPickedPhoneColour: [],
                     page: pageSize, 
                     pages: Math.ceil(totalProductsOfThatCategoryWithFilter/pageSize)
                 });
@@ -326,7 +357,7 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                 throw new Error("Can't find the list of product");
             };
             break;
-            
+
             case 'tvs':
                 console.log('tvs');
                 let noTVScreenSizes = false;
@@ -397,12 +428,14 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                         processorTypes: [],
                         tvScreenSize: arrayOfTVScreenSizes,
                         tvScreenSolutions: arrayOfTVScreenSolution,
+                        phoneColour: [],
                         currentPickedBrands: pickedBrands,
                         currentPickedLaptopScreenSizes: [],
                         currentPickedRam: [],
                         currentPickedProcessorType: [],
                         currentPickedTVScreenSize: pickedTVScreenSize,
                         currentPickedTVScreenSolution: pickedTVScreenSolution,
+                        currentPickedPhoneColour: [],
                         page: pageSize, 
                         pages: Math.ceil(totalProductsOfTVWithFilter/pageSize)
                     });
@@ -411,7 +444,76 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     throw new Error("Can't find the list of product");
                 };        
 
+                break;
+            case 'phones': 
+                    let noPhonesColour = false;
+                    if (pickedPhoneColour == undefined) {
+                        pickedPhoneColour = arrayOfPhoneColour;
+                        noPhonesColour = true;
+                    }
+                
+                    const totalProductsOfPhoneWithFilter = await Product.countDocuments({ 
+                        category: req.params.category,
+                        price: { $gt: lowPrice, $lt: highPrice },
+                        brand: { $in: pickedBrands },
+                        "phoneDetail.Colour": {
+                            $in: pickedPhoneColour
+                        }
+                    });
+                    console.log(totalProductsOfPhoneWithFilter);
+                
+                    const phonesListWithBrands = await Product.find({ 
+                        category: req.params.category,
+                        price: { $gt: lowPrice, $lt: highPrice },
+                        brand: { $in: pickedBrands },
+                        "phoneDetail.Colour": {
+                            $in: pickedPhoneColour
+                        }
+                        })
+                        .select({
+                        "rating": 1,
+                        "numReviews": 1,
+                        "price": 1,
+                        "countInStock": 1,
+                        "_id": 1,
+                        "name": 1,
+                        "image": 1,
+                        "onSale": 1
+                    }).skip(pageSize * currentPage).limit(pageSize);
+                
+                    //TODO: We have these `if`s because we don't want to send the signal to make all the 
+                    //TODO: box checked on the front-end. Here we return what we receive in the start
+                    if (noBrandFilters) {
+                        pickedBrands = [];
+                    }
+                    if (noPhonesColour) {
+                        pickedPhoneColour = [];
+                    }
 
+                    if (phonesListWithBrands) {
+                        res.status(200).send({ 
+                            listItems: phonesListWithBrands, 
+                            brands: ArrayOfBrands,
+                            screenSizes: [],
+                            rams: [],
+                            processorTypes: [],
+                            tvScreenSize: [],
+                            tvScreenSolutions: [],
+                            phoneColour: arrayOfPhoneColour,
+                            currentPickedBrands: pickedBrands,
+                            currentPickedLaptopScreenSizes: [],
+                            currentPickedRam: [],
+                            currentPickedProcessorType: [],
+                            currentPickedTVScreenSize: [],
+                            currentPickedTVScreenSolution: [],
+                            currentPickedPhoneColour: pickedPhoneColour,
+                            page: pageSize, 
+                            pages: Math.ceil(totalProductsOfPhoneWithFilter/pageSize)
+                        });
+                    } else {
+                        res.status(404);
+                        throw new Error("Can't find the list of product");
+                    };        
                 break;
             default:
                 const otherTotalProductsOfThatCategoryWithFilter = await Product.countDocuments({ 
@@ -447,12 +549,14 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                         processorTypes: [],
                         tvScreenSize: [],
                         tvScreenSolutions: [],
+                        phoneColour: [],
                         currentPickedBrands: pickedBrands,
                         currentPickedLaptopScreenSizes: [],
                         currentPickedRam: [],
                         currentPickedProcessorType: [],
                         currentPickedTVScreenSize: [],
                         currentPickedTVScreenSolution: [],
+                        currentPickedPhoneColour: [],
                         page: pageSize, 
                         pages: Math.ceil(otherTotalProductsOfThatCategoryWithFilter/pageSize)
                     });

@@ -96,6 +96,7 @@ const ListScreen = () => {
     const [laptopProcessorTypes, setLaptopProcessorTypes] = useState([]);
     const [tvScreenSizes, setTVScreenSizes] = useState([]);
     const [tvScreenSolution, setTVScreenSolution] = useState([]);
+    const [phoneCoulours, setPhoneColours] = useState([]);
 
     //TODO: Toggle filters Options
     const [filterPriceOpen, setFilterPriceOpen] = useState(true);
@@ -105,6 +106,7 @@ const ListScreen = () => {
     const [filterLaptopProcessorType, setFilterLaptopProcessorTypes] = useState(true);
     const [filterTVScreenSize, setFilterTVScreenSize] = useState(true);
     const [filterTVScreenSolution, setFilterTVScreenSolution] = useState(true);
+    const [filterPhoneColour, setFilterPhoneColour] = useState(true);
 
     //TODO: Data from Redux Store
     const { 
@@ -115,12 +117,14 @@ const ListScreen = () => {
         processorTypes,
         tvScreenSize,
         tvScreenSolutions,
+        phoneColour,
         currentPickedBrands,
         currentPickedLaptopScreenSizes, 
         currentPickedRam,
         currentPickedProcessorType,
         currentPickedTVScreenSize,
         currentPickedTVScreenSolution,
+        currentPickedPhoneColour,
         pages, 
         loading, 
         error 
@@ -143,6 +147,7 @@ const ListScreen = () => {
             setFilterLaptopProcessorTypes(false);
             setFilterTVScreenSize(false);
             setFilterTVScreenSolution(false);
+            setFilterPhoneColour(false);
         } 
     }, [])
 
@@ -166,7 +171,8 @@ const ListScreen = () => {
             laptopRAMs,
             laptopProcessorTypes,
             tvScreenSizes,
-            tvScreenSolution
+            tvScreenSolution,
+            phoneCoulours
         ));
 
     }, [dispatch, category, lowPrice, highPrice]);
@@ -181,6 +187,7 @@ const ListScreen = () => {
         unCheckAllFilter(laptopProcessorTypes);
         unCheckAllFilter(tvScreenSizes);
         unCheckAllFilter(tvScreenSolution);
+        unCheckAllFilter(phoneCoulours);
 
         dispatch(getListOfProductsBasedOnCategory(
             category, 
@@ -192,7 +199,8 @@ const ListScreen = () => {
             laptopRAMs,
             laptopProcessorTypes,
             tvScreenSizes,
-            tvScreenSolution));
+            tvScreenSolution,
+            phoneCoulours));
     }, [dispatch, category]);
 
     useEffect(() => {
@@ -217,6 +225,9 @@ const ListScreen = () => {
 
         const tvScreenSolutionCheckedArray = checkIfFilterIsCheckedOrNot(tvScreenSolutions, currentPickedTVScreenSolution);
         setTVScreenSolution(tvScreenSolutionCheckedArray);
+
+        const phoneColourCheckedArray = checkIfFilterIsCheckedOrNot(phoneColour, currentPickedPhoneColour);
+        setPhoneColours(phoneColourCheckedArray);
     }, [
         brands, 
         currentPickedBrands, 
@@ -225,11 +236,13 @@ const ListScreen = () => {
         rams,
         tvScreenSize,
         tvScreenSolutions,
+        phoneColour,
         currentPickedLaptopScreenSizes, 
         currentPickedRam,
         currentPickedProcessorType,
         currentPickedTVScreenSize,
-        currentPickedTVScreenSolution
+        currentPickedTVScreenSolution,
+        currentPickedPhoneColour
     ]);
 
     const unCheckAllFilter = (filterList) => {
@@ -271,7 +284,8 @@ const ListScreen = () => {
             laptopRAMs,
             laptopProcessorTypes,
             tvScreenSizes,
-            tvScreenSolution));
+            tvScreenSolution,
+            phoneCoulours));
     }
 
     const onFilterPriceHandler = (e) => {
@@ -286,7 +300,8 @@ const ListScreen = () => {
             laptopRAMs,
             laptopProcessorTypes,
             tvScreenSizes,
-            tvScreenSolution));
+            tvScreenSolution,
+            phoneCoulours));
     }
 
     const filterByBrandHelperFunction = (e, listOfCurrentFilters) => {
@@ -318,6 +333,9 @@ const ListScreen = () => {
         let currentTVScreenSolution = filterByBrandHelperFunction(e, tvScreenSolution);
         setTVScreenSolution([...currentTVScreenSolution]);
 
+        let currentPhoneColours = filterByBrandHelperFunction(e, phoneCoulours);
+        setPhoneColours([...currentPhoneColours]);
+
         dispatch(getListOfProductsBasedOnCategory(
             category, 
             0, 
@@ -328,7 +346,8 @@ const ListScreen = () => {
             laptopRAMs,
             laptopProcessorTypes,
             tvScreenSizes,
-            tvScreenSolution));
+            tvScreenSolution,
+            phoneCoulours));
     }
 
     const toggleFilterOptions = (filterName) => {
@@ -353,6 +372,9 @@ const ListScreen = () => {
                 break;
             case 'tvScreenSolution':
                 setFilterTVScreenSolution(!filterTVScreenSolution);
+                break;
+            case 'phoneColour':
+                setFilterPhoneColour(!filterPhoneColour);
                 break;
             default: 
                 break;
@@ -438,6 +460,20 @@ const ListScreen = () => {
                                         toggleFilterOptionsArgument="tvScreenSolution"
                                         filterIsActive={filterTVScreenSolution}
                                         listOfFilters={tvScreenSolution}
+                                        filterProduct={filterByBrandHandler}
+                                    />
+                                </>
+                            ) : null
+                        }
+                        {
+                            category === 'phones' ? (
+                                <>
+                                    <FilterComponent 
+                                        filterName="Phone Colour"
+                                        toggleFilterOptions={toggleFilterOptions}
+                                        toggleFilterOptionsArgument="phoneColour"
+                                        filterIsActive={filterPhoneColour}
+                                        listOfFilters={phoneCoulours}
                                         filterProduct={filterByBrandHandler}
                                     />
                                 </>

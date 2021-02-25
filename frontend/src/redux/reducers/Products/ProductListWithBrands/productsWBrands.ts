@@ -18,6 +18,8 @@ interface ProductListAndBrandsState {
     tvScreenSize: string[],
     tvScreenSolutions: string[],
     
+    phoneColour: string[],
+
     currentPickedBrands: string[],
 
     currentPickedLaptopScreenSizes: string[],
@@ -26,6 +28,8 @@ interface ProductListAndBrandsState {
     
     currentPickedTVScreenSize: string[],
     currentPickedTVScreenSolution: string[],
+
+    currentPickedPhoneColour: string[],
 
     page: number | null,
     pages: number | null,
@@ -37,17 +41,22 @@ interface ProductListAndBrandsState {
 const productListBasedOnCategory: ProductListAndBrandsState = {
     productsList: [],
     brands: [],
+
     screenSizes: [],
     rams: [],
     processorTypes: [],
     tvScreenSize: [],
     tvScreenSolutions: [],
+    phoneColour: [],
+
     currentPickedBrands: [],
     currentPickedLaptopScreenSizes: [],
     currentPickedRam: [],
     currentPickedProcessorType: [],
     currentPickedTVScreenSize: [],
     currentPickedTVScreenSolution: [],
+    currentPickedPhoneColour: [],
+
     pages: null,
     page: null,
     loading: false,
@@ -64,12 +73,14 @@ interface CurrentAction {
         processorTypes?: [],
         tvScreenSize?: [],
         tvScreenSolutions?: [],
+        phoneColour?: [],
         currentPickedBrands?: string[],
         currentPickedLaptopScreenSizes?: string[],
         currentPickedRam?: string[],
         currentPickedProcessorType?: string[],
         currentPickedTVScreenSize?: string[],
         currentPickedTVScreenSolution?: string[],
+        currentPickedPhoneColour?: string[],
         page?: number,
         pages?: number,
         error? : string
@@ -102,13 +113,15 @@ export const getListOfProductsBasedOnCategory = (state = productListBasedOnCateg
                  action.payload.processorTypes instanceof Array &&
                  action.payload.tvScreenSize instanceof Array &&
                  action.payload.tvScreenSolutions instanceof Array &&
+                 action.payload.phoneColour instanceof Array &&
                  action.payload.currentPickedBrands instanceof Array &&
                  action.payload.currentPickedLaptopScreenSizes instanceof  Array &&
                  action.payload.screenSizes instanceof  Array &&
                  action.payload.currentPickedRam instanceof Array &&
                  action.payload.currentPickedProcessorType instanceof Array &&
                  action.payload.currentPickedTVScreenSize instanceof Array && 
-                 action.payload.currentPickedTVScreenSolution instanceof Array) {
+                 action.payload.currentPickedTVScreenSolution instanceof Array && 
+                 action.payload.currentPickedPhoneColour instanceof Array) {
 
                      console.log(action.payload.listItems);
                     return {
@@ -123,12 +136,14 @@ export const getListOfProductsBasedOnCategory = (state = productListBasedOnCateg
                         processorTypes: [...action.payload.processorTypes],
                         tvScreenSize: [...action.payload.tvScreenSize],
                         tvScreenSolutions: [...action.payload.tvScreenSolutions],
+                        phoneColour: [...action.payload.phoneColour],
                         currentPickedBrands: [...action.payload.currentPickedBrands],
                         currentPickedLaptopScreenSizes: [...action.payload.currentPickedLaptopScreenSizes],
                         currentPickedRam: [...action.payload.currentPickedRam],
                         currentPickedProcessorType: [...action.payload.currentPickedProcessorType],
                         currentPickedTVScreenSize: [...action.payload.currentPickedTVScreenSize],
                         currentPickedTVScreenSolution: [...action.payload.currentPickedTVScreenSolution],
+                        currentPickedPhoneColour: [...action.payload.currentPickedPhoneColour], 
                         page: action.payload.page,
                         pages: action.payload.pages
                     }

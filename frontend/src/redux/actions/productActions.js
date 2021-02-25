@@ -155,12 +155,12 @@ var getSetOfReviewsOfCurrentProductBasedOnPageNumber = function (productId, page
     });
 }); }; };
 exports.getSetOfReviewsOfCurrentProductBasedOnPageNumber = getSetOfReviewsOfCurrentProductBasedOnPageNumber;
-var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes, laptopRAMs, laptopProcessorTypes, tvScreenSizes, tvScreenSolution) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
-    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, RAMSizeArray, i, RAMSizeQuery, i, ProcessorTypeArray, i, ProcessorTypeQuery, i, data, TVScreenSizesArray, i, TVscreenSizesQuery, i, TVScreenSolutionArray, i, TVscreenSolutionQuery, i, TVData, otherData, error_5;
+var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highPrice, filteredBrands, laptopScreenSizes, laptopRAMs, laptopProcessorTypes, tvScreenSizes, tvScreenSolution, phoneCoulours) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
+    var BrandsArray, i, brandArrayQuery, i, ScreenSizesArray, i, screenSizesQuery, i, RAMSizeArray, i, RAMSizeQuery, i, ProcessorTypeArray, i, ProcessorTypeQuery, i, data, TVScreenSizesArray, i, TVscreenSizesQuery, i, TVScreenSolutionArray, i, TVscreenSolutionQuery, i, TVData, PhoneColourArray, i, PhoneColourQuery, i, PhoneData, otherData, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 7, , 8]);
+                _a.trys.push([0, 9, , 10]);
                 dispatch({
                     type: actionTypes_1.GET_LIST_PRODUCTS_PENDING
                 });
@@ -212,7 +212,7 @@ var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highP
                     type: actionTypes_1.GET_LIST_PRODUCTS_SUCCESS,
                     payload: data
                 });
-                return [3 /*break*/, 6];
+                return [3 /*break*/, 8];
             case 2:
                 if (!(category === 'tvs')) return [3 /*break*/, 4];
                 TVScreenSizesArray = [];
@@ -243,27 +243,48 @@ var getListOfProductsBasedOnCategory = function (category, page, lowPrice, highP
                     type: actionTypes_1.GET_LIST_PRODUCTS_SUCCESS,
                     payload: TVData
                 });
-                return [3 /*break*/, 6];
+                return [3 /*break*/, 8];
             case 4:
+                if (!(category === 'phones')) return [3 /*break*/, 6];
+                PhoneColourArray = [];
+                for (i = 0; i < phoneCoulours.length; i++) {
+                    if (phoneCoulours[i].isChecked) {
+                        PhoneColourArray.push(phoneCoulours[i].value);
+                    }
+                }
+                PhoneColourQuery = "&phoneColour=";
+                for (i = 0; i < PhoneColourArray.length; i++) {
+                    PhoneColourQuery += PhoneColourArray[i] + ",";
+                }
+                return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery + PhoneColourQuery)];
+            case 5:
+                PhoneData = (_a.sent()).data;
+                console.log(PhoneData);
+                dispatch({
+                    type: actionTypes_1.GET_LIST_PRODUCTS_SUCCESS,
+                    payload: PhoneData
+                });
+                return [3 /*break*/, 8];
+            case 6:
                 console.log("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery);
                 return [4 /*yield*/, axios_1["default"].get("/api/products/list/" + category + "?page=" + page + "&lowPrice=" + Number(lowPrice) + "&highPrice=" + Number(highPrice) + brandArrayQuery)];
-            case 5:
+            case 7:
                 otherData = (_a.sent()).data;
                 console.log(otherData);
                 dispatch({
                     type: actionTypes_1.GET_LIST_PRODUCTS_SUCCESS,
                     payload: otherData
                 });
-                _a.label = 6;
-            case 6: return [3 /*break*/, 8];
-            case 7:
+                _a.label = 8;
+            case 8: return [3 /*break*/, 10];
+            case 9:
                 error_5 = _a.sent();
                 dispatch({
                     type: actionTypes_1.GET_LIST_PRODUCTS_FAIL,
                     payload: { error: error_5.response && error_5.response.data.message ? error_5.response.data.message : null }
                 });
-                return [3 /*break*/, 8];
-            case 8: return [2 /*return*/];
+                return [3 /*break*/, 10];
+            case 10: return [2 /*return*/];
         }
     });
 }); }; };
