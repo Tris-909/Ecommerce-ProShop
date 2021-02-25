@@ -30,46 +30,14 @@ const HomeScreen = () => {
     const { success: removeItemFromWishListSuccess} = useSelector(state => state.removeItemFromWishList);
 
     useEffect(() => {
-        //TODO: Get carousel products for the first time 
-        if (carouselProducts.length === 0) {
-            dispatch(getCarouselProducts());
-        }
-    }, [dispatch, carouselProducts]);
+        dispatch(getCarouselProducts());
+        dispatch(getTopProductsForHomeScreen('laptops'));
+        dispatch(getTopProductsForHomeScreen('tvs'));
+        dispatch(getTopProductsForHomeScreen('phones'));
+        dispatch(getTopProductsForHomeScreen('headphone'));
+        dispatch(getTopProductsForHomeScreen('game'));
 
-    useEffect(() => {
-        //TODO: Get top laptops for the first time 
-        if (topLaptops.length === 0) {
-            dispatch(getTopProductsForHomeScreen('laptops'));
-        }
-    }, [dispatch, topLaptops]);
-
-    useEffect(() => {
-        //TODO: Get top tvs for the first time 
-        if (topTVs.length === 0) {
-            dispatch(getTopProductsForHomeScreen('tvs'));
-        }
-    }, [dispatch, topTVs]);
-
-    useEffect(() => {
-        //TODO: Fetch top-phone for the first time
-        if (topPhones.length === 0) {
-            dispatch(getTopProductsForHomeScreen('phones'));
-        }
-    }, [dispatch, topPhones]);
-
-    useEffect(() => {
-        //TODO: Fetch top-headphone for the first time
-        if (topHeadphones.length === 0) {
-            dispatch(getTopProductsForHomeScreen('headphone'));
-        }
-    }, [dispatch, topHeadphones]);
-
-    useEffect(() => {
-        //TODO: Fetch top-games for the first time
-        if (topGames.length === 0) {
-            dispatch(getTopProductsForHomeScreen('game'));
-        }
-    }, [dispatch, topGames]);
+    }, [dispatch])
 
     useEffect(() => {
         //TODO: Fetch Wishlist for the first time if needed

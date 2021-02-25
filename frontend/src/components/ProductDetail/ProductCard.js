@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Col, Row, Card, ListGroup, Form, Button } from 'react-bootstrap'
-import { addItemToCart } from '../../redux/actions/cartActions';
+import {Col, Row, Card, ListGroup, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
 const ProductCard = ( props ) => {
@@ -8,12 +9,20 @@ const ProductCard = ( props ) => {
     const [quantity, setQuantity] = useState(1);
     const {price, countInStock, id} = props;
 
+    const { user } = useSelector(state => state.user);
+
+
     const addToCartHandler = () => {
         history.push(`/cart/${id}?qty=${quantity}`);
     }
 
     return (
         <Col md={4}>
+            {
+                user ? user.isAdmin === true ? (
+                    <Link className="btn btn-dark my-3" to={`/admin/products/${id}/edit`}>Admin Edit</Link> 
+                ) : null : null
+            }
             <Card>
                 <ListGroup variant="flush">
                     <ListGroup.Item>

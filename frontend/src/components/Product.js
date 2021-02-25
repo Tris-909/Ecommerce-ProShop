@@ -71,6 +71,34 @@ const CrossPrice = styled.div`
     }
 `;
 
+const OnSaleTag = styled.div`
+    top: 0;
+    left: -10%;
+    height: 10%;
+    width: 100%;
+    background-color: red;
+    font-family: 'Luckiest Guy', cursive;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 85%);
+`;
+
+const ImageContainer = styled.div`
+    padding-left: 1rem;
+    padding-right: 1rem;
+`;
+
+const TextBold = styled.div`
+    font-size: 1.3rem;
+    font-weight: 700;
+
+    &:hover {
+        text-decoration: none; !important
+    }
+`;
+
 const Product = (props) => {
     const { product, link = '/product' } = props;
     const [isLoved, setIsLoved] = useState(false);
@@ -136,14 +164,21 @@ const Product = (props) => {
     }
 
     return (
-        <Card className="my-3 p-3 rounded">
+        <Card className="my-3 rounded">
+            {
+                product.onSale !== 0 ? (
+                    <OnSaleTag>ON SALE</OnSaleTag>
+                ) : null
+            }
             <Link to={`${link}/${product._id}`}>
-                <Card.Img src={product.image} variant="top" />
+                <ImageContainer>
+                    <Card.Img src={product.image} variant="top" />
+                </ImageContainer>
             </Link>
             <Card.Body>
-                <Link to={`${link}/${product._id}`}>
+                <Link to={`${link}/${product._id}`} style={{textDecoration: 'none'}}>
                     <Card.Title as="div">
-                        <strong>{product.name}</strong>
+                        <TextBold>{product.name}</TextBold>
                     </Card.Title>
                 </Link>
                 <Card.Text as="div">
@@ -155,7 +190,8 @@ const Product = (props) => {
 
                 <FootProductContainer>
                     <CardMoneyText>
-                    { product.onSale !== 0 ? (
+                    { 
+                        product.onSale !== 0 ? (
                             <>
                             <CrossPrice>$ {product.price}</CrossPrice>
                             <p> $ {product.price - product.onSale} </p>
@@ -164,7 +200,8 @@ const Product = (props) => {
                             <span> 
                                 $ {product.price} 
                             </span> 
-                        )} 
+                        )
+                    } 
                     </CardMoneyText>
                     <ButtonContainer>
                         <i className="fas fa-cart-plus" 
