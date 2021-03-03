@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../redux/actions/orderActions';
+import { getAllItemsCart } from '../redux/actions/cartActions';
 import { removeProductsInCartAfterBuy } from '../redux/actions/cartActions';
 import Message from '../components/Message';
 import CheckOutStep from '../components/CheckOutStep';
@@ -12,6 +13,10 @@ const PlaceOrderScreen = ({ history }) => {
     const dispatch = useDispatch();
     const { cartItems, shippingAddress, paymentMethod } = useSelector(state => state.cart);
     const { orders, success, error } = useSelector(state => state.orders);
+
+    useEffect(() => {
+        dispatch(getAllItemsCart());
+    }, []);
 
     useEffect(() => {
         if (success) {
@@ -86,9 +91,18 @@ const PlaceOrderScreen = ({ history }) => {
                                                     {item.productName}
                                                 </Link>
                                             </Col>
-                                            <Col md={4}>
-                                                1 x ${item.productPrice - item.onSale} = ${1 * item.productPrice} - ${item.onSale}
-                                            </Col>
+                                            {
+                                                item.onSale !== 0 ? (
+                                                    <Col md={4}>
+                                                        1 x ${item.productPrice - item.onSale} = ${1 * item.productPrice} - ${item.onSale}
+                                                    </Col>
+                                                ) : (
+                                                    <Col md={4}>
+                                                        1 x ${item.productPrice} = ${1 * item.productPrice}
+                                                    </Col>
+                                                )
+                                            }
+
                                         </Row>
                                     </ListGroup.Item>
                                 ))}

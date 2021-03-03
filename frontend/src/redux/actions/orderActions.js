@@ -55,6 +55,7 @@ var createOrder = function (orderItems, shippingAddress, paymentMethod, itemsPri
                         'Authorization': "Bearer " + user.token
                     }
                 };
+                console.log(orderItems);
                 return [4 /*yield*/, axios_1["default"].post("/api/orders", {
                         orderItems: orderItems,
                         shippingAddress: shippingAddress,

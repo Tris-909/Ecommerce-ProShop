@@ -47,7 +47,7 @@ export const createOrder = (
                 'Authorization': `Bearer ${user.token}` 
             }
         }
-
+        console.log(orderItems);
         const createdOrder = await axios.post(`/api/orders`, {
             orderItems, 
             shippingAddress, 

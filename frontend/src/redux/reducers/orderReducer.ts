@@ -34,7 +34,8 @@ export interface SingleOrderItem {
     itemId: string,
     productName: string,
     productImage: string,
-    productPrice: number
+    productPrice: number,
+    onSale: number
 }
 
 export interface SingleOrder {

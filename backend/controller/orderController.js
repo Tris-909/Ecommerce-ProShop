@@ -30,7 +30,7 @@ const addOrder = AsyncHandler(async (req, res, next) => {
             totalPrice,
             onSale 
         });
-
+        console.log(order);
         const createdOrder = await order.save();
         res.status(201).json(createdOrder);
     }

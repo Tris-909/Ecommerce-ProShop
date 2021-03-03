@@ -25,7 +25,6 @@ import TVTable from '../components/ProductDetail/TvTable/TVTable';
 import PhoneTable from '../components/ProductDetail/PhoneTable/PhoneTable';
 import HeadphoneTable from '../components/ProductDetail/HeadphoneTable/HeadphoneTable';
 import GameTable from '../components/ProductDetail/GameTable/GameTable';
-import AlsoLikeProduct from '../components/AlsoLike/AlsoLikeProduct';
 
 const YouMayAlsoLikeText = styled.div`
     font-size: 2.5rem;
