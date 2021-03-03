@@ -233,7 +233,7 @@ const getWishListItems = AsyncHandler(async (req, res) => {
 //?   @method : POST /api/users/wishlist/additem
 //?   @access : private
 const addItemToUserWishList = AsyncHandler(async (req, res) => {
-    const { itemId, productName, productPrice, productImage, productRating, productNumReviews } = req.body;
+    const { itemId, productName, productPrice, productImage, productRating, productNumReviews, onSale } = req.body;
     const user = await User.findById(req.user._id);
     const theItem = {
         itemId, 
@@ -241,7 +241,8 @@ const addItemToUserWishList = AsyncHandler(async (req, res) => {
         productPrice, 
         productImage,
         productRating,
-        productNumReviews
+        productNumReviews,
+        onSale
     }    
     console.log(theItem);
 

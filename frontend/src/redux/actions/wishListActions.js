@@ -76,7 +76,7 @@ var getWishList = function () { return function (dispatch, getState) { return __
     });
 }); }; };
 exports.getWishList = getWishList;
-var addItemToWishList = function (itemId, productName, productPrice, productImage, productRating, productNumReviews) { return function (dispatch, getState) { return __awaiter(void 0, void 0, void 0, function () {
+var addItemToWishList = function (itemId, productName, productPrice, productImage, productRating, productNumReviews, onSale) { return function (dispatch, getState) { return __awaiter(void 0, void 0, void 0, function () {
     var user, config, postBody, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -94,6 +94,7 @@ var addItemToWishList = function (itemId, productName, productPrice, productImag
                 };
                 postBody = {
                     itemId: itemId,
+                    onSale: onSale,
                     productName: productName,
                     productPrice: productPrice,
                     productImage: productImage,

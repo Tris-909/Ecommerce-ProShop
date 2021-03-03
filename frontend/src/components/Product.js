@@ -172,7 +172,15 @@ const Product = (props) => {
         dispatch({type: ADD_ITEM_TO_WISH_LIST_RESET});
         
         if (user) {
-            dispatch(addItemToWishList(product._id, product.name, product.price, product.image ,product.rating, product.numReviews));
+            dispatch(addItemToWishList(product._id, 
+                product.name, 
+                product.price, 
+                product.image, 
+                product.rating, 
+                product.numReviews, 
+                product.onSale
+            ));
+            
             if (addItemToWishListSuccess) {
                 setIsLoved(true);
             }

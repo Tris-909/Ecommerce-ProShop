@@ -46,7 +46,12 @@ const userSchema = mongoose.Schema({
             productNumReviews: {
                 type: Number,
                 required: true
-            }
+            },
+            onSale: {
+                type: Number
+            },
+            newProduct: Boolean,
+            preOrder: Boolean,
         }
     ],
     cartList: [
@@ -72,6 +77,8 @@ const userSchema = mongoose.Schema({
                 type: Number,
                 required: true
             },
+            newProduct: Boolean,
+            preOrder: Boolean,
             countInStock: {
                 type: Number,
                 required: true

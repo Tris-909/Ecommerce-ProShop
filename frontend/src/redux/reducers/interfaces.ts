@@ -20,7 +20,10 @@ export interface singleWishListItem {
     productPrice: number,
     productImage: string,
     productRating: number,
-    productNumReviews: number
+    productNumReviews: number,
+    onSale: number,
+    newProduct: boolean,
+    preOrder: boolean,
 }
 
 export interface singleCartItem {

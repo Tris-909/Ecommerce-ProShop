@@ -162,7 +162,9 @@ const ProductScreen = ({ match }) => {
                                     onSale: item.onSale,
                                     productImage: item.image,
                                     numReviews: item.numReviews,
-                                    rating: item.rating
+                                    rating: item.rating,
+                                    newProduct: item.newProduct,
+                                    preOrder: item.preOrder
                                 }
                                 return (
                                     <Col key={item._id} sm={6} md={4} lg={4} xl={4} style={{marginTop: '1rem', minHeight: '350px'}}>

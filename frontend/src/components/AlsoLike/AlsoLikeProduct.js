@@ -20,10 +20,9 @@ import {
 import Message from '../Message';
 
 const Container = styled.div`
-    border: 0.5px solid grey;
     height: 100%;
-    padding: 20px;
-
+    padding: 10px;
+    border: 3px solid grey;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,19 +82,6 @@ const CrossPrice = styled.div`
         -o-transform:rotate(-10deg);
         transform:rotate(-10deg);
     }
-`;
-const OnSaleTag = styled.div`
-    top: 0;
-    left: -10%;
-    height: 10%;
-    width: 100%;
-    background-color: red;
-    font-family: 'Luckiest Guy', cursive;
-    color: white;
-    font-size: 2rem;
-    text-align: center;
-    padding-bottom: 0.5rem;
-    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 85%);
 `;
 
 const NewReleaseTag = styled.div`
@@ -162,7 +148,15 @@ const AlsoLikeProduct = (props) => {
         dispatch({type: ADD_ITEM_TO_WISH_LIST_RESET});
         
         if (user) {
-            dispatch(addItemToWishList(itemId, productName, productPrice, productImage, rating, numReviews));
+            dispatch(addItemToWishList(itemId, 
+                productName, 
+                productPrice, 
+                productImage, 
+                rating, 
+                numReviews, 
+                onSale
+            ));
+
             if (addItemToWishListSuccess) {
                 setIsLoved(true);
             }

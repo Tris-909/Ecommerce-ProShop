@@ -79,7 +79,7 @@ const WishListProduct = ({ product }) => {
     const onAddItemToWishList = (e) => {
         e.preventDefault();
         dispatch({type: ADD_ITEM_TO_WISH_LIST_RESET});
-        dispatch(addItemToWishList(product._id, product.name, product.price, product.image ,product.rating, product.numReviews));
+        dispatch(addItemToWishList(product._id, product.name, product.price, product.image ,product.rating, product.numReviews, product.onSale));
         if (addItemToWishListSuccess) {
             setIsLoved(true);
         }
@@ -91,8 +91,7 @@ const WishListProduct = ({ product }) => {
         dispatch(removeAnItemFromWishList(wishListID));
         setIsLoved(false);
     }
-
-    
+    console.log(product.onSale);
     return (
         <Card className="my-3 p-3 rounded">
             <Link to={`/product/${product.itemId}`}>
@@ -122,11 +121,11 @@ const WishListProduct = ({ product }) => {
                         { product.onSale !== 0 ? (
                             <>
                             <span style={{textDecoration: 'line-through'}}>$ {product.price}</span>
-                            <span> $ {product.price - product.onSale} </span>
+                            <span> {product.productPrice - product.onSale} </span>
                             </>
                         ) : ( 
                             <span> 
-                                $ {product.price} 
+                                $ {product.productPrice} 
                             </span> 
                         )} 
                     </CardMoneyText>

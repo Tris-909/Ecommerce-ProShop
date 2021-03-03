@@ -50,6 +50,7 @@ export const getWishList = () => async (dispatch: Dispatch, getState: Function) 
 
 interface postBody {
     itemId: string,
+    onSale: number,
     productName: string,
     productPrice: number,
     productImage: string,
@@ -62,7 +63,8 @@ export const addItemToWishList = ( itemId: string,
     productPrice: number, 
     productImage: string, 
     productRating: number, 
-    productNumReviews: number) => async (dispatch: Dispatch, getState: Function) => {
+    productNumReviews: number,
+    onSale: number) => async (dispatch: Dispatch, getState: Function) => {
     try {
         dispatch({ 
             type: ADD_ITEM_TO_WISH_LIST_REQUEST
@@ -78,6 +80,7 @@ export const addItemToWishList = ( itemId: string,
 
         const postBody:postBody = {
             itemId, 
+            onSale,
             productName, 
             productPrice, 
             productImage, 
