@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import FormContainer from '../components/FormContainer';
@@ -27,6 +27,9 @@ const ProductEditScreen = ({ history, match }) => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
     const [onSale, setOnSale] = useState(0);
+    const [openOnSale, setOpenOnSale] = useState(false);
+    const [newProduct, setNewProduct] = useState(false);
+    const [preOrder, setPreOrder] = useState(false);
     const [image, setImage] = useState('');
     const [brand, setBrand] = useState('');
     const [countInStock, setCountInStock] = useState(0);
@@ -106,7 +109,22 @@ const ProductEditScreen = ({ history, match }) => {
         if (singleProduct) {
             setName(singleProduct.name);
             setPrice(singleProduct.price);
-            setOnSale(singleProduct.onSale);
+
+            if (singleProduct.onSale > 0) {
+                setOpenOnSale(true);
+                setOnSale(singleProduct.onSale);
+                setNewProduct(false);
+                setPreOrder(false);
+            } else if (singleProduct.newProduct === true) {
+                setNewProduct(true);
+                setOpenOnSale(false);
+                setPreOrder(false);
+            } else if (singleProduct.preOrder === true) {
+                setNewProduct(false);
+                setOpenOnSale(false);
+                setPreOrder(true);
+            }
+
             setImage(singleProduct.image);
             setBrand(singleProduct.brand);
             setCountInStock(singleProduct.countInStock);
@@ -174,6 +192,12 @@ const ProductEditScreen = ({ history, match }) => {
 
         }
     }, [singleProduct])
+
+    useEffect(() => {
+        if (openOnSale === false) {
+            setOnSale(0);
+        }
+    }, [openOnSale]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -253,6 +277,8 @@ const ProductEditScreen = ({ history, match }) => {
             name, 
             price, 
             onSale,
+            newProduct,
+            preOrder,
             image, 
             brand, 
             category, 
@@ -290,6 +316,22 @@ const ProductEditScreen = ({ history, match }) => {
         }
     }
 
+    const radioButtonChangeHandler = (radioType) => {
+        if (radioType === 'ONSALE') {
+            setOpenOnSale(!onSale);
+            setNewProduct(false);
+            setPreOrder(false);
+        } else if (radioType === 'ISNEW') {
+            setNewProduct(!newProduct);
+            setOpenOnSale(false);
+            setPreOrder(false);
+        } else {
+            setPreOrder(!preOrder);
+            setNewProduct(false);
+            setOpenOnSale(false);
+        }
+    }
+
     return (
     <>
         <Link to='/admin/productsList' className="btn btn-light my-3">
@@ -318,13 +360,46 @@ const ProductEditScreen = ({ history, match }) => {
                         onChange={(e) => setPrice(e.target.value)} />
                 </Form.Group>
 
-                <Form.Group controlId='onSale'>
-                    <Form.Label>Discount :</Form.Label>
-                    <Form.Control 
-                        type="number" 
-                        placeholder="Product Discount as Number" 
-                        value={onSale} 
-                        onChange={(e) => setOnSale(e.target.value)} />
+                <Form.Group>
+                    <Form.Label> Product Status : </Form.Label>
+
+                    <Form.Check 
+                        label="Product On Sale"
+                        type="radio" 
+                        name="productStatus" 
+                        value={openOnSale} 
+                        checked={openOnSale === true}
+                        onChange={() => radioButtonChangeHandler('ONSALE')} />   
+
+                    {
+                        openOnSale ? (
+                            <>
+                                <Form.Label>Discount :</Form.Label>
+                                <Form.Control 
+                                    type="number" 
+                                    placeholder="Product Discount as Number" 
+                                    value={onSale} 
+                                    name="productStatus"
+                                    onChange={(e) => setOnSale(e.target.value)} />
+                            </>
+                        ) : null
+                    }
+
+                    <Form.Check 
+                        label="Product Is New"
+                        type="radio" 
+                        name="productStatus" 
+                        value={newProduct} 
+                        checked={newProduct === true}
+                        onChange={() => radioButtonChangeHandler('ISNEW')} />   
+
+                    <Form.Check 
+                        label="Products can be pre-ordered"
+                        type="radio" 
+                        name="productStatus" 
+                        value={preOrder} 
+                        checked={preOrder === true}
+                        onChange={() => radioButtonChangeHandler('PREORDER')} />   
                 </Form.Group>
 
                 <Form.Group controlId='image'>

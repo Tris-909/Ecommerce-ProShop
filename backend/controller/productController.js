@@ -283,6 +283,8 @@ const createProduct = AsyncHandler(async (req, res) => {
         rating: 0,
         price: 0,
         onSale: 0,
+        newProduct: false,
+        preOrder: false,
         countInStock: 0,
         numReviews: 0,
         numOf5StarsReviews: 0,
@@ -301,17 +303,28 @@ const createProduct = AsyncHandler(async (req, res) => {
 //? private/admin
 const updateProduct = AsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
-    console.log(req.body);
+    
+    console.log('onSale', req.body.onSale);
+    console.log('preOrder', req.body.preOrder);
+    console.log('newProduct', req.body.newProduct);
+
+
     if (product) {
         product.name = req.body.name || product.name;
         product.price = req.body.price || product.price;
-        product.onSale = req.body.onSale || product.onSale;
+        product.onSale = req.body.onSale;
         product.image = req.body.image || product.image;
         product.brand = req.body.brand || product.brand;
         product.category = req.body.category || product.category;
         product.countInStock = req.body.countInStock || product.countInStock;
         product.numReviews = req.body.numReviews || product.numReviews;
         product.description = req.body.description || product.description;
+        product.newProduct = req.body.newProduct;
+        product.preOrder = req.body.preOrder;
+
+        console.log('product.onSale', product.onSale);
+        console.log('product.newProduct', product.newProduct);
+        console.log('product.preOrder', product.preOrder);
 
         if (req.body.details !== undefined) {
             product.details = req.body.details || product.details;
