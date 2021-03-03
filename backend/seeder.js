@@ -43,7 +43,15 @@ const importData = async () => {
             }
         });
 
-        await Product.insertMany(bindingOnSale);
+        const bindingIsNewAndPreOrder = bindingOnSale.map((product) => {
+            return {
+                ...product,
+                newProduct: false,
+                preOrder: false
+            }
+        })
+
+        await Product.insertMany(bindingIsNewAndPreOrder);
         console.log('Data Imported'.green.inverse);
         process.exit();
     } catch(error) {

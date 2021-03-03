@@ -120,6 +120,16 @@ const productSchema = mongoose.Schema({
         required: true,
         default: 0
     },
+    newProduct: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    preOrder: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     countInStock: {
         type: Number,
         required: true,
