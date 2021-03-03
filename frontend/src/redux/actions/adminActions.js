@@ -236,9 +236,6 @@ export const updateProductAsAdmin = ( name,
         }
 
         onSale = Number(onSale);
-        console.log(onSale);
-        console.log(newProduct);
-        console.log(preOrder);
 
         await axios.put(`/api/products/${id}`, {
             name, 

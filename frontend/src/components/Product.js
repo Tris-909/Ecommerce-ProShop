@@ -85,6 +85,36 @@ const OnSaleTag = styled.div`
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0 85%);
 `;
 
+const NewReleaseTag = styled.div`
+    top: 0;
+    left: -10%;
+    height: 10%;
+    width: 100%;
+    background-color: black;
+    font-family: 'Luckiest Guy', cursive;
+    color: yellow;
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 85%);
+`;
+
+
+const PreOrderTag = styled.div`
+    top: 0;
+    left: -10%;
+    height: 10%;
+    width: 100%;
+    background-color: orange;
+    font-family: 'Luckiest Guy', cursive;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 85%);
+`;
+
+
 const ImageContainer = styled.div`
     padding-left: 1rem;
     padding-right: 1rem;
@@ -165,9 +195,20 @@ const Product = (props) => {
 
     return (
         <Card className="my-3 rounded">
+            {/* Only One out of 3 features like : onSale, newProduct, Pre-Order exist on a single product */}
             {
                 product.onSale !== 0 ? (
                     <OnSaleTag>ON SALE</OnSaleTag>
+                ) : null
+            }
+            {
+                product.newProduct === true ? (
+                    <NewReleaseTag> New Release </NewReleaseTag>
+                ) : null
+            }
+            {
+                product.preOrder === true ? (
+                    <PreOrderTag> Pre-Order </PreOrderTag>
                 ) : null
             }
             <Link to={`${link}/${product._id}`}>

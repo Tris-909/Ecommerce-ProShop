@@ -18,7 +18,10 @@ interface topProduct {
     _id: string,
     name: string,
     image: string,
-    category: string
+    category: string,
+    onSale?: number,
+    newProduct?: boolean,
+    preOrder?: boolean
 }
 
 interface initialProducts {

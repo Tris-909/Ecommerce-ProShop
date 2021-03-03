@@ -217,7 +217,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
             "_id": 1,
             "name": 1,
             "image": 1,
-            "onSale": 1
+            "onSale": 1,
+            "newProduct": 1,
+            "preOrder": 1
         }).skip(pageSize * currentPage).limit(pageSize);
 
         if (productListNoBrand) {
@@ -312,7 +314,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     "_id": 1,
                     "name": 1,
                     "image": 1,
-                    "onSale": 1
+                    "onSale": 1,
+                    "newProduct": 1,
+                    "preOrder": 1
                 }).skip(pageSize * currentPage).limit(pageSize);
 
             //TODO: We have these `if`s because we don't want to send the signal to make all the 
@@ -403,7 +407,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     "_id": 1,
                     "name": 1,
                     "image": 1,
-                    "onSale": 1
+                    "onSale": 1,
+                    "newProduct": 1,
+                    "preOrder": 1
                 }).skip(pageSize * currentPage).limit(pageSize);
                 console.log(tvListWithBrands);
 
@@ -478,7 +484,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                         "_id": 1,
                         "name": 1,
                         "image": 1,
-                        "onSale": 1
+                        "onSale": 1,
+                        "newProduct": 1,
+                        "preOrder": 1
                     }).skip(pageSize * currentPage).limit(pageSize);
                 
                     //TODO: We have these `if`s because we don't want to send the signal to make all the 
@@ -533,7 +541,9 @@ const getListOfProducts = AsyncHandler(async (req, res) => {
                     "_id": 1,
                     "name": 1,
                     "image": 1,
-                    "onSale": 1
+                    "onSale": 1,
+                    "newProduct": 1,
+                    "preOrder": 1
                 }).skip(pageSize * currentPage).limit(pageSize);
 
                 if (noBrandFilters) {

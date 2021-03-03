@@ -30,6 +30,8 @@ export interface singleCartItem {
     productImage: string,
     productPrice: number,
     onSale: number,
+    newProduct: boolean,
+    preOrder: boolean,
     countInStock: number,
     quantity: number
 }

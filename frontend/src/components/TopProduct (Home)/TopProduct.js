@@ -32,10 +32,10 @@ const TopProduct = ({ loading, itemArray, title, itemLink, listItemLink }) => {
         <Container>
             <TopProductTitle><Link to={listItemLink}>{title}</Link></TopProductTitle>
             <Row style={{ justifyContent: 'center', alignItems: 'center'}}>
-               { !loading ? itemArray.length > 0 ? itemArray.map((tv) => {
+               { !loading ? itemArray.length > 0 ? itemArray.map((item) => {
                     return(
-                        <Col sm={12} md={6} lg={6} xl={4} key={tv._id}>
-                           <Product product={tv} link={itemLink}/>
+                        <Col sm={12} md={6} lg={6} xl={4} key={item._id}>
+                           <Product product={item} link={itemLink}/>
                         </Col>
                     );
                 }) : (
