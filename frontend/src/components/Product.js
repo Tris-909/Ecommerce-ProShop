@@ -150,7 +150,7 @@ const Product = (props) => {
         });
 
         //TODO: Switch addItemSuccess to false to not going to cart page
-        dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
+        // dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
     }, [wishList, product]);
 
     const onAddItemToCartHandler = async (e, id, productName, productImage, productPrice, onSale , countInStock, qty) => {

@@ -12,6 +12,7 @@ import {
 import styled from 'styled-components';
 
 //! Product Components 
+import Product from '../components/Product';
 import ProductImage from '../components/ProductDetail/ProductImage';
 import ProductInfo from '../components/ProductDetail/ProductInfo';
 import ProductCard from '../components/ProductDetail/ProductCard';
@@ -73,7 +74,7 @@ const ProductScreen = ({ match }) => {
                 dispatch(getAlsoLikeProducts('game'));
             }
         }
-    }, [dispatch, singleProduct, addItemToWishListSuccess, removeItemFromWishListSuccess]);
+    }, [dispatch, singleProduct]);
 
     const checkIfErrorExisted = () => {
         if (error) {
@@ -156,9 +157,10 @@ const ProductScreen = ({ match }) => {
                             <Row>
                              { alsoLikeLoading ? <Loading /> : alsoLikeItems.length !== 0 ? alsoLikeItems.map((item) => {
                                 const product = {
-                                    itemId: item._id,
-                                    productName: item.name,
-                                    productPrice: item.price,
+                                    _id: item._id,
+                                    name: item.name,
+                                    price: item.price,
+                                    image: item.image,
                                     onSale: item.onSale,
                                     productImage: item.image,
                                     numReviews: item.numReviews,
@@ -168,7 +170,8 @@ const ProductScreen = ({ match }) => {
                                 }
                                 return (
                                     <Col key={item._id} sm={6} md={4} lg={4} xl={4} style={{marginTop: '1rem', minHeight: '350px'}}>
-                                        <AlsoLikeProduct product={product} />
+                                        {/* <AlsoLikeProduct product={product} /> */}
+                                        <Product product={product} />
                                     </Col>
                                 )}
                               ) : null }
