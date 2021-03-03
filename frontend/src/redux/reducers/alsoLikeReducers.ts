@@ -12,6 +12,8 @@ interface singleAlsoLikeProduct {
     name: string,
     price: number,
     onSale: number,
+    newProduct: boolean,
+    preOrder: boolean,
     image: string,
     numReviews: number
 }

@@ -13,6 +13,9 @@ interface singleAlsoLikeProduct {
     price: number,
     image: string,
     numReviews: number
+    onSale?: number,
+    newProduct?: boolean,
+    preOrder?: boolean,
 }
 
 type DataReturn = singleAlsoLikeProduct[];

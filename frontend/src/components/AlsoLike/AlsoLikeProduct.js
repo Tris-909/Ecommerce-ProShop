@@ -84,9 +84,46 @@ const CrossPrice = styled.div`
         transform:rotate(-10deg);
     }
 `;
+const OnSaleTag = styled.div`
+    top: 0;
+    left: -10%;
+    height: 10%;
+    width: 100%;
+    background-color: red;
+    font-family: 'Luckiest Guy', cursive;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 85%);
+`;
+
+const NewReleaseTag = styled.div`
+    top: 0;
+    left: -10%;
+    height: 10%;
+    width: 100%;
+    background-color: black;
+    font-family: 'Luckiest Guy', cursive;
+    color: yellow;
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 85%);
+`;
 
 const AlsoLikeProduct = (props) => {
-    const {itemId, productName, productPrice, productImage, numReviews, rating, onSale} = props.product;
+    const {
+        itemId, 
+        productName, 
+        productPrice, 
+        productImage, 
+        numReviews, 
+        rating, 
+        onSale,
+        newProduct,
+        preOrder
+    } = props.product;
     const [isLoved, setIsLoved] = useState(false);
     const [wishListID, setWishListID] = useState(null);
 
@@ -148,6 +185,16 @@ const AlsoLikeProduct = (props) => {
 
     return (
             <Container>
+                {
+                    newProduct === true ? (
+                        <NewReleaseTag>New Release</NewReleaseTag>
+                    ) : null
+                }
+                {
+                    preOrder === true ? (
+                        <NewReleaseTag>Pre-Order</NewReleaseTag>
+                    ) : null
+                }
                 <Link to={`/product/${itemId}`}>
                     <img src={productImage} alt={itemId} style={{width: '100%'}} />
                 </Link>
