@@ -1,19 +1,43 @@
 import React, {useState} from 'react';
 import {Col, Row, Card, ListGroup, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch ,useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import {
+    addItemToCart
+} from '../../redux/actions/cartActions.js';
+import {
+    ADD_PRODUCT_TO_CART_RESET
+} from '../../redux/actions/actionTypes';
 
 const ProductCard = ( props ) => {
+    const dispatch = useDispatch();
+
     const history = useHistory();
     const [quantity, setQuantity] = useState(1);
-    const {price, countInStock, id} = props;
+    const {
+        price, 
+        name,
+        image,
+        onSale,
+        countInStock, 
+        id,
+    } = props;
 
     const { user } = useSelector(state => state.user);
 
+    const addToCartHandler = async (e) => {
+        e.preventDefault();
 
-    const addToCartHandler = () => {
-        history.push(`/cart/${id}?qty=${quantity}`);
+        if (user) {
+            dispatch({ type: ADD_PRODUCT_TO_CART_RESET });
+            await dispatch(addItemToCart(id, name, image, price, onSale, countInStock, 1));
+        
+            history.push('/cart')
+
+        } else {
+            history.push('/login')
+        }
     }
 
     return (
@@ -66,7 +90,7 @@ const ProductCard = ( props ) => {
                     )}
                     <ListGroup.Item>
                         <Button 
-                            onClick={addToCartHandler}
+                            onClick={(e) => addToCartHandler(e, id, name, image, price, onSale, 1, 1)}
                             className="btn-block" 
                             type="button"
                             disabled={countInStock === 0}>

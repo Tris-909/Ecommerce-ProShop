@@ -95,6 +95,9 @@ const ProductScreen = ({ match }) => {
                             />                            
                             <ProductCard 
                                 price={singleProduct.price}
+                                onSale={singleProduct.onSale}
+                                name={singleProduct.name}
+                                image={singleProduct.image}
                                 countInStock={singleProduct.countInStock}
                                 id={match.params.id}
                             />
