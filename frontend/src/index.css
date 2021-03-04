@@ -1,20 +1,19 @@
 main {
-    min-height: 80vh;
+  min-height: 80vh;
 }
 
 h3 {
-    padding: 1rem 0;
+  padding: 1rem 0;
 }
 
 .rating span {
-    margin: 0.1rem;
+  margin: 0.1rem;
 }
 
 .carousel-item-next,
 .carousel-item-prev,
 .carousel-item.active {
   display: flex;
-
 }
 
 .carousel-caption {
@@ -55,14 +54,18 @@ h3 {
   color: black;
 }
 
-
+#map {
+  height: 100%;
+  width: 100%;
+  position: relative !important;
+}
 
 @media (max-width: 1300px) {
   .carousel-caption {
     font-size: 1.5rem;
   }
 }
- 
+
 @media (max-width: 1000px) {
   .carousel-caption {
     font-size: 1rem;
@@ -98,8 +101,8 @@ h3 {
 }
 
 @media (max-width: 370px) {
-  .table th, .table td {
+  .table th,
+  .table td {
     padding: 0.5rem;
   }
 }
-

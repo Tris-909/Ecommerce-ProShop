@@ -1,4 +1,5 @@
 import React from 'react';
+import MiniHeader from './components/MiniHeader';
 import Header from './components/Header';
 import SubNavbar from './components/SubNavbar';
 import Footer from './components/Footer';
@@ -23,6 +24,7 @@ import ListScreen from './screens/ListScreen';
 import ForgotPasswordScreen from './screens/ForgotPassword';
 import ResetPasswordAfterLink from './screens/ResetPassword';
 import ErrorHandlerPage from './screens/ErrorPage';
+import StoreFinder from './screens/StoreFinder';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -66,12 +68,14 @@ function App() {
   return (
     <Router>
       <ScrollToTop>
+          <MiniHeader />
           <Header/>
           <SubNavbar />
           <main className='py-3'>
             <MarginContainer>  
               <Switch> 
               <Route path="/" component={HomeScreen} exact />
+              <Route path="/storefinder" component={StoreFinder} exact />
               <Route path="/product/:id" component={ProductScreen} />
               <Route path="/laptops" component={ListScreen} exact />
               <Route path="/tvs" component={ListScreen} exact />
