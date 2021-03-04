@@ -6,12 +6,20 @@ import emailjs from 'emailjs-com';
 const Container = styled.div`
     display: flex;
     flex-direction: row;
+
+    @media (max-width: 989px) {
+        flex-direction: column;
+    }
 `;
 
 const LeftContainer = styled.div`
     margin-top: 3rem;
     margin-bottom: 2rem;
     width: 50%;
+
+    @media (max-width: 989px) {
+        width: 100%;
+    }
 `;
 
 const RightContainer = styled.div`
@@ -21,6 +29,11 @@ const RightContainer = styled.div`
     width: 50%;
     margin-left: 2rem;
     padding: 2rem;
+
+    @media (max-width: 989px) {
+        width: 100%;
+        margin-left: 0rem;
+    }
 `;
 
 const HelpAndSupport = () => {
