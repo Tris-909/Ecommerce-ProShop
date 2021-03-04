@@ -24,6 +24,7 @@ import productRoutes from './routes/productRoutes.js';
 import usersRoutes from './routes/userRoute.js'; 
 import ordersRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import storeInfoRoutes from './routes/storeInfoRoutes.js';
 import { notFound, errorHandler } from './middlewares/error.js';
 
 //? Forgot password
@@ -47,6 +48,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/storefinder', storeInfoRoutes);
 
 //! PAYPAL INTEGRATION -----------------------------------------------------------------
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENTID));
