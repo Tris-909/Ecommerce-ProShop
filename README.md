@@ -62,6 +62,9 @@
   _ Building CartList and WishList connected to a databases <br />
   _ Building Product Screen that change detail table based on category <br />
   _ Integrating with Paypal APIs to proceed online payment <br />
+  _ Intergrating with GoogleMap APIs and Adding dynamic Marker with real-information with it <br />
+  _ Build a ContactUs page where it connects directly to emailJS to send email to my gmail <br />
+  _ Adding ScrollToTop Button <br />
   _ Building Admin Page <br />
   _ Building Custom Discount Function and give admin the ability to discount any items as wish thourgh an user interface <br /> 
   _ Using Redux, Redux-Thunk, Redux Dev Tool to manage state of the whole application <br />
