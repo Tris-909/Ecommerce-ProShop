@@ -36,47 +36,76 @@ padding-left: 2%;
 padding-right: 2%;
 `;
 
+const MoveToTopButton = styled.div`
+  position: fixed;
+  right: 1%;
+  bottom: 3%;
+  z-index: 900;
+
+  color: black;
+  cursor: pointer;
+
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+
+  border: none;
+  padding: 1em;
+  text-align: center;
+  font-size: 3rem;
+`;
+
 function App() {
+  const smoothScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
   return (
     <Router>
       <ScrollToTop>
-        <Header/>
-        <SubNavbar />
-      <main className='py-3'>
-        <MarginContainer>  
-          <Switch> 
-          <Route path="/" component={HomeScreen} exact />
-          <Route path="/product/:id" component={ProductScreen} />
-          <Route path="/laptops" component={ListScreen} exact />
-          <Route path="/tvs" component={ListScreen} exact />
-          <Route path="/phones" component={ListScreen} exact />
-          <Route path="/headphone" component={ListScreen} exact />
-          <Route path="/game" component={ListScreen} exact />
-          <Route path="/cart/:id?" component={CartScreen} />
-          <Route path="/login" component={LoginScreen} exact /> 
-          <Route path="/register" component={RegisterScreen} exact />
-          <Route path="/forgotpassword" component={ForgotPasswordScreen} exact />
-          <Route path="/reset/:token" component={ResetPasswordAfterLink} />
-          <Route path="/profile" component={ProfileScreen} exact />
-          <Route path="/shipping" component={ShippingScreen} exact />
-          <Route path="/payment" component={PaymentScreen} exact />
-          <Route path="/placeorder" component={PlaceOrderScreen} exact />
-          <Route path="/wishlist" component={WishListScreen} exact />
-          <Route path="/orders/:id" component={OrderScreen} />
-          <Route path="/admin/usersList" component={AdminScreen} exact />
-          <Route path="/admin/users/:id/edit" component={AdminUserInfoScreen} />
-          <Route path="/admin/productsList" component={ProductListAdminScreen} exact />
-          <Route path="/admin/productsList/:pageNumber" component={ProductListAdminScreen} />
-          <Route path="/admin/products/:id/edit" component={ProductEditScreen} />
-          <Route path="/admin/ordersList" component={AdminOrdersScreen} exact />
-          <Route path="/search/:keyword" component={SearchScreen} exact />
-          <Route path="/page/:pageNumber" component={SearchScreen} />
-          <Route path="/search/:keyword/page/:pageNumber" component={SearchScreen} />
-          <Route path="*" component={ErrorHandlerPage} />
-          </Switch>
-        </MarginContainer>
-      </main>
-      <Footer/>
+          <Header/>
+          <SubNavbar />
+          <main className='py-3'>
+            <MarginContainer>  
+              <Switch> 
+              <Route path="/" component={HomeScreen} exact />
+              <Route path="/product/:id" component={ProductScreen} />
+              <Route path="/laptops" component={ListScreen} exact />
+              <Route path="/tvs" component={ListScreen} exact />
+              <Route path="/phones" component={ListScreen} exact />
+              <Route path="/headphone" component={ListScreen} exact />
+              <Route path="/game" component={ListScreen} exact />
+              <Route path="/cart/:id?" component={CartScreen} />
+              <Route path="/login" component={LoginScreen} exact /> 
+              <Route path="/register" component={RegisterScreen} exact />
+              <Route path="/forgotpassword" component={ForgotPasswordScreen} exact />
+              <Route path="/reset/:token" component={ResetPasswordAfterLink} />
+              <Route path="/profile" component={ProfileScreen} exact />
+              <Route path="/shipping" component={ShippingScreen} exact />
+              <Route path="/payment" component={PaymentScreen} exact />
+              <Route path="/placeorder" component={PlaceOrderScreen} exact />
+              <Route path="/wishlist" component={WishListScreen} exact />
+              <Route path="/orders/:id" component={OrderScreen} />
+              <Route path="/admin/usersList" component={AdminScreen} exact />
+              <Route path="/admin/users/:id/edit" component={AdminUserInfoScreen} />
+              <Route path="/admin/productsList" component={ProductListAdminScreen} exact />
+              <Route path="/admin/productsList/:pageNumber" component={ProductListAdminScreen} />
+              <Route path="/admin/products/:id/edit" component={ProductEditScreen} />
+              <Route path="/admin/ordersList" component={AdminOrdersScreen} exact />
+              <Route path="/search/:keyword" component={SearchScreen} exact />
+              <Route path="/page/:pageNumber" component={SearchScreen} />
+              <Route path="/search/:keyword/page/:pageNumber" component={SearchScreen} />
+              <Route path="*" component={ErrorHandlerPage} />
+              </Switch>
+            </MarginContainer>
+            <MoveToTopButton onClick={smoothScrollToTop}>
+              <i className="fas fa-angle-double-up"></i>
+            </MoveToTopButton>
+          </main>
+          <Footer/>
       </ScrollToTop>
     </Router>
   );

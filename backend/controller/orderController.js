@@ -1,4 +1,5 @@
 import AsyncHandler from 'express-async-handler';
+import User from '../models/user.js';
 import Order from '../models/order.js';
 import { AppError } from '../utils/appError.js';
 
@@ -30,7 +31,12 @@ const addOrder = AsyncHandler(async (req, res, next) => {
             totalPrice,
             onSale 
         });
-        console.log(order);
+
+        const currentUser = await User.findById(req.user._id);
+
+        currentUser.cartList = [];
+
+        await currentUser.save();
         const createdOrder = await order.save();
         res.status(201).json(createdOrder);
     }
