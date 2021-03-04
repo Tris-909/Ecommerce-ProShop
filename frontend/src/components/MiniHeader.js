@@ -22,12 +22,16 @@ const MiniHeader = () => {
         <NavBar>
             <Content> 
                 <LinkContainer to='/storefinder'>
-                    <i className="fas fa-map-marker-alt"></i> Find Stores
+                    <div>
+                        <i className="fas fa-map-marker-alt"></i> Find Stores
+                    </div>
                 </LinkContainer>
             </Content>
             <Content>
                 <LinkContainer to='/storefinder'>
-                    <i className="fas fa-handshake"></i> Help & Support
+                    <div>
+                        <i className="fas fa-handshake"></i> Help & Support
+                    </div>
                 </LinkContainer>
             </Content>
         </NavBar>

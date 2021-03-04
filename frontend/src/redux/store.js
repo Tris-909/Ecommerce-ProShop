@@ -70,6 +70,9 @@ import {
 import {
     update_userInfo_Admin_Reducer
 } from './reducers/Admin/User/updateAUserInfo';
+import {
+    storeInfoReducer
+} from './reducers/StoreFinder/storeFinder';
 
 const reducer = combineReducers({
     productsList: searchProductsListReducer,
@@ -102,7 +105,8 @@ const reducer = combineReducers({
     addItemToWishList: addItemToWishListReducer,
     removeItemFromWishList: removeItemFromWishListReducer,
     removeAllItemsFromWishList: removeAllItemsFromWishListReducer,
-    alsoLike: alsoLikeReducer
+    alsoLike: alsoLikeReducer,
+    storeInfo: storeInfoReducer
 });
 
 const userInfoFromLocalStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;

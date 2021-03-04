@@ -45,3 +45,11 @@ export interface User {
     agreeAndDisAgree?: singleAgreeOrDisAgreeVote[],
     token: string
 }
+
+export interface SingleStoreInfo {
+    _id: string,
+    name: string,
+    address: string,
+    phone: string,
+    link: string
+}
