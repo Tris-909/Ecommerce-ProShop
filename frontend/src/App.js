@@ -25,6 +25,7 @@ import ForgotPasswordScreen from './screens/ForgotPassword';
 import ResetPasswordAfterLink from './screens/ResetPassword';
 import ErrorHandlerPage from './screens/ErrorPage';
 import StoreFinder from './screens/StoreFinder';
+import HelpAndSupport from './screens/HelpAndSupport';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -76,6 +77,7 @@ function App() {
               <Switch> 
               <Route path="/" component={HomeScreen} exact />
               <Route path="/storefinder" component={StoreFinder} exact />
+              <Route path="/helpandsupport" component={HelpAndSupport} exact />
               <Route path="/product/:id" component={ProductScreen} />
               <Route path="/laptops" component={ListScreen} exact />
               <Route path="/tvs" component={ListScreen} exact />

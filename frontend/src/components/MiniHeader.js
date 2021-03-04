@@ -28,7 +28,7 @@ const MiniHeader = () => {
                 </LinkContainer>
             </Content>
             <Content>
-                <LinkContainer to='/storefinder'>
+                <LinkContainer to='/helpandsupport'>
                     <div>
                         <i className="fas fa-handshake"></i> Help & Support
                     </div>
