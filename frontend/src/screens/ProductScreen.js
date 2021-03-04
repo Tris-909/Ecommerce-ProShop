@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import { Link } from 'react-router-dom';
 import { Row, Col, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../redux/actions/productActions';
@@ -87,7 +86,6 @@ const ProductScreen = ({ match }) => {
                 return(
                     <>
                         <Helmet title={singleProduct.name} href={singleProduct._id} />
-                        <Link className="btn btn-dark my-3" to="/">Go Back</Link>
                         <Row>  
                             <ProductImage 
                                 image={singleProduct.image} 
