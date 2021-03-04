@@ -10,7 +10,11 @@ interface singleStoreInfo {
     name: string,
     address: string,
     phone: string,
-    link: string
+    link: string,
+    position: {
+        lat: number,
+        lng: number
+    }
 }
 
 interface storeInfoInitialStateType {

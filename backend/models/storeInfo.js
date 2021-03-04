@@ -16,6 +16,10 @@ const storeInfoSchema = mongoose.Schema({
     link: {
         type: String,
         required: true
+    },
+    position: {
+        lat: Number,
+        lng: Number
     }
 });
 
