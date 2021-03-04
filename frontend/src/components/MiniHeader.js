@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {LinkContainer} from 'react-router-bootstrap';
 
 const NavBar = styled.div`
     width: 100%;
@@ -19,8 +20,16 @@ const Content = styled.div`
 const MiniHeader = () => {
     return(
         <NavBar>
-            <Content> <i className="fas fa-map-marker-alt"></i> Find Stores</Content>
-            <Content> <i className="fas fa-handshake"></i> Help & Support</Content>
+            <Content> 
+                <LinkContainer to='/storefinder'>
+                    <i className="fas fa-map-marker-alt"></i> Find Stores
+                </LinkContainer>
+            </Content>
+            <Content>
+                <LinkContainer to='/storefinder'>
+                    <i className="fas fa-handshake"></i> Help & Support
+                </LinkContainer>
+            </Content>
         </NavBar>
     );
 }
