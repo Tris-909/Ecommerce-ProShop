@@ -88,7 +88,7 @@ const ProductScreen = ({ match }) => {
                         <Helmet title={singleProduct.name} href={singleProduct._id} />
                         <Row>  
                             <ProductImage 
-                                image={singleProduct.image} 
+                                subImages={singleProduct.subImages}
                                 name={singleProduct.name} 
                             />                            
                             <ProductCard 

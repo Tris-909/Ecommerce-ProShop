@@ -85,6 +85,7 @@ export interface SingleProduct {
     _id: string,
     name: string,
     image: string,
+    subImages: string[],
     description: string,
     brand: string,
     category: string,

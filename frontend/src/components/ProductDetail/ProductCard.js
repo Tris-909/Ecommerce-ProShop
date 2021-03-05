@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Col, Row, Card, ListGroup, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch ,useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import {
     addItemToCart
@@ -9,6 +10,11 @@ import {
 import {
     ADD_PRODUCT_TO_CART_RESET
 } from '../../redux/actions/actionTypes';
+
+const Container = styled.div`
+        margin-top: 2rem;
+    
+`;
 
 const ProductCard = ( props ) => {
     const dispatch = useDispatch();
@@ -41,7 +47,8 @@ const ProductCard = ( props ) => {
     }
 
     return (
-        <Col md={4}>
+        <Col md={4} >
+            <Container>
             {
                 user ? user.isAdmin === true ? (
                     <Link className="btn btn-dark my-3" to={`/admin/products/${id}/edit`}>Admin Edit</Link> 
@@ -99,6 +106,7 @@ const ProductCard = ( props ) => {
                     </ListGroup.Item>
                 </ListGroup>
             </Card>
+            </Container>
         </Col>
     )
 }
