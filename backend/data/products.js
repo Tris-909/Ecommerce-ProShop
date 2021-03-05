@@ -2,6 +2,11 @@ const products = [
   {
     name: 'MSI Prestige 14Evo 14" Full HD Laptop (512GB)',
     image: '/images/MSI-laptop1.jpg',
+    subImages: [
+      '/images/MSI-laptop1.jpg',
+      '/images/laptop_1_1.png',
+      '/images/laptop_1_2.png'
+    ],
     description:
       'MSI taps into the spirit of exploration by designing the greatest laptop collection- Prestige Series. To keep more efficient of the work, these finely- crafted machines not only show unique taste, but also are immensely powerful. Thin and light yet immensely powerful, it enhances your style and workflow wherever you go.',
     brand: 'MSI',
@@ -40,6 +45,13 @@ const products = [
 {
     name: 'MSI GF63 15.6" Full HD 144Hz Gaming Laptop (512GB)',
     image: '/images/MSI-laptop2.jpg',
+    subImages: [
+      '/images/MSI-laptop1.jpg',
+      '/images/laptop_2_1.png',
+      '/images/laptop_2_2.png',
+      '/images/laptop_2_3.png',
+      '/images/laptop_2_4.png',
+    ],
     description:
       'Brand new gaming laptop 144Hz display with beautiful design for gamer out there',
     brand: 'MSI',
@@ -78,6 +90,13 @@ const products = [
 {
     name: 'MSI GT76 Titan DT 17.3" Full HD 300Hz Gaming Laptop (RTX 2080 Super)',
     image: '/images/MSI-laptop3.jpg',
+    subImages: [
+      '/images/MSI-laptop3.jpg',
+      '/images/laptop_3_1.png',
+      '/images/laptop_3_2.png',
+      '/images/laptop_3_3.png',
+      '/images/laptop_3_4.png',
+    ],
     description:
       'Monster gaming laptop that will blown your mind away',
     brand: 'MSI',
@@ -116,6 +135,12 @@ const products = [
 {
     name: 'MSI GE66 Dragonshield 15.6" Full HD 240Hz Gaming Laptop (1TB) [RTX 2070]',
     image: '/images/MSI-laptop4.jpg',
+    subImages: [
+      '/images/MSI-laptop4.jpg',
+      '/images/laptop_4_1.png',
+      '/images/laptop_4_2.png',
+      '/images/laptop_4_3.png',
+    ],
     description:
       'Welcome aboard to the GE66 Dragonshield. Indulged in the extraordinary performance with cutting-edge technologies. Armed with the latest 10th Gen. Intel® Core™ i7 processors and NVIDIA® GeForce RTX 2070 graphics. The sci-fi design with panoramic aurora lighting gives you the ultimate RGB gaming setup. The Dragonshield Limited Edition is the all-inclusive gaming laptop.',
     brand: 'MSI',
@@ -154,6 +179,13 @@ const products = [
 {
     name: 'MSI GP65 Leopard 15.6" Full HD 144Hz Gaming Laptop (512GB)[GTX 1660 Ti]',
     image: '/images/MSI-laptop5.jpg',
+    subImages: [
+      '/images/MSI-laptop5.jpg',
+      '/images/laptop_5_1.png',
+      '/images/laptop_5_2.png',
+      '/images/laptop_5_3.png',
+      '/images/laptop_5_4.png',
+    ],
     description:
       'The one that is the most adaptable to change is the one that survive and evolve. Choose the Dragon Spirit and evolve with the latest MSI Gaming Laptops equipped with 10th Gen.',
     brand: 'MSI',
@@ -192,6 +224,13 @@ const products = [
 {
     name: 'MSI Bravo 15 15.6" Full HD 144Hz Gaming Laptop (512GB) [Ryzen 5]',
     image: '/images/MSI-laptop6.jpg',
+    subImages: [
+      '/images/MSI-laptop6.jpg',
+      '/images/laptop_6_1.png',
+      '/images/laptop_6_2.png',
+      '/images/laptop_6_3.png',
+      '/images/laptop_6_4.png'
+    ],
     description:
       'Bravo 15 ignites the gaming laptop world by combining the most advanced 7nm technology AMD Ryzen™ processor and Radeon™ RX graphics together, providing stunning performance and smooth gaming display with FreeSync™ Premium Technology.',
     brand: 'MSI',
@@ -230,6 +269,12 @@ const products = [
 {
   name: 'Razer Blade Pro 17.3" 120Hz Ultra HD 4K Gaming Laptop (1TB) [RTX 2080 Super]',
   image: '/images/laptop-7.jpg',
+  subImages: [
+    '/images/laptop-7.jpg',
+    '/images/laptop_7_1.png',
+    '/images/laptop_7_2.png',
+    '/images/laptop_7_3.png',
+  ],
   description:
     'With the latest NVIDIA® GeForce® RTX SUPER™ graphics, the Razer Blade Pro 17 delivers more performance than ever before. Harnessing the power of ray tracing technology and AI, the NVIDIA® GeForce® RTX SUPER™ graphics performs up to 15% faster than its predecessor. Be immersed in your favorite games and experience stunning visuals with up to NVIDIA® GeForce® RTX 2080 SUPER™ Max-Q graphics.',
   brand: 'Razer',
@@ -268,6 +313,12 @@ const products = [
 {
   name: 'Apple MacBook Pro 13-inch with M1 chip, 256GB SSD (Space Grey) [2020]',
   image: '/images/laptop-8.jpg',
+  subImages: [
+    '/images/laptop-8.jpg',
+    '/images/laptop_8_1.png',
+    '/images/laptop_8_2.png',
+    '/images/laptop_8_3.png',
+  ],
   description:
     'The Apple M1 chip redefines the 13-inch MacBook Pro. Featuring an 8-core CPU that flies through complex workflows in photography, coding, video editing and more. An incredible 8-core GPU that crushes graphics-intensive tasks and enables super-smooth gaming. An advanced 16-core Neural Engine for more machine learning power in your favourite apps. Superfast unified memory for fluid performance. And the longest-ever battery life in a Mac, at up to 20 hours.2 It’s Apple’s most popular pro notebook. Much more performance and much more pro.',
   brand: 'Apple',
@@ -306,6 +357,12 @@ const products = [
 {
   name: 'Apple MacBook Air 13-inch i3 256GB (Gold) [2020]',
   image: '/images/laptop-9.jpg',
+  subImages: [
+    '/images/laptop-9.jpg',
+    '/images/laptop_9_1.png',
+    '/images/laptop_9_2.png',
+    '/images/laptop_9_3.png',
+  ],
   description:
     'The latest MacBook Air features a stunning Retina display with True Tone technology, Touch ID, a backlit Magic Keyboard and a Force Touch trackpad — all housed in a thin and light iconic wedge design made from 100 per cent recycled aluminium.2 And with 11-hour battery life, it’s a do-it-all notebook that goes all day long.',
   brand: 'Apple',
@@ -344,6 +401,12 @@ const products = [
 {
   name: 'Asus ROG Zephyrus M GU502 15.6" 144Hz Full HD Gaming Laptop (512GB) [GTX 1660 Ti]',
   image: '/images/laptop-10.jpg',
+  subImages: [
+    '/images/laptop-10.jpg',
+    '/images/laptop_10_1.png',
+    '/images/laptop_10_2.png',   
+    '/images/laptop_10_3.png',
+  ],
   description:
     'ROG Zephyrus M picks up where its predecessor, ROG Zephyrus, left off — delivering mighty performance in a minute package. Its powered by up to an 8th Generation Intel® Core™ i7 processor and NVIDIA® GeForce® GTX 1070 graphics, and features an IPS-level display with a superfast 144Hz refresh rate, lightning-quick 3ms response time, and NVIDIA G-SYNC™ technology. The revolutionary Active Aerodynamic System (AAS) ensures Zephyrus M runs cool and quiet even at high processor loads. ROG-exclusive software lets you switch between integrated and discrete GPU modes — the Optimus power-saving mode gives you impressive battery life, while the G-SYNC mode lets you experience its graphics prowess in all its glory!',
   brand: 'ASUS',
@@ -382,6 +445,12 @@ const products = [
 {
   name: 'Dell Inspiron 15 5000 14" Full HD Laptop (512GB) [i7 11th Gen]',
   image: '/images/laptop-11.jpg',
+  subImages: [
+    '/images/laptop-11.jpg',
+    '/images/laptop_11_1.png',
+    '/images/laptop_11_2.png',   
+    '/images/laptop_11_3.png',
+  ],
   description:
     'With 11th Gen Intel® Core™ i7-1165G7 processors and 8GB DDR4 memory, you have ample power and storage for all your entertainment, projects and more. Your Inspiron 5000 is more than flexible, more than portable. It’s also made with premium materials, like an aluminium palm rest and a sleek, slim body that looks good in any environment.',
   brand: 'Dell',
@@ -420,6 +489,12 @@ const products = [
 {
   name: 'Asus ROG Zephyrus S17 17.3" Full HD Laptop (1TB) [RTX 2070 Super]',
   image: '/images/laptop-12.jpg',
+  subImages: [
+    '/images/laptop-12.jpg',
+    '/images/laptop_12_1.png',
+    '/images/laptop_12_2.png',   
+    '/images/laptop_12_3.png',
+  ],
   description:
     'ROG Zephyrus S sets the standard for ultra-slim Windows 10 Pro gaming laptops featuring NVIDIA GeForce RTX 2070 SUPER graphics. Boasting a 300Hz refresh rate Pantone Validated display with ultra-narrow bezel, PCIe NVMe SSD, and an 10th Gen Intel Core i7 processor, the ROG GX701 has all the power and portability needed to conquer the latest and greatest game titles, anywhere. Use the ROG-exclusive GPU switch to change between G-SYNC for gaming and Optimus for battery life while the ROG Active Aerodynamic System (AAS) expands to help Zephyrus S17 sustain top performance for gaming and other heavy loads.',
   brand: 'ASUS',
@@ -458,6 +533,12 @@ const products = [
 {
   name: 'Asus TUF A15 15.6" Full HD 144Hz Gaming Laptop (512GB) [GTX 1660Ti]',
   image: '/images/laptop-13.jpg',
+  subImages: [
+    '/images/laptop-13.jpg',
+    '/images/laptop_13_1.png',
+    '/images/laptop_13_2.png',   
+    '/images/laptop_13_3.png',
+  ],
   description:
     'Built with industry-leading AMD technology for the most demanding gaming and content creation workloads, AMD Ryzen™ 7 4000 H-Series Mobile Processors deliver desktop-caliber performance with 8 powerful cores for an uncompromising PC experience.',
   brand: 'ASUS',
@@ -496,6 +577,12 @@ const products = [
 {
   name: 'Lenovo IdeaPad L340 15-01JC 15.6" Full HD Gaming Laptop (256GB) [GTX 1050]',
   image: '/images/laptop-14.jpg',
+  subImages: [
+    '/images/laptop-14.jpg',
+    '/images/laptop_14_1.png',
+    '/images/laptop_14_2.png',   
+    '/images/laptop_14_3.png',
+  ],
   description:
     'Gaming is all about making the right choices. With the Lenovo™ IdeaPad™ L340 Gaming, you know you have made a great call from the very start. Equipped with Intel® Processors, NVIDIA® GeForce® graphics, and jaw-dropping Dolby Audio™, you’ll experience first-hand real power and seamless play.',
   brand: 'Lenovo',
@@ -534,6 +621,13 @@ const products = [
 {
   name: 'Alienware M15 R3 15.6" Full HD 300Hz Gaming Laptop (512GB)[RTX 2070]',
   image: '/images/laptop-15.jpg',
+  subImages: [
+    '/images/laptop-15.jpg',
+    '/images/laptop_15_1.png',
+    '/images/laptop_15_2.png',   
+    '/images/laptop_15_3.png',
+    '/images/laptop_15_4.png'
+  ],
   description:
     'Experience unprecedented performance thanks to hyper-efficient voltage regulation engineered to exceed Intel® and NVIDIA® reference design requirements. With 8-phase voltage regulation on NVIDIA® RTX 2070 and 6-phase voltage regulation on Intel® Core™ i7 processors, the new Alienware m15 is hardwired for greater efficiency and sustained turbo frequencies, enabling longer stretches of GPU and CPU high performance. To take on even the most challenging titles, the Alienware M15 brings NVIDIA® GeForce® 20 Series GeForce RTX™ cards with the latest in shading advancements and NVIDIA technologies like ray tracing, DLSS, and AI-enhanced graphics.',
   brand: 'Dell',
@@ -577,6 +671,11 @@ const products = [
 {
   name: 'Samsung Q60T 75" QLED Ultra HD 4K Smart TV [2020]',
   image: '/images/tvs-1.jpg',
+  subImages: [
+    '/images/tvs-1.jpg',
+    '/images/tv_1_1.png',
+    '/images/tv_1_2.png'
+  ],
   description:
     'Enter a world saturated with colour and sharpened to refreshing clarity, all of it made possible through the power of Quantum Dot technology. An intuitive Smart TV interface learns what you like and suggests exciting new content. And if you’re into gaming, Game Enhancer automatically neutralizes annoyances like tearing and stuttering.',
   brand: 'Samsung',
@@ -605,6 +704,12 @@ const products = [
 {
   name: 'LG CX 48" Self-Lit OLED Smart 4K TV with AI ThinQ',
   image: '/images/tvs-2.jpg',
+  subImages: [
+    '/images/tvs-2.jpg',
+    '/images/tv_2_1.png',
+    '/images/tv_2_2.png',
+    '/images/tv_2_3.png'
+  ],
   description:
     'Enjoy professionally mastered visual and sound at home. Watch Dolby enhanced movies the way they should be absolutely breathtakingly1. With Dolby Vision IQ, the screen brightness, colour and contrast are intelligently adjusted for content and lighting conditions. Plus, Dolby Atmos delivers an immersive audio experience, for maximum enjoyment.',
   brand: 'LG',
@@ -633,6 +738,12 @@ const products = [
 {
   name: 'Hisense 70S5 Series 5 70" 4K UHD Smart TV [2020]',
   image: '/images/tvs-3.jpg',
+  subImages: [
+    '/images/tvs-3.jpg',
+    '/images/tv_3_1.png',
+    '/images/tv_3_2.png',
+    '/images/tv_3_3.png'
+  ],
   description:
     'Get straight to the content you love with a touch of button with the Series 5 Smart TV by Hisense. Easily navigate through the VIDAA U Smart UI and stream the latest movies and TV series in stunning 4K Ultra HD.  Now you can share your favourite pictures and videos via the Hisense RemoteNow app.',
   brand: 'Hisense',
@@ -661,6 +772,12 @@ const products = [
 {
   name: 'LG CX 55" Self-Lit OLED Smart 4K TV with AI ThinQ',
   image: '/images/tvs-4.jpg',
+  subImages: [
+    '/images/tvs-4.jpg',
+    '/images/tv_4_1.png',
+    '/images/tv_4_2.png',
+    '/images/tv_4_3.png'
+  ],
   description:
     'Self-Lit OLED: Perfect Black, Billion Rich Colours, OLED Eye Comfort',
   brand: 'LG',
@@ -689,6 +806,11 @@ const products = [
 {
   name: 'Samsung Q80T 75" QLED Ultra HD 4K Smart TV [2020]',
   image: '/images/tvs-5.jpg',
+  subImages: [
+    '/images/tvs-5.jpg',
+    '/images/tv_1_1.png',
+    '/images/tv_1_2.png',
+  ],
   description:
     'Step up to a whole new world of color. Quantum Dot technology lets you experience images bursting with a dazzling range of over one billion colors, each upscaled to incredible clarity in a revolutionary new way thanks to Samsung’s intelligent 4K processor.',
   brand: 'Samsung',
@@ -717,6 +839,11 @@ const products = [
 {
   name: 'Sony X7000G 65" 4k Ultra HD HDR Smart TV',
   image: '/images/tvs-6.jpg',
+  subImages: [
+    '/images/tvs-6.jpg',
+    '/images/tv_5_1.png',
+    '/images/tv_5_2.png',
+  ],
   description:
     "Enjoy an immersive soundstage that pulls you into the heart of the action. S-Force Front Surround mimics the way the brain correlates sound sources to create proper volume, time lag, and sound wave spectrum - using only left and right speaker channels. By naturally emulating three-dimensional sound fields, you'll enjoy rich, high-fidelity audio across a wider listening area.",
   brand: 'Sony',
@@ -745,6 +872,11 @@ const products = [
 {
   name: 'FFalcon 24F1 24" HD LED TV',
   image: '/images/tvs-7.jpg',
+  subImages: [
+    '/images/tvs-7.jpg',
+    '/images/tv_6_1.png',
+    '/images/tv_6_2.png',
+  ],
   description:
     'Outstanding picture quality doesn’t’t have to break the bank. The sophisticated looking F1 Series offers you amazing true to life colour. And with LED backlighting, you can enjoy your favourite shows, while still being energy efficient. This adds up to an amazing viewing experience, as well as peace of mind with a comprehensive one-year warranty.',
   brand: 'FFalcon',
@@ -773,6 +905,11 @@ const products = [
 {
   name: 'Samsung TU8000 65" Crystal UHD 4K Smart TV [2020]',
   image: '/images/tvs-8.jpg',
+  subImages: [
+    '/images/tvs-8.jpg',
+    '/images/tv_7_1.png',
+    '/images/tv_7_2.png',
+  ],
   description:
     'Experience your favourite movies and shows on a vibrant, stunning 4K UHD screen, using the Universal Guide to surf smoothly and select content. Everything you watch is automatically upscaled into 4K for stunningly vivid colour and detail.',
   brand: 'Samsung',
@@ -801,6 +938,12 @@ const products = [
 {
   name: 'Samsung LS03T 32" The Frame QLED FHD TV [2020]',
   image: '/images/tvs-9.jpg',
+  subImages: [
+    '/images/tvs-9.jpg',
+    '/images/tv_8_1.png',
+    '/images/tv_8_2.png',
+    '/images/tv_8_3.png',
+  ],
   description:
     'The Frame uniquely transforms into a work of art when its not in use. Choose from the built-in artworks,* or access hundreds of artworks from world-renowned galleries via the Samsung Art Store.',
   brand: 'Samsung',
@@ -829,6 +972,11 @@ const products = [
 {
   name: 'Hitachi 65QLEDSM20 65" 4K Ultra HD Android QLED TV',
   image: '/images/tvs-10.jpg',
+  subImages: [
+    '/images/tvs-10.jpg',
+    '/images/tv_9_1.png',
+    '/images/tv_9_2.png',
+  ],
   description:
     'This Hitachi 65-inch SM20 4K UHD ANDROID QLED TV 65QLEDSM20 has a 3840 x 2160-pixel screen resolution to support the latest in 4K Ultra HD entertainment, while Quantum Dot colour delivers bright, bold hues so that anything you watch looks more refined and real. Built-in Wi-Fi makes this a smart TV so you can connect to the internet and discover countless apps including your Netflix or Amazon Prime Video subscription, You Tube clips - or explore plenty of options via Google Play at the Android TV smart interface.',
   brand: 'Hitachi',
@@ -857,6 +1005,12 @@ const products = [
 {
   name: 'Hisense 49S4 Series S4 49" HD LED Smart TV [2020]',
   image: '/images/tvs-11.jpg',
+  subImages: [
+    '/images/tvs-11.jpg',
+    '/images/tv_10_1.png',
+    '/images/tv_10_2.png',
+    '/images/tv_10_3.png'
+  ],
   description:
     'The Hisense Series 4 LED LCD Smart TV brings full HD resolution to your home, with pictures so clear and detailed you’ll feel like you’re right in the action!  Thanks to the VIDAA U smart platform, stream thousands of movies and catch up to your favourite free to air shows. Let yourself go wherever your imagination can take you with the Hisense Smart TV experience.',
   brand: 'Hisense',
@@ -885,6 +1039,12 @@ const products = [
 {
   name: 'LG UN7300 UHD 65" Smart 4K TV with AI ThinQ',
   image: '/images/tvs-12.jpg',
+  subImages: [
+    '/images/tvs-12.jpg',
+    '/images/tv_11_1.png',
+    '/images/tv_11_2.png',
+    '/images/tv_11_3.png'
+  ],
   description:
     'LG UHD TV was made to entertain by taking what you watch to a new level. Whether its cinema, sports, or games, it delivers realistic images with vivid colour and fine detail in up to four times the definition of Full HD.',
   brand: 'LG',
@@ -913,6 +1073,12 @@ const products = [
 {
   name: 'Apple iPhone 12 Pro Max 256GB (Pacific Blue)',
   image: '/images/phones-1.jpg',
+  subImages: [
+    '/images/phones-1.jpg',
+    '/images/phone_1_1.png',
+    '/images/phone_1_2.png',
+    '/images/phone_1_3.png',
+  ],
   description:
     "iPhone 12 Pro Max. 5G to download huge files on the go and stream HDR video.1 Larger 6.7-inch Super Retina XDR display.2 Ceramic Shield with four times better drop performance.3 Incredible low-light photography with the best Pro camera system on an iPhone, and 5× optical zoom range. Cinema-grade Dolby Vision video recording, editing and playback. Night mode portraits and next-level AR experiences with the LiDAR Scanner. Powerful A14 Bionic chip. And new MagSafe accessories for easy attachment and faster wireless charging.4 For infinitely spectacular possibilities.",
   brand: 'Apple',
@@ -944,6 +1110,12 @@ const products = [
 {
   name: 'Samsung Galaxy S20 FE 5G 128GB (Cloud Navy)',
   image: '/images/phones-2.jpg',
+  subImages: [
+    '/images/phones-2.jpg',
+    '/images/phone_2_1.png',
+    '/images/phone_2_2.png',
+    '/images/phone_2_3.png',
+  ],
   description:
     "This is unexpected. Galaxy S20 FE features a colourful design, next level photography, and pro-grade performance, without the pro-grade price tag.",
   brand: 'Samsung',
@@ -975,6 +1147,12 @@ const products = [
 {
   name: 'Samsung Galaxy S10 5G 256GB (Majestic Black)',
   image: '/images/phones-3.jpg',
+  subImages: [
+    '/images/phones-3.jpg',
+    '/images/phone_3_1.png',
+    '/images/phone_3_2.png',
+    '/images/phone_3_3.png',
+  ],
   description:
     "Tired of waiting? The Galaxy S10 5G is here and its bringing access to fast 5G connectivity with it. Satisfy your need for speed in every part of your life. Download the latest season of that show you love in minutes, stream movies and sports without constant buffering , catch up with friends and family over 4K video calls without the lag, and open up a new world of possibilities in gaming, AR and VR. And with our best camera yet, you'll be able to share epic shots in a flash then watch it all come to life on our stunning 6.7 inch Infinity-O Display [1]Available on selected plans on the Telstra network. 5G network is progressively being rolled out across Australia. Current availability is limited to major capital city CBDs and other select high traffic areas. Actual speeds achieved will vary depending on service availability and other factors. For more details, visit Telstra's website at https://www.telstra.com.au/coveragenetworks/5G .",
   brand: 'Samsung',
@@ -1006,6 +1184,12 @@ const products = [
 {
   name: 'Google Pixel 4a 128GB (Just Black)',
   image: '/images/phones-4.jpg',
+  subImages: [
+    '/images/phones-4.jpg',
+    '/images/phone_4_1.png',
+    '/images/phone_4_2.png',
+    '/images/phone_4_3.png',
+  ],
   description:
     "Meet Pixel 4a, the helpful Google phone at a helpful price. It comes packed with all the things that you want in a phone, for a lot less than you’d expect.",
   brand: 'Google',
@@ -1037,6 +1221,12 @@ const products = [
 {
   name: 'Samsung Galaxy Z Fold2 5G 256GB (Black)',
   image: '/images/phones-5.jpg',
+  subImages: [
+    '/images/phones-5.jpg',
+    '/images/phone_5_1.png',
+    '/images/phone_5_2.png',
+    '/images/phone_5_3.png',
+  ],
   description:
     "Meet the phone that’s changing the shape of the future. It puts a powerful hinge, foldable screen, an all-day battery, and the power of seriously fast 5G* all in the palm of your hand.",
   brand: 'Samsung',
@@ -1068,6 +1258,12 @@ const products = [
 {
   name: 'Asus ROG 3 Gaming Phone (512GB)',
   image: '/images/phones-6.jpg',
+  subImages: [
+    '/images/phones-6.jpg',
+    '/images/phone_6_1.png',
+    '/images/phone_6_2.png',
+    '/images/phone_6_3.png',
+  ],
   description:
     "In the third generation of ROG Phone, we have taken everything you loved about the previous generations, all the learnings from customer and media feedback and continued to improve. These are the five core considerations we consider when making “The ultimate gaming smartphone”.",
   brand: 'ASUS',
@@ -1102,6 +1298,12 @@ const products = [
 {
   name: 'Samsung Galaxy A51 128GB (Black)',
   image: '/images/phones-7.jpg',
+  subImages: [
+    '/images/phones-7.jpg',
+    '/images/phone_7_1.png',
+    '/images/phone_7_2.png',
+    '/images/phone_7_3.png',
+  ],
   description:
     "If you're after a smartphone with a big screen, big battery and plenty of photography features, but don't want to break the bank, the Samsung Galaxy A51 could well be the phone for you. A51's Infinity-O Display optimises visual symmetry. Now you can game, watch, surf, and multi-task without interruption on a 6.5 inches FHD+ widescreen display*—all powered by Super AMOLED technology. Enjoy a smartphone experience that minimises the bezel and maximises screen space.",
   brand: 'Samsung',
@@ -1133,6 +1335,12 @@ const products = [
 {
   name: 'Samsung Galaxy Note20 Ultra 256GB (Black)',
   image: '/images/phones-8.jpg',
+  subImages: [
+    '/images/phones-8.jpg',
+    '/images/phone_8_1.png',
+    '/images/phone_8_2.png',
+    '/images/phone_8_3.png',
+  ],
   description:
     "Forget work-life balance, Galaxy Note20 Ultra gives you work-life flow. Hold the power of a computer in the palm of your hand and scribble with the S Pen that feels just like pen-to paper. Work smart, play harder with our fastest Galaxy Note processor, smoothest display1 and incredible touch sensitivity. It’s a gaming machine.",
   brand: 'Samsung',
@@ -1164,6 +1372,12 @@ const products = [
 {
   name: 'Oppo Find X2 Neo (Moonlight Black)',
   image: '/images/phones-9.jpg',
+  subImages: [
+    '/images/phones-9.jpg',
+    '/images/phone_9_1.png',
+    '/images/phone_9_2.png',
+    '/images/phone_9_3.png',
+  ],
   description:
     "Find X2 Neo once again raises the bar which it comes to video stabilization, bringing two different image stabilization functions. Ranging from daily use to intense athletics, top-notch video quality is assured. You activate the camera – Find X2 Neo takes care of the rest.",
   brand: 'Oppo',
@@ -1195,6 +1409,12 @@ const products = [
 {
   name: 'Oppo Find X2 Pro (Ceramic Black)',
   image: '/images/phones-10.jpg',
+  subImages: [
+    '/images/phones-10.jpg',
+    '/images/phone_10_1.png',
+    '/images/phone_10_2.png',
+    '/images/phone_10_3.png',
+  ],
   description:
     "The Find series has always pushed the boundaries of technology, to constantly create new possibilities. Awaken your senses, with the new Find X2 Pro. Find X2 Pro features a simple, tangible elegance that takes off the edge. With smooth curves that fit perfectly in your hand, this is a beauty you can feel from your eyes all the way to your fingertips.",
   brand: 'Oppo',
@@ -1226,6 +1446,12 @@ const products = [
 {
   name: 'OPPO A9 2020 128GB (Green)',
   image: '/images/phones-11.jpg',
+  subImages: [
+    '/images/phones-11.jpg',
+    '/images/phone_11_1.png',
+    '/images/phone_11_2.png',
+    '/images/phone_11_3.png',
+  ],
   description:
     "OPPO A9 2020 (A9) fits five separate cameras into a single smartphone. A 48MP rear main lens for maximum photo resolution. An Ultra Wide 119° rear lens for panoramic pictures. Two rear lenses that provide artistic portrait effects, and a 16MP front lens featuring AI Beautification.",
   brand: 'Oppo',
@@ -1257,6 +1483,13 @@ const products = [
 {
   name: 'Oppo Reno4 5G 128GB (Galactic Blue)',
   image: '/images/phones-12.jpg',
+  subImages: [
+    '/images/phones-12.jpg',
+    '/images/phone_12_1.png',
+    '/images/phone_12_2.png',
+    '/images/phone_12_3.png',
+    '/images/phone_12_4 .png',
+  ],
   description:
     "Sporting a dual-edged 2.5D screen, this slim phone features clear-cut, no-nonsense contours while making it truly heavenly to hold. The AMOLED screen reduces blue light for the comfort of your eyes while delivering great clarity and detail.",
   brand: 'Oppo',
@@ -1288,6 +1521,13 @@ const products = [
 {
   name: 'Sony WH-1000XM4 Wireless Noise Cancelling Over-Ear Headphones (Black)',
   image: '/images/headphone-1.jpg',
+  subImages: [
+    '/images/headphone-1.jpg',
+    '/images/headphone_1_1.png',
+    '/images/headphone_1_2.png',
+    '/images/headphone_1_3.png',
+    '/images/headphone_1_4.png',
+  ],
   description:
     "Featuring Sony’s industry-leading Noise Cancelling technology, the WH-1000XM4 pushes the boundaries of wireless headphone technology, to deliver an exceptional audio experience. A refined design promises even better wearing comfort, whilst premium sound is assured, thanks to Sony’s HD Noise Cancelling Processor QN1 and suite of other Sony audio technologies.",
   brand: 'Sony',
@@ -1313,6 +1553,12 @@ const products = [
 {
   name: 'Beats Studio3 Wireless Noise Cancelling Over-Ear Headphones (Midnight Black)',
   image: '/images/headphone-2.jpg',
+  subImages: [
+    '/images/headphone-2.jpg',
+    '/images/headphone_2_1.png',
+    '/images/headphone_2_2.png',
+    '/images/headphone_2_3.png',
+  ],
   description:
     "Hear the music. Not the noise. Introducing the Beats Studio3 Wireless, featuring Beats Pure Adaptive Noise Canceling (Beats Pure ANC) and the Apple W1 chip.",
   brand: 'beats',
@@ -1338,6 +1584,12 @@ const products = [
 {
   name: 'Sennheiser HD 458BT Over-Ear Wireless Noise Cancelling Headphones (Black/Red)',
   image: '/images/headphone-3.jpg',
+  subImages: [
+    '/images/headphone-3.jpg',
+    '/images/headphone_3_1.png',
+    '/images/headphone_3_2.png',
+    '/images/headphone_3_3.png'
+  ],
   description:
     "Great wireless sound gets a stunning new look: Sennheiser’s new HD 458BT remixes its exceptional HD 450BT wireless headset with a bold new red and black style. Whether at home or on the move, their captivating sound quality, advanced Bluetooth technology, and excellent 30-hour battery life make them perfect for audio lovers seeking a better wireless listening experience.",
   brand: 'Sennheiser',
@@ -1363,6 +1615,12 @@ const products = [
 {
   name: 'Samsung Galaxy Buds+ (Black)',
   image: '/images/headphone-4.jpg',
+  subImages: [
+    '/images/headphone-4.jpg',
+    '/images/headphone_4_1.png',
+    '/images/headphone_4_2.png',
+    '/images/headphone_4_3.png'
+  ],
   description:
     "Introducing Galaxy Buds+. Wireless earbuds[1] with 2-way speakers delivering sound by AKG with rich treble and bass, an adaptive 3-mic system for crystal clear calls, and long-lasting battery power — all for a premium listening experience.",
   brand: 'Samsung',
@@ -1388,6 +1646,12 @@ const products = [
 {
   name: 'Jabra Elite 75t True Wireless In-Ear Headphones (Titanium Black)',
   image: '/images/headphone-5.jpg',
+  subImages: [
+    '/images/headphone-5.jpg',
+    '/images/headphone_5_1.png',
+    '/images/headphone_5_2.png',
+    '/images/headphone_5_3.png'
+  ],
   description:
     "Designed and tested for secure fit, so you can be confident that your earbuds will stay put. A new smaller design makes them the ideal fit for every type of ear while the ergonomic shape makes them exceptionally comfortable.",
   brand: 'Jabra',
@@ -1413,6 +1677,10 @@ const products = [
 {
   name: 'Apple Airpods with Charging Case (2nd Gen)',
   image: '/images/headphone-6.jpg',
+  subImages: [
+    '/images/headphone-6.jpg',
+    '/images/headphone_6_1.png'
+  ],
   description:
     "The new AirPods combine intelligent design with breakthrough technology and crystal-clear sound. Powered by the new Apple H1 headphone chip, AirPods now feature hands-free access to Siri using just your voice. And up to three hours of talk time on a single charge.1",
   brand: 'Apple',
@@ -1438,6 +1706,12 @@ const products = [
 {
   name: 'Sennheiser PXC550-II Wireless Noise Cancelling Headphones',
   image: '/images/headphone-7.jpg',
+  subImages: [
+    '/images/headphone-7.jpg',
+    '/images/headphone_7_1.png',
+    '/images/headphone_7_2.png',
+    '/images/headphone_7_3.png',
+  ],
   description:
     "Created for the frequent traveler, the PXC 550-II Wireless from Sennheiser upgrades every journey with exceptional comfort, unrivalled sound quality and wireless freedom. Superior wireless audio is assured by support for high quality AAC and aptX™ and aptX™ LL codecs and Bluetooth 5.0, with adaptive noise cancellation ensuring outstanding listening experience even in busy environments. Sennheiser’s triple microphone array also delivers unrivalled speech clarity when making calls on the move, or interacting with virtual assistants such as Siri, Google and Alexa via the Voice Assistant Button.",
   brand: 'Sennheiser',
@@ -1463,6 +1737,12 @@ const products = [
 {
   name: 'Beats Solo 3 Wireless On-Ear Headphones (Black)',
   image: '/images/headphone-8.jpg',
+  subImages: [
+    '/images/headphone-8.jpg',
+    '/images/headphone_8_1.png',
+    '/images/headphone_8_2.png',
+    '/images/headphone_8_3.png',
+  ],
   description:
     "With up to 40 hours of battery life, Beats Solo 3 Wireless is your perfect everyday headphone. Get the most out of your music with an award-winning, emotionally charged Beats listening experience.",
   brand: 'Beats',
@@ -1488,6 +1768,12 @@ const products = [
 {
   name: 'Bose Sleepbuds II',
   image: '/images/headphone-9.jpg',
+  subImages: [
+    '/images/headphone-9.jpg',
+    '/images/headphone_9_1.png',
+    '/images/headphone_9_2.png',
+    '/images/headphone_9_3.png',
+  ],
   description:
     "Bose Sleepbuds™ II deliver relaxing sounds that help you fall asleep and use Bose noise-masking technology, so you stay asleep. Tiny, wireless Sleepbuds™ II are designed for comfort with sleep technology clinically proven to help you fall asleep faster. Sleepbuds™ II play content only from the Bose Sleep app, which gives you full control of the Sound Library and helps you personalize features. Discover tranquil tones and soothing sounds from nature. Or, use Bose noise-masking sounds to cover unwanted night time noise. Download your favourite sounds directly to Sleepbuds™ II, control volume, and set a personal wake-up alarm.",
   brand: 'Bose',
@@ -1513,6 +1799,13 @@ const products = [
 {
   name: 'Beats Flex Wireless In-Ear Headphones (Black)',
   image: '/images/headphone-10.jpg',
+  subImages: [
+    '/images/headphone-10.jpg',
+    '/images/headphone_10_1.png',
+    '/images/headphone_10_2.png',
+    '/images/headphone_10_3.png',
+    '/images/headphone_10_4.png'
+  ],
   description:
     "The Flex-Form cable provides all-day comfort with durable Nitinol construction, while four ear tip options offer a personalised fit. Magnetic earbuds make listening that much easier by automatically playing music when they’re in your ears and pausing when they’re attached around your neck1.",
   brand: 'Beats',
@@ -1538,6 +1831,12 @@ const products = [
 {
   name: 'JBL Under Armour Flash True Wireless In-Ear Headphones Rock Edition',
   image: '/images/headphone-11.jpg',
+  subImages: [
+    '/images/headphone-11.jpg',
+    '/images/headphone_11_1.png',
+    '/images/headphone_11_2.png',
+    '/images/headphone_11_3.png'
+  ],
   description:
     "UA Project Rock True Wireless offers a truly cord-free experience built for the grind. UA Stormwaterproof technology and Antibacterial Sport Flex Fit ear tips were crafted specifically for all-condition training while the JBL Charged Sound was boldly optimized and tuned with rich bass for motivation. Hear your surroundings with Bionic Hearing featuring TalkThru Technology for quick conversations with just one touch, and AmbientAware Technology to hear your surroundings for increased safety. With a total of 25 hours battery life and a rugged aluminium charging case, these headphones truly break the limits.",
   brand: 'JBL',
@@ -1563,6 +1862,11 @@ const products = [
 {
   name: 'Bose SoundSport Free Wireless In-Ear Headphones (Triple Black)',
   image: '/images/headphone-12.jpg',
+  subImages: [
+    '/images/headphone-12.jpg',
+    '/images/headphone_12_1.png',
+    '/images/headphone_12_2.png'
+  ],
   description:
     "Demanding workouts demand SoundSport® Free wireless headphones. They’re completely free of wires, so you’ll enjoy complete freedom of movement. They’re sweat and weather resistant, too. Bose® StayHear®+ Sport tips are designed to stay secure and comfortable all workout long. And the earbuds are packed full of technology that makes your music sound so clear and powerful, you’ll push past your limits. When you’re done working out, the magnetized case also keeps the earbuds securely in place while they recharge. Off a single charge, the earbuds can play for up to five hours—long enough to power you through almost any workout. A fully charged case gives you two additional earbud charges—or up to 10 hours of battery life. Voice prompts talk you through Bluetooth® pairing, and you also can use these headphones to take calls and access your phone’s Siri or your Google Assistant™.",
   brand: 'Bose',
@@ -1588,6 +1892,12 @@ const products = [
 {
   name: 'Cyberpunk 2077 Day One Edition',
   image: '/images/game-1.jpg',
+  subImages: [
+    '/images/game-1.jpg',
+    '/images/game_1_1.png',
+    '/images/game_1_2.png',
+    '/images/game_1_3.png'
+  ],
   description:
     "Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality. You can customize your character’s cyberware, skillset and playstyle, and explore a vast city where the choices you make shape the story and the world around you.",
   brand: 'CD Projekt',
@@ -1613,6 +1923,12 @@ const products = [
 {
   name: 'The Nioh Collection',
   image: '/images/game-2.jpg',
+  subImages: [
+    '/images/game-1.jpg',
+    '/images/game_2_1.png',
+    '/images/game_2_2.png',
+    '/images/game_2_3.png'
+  ],
   description:
     "In this expansive collection, journey through Sengoku-era Japan to face nightmarish foes and legendary warriors in blisteringly fast hardcore combat. Master the way of the samurai in Nioh, then unleash your inner darkness in Nioh 2 – each expertly remastered and enhanced for PS5™.",
   brand: 'Team Ninja',
@@ -1638,6 +1954,12 @@ const products = [
 {
   name: 'HITMAN 3',
   image: '/images/game-3.jpg',
+  subImages: [
+    '/images/game-3.jpg',
+    '/images/game_3_1.png',
+    '/images/game_3_2.png',
+    '/images/game_3_3.png'
+  ],
   description:
     "HITMAN 3 is the dramatic conclusion to the World of Assassination trilogy and takes players around the world on a globetrotting adventure to sprawling sandbox locations. Agent 47 returns as a ruthless professional for the most important contracts of his entire career. Death Awaits.",
   brand: 'IO Interactive',
@@ -1663,6 +1985,12 @@ const products = [
 {
   name: "Marvel's Spider-Man: Miles Morales",
   image: '/images/game-4.jpg',
+  subImages: [
+    '/images/game-4.jpg',
+    '/images/game_4_1.png',
+    '/images/game_4_2.png',
+    '/images/game_4_3.png'
+  ],
   description:
     "In the latest adventure in the Marvel’s Spider-Man universe, teenager Miles Morales is adjusting to his new home while following in the footsteps of his mentor, Peter Parker, as a new Spider-Man. But when a fierce power struggle threatens to destroy his new home, the aspiring hero realizes that with great power, there must also come great responsibility. To save all of Marvel’s New York, Miles must take up the mantle of Spider-Man and own it.",
   brand: 'Insomniac Games',
@@ -1688,6 +2016,12 @@ const products = [
 {
   name: "Call of Duty: Black Ops Cold War",
   image: '/images/game-5.jpg',
+  subImages: [
+    '/images/game-5.jpg',
+    '/images/game_5_1.png',
+    '/images/game_5_2.png',
+    '/images/game_5_3.png'
+  ],
   description:
     "Black Ops Cold War will drop fans into the depths of the Cold War’s volatile geopolitical battle of the early 1980s. Nothing is ever as it seems in a gripping single-player Campaign, where players will come face-to-face with historical figures and hard truths, as they battle around the globe through iconic locales like East Berlin, Vietnam, Turkey, Soviet KGB headquarters and more.",
   brand: 'Activision',
@@ -1713,6 +2047,12 @@ const products = [
 {
   name: "Assassin's Creed Valhalla",
   image: '/images/game-6.jpg',
+  subImages: [
+    '/images/game-6.jpg',
+    '/images/game_6_1.png',
+    '/images/game_6_2.png',
+    '/images/game_6_3.png'
+  ],
   description:
     "Ninth century AD. Driven from Norway by endless wars and dwindling resources, a Viking raider, Eivor, leads a clan of Norsemen across the icy North Sea to the rich lands of England’s broken kingdoms. Their mission: establish a new permanent home, no matter the cost. In Assassin’s Creed® Valhalla, you are Eivor, a fierce Viking warrior raised on tales of battle and glory. Explore a mysterious and beautiful open world set against the brutal backdrop of England’s Dark Ages. Raid your enemies, grow your settlement, and build your political power in the quest to earn a place among the gods in Valhalla. Wars will rage. Kingdoms will fall. This is the age of the Vikings.",
   brand: 'Ubisoft',
@@ -1738,6 +2078,12 @@ const products = [
 {
   name: "Immortals Fenyx Rising",
   image: '/images/game-7.jpg',
+  subImages: [
+    '/images/game-7.jpg',
+    '/images/game_7_1.png',
+    '/images/game_7_2.png',
+    '/images/game_7_3.png'
+  ],
   description:
     "Immortals Fenyx Rising™ brings grand mythological adventure to life. Play as Fenyx, a new winged demigod on a quest to save the Greek gods and their home from a dark curse. Take on mythological beasts, master the legendary powers of the gods and defeat Typhon, the deadliest Titan in Greek mythology, in an epic fight for the ages.",
   brand: 'Ubisoft',
@@ -1763,6 +2109,12 @@ const products = [
 {
   name: "Watch Dogs Legion",
   image: '/images/game-8.jpg',
+  subImages: [
+    '/images/game-8.jpg',
+    '/images/game_8_1.png',
+    '/images/game_8_2.png',
+    '/images/game_8_3.png'
+  ],
   description:
     "It is time to take back London, and anyone you see in this iconic city can be recruited to your resistance. Corrupt opportunists have taken over and it’s up to you to build a resistance to give the city back to the people. With an entire population of potential recruits and the city’s technology at your fingertips, you’ll need to hack, infiltrate, and fight your way to liberate London. Welcome to the Resistance.",
   brand: 'Ubisoft',
@@ -1788,6 +2140,12 @@ const products = [
 {
   name: "NBA 2K21",
   image: '/images/game-9.jpg',
+  subImages: [
+    '/images/game-9.jpg',
+    '/images/game_9_1.png',
+    '/images/game_9_2.png',
+    '/images/game_9_3.png'
+  ],
   description:
     "NBA 2K21 is the latest title in the world-renowned, best-selling NBA 2K series, delivering an industry-leading sports video game experience. With extensive improvements upon its best-in-class graphics and gameplay, competitive and community online features, and deep, varied game modes, NBA 2K21 offers one-of-a-kind immersion into all facets of NBA basketball and culture - where Everything is Game.",
   brand: '2k',
@@ -1813,6 +2171,12 @@ const products = [
 {
   name: "Demon's Souls",
   image: '/images/games-10.jpg',
+  subImages: [
+    '/images/games-10.jpg',
+    '/images/game_10_1.png',
+    '/images/game_10_2.png',
+    '/images/game_10_3.png'
+  ],
   description:
     "From Bluepoint Games comes a remake of the PlayStation classic, Demon’s Souls™. Entirely rebuilt from the ground up and masterfully enhanced, this remake introduces the horrors of a fog-laden, dark fantasy land to a whole new generation of gamers. Those who have faced its trials and tribulations before, can once again challenge the darkness in stunning visual quality and incredible performance. In his quest for power, the 12th King of Boletaria, King Allant channelled the ancient Soul Arts, awakening a demon from the dawn of time itself, The Old One.",
   brand: 'Bluepoint Games',
@@ -1838,6 +2202,12 @@ const products = [
 {
   name: "My Universe: Pet Clinic Cats & Dogs",
   image: '/images/games-11.jpg',
+  subImages: [
+    '/images/games-11.jpg',
+    '/images/game_11_1.png',
+    '/images/game_11_2.png',
+    '/images/game_11_3.png'
+  ],
   description:
     "An injury, fever, an animal that refuses to eat: it’s up to you to act! Pay close attention during the medical examination, decide what care your four-legged patients need and take care of their personal well-being through dozens of activities.",
   brand: 'Microids Life',
@@ -1863,6 +2233,12 @@ const products = [
 {
   name: "Mortal Kombat 11 Ultimate",
   image: '/images/games-12.jpg',
+  subImages: [
+    '/images/games-12.jpg',
+    '/images/game_12_1.png',
+    '/images/game_12_2.png',
+    '/images/game_12_3.png'
+  ],
   description:
     "Take control of Earthrealm’s protectors in the game’s TWO critically acclaimed, time-bending Story Campaigns as they race to stop Kronika from rewinding time and rebooting history. Friendships are tested, and new alliances forged, in the battle to save all of existence. MK11 Ultimate features the komplete 37-character roster, including new additions Rain, Mileena & Rambo. Mortal Kombat 11 showcases every amusing friendship, gory fatality and soul-crushing fatal blow like never before. You’ll be so close to the fight, you can feel it!",
   brand: 'NetherRealm',
@@ -1888,6 +2264,12 @@ const products = [
 {
   name: "Ori and the Blind Forest",
   image: '/images/games-13.jpg',
+  subImages: [
+    '/images/games-13.jpg',
+    '/images/game_13_1.png',
+    '/images/game_13_2.png',
+    '/images/game_13_3.png'
+  ],
   description:
     "The forest of Nibel is dying. After a powerful storm sets a series of devastating events in motion, Ori must journey to find courage and confront a dark nemesis to save the forest of Nibel. Ori and the Blind Forest tells the tale of a young orphan destined for heroics, through a visually stunning Action-Platformer crafted by Moon Studios. Featuring hand-painted artwork, meticulously animated character performance, a fully orchestrated score, Ori and the Blind Forest explores a deeply emotional story about love and sacrifice, and the hope that exists in us all.",
   brand: 'Moon Studios',
@@ -1913,6 +2295,12 @@ const products = [
 {
   name: "Ori and the Will of the Wisps",
   image: '/images/games-14.jpg',
+  subImages: [
+    '/images/games-14.jpg',
+    '/images/game_14_1.png',
+    '/images/game_14_2.png',
+    '/images/game_14_3.png'
+  ],
   description:
     "The little spirit Ori is no stranger to peril, but when a fateful flight puts the owlet Ku in harm’s way, it will take more than bravery to bring a family back together, heal a broken land, and discover Ori’s true destiny. This highly anticipated sequel to the acclaimed action-platformer Ori and the Blind Forest finally comes to Nintendo Switch. Embark on an epic adventure in a vast world filled with new friends and foes that come to life in stunning, hand-painted artwork. Set to a fully orchestrated original score, Ori and the Will of the Wisps continues the Moon Studios tradition of tightly crafted platforming action and deeply emotional storytelling.",
   brand: 'Moon Studios',
@@ -1938,6 +2326,12 @@ const products = [
 {
   name: "The Patheless Day One Edition",
   image: '/images/games-15.jpg',
+  subImages: [
+    '/images/games-15.jpg',
+    '/images/game_15_1.png',
+    '/images/game_15_2.png',
+    '/images/game_15_3.png'
+  ],
   description:
     "Become the Hunter, a master of archery who travels to a mystical island to dispel a curse of darkness that grips the world. Forge a connection with your eagle companion as you hunt corrupted spirits, but be careful not to become the hunted yourself. Explore misty forests full of secrets, solve puzzles in ancient ruins, and test your skill in epic battles. The bond with your eagle and the fate of the world hang in the balance.",
   brand: 'Giant Squid',
