@@ -33,6 +33,7 @@ import User from './models/user.js';
 import handlebars  from 'handlebars';
 import * as fs from 'fs';
 import nodemailer from 'nodemailer';
+import sibTransport from 'nodemailer-sendinblue-transport';
 
 //!--------------------- EXPRESS START -----------------------------------------------------//
 const app = express();
@@ -88,17 +89,9 @@ app.post('/forgotpassword',async (req, res) => {
 
     await user.save();
 
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        secure: true,
-        auth: {
-            user: `${process.env.EMAIL_ADDRESS}`,
-            pass: `${process.env.EMAIL_PASSWORD}`
-        },
-        tls: {
-            rejectUnauthorized: false
-        }
-    });
+    const transport = nodemailer.createTransport(sibTransport({
+        apiKey: process.env.SENDIBLUE_API_V2
+    }));
 
     var readHTMLFile = function(path, callback) {
         fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
@@ -130,19 +123,13 @@ app.post('/forgotpassword',async (req, res) => {
         var htmlToSend = template(replacements);
 
         const mailOptions = {
-            from: 'Proshop@business.com',
+            from: 'tranminhtri9090@gmail.com',
             to: `${user.email}`,
             subject: 'Link to Reset Your Password',
             html: htmlToSend
         };
 
-        transporter.sendMail(mailOptions, function(err, response) {
-            if (err) {
-                console.log('Error : ' + err);
-            }  else {
-                res.status(200).json('recovery email sent');
-            }
-        });
+        transport.sendMail(mailOptions);
     });
 });
 
