@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Form, Button, InputGroup } from 'react-bootstrap';
+import { Form, Button, InputGroup, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import FormContainer from '../components/FormContainer';
@@ -23,6 +23,8 @@ const ProductEditScreen = ({ history, match }) => {
     const { success: updatedSuccess, loading: updatedLoading, error: updatedError } = useSelector(state => state.updatedProduct);
     const { user } = useSelector(state => state.user);
 
+    const [firstTime, setFirstTime] = useState(true);
+
     //! ALL PRODUCT 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
@@ -31,6 +33,8 @@ const ProductEditScreen = ({ history, match }) => {
     const [newProduct, setNewProduct] = useState(false);
     const [preOrder, setPreOrder] = useState(false);
     const [image, setImage] = useState('');
+    const [subImages, setSubImages] = useState([]);
+    const [newImage, setNewImage] = useState('');
     const [brand, setBrand] = useState('');
     const [countInStock, setCountInStock] = useState(0);
     const [category, setCategory] = useState('');
@@ -102,10 +106,21 @@ const ProductEditScreen = ({ history, match }) => {
     useEffect(() => {
         if (user && user.isAdmin) {
             dispatch(getSingleProduct(productID));
+            changeData(singleProduct);
         }
     }, [productID, updatedSuccess]);
 
     useEffect(() => {
+        changeData(singleProduct);
+    }, [singleProduct]);
+
+    useEffect(() => {
+        if (openOnSale === false) {
+            setOnSale(0);
+        }
+    }, [openOnSale]);
+
+    const changeData = (singleProduct) => {
         if (singleProduct) {
             setName(singleProduct.name);
             setPrice(singleProduct.price);
@@ -126,6 +141,7 @@ const ProductEditScreen = ({ history, match }) => {
             }
 
             setImage(singleProduct.image);
+            setSubImages(singleProduct.subImages);
             setBrand(singleProduct.brand);
             setCountInStock(singleProduct.countInStock);
             setCategory(singleProduct.category);
@@ -189,18 +205,10 @@ const ProductEditScreen = ({ history, match }) => {
                 setoperatingSystem(singleProduct.details.operatingSystem);
                 setmanufacturersWarantty(singleProduct.details.manufacturersWarantty);
             }
+        }    
+    }
 
-        }
-    }, [singleProduct])
-
-    useEffect(() => {
-        if (openOnSale === false) {
-            setOnSale(0);
-        }
-    }, [openOnSale]);
-
-    const submitHandler = (e) => {
-        e.preventDefault();
+    const submitHandler = () => {
         dispatch({ type: UPDATE_PRODUCT_AS_ADMIN_RESET });
 
         let headphoneDetail, gameDetail, tvsDetail, phoneDetail, details;
@@ -293,7 +301,14 @@ const ProductEditScreen = ({ history, match }) => {
         ));
     }
 
+    const onSubmitButtonClickHandler = (e) => {
+        e.preventDefault();
+        submitHandler();
+    }
+
     const uploadFileHandler = async (e) => {
+        e.preventDefault();
+
         const file = e.target.files[0];
         const formData = new FormData();
         formData.append('image', file);
@@ -305,8 +320,9 @@ const ProductEditScreen = ({ history, match }) => {
                     'Content-Type': 'multipart/form-data'
                 }
             }
+           
 
-            const { data } = await axios.post('/api/upload', formData, config);
+            const { data } = await axios.post(`/api/upload/${productID}`, formData, config);
 
             setImage(data);
             setUploading(false);
@@ -341,7 +357,7 @@ const ProductEditScreen = ({ history, match }) => {
             <h1>CREATE / EDIT PRODUCT :</h1>
             { error ? <Message variant="danger" content={error} /> : null }
             { loading ? <Loading /> : (
-            <Form onSubmit={submitHandler}>
+            <Form>
                 <Form.Group controlId='name'>
                     <Form.Label>Name :</Form.Label>
                     <Form.Control 
@@ -411,6 +427,29 @@ const ProductEditScreen = ({ history, match }) => {
                         onChange={(e) => setImage(e.target.value)} />
                     <Form.File id="image-file" label="Choose File" custom 
                     onChange={uploadFileHandler}></Form.File>
+                    {uploading ? <Loading /> : null}
+                </Form.Group>
+
+                <Form.Group controlId='subImages'>
+                    <Form.Label>Sub Images : </Form.Label>
+                    <ListGroup>
+                        {
+                            subImages.map((singleImage, index) => {
+                                return (
+                                <ListGroup.Item key={index}>
+                                    {singleImage}
+                                </ListGroup.Item>
+                                )
+                            })
+                        }
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Enter Your New Sub-Image URL" 
+                        value={newImage} 
+                        onChange={(e) => setNewImage(e.target.value)} />
+                    </ListGroup>
+                    <Form.File id="image-file" label="Choose File" custom 
+                    ></Form.File>
                     {uploading ? <Loading /> : null}
                 </Form.Group>
 
@@ -602,7 +641,11 @@ const ProductEditScreen = ({ history, match }) => {
                     onChange={(evt) => setDescription(evt.editor.getData())}
                 />
 
-                <Button type="submit" variant='primary' style={{marginTop: '1rem'}}>Update</Button>
+                <Button 
+                type="button" 
+                variant='primary' 
+                style={{marginTop: '1rem'}}
+                onClick={(e) => onSubmitButtonClickHandler(e)}>Update</Button>
             </Form>
             ) }
         </FormContainer>

@@ -74,7 +74,7 @@ const HomeScreen = () => {
                             <TopProduct 
                                 loading={topProductsLoading} 
                                 itemArray={topLaptops} 
-                                title="Our Top Tier MSI Laptops" 
+                                title="Our Top Tier Laptops" 
                                 itemLink="/product"
                                 listItemLink="/laptops"
                             />

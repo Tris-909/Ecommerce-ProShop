@@ -1,14 +1,17 @@
 import express from 'express';
 import path from 'path';
 import multer from 'multer';
+import Product from '../models/product.js';
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
     destination(req, file, cb) {
-        cb(null, 'uploads/')
+        cb(null, 'frontend/public/images')
     },
     filename(req, file, cb) {
-        cb(null, `${file.filename}-${Date.now()}${path.extname(file.originalname)}`)
+        console.log(file);
+        cb(null, `${file.originalname}`)
     }
 });
 
@@ -31,7 +34,11 @@ const upload = multer({
     }
 })
 
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/:id', upload.single('image'),async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    product.image = `/${req.file.path.replace(/\\/g, "/")}`;
+    await product.save();
+
     res.send(`/${req.file.path.replace(/\\/g, "/")}`)
 });
 
