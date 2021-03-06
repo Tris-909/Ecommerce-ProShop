@@ -130,6 +130,7 @@ app.post('/forgotpassword',async (req, res) => {
         };
 
         transport.sendMail(mailOptions);
+        res.status(200).send('SendEmail Successfully');
     });
 });
 
