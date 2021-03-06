@@ -138,7 +138,10 @@ app.get('/reset',async (req, res) => {
     const user = await User.find({
         resetPasswordToken: req.query.resetPasswordToken
     });
-    
+    console.log(req.query.resetPasswordToken);
+    console.log(user[0]);
+
+
     if (user === null) {
         res.json('Link have expired !');
     }
@@ -153,7 +156,7 @@ app.post('/updatePasswordViaEmail', async (req, res) => {
     const user = await User.findOne({
         email: req.body.email
     });
-    
+
     console.log(user);
 
     console.log(req.body.email);

@@ -29,7 +29,7 @@ const ResetPasswordAfterLink = ({ match, history }) => {
             } else {
                 setUpdate(false);
                 setIsLoading(false);
-                setError(false);
+                setError(true);
             }
         }).catch((err) => {
             console.log(err.data);
@@ -56,7 +56,7 @@ const ResetPasswordAfterLink = ({ match, history }) => {
                     setError(false);
                 } else {
                     setUpdate(false);
-                    setError(false);
+                    setError(true);
                 }
             }).catch((error) => {
                 console.log(error.data);
