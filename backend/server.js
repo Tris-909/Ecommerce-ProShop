@@ -168,12 +168,13 @@ app.put('/updatePasswordViaEmail', async (req, res) => {
         email: req.body.email
     });
 
+    console.log(req.body.email);
+    console.log(user);
+
     if (user === null) {
         res.status(404);
         throw new Error('This user is not existed');
     }
-    console.log(req.body.email);
-    console.log(user);
 
     user.password = req.body.password;
     // Hashing function is in model file
