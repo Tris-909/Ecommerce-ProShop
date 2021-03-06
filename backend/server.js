@@ -150,12 +150,13 @@ app.get('/reset',async (req, res) => {
     const user = await User.findOne({
         resetPasswordToken: req.query.resetPasswordToken
     });
-    console.log(`Tokens `, req.query.resetPasswordToken);
-    console.log(`Users `, user);
+
 
     if (user === null) {
         res.json('Link have expired !');
     }
+
+    console.log(user.email);
 
     res.status(200).send({
         email: user.email,
@@ -163,7 +164,7 @@ app.get('/reset',async (req, res) => {
     });
 });
 
-app.put('/updatePasswordViaEmail', async (req, res) => {
+app.post('/updatePasswordViaEmail', async (req, res) => {
     const user = await User.findOne({
         email: req.body.email
     });

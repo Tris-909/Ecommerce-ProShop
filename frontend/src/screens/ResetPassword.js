@@ -47,7 +47,7 @@ const ResetPasswordAfterLink = ({ match, history }) => {
         if (password !== confirmPassword) {
             setNotMatch(true);
         } else {
-            axios.put('/updatePasswordViaEmail', {
+            axios.post('/updatePasswordViaEmail', {
                 email: email,
                 password: password
             }).then((res) => {
