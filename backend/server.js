@@ -114,9 +114,10 @@ app.post('/forgotpassword',async (req, res) => {
 
     readHTMLFile(__dirname + '/backend/emails/forgetPassword.hbs', function(err, html) {
         let websitesLink;
+
         if (process.env.NODE_ENV === 'DEVELOPMENT') {
             websitesLink = `http://localhost:3000`;
-        } else {
+        } else if (process.env.NODE_ENV === 'production') {
             websitesLink = `https://proshop-tris.herokuapp.com`;
         }
 
@@ -147,11 +148,10 @@ app.post('/forgotpassword',async (req, res) => {
 
 app.get('/reset',async (req, res) => {
     const user = await User.findOne({
-        resetPasswordToken: req.query.resetPasswordToken,
-        resetPasswordToken: { $gt: Date.now() } 
+        resetPasswordToken: req.query.resetPasswordToken
     });
-
-    console.log(req.query.resetPasswordToken);
+    console.log(`Tokens `, req.query.resetPasswordToken);
+    console.log(`Users `, user);
 
     if (user === null) {
         res.json('Link have expired !');
@@ -172,6 +172,8 @@ app.put('/updatePasswordViaEmail', async (req, res) => {
         res.status(404);
         throw new Error('This user is not existed');
     }
+    console.log(req.body.email);
+    console.log(user);
 
     user.password = req.body.password;
     // Hashing function is in model file
