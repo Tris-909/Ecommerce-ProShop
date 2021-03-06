@@ -65,6 +65,7 @@ const ResetPasswordAfterLink = ({ match, history }) => {
     }
 
     if (error) {
+        console.log(error);
         return(
             <>
                 <Helmet title="Reset Password | Proshop" />
