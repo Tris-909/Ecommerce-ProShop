@@ -42,12 +42,12 @@ const ResetPasswordAfterLink = ({ match, history }) => {
         }
     }, [update]);
 
-    const updatePasswordViaEmail = (e) => {
+    const updatePasswordViaEmail = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
             setNotMatch(true);
         } else {
-            axios.post('/updatePasswordViaEmail', {
+            await axios.post('/updatePasswordViaEmail', {
                 email: email,
                 password: password
             }).then((res) => {
@@ -86,7 +86,7 @@ const ResetPasswordAfterLink = ({ match, history }) => {
             <FormContainer>
                   <Helmet title="Reset Password | Proshop" />
                   <Form onSubmit={updatePasswordViaEmail}>
-                    <h1> Reset Your Password : </h1>
+                    <h1> Reset Your Password For {email} : </h1>
                     {
                         notMatch ? (
                             <Alert variant="danger">
