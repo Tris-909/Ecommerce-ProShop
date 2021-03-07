@@ -28,7 +28,7 @@ const ForgotPasswordScreen = ({ location, history }) => {
             setShowError(true);
             setmessageFromServer('This email is not valid');
         } else {
-            axios.post('/forgotpassword', {email}).then((res) => {
+            axios.post('api/resetPassword/forgotpassword', {email}).then((res) => {
                 console.log(res.data);
                 if (res.data === 'email not in db') {
                     setShowError(true);

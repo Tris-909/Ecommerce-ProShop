@@ -2,6 +2,13 @@ import AsyncHandler from 'express-async-handler';
 import User from '../models/user.js';
 import generateToken from '../utils/generateToken.js';
 
+//? Forgot password
+import crypto from 'crypto';
+import handlebars  from 'handlebars';
+import * as fs from 'fs';
+import nodemailer from 'nodemailer';
+import sibTransport from 'nodemailer-sendinblue-transport';
+
 //?   @description : Auth user & get token 
 //?   @method : POST /api/users/login
 //?   @access : public 
@@ -388,6 +395,114 @@ const getUserCartList = AsyncHandler(async (req, res) => {
     }
 });
 
+//?   @description : POST send email to user gmail that contains a token
+//?   @method : POST /api/resetPassword/forgotpassword
+//?   @access : public
+const SendForgotPasswordEmail = AsyncHandler(async (req, res) => {
+    if (req.body.email === '') {
+        res.status(400).send('email required');
+    }
+
+    const user = await User.findOne({
+        email: req.body.email
+    });
+
+    if (user === null) {
+        res.status(403).send('email not in db');
+    }
+
+    const token = crypto.randomBytes(20).toString('hex');
+
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000;
+
+    await user.save();
+
+    const transport = nodemailer.createTransport(sibTransport({
+        apiKey: process.env.SENDIBLUE_API_V2
+    }));
+
+    var readHTMLFile = function(path, callback) {
+        fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+            if (err) {
+                throw err;
+                callback(err);
+            }
+            else {
+                callback(null, html);
+            }
+        });
+    };
+
+    readHTMLFile(__dirname + '/backend/emails/forgetPassword.hbs', function(err, html) {
+        let websitesLink;
+
+        if (process.env.NODE_ENV === 'DEVELOPMENT') {
+            websitesLink = `http://localhost:3000`;
+        } else if (process.env.NODE_ENV === 'production') {
+            websitesLink = `https://proshop-tris.herokuapp.com`;
+        }
+
+        var template = handlebars.compile(html);
+        var replacements = {
+             username: `${user.email}`,
+             websitesLink: `${websitesLink}`,
+             token: `${token}`
+        };
+        var htmlToSend = template(replacements);
+
+        const mailOptions = {
+            from: 'tranminhtri9090@gmail.com',
+            to: `${user.email}`,
+            subject: 'Link to Reset Your Password',
+            html: htmlToSend
+        };
+
+        transport.sendMail(mailOptions);
+        res.status(200).send('SendEmail Successfully');
+    });
+});
+
+//?   @description : GET a user based on the given token
+//?   @method : GET /api/resetPassword/:resetPasswordToken
+//?   @access : public
+const MatchEmailByToken = AsyncHandler(async (req, res) => {
+    const user = await User.findOne({
+        resetPasswordToken: req.params.resetPasswordToken
+    });
+
+    if (user === null) {
+        res.json('Link have expired !');
+    }
+
+    res.status(200).send({
+        email: user.email,
+        message: 'password reset link a-ok'
+    });
+});
+
+//?   @description : POST change the password of the current user
+//?   @method : POST /api/resetPassword/updatePasswordViaEmail
+//?   @access : public
+const UpdatePasswordViaEmail = AsyncHandler(async (req, res) => {
+    const user = await User.findOne({
+        email: req.body.email
+    });
+
+    if (user === null) {
+        res.status(404);
+        throw new Error('This user is not existed');
+    }
+
+    user.password = req.body.password;
+    // Hashing function is in model file
+    await user.save();
+
+    res.status(200).send({
+        message: 'password updated'
+    });
+});
+
 export {
     login,
     getUserProfile,
@@ -407,5 +522,9 @@ export {
 
     addItemToCart,
     removeItemFromCart,
-    getUserCartList
+    getUserCartList,
+
+    SendForgotPasswordEmail,
+    MatchEmailByToken,
+    UpdatePasswordViaEmail
 }

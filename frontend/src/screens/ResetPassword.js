@@ -16,7 +16,7 @@ const ResetPasswordAfterLink = ({ match, history }) => {
     const [notMatch, setNotMatch] = useState(false);
 
     useEffect(() => {
-        axios.get(`/resetPassword/${match.params.token}`).then((res) => {
+        axios.get(`api/resetPassword/${match.params.token}`).then((res) => {
             console.log(res);
             if (res.data.message === 'password reset link a-ok') {
                 setEmail(res.data.email);
@@ -44,7 +44,7 @@ const ResetPasswordAfterLink = ({ match, history }) => {
         if (password !== confirmPassword) {
             setNotMatch(true);
         } else {
-            await axios.post('/updatePasswordViaEmail', {
+            await axios.post('api/resetPassword/updatePasswordViaEmail', {
                 email: email,
                 password: password
             }).then((res) => {
@@ -70,7 +70,7 @@ const ResetPasswordAfterLink = ({ match, history }) => {
                 <Row className="py-3">
                     <Col>
                         <Link to={'/forgotpassword'}> 
-                            Click here to comback to Forgot Password Screen again 
+                            Click here to comeback to Forgot Password Screen again 
                         </Link>
                     </Col>
                 </Row>
