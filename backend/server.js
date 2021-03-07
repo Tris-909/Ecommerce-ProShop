@@ -134,20 +134,17 @@ app.post('/forgotpassword',async (req, res) => {
     });
 });
 
-app.get(`/resetPassword`,async (req, res) => {
-    const user = await User.find({
-        resetPasswordToken: req.query.resetPasswordToken
+app.get(`/resetPassword/:resetPasswordToken`, async (req, res) => {
+    const user = await User.findOne({
+        resetPasswordToken: req.params.resetPasswordToken
     });
-    console.log(req.query.resetPasswordToken);
-    console.log(user[0]);
-
 
     if (user === null) {
         res.json('Link have expired !');
     }
 
     res.status(200).send({
-        email: user[0].email,
+        email: user.email,
         message: 'password reset link a-ok'
     });
 });
