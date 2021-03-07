@@ -46,6 +46,7 @@ const ProductEditScreen = ({ history, match }) => {
     const [description, setDescription] = useState('');
     const [uploading, setUploading] = useState(false);
     const [subUploading, setSubUploading] = useState(false);
+    const [productStatusDefault, setProductStatusDefault] = useState(false);
 
     //! LAPTOP
     const [displaySizeInches, setdisplaySizeInches] = useState('');
@@ -385,10 +386,15 @@ const ProductEditScreen = ({ history, match }) => {
             setNewProduct(!newProduct);
             setOpenOnSale(false);
             setPreOrder(false);
-        } else {
+        } else if (radioType === 'PREORDER') {
             setPreOrder(!preOrder);
             setNewProduct(false);
             setOpenOnSale(false);
+        } else {
+            setProductStatusDefault(true);
+            setNewProduct(false);
+            setOpenOnSale(false);
+            setPreOrder(false);
         }
     }
 
@@ -460,6 +466,14 @@ const ProductEditScreen = ({ history, match }) => {
                         value={preOrder} 
                         checked={preOrder === true}
                         onChange={() => radioButtonChangeHandler('PREORDER')} />   
+
+                    <Form.Check 
+                        label="Products status will be set to default"
+                        type="radio" 
+                        name="productStatus" 
+                        value={productStatusDefault} 
+                        checked={productStatusDefault === true}
+                        onChange={() => radioButtonChangeHandler('DEFAULT')} />   
                 </Form.Group>
 
                 <Form.Group controlId='image'>
