@@ -134,7 +134,7 @@ app.post('/forgotpassword',async (req, res) => {
     });
 });
 
-app.get('/reset',async (req, res) => {
+app.get(`/resetPassword`,async (req, res) => {
     const user = await User.find({
         resetPasswordToken: req.query.resetPasswordToken
     });

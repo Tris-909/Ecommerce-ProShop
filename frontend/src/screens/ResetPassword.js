@@ -16,11 +16,12 @@ const ResetPasswordAfterLink = ({ match, history }) => {
     const [notMatch, setNotMatch] = useState(false);
 
     useEffect(() => {
-        axios.get('/reset', {
+        axios.get('/resetPassword', {
             params: {
                 resetPasswordToken: match.params.token
             }
         }).then((res) => {
+            console.log(res);
             if (res.data.message === 'password reset link a-ok') {
                 setEmail(res.data.email);
                 setUpdate(false);
