@@ -16,7 +16,8 @@ import {
     createProduct, 
     updateProduct,
     createReview ,
-    deleteReviewProduct
+    deleteReviewProduct,
+    deleteASubImageOfTheProduct
 } from '../controller/productController.js';
 import { getListOfProducts } from '../controller/ProductFilters/productFilters.js';
 import { getTopProducts } from '../controller/HomeScreenController/topProducts.js';
@@ -25,7 +26,7 @@ import { getAlsoLikeProductsBasedOnCategory } from '../controller/AProductScreen
 import { protect } from '../middlewares/auth.js';
 import { admin } from '../middlewares/admin.js';
 
-
+router.route('/deleteSubImage/:productID').post(protect, admin, deleteASubImageOfTheProduct);
 router.route('/toptier').get(getTopProducts);
 router.route('/alsolike').get(getAlsoLikeProductsBasedOnCategory);
 router.route('/carousel').get(getTopRatedProducts);

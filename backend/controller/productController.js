@@ -485,6 +485,24 @@ const deleteReviewProduct = AsyncHandler(async(req, res) => {
     }
 });
 
+
+//? Create A review
+//? POST /api/products/deleteSubImage/:productID?ImageIndex=
+//? admin / private
+
+const deleteASubImageOfTheProduct = AsyncHandler( async(req, res) => {
+    const product = await Product.findById(req.params.productID);
+
+    if (!product) {
+        res.status(404).send('Cant find product based on ID');
+    }
+
+    product.subImages.splice(req.query.ImageIndex);
+    await product.save();
+
+    res.status(200).send('Delete Sub-image successfully');
+});
+
 export {
     getProducts,
     getProductById,
@@ -501,5 +519,6 @@ export {
     createProduct,
     updateProduct,
     createReview,
-    deleteReviewProduct
+    deleteReviewProduct,
+    deleteASubImageOfTheProduct
 }

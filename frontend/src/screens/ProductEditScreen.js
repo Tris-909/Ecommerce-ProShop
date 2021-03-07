@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { Form, Button, InputGroup, ListGroup } from 'react-bootstrap';
+import { Form, Button, ListGroup } from 'react-bootstrap';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import FormContainer from '../components/FormContainer';
@@ -16,14 +17,18 @@ import PhoneInput from '../components/ProductDetail/PhoneTable/PhoneInput';
 import LaptopInput from '../components/ProductDetail/LaptopTable/LaptopInput';
 import CKEditor from 'ckeditor4-react';
 
+const ListGroupInnerContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
 const ProductEditScreen = ({ history, match }) => {
     const dispatch = useDispatch();
     const productID = match.params.id;
     const { singleProduct, loading, error } = useSelector(state => state.singleProduct);
     const { success: updatedSuccess, loading: updatedLoading, error: updatedError } = useSelector(state => state.updatedProduct);
     const { user } = useSelector(state => state.user);
-
-    const [firstTime, setFirstTime] = useState(true);
 
     //! ALL PRODUCT 
     const [name, setName] = useState('');
@@ -40,6 +45,7 @@ const ProductEditScreen = ({ history, match }) => {
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [uploading, setUploading] = useState(false);
+    const [subUploading, setSubUploading] = useState(false);
 
     //! LAPTOP
     const [displaySizeInches, setdisplaySizeInches] = useState('');
@@ -319,8 +325,7 @@ const ProductEditScreen = ({ history, match }) => {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }
-           
+            }  
 
             const { data } = await axios.post(`/api/upload/${productID}`, formData, config);
 
@@ -330,6 +335,45 @@ const ProductEditScreen = ({ history, match }) => {
             console.log(error);
             setUploading(false);
         }
+    }
+
+    const uploadSubImageFileHandler = async (e) => {
+        e.preventDefault();
+
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        setSubUploading(true);
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }  
+
+            const { data } = await axios.post(`/api/upload/sub/${productID}`, formData, config);
+
+            setNewImage(data);
+            setSubUploading(false);
+        } catch(error) {
+            console.log(error);
+            setSubUploading(false);
+        }
+    }
+
+    const deleteSubImageHandler = async (e, index) => {
+        e.preventDefault();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        }
+        await axios.post(`/api/products/deleteSubImage/${productID}?ImageIndex=${index}`, {}, config);
+        dispatch(getSingleProduct(productID));
+        changeData(singleProduct);
     }
 
     const radioButtonChangeHandler = (radioType) => {
@@ -437,7 +481,12 @@ const ProductEditScreen = ({ history, match }) => {
                             subImages.map((singleImage, index) => {
                                 return (
                                 <ListGroup.Item key={index}>
-                                    {singleImage}
+                                    <ListGroupInnerContainer>
+                                        <div>{singleImage}</div>
+                                        <i className="fas fa-times"
+                                        style={{cursor: 'pointer'}}
+                                        onClick={(e) => deleteSubImageHandler(e, index)}></i>
+                                    </ListGroupInnerContainer>
                                 </ListGroup.Item>
                                 )
                             })
@@ -449,8 +498,8 @@ const ProductEditScreen = ({ history, match }) => {
                         onChange={(e) => setNewImage(e.target.value)} />
                     </ListGroup>
                     <Form.File id="image-file" label="Choose File" custom 
-                    ></Form.File>
-                    {uploading ? <Loading /> : null}
+                    onChange={uploadSubImageFileHandler}></Form.File>
+                    {subUploading ? <Loading /> : null}
                 </Form.Group>
 
                 <Form.Group controlId='brand'>

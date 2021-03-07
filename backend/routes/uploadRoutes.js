@@ -34,6 +34,15 @@ const upload = multer({
     }
 })
 
+router.post('/sub/:id',  upload.single('image'),async (req, res) => {
+    const product = await Product.findById(req.params.id);
+
+    product.subImages.push(`/${req.file.path.replace(/\\/g, "/")}`);
+    await product.save();
+
+    res.send(`/${req.file.path.replace(/\\/g, "/")}`)
+});
+
 router.post('/:id', upload.single('image'),async (req, res) => {
     const product = await Product.findById(req.params.id);
     product.image = `/${req.file.path.replace(/\\/g, "/")}`;
