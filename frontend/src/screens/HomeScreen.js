@@ -10,6 +10,7 @@ import {getTopProductsForHomeScreen} from '../redux/actions/topProductsAction';
 
 //TODO: Components
 import TopProduct from '../components/TopProduct (Home)/TopProduct';
+import TopProductWithImages from '../components/TopProduct (Home)/TopProductWithImages';
 import CarouselSection from '../components/Carousel';
 import Helmet from '../components/Helmet';
 
@@ -127,6 +128,14 @@ const HomeScreen = () => {
                                 listItemLink="/game"
                             />
                         ) : null  
+                    }
+
+                    {
+                        topGames.length !== 0 ? (
+                            <TopProductWithImages 
+                                itemArray={topGames}
+                            />
+                        ) : null
                     }
                 </>
             )
