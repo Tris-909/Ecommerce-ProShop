@@ -33,8 +33,6 @@ const YourCartText = styled.div`
     font-size: 0.7rem;
     font-weight: 700;
     margin-left: 8px;
-    
-
 
     @media (max-width: 990px) {
         display: inline;

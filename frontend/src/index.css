@@ -60,9 +60,18 @@ h3 {
   position: relative !important;
 }
 
+.BrainhubCarousel__arrows {
+  background-color: black !important;
+}
+
 .BrainhubCarousel__dots {
   justify-content: start !important;
   margin-left: 15% !important;
+}
+
+.responsiveGameContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 320px) {
@@ -74,6 +83,14 @@ h3 {
 @media (max-width: 1300px) {
   .carousel-caption {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .responsiveGameContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 

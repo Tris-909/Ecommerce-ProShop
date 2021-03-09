@@ -37,6 +37,7 @@ export interface SingleTopProduct {
 
 export interface SingleTopProductWithImages {
     _id: string,
+    image: string,
     subImages: string,
     name: string,
     price: number,

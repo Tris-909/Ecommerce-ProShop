@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getCarouselProducts} from '../redux/actions/productActions';
 import {getWishList} from '../redux/actions/wishListActions';
 import {getAllItemsCart} from '../redux/actions/cartActions';
-import {getTopProductsForHomeScreen} from '../redux/actions/topProductsAction';
+import {getTopProductsForHomeScreen, getTopProductsWithImages} from '../redux/actions/topProductsAction';
 
 //TODO: Components
 import TopProduct from '../components/TopProduct (Home)/TopProduct';
@@ -22,10 +22,15 @@ const HomeScreen = () => {
     const { 
         loading: topProductsLoading, 
         topPhones, 
+        topPhonesWithImages,
         topLaptops, 
+        topLaptopsWithImages,
         topTVs, 
+        topTVsWithImages,
         topHeadphones, 
+        topHeadphonesWithImages,
         topGames, 
+        topGamesWithImages,
         error } = useSelector(state => state.topProductsReducer);
     const { success: addItemToWishListSuccess} = useSelector(state => state.addItemToWishList);
     const { success: removeItemFromWishListSuccess} = useSelector(state => state.removeItemFromWishList);
@@ -37,6 +42,7 @@ const HomeScreen = () => {
         dispatch(getTopProductsForHomeScreen('phones'));
         dispatch(getTopProductsForHomeScreen('headphone'));
         dispatch(getTopProductsForHomeScreen('game'));
+        dispatch(getTopProductsWithImages('game'))
 
     }, [dispatch])
 
@@ -119,24 +125,25 @@ const HomeScreen = () => {
                     }
 
                     {
+                        topGamesWithImages.length !== 0 ? (
+                            <TopProductWithImages 
+                                itemArray={topGamesWithImages}
+                            />
+                        ) : null
+                    }
+
+                    {
                         topGames.length !== 0 ? (
                             <TopProduct 
                                 loading={topProductsLoading}
                                 itemArray={topGames}
-                                title="For Game Lovers"
                                 itemLink="/product"
                                 listItemLink="/game"
                             />
                         ) : null  
                     }
 
-                    {
-                        topGames.length !== 0 ? (
-                            <TopProductWithImages 
-                                itemArray={topGames}
-                            />
-                        ) : null
-                    }
+
                 </>
             )
         }

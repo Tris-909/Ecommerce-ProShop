@@ -36,11 +36,12 @@ const getTopProductsWithImagesForSideCarousel = AsyncHandler(async (req, res) =>
 
     const topProductsWithImages = await Product.find({category: category }).sort({ price: -1 }).select({
         "_id": 1,
+        "image": 1,
         "subImages": 1,
         "name": 1,
         "price": 1,
         "category": 1
-    }).limit(3);
+    }).limit(4);
 
     if (topProductsWithImages) {
         res.status(200).send(topProductsWithImages);

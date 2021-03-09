@@ -118,6 +118,7 @@ const PreOrderTag = styled.div`
 const ImageContainer = styled.div`
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 1rem;
 `;
 
 const TextBold = styled.div`

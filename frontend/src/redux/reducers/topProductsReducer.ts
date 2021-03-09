@@ -32,6 +32,7 @@ interface topProduct {
 
 interface topProductWithImages {
     _id: string,
+    image: string,
     subImages: string[],
     name: string,
     price: number,
@@ -90,7 +91,7 @@ export const topProductsReducer = (state = initialTopProducts, action:Action) =>
                 return {
                     ...state,
                     loading: false,
-                    topPhonesWithImages: [...action.payload]
+                    topPhones: [...action.payload]
                 }
             }
             break;
@@ -99,7 +100,7 @@ export const topProductsReducer = (state = initialTopProducts, action:Action) =>
                 return {
                     ...state,
                     loading: false,
-                    topPhones: [...action.payload]
+                    topPhonesWithImages: [...action.payload]
                 }
             }
             break;

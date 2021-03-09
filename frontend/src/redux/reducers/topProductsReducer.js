@@ -41,12 +41,12 @@ var topProductsReducer = function (state, action) {
             return __assign(__assign({}, state), { loading: true });
         case actionTypes_1.GET_TOP_PHONES_SUCCESS:
             if (action.payload instanceof Array) {
-                return __assign(__assign({}, state), { loading: false, topPhonesWithImages: __spreadArrays(action.payload) });
+                return __assign(__assign({}, state), { loading: false, topPhones: __spreadArrays(action.payload) });
             }
             break;
         case actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_PHONE_SUCCESS:
             if (action.payload instanceof Array) {
-                return __assign(__assign({}, state), { loading: false, topPhones: __spreadArrays(action.payload) });
+                return __assign(__assign({}, state), { loading: false, topPhonesWithImages: __spreadArrays(action.payload) });
             }
             break;
         case actionTypes_1.GET_TOP_LAPTOPS_SUCCESS:
