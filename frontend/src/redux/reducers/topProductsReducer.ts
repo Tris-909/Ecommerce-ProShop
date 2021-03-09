@@ -7,6 +7,12 @@ import {
     GET_TOP_HEADPHONE_SUCCESS,
     GET_TOP_GAMES_SUCCESS,
 
+    GET_TOP_PRODUCTS_WITH_IMAGES_LAPTOPS_SUCCESS,
+    GET_TOP_PRODUCTS_WITH_IMAGES_TVS_SUCCESS,
+    GET_TOP_PRODUCTS_WITH_IMAGES_PHONE_SUCCESS,
+    GET_TOP_PRODUCTS_WITH_IMAGES_HEADPHONE_SUCCESS,
+    GET_TOP_PRODUCTS_WITH_IMAGES_GAME_SUCCESS,
+
     GET_TOP_PRODUCTS_FAIL
 } from '../actions/actionTypes';
 import { Action } from './interfaces';
@@ -24,22 +30,50 @@ interface topProduct {
     preOrder?: boolean
 }
 
+interface topProductWithImages {
+    _id: string,
+    subImages: string[],
+    name: string,
+    price: number,
+    category: string
+}
+
 interface initialProducts {
     topPhones: topProduct[],
+    topPhonesWithImages: topProductWithImages[],
+
     topLaptops: topProduct[],
+    topLaptopsWithImages: topProductWithImages[],
+
     topTVs: topProduct[],
+    topTVsWithImages: topProductWithImages[],
+
     topHeadphones: topProduct[],
+    topHeadphonesWithImages: topProductWithImages[],
+
     topGames: topProduct[],
+    topGamesWithImages: topProductWithImages[],
+
     loading: boolean,
     error: null | string
 }
 
 const initialTopProducts: initialProducts = {
     topPhones: [],
+    topPhonesWithImages: [],
+
     topLaptops: [],
+    topLaptopsWithImages: [],
+
     topTVs: [],
+    topTVsWithImages: [],
+
     topHeadphones: [],
+    topHeadphonesWithImages: [],
+
     topGames: [],
+    topGamesWithImages: [],
+
     loading: false,
     error: null
 }
@@ -52,6 +86,15 @@ export const topProductsReducer = (state = initialTopProducts, action:Action) =>
                 loading: true
             }
         case GET_TOP_PHONES_SUCCESS:
+            if (action.payload instanceof Array) {
+                return {
+                    ...state,
+                    loading: false,
+                    topPhonesWithImages: [...action.payload]
+                }
+            }
+            break;
+        case GET_TOP_PRODUCTS_WITH_IMAGES_PHONE_SUCCESS:
             if (action.payload instanceof Array) {
                 return {
                     ...state,
@@ -69,12 +112,30 @@ export const topProductsReducer = (state = initialTopProducts, action:Action) =>
                 }         
             }
             break;
+        case GET_TOP_PRODUCTS_WITH_IMAGES_LAPTOPS_SUCCESS:
+            if (action.payload instanceof Array) {
+                return {
+                    ...state,
+                    loading: false,
+                    topLaptopsWithImages: [...action.payload]
+                }
+            }
+            break;
         case GET_TOP_TVS_SUCCESS:
             if (action.payload instanceof Array) {
                 return {
                     ...state,
                     loading: false,
                     topTVs: [...action.payload] 
+                }
+            }
+            break;
+        case GET_TOP_PRODUCTS_WITH_IMAGES_TVS_SUCCESS:
+            if (action.payload instanceof Array) {
+                return {
+                    ...state,
+                    loading: false,
+                    topTVsWithImages: [...action.payload]
                 }
             }
             break;
@@ -87,12 +148,30 @@ export const topProductsReducer = (state = initialTopProducts, action:Action) =>
                 }
             }
             break;
+        case GET_TOP_PRODUCTS_WITH_IMAGES_HEADPHONE_SUCCESS:
+            if (action.payload instanceof Array) {
+                return {
+                    ...state,
+                    loading: false,
+                    topHeadphonesWithImages: [...action.payload]
+                }
+            }
+            break;
         case GET_TOP_GAMES_SUCCESS:
             if (action.payload instanceof Array) {
                 return {
                     ...state,
                     loading: false,
                     topGames: [...action.payload]
+                }
+            }
+            break;
+        case GET_TOP_PRODUCTS_WITH_IMAGES_GAME_SUCCESS:
+            if (action.payload instanceof Array) {
+                return {
+                    ...state,
+                    loading: false,
+                    topGamesWithImages: [...action.payload]
                 }
             }
             break;

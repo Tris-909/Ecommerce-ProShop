@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getTopProductsForHomeScreen = void 0;
+exports.getTopProductsWithImages = exports.getTopProductsForHomeScreen = void 0;
 var actionTypes_1 = require("./actionTypes");
 var axios_1 = require("axios");
 var getTopProductsForHomeScreen = function (category) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
@@ -102,3 +102,66 @@ var getTopProductsForHomeScreen = function (category) { return function (dispatc
     });
 }); }; };
 exports.getTopProductsForHomeScreen = getTopProductsForHomeScreen;
+var getTopProductsWithImages = function (category) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
+    var data, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                dispatch({
+                    type: actionTypes_1.GET_TOP_PRODUCTS_REQUEST
+                });
+                return [4 /*yield*/, axios_1["default"].get('/api/products/toptierwithsubimages', {
+                        params: {
+                            category: category
+                        }
+                    })];
+            case 1:
+                data = (_a.sent()).data;
+                switch (data[0].category) {
+                    case 'laptops':
+                        dispatch({
+                            type: actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_LAPTOPS_SUCCESS,
+                            payload: data
+                        });
+                        break;
+                    case 'tvs':
+                        dispatch({
+                            type: actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_TVS_SUCCESS,
+                            payload: data
+                        });
+                        break;
+                    case 'phones':
+                        dispatch({
+                            type: actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_PHONE_SUCCESS,
+                            payload: data
+                        });
+                        break;
+                    case 'headphone':
+                        dispatch({
+                            type: actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_HEADPHONE_SUCCESS,
+                            payload: data
+                        });
+                        break;
+                    case 'game':
+                        dispatch({
+                            type: actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_GAME_SUCCESS,
+                            payload: data
+                        });
+                        break;
+                    default:
+                        return [2 /*return*/];
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                dispatch({
+                    type: actionTypes_1.GET_TOP_PRODUCTS_FAIL,
+                    payload: error_2.response && error_2.response.data.message ? error_2.response.data : null
+                });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); }; };
+exports.getTopProductsWithImages = getTopProductsWithImages;

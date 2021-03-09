@@ -38,7 +38,8 @@ const getTopProductsWithImagesForSideCarousel = AsyncHandler(async (req, res) =>
         "_id": 1,
         "subImages": 1,
         "name": 1,
-        "price": 1
+        "price": 1,
+        "category": 1
     }).limit(3);
 
     if (topProductsWithImages) {

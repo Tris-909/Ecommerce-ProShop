@@ -35,6 +35,14 @@ export interface SingleTopProduct {
     category: string
 }
 
+export interface SingleTopProductWithImages {
+    _id: string,
+    subImages: string,
+    name: string,
+    price: number,
+    category: string
+}
+
 export interface User {
     _id: string,
     name: string,

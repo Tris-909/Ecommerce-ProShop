@@ -22,10 +22,15 @@ exports.topProductsReducer = void 0;
 var actionTypes_1 = require("../actions/actionTypes");
 var initialTopProducts = {
     topPhones: [],
+    topPhonesWithImages: [],
     topLaptops: [],
+    topLaptopsWithImages: [],
     topTVs: [],
+    topTVsWithImages: [],
     topHeadphones: [],
+    topHeadphonesWithImages: [],
     topGames: [],
+    topGamesWithImages: [],
     loading: false,
     error: null
 };
@@ -36,6 +41,11 @@ var topProductsReducer = function (state, action) {
             return __assign(__assign({}, state), { loading: true });
         case actionTypes_1.GET_TOP_PHONES_SUCCESS:
             if (action.payload instanceof Array) {
+                return __assign(__assign({}, state), { loading: false, topPhonesWithImages: __spreadArrays(action.payload) });
+            }
+            break;
+        case actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_PHONE_SUCCESS:
+            if (action.payload instanceof Array) {
                 return __assign(__assign({}, state), { loading: false, topPhones: __spreadArrays(action.payload) });
             }
             break;
@@ -44,9 +54,19 @@ var topProductsReducer = function (state, action) {
                 return __assign(__assign({}, state), { loading: false, topLaptops: __spreadArrays(action.payload) });
             }
             break;
+        case actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_LAPTOPS_SUCCESS:
+            if (action.payload instanceof Array) {
+                return __assign(__assign({}, state), { loading: false, topLaptopsWithImages: __spreadArrays(action.payload) });
+            }
+            break;
         case actionTypes_1.GET_TOP_TVS_SUCCESS:
             if (action.payload instanceof Array) {
                 return __assign(__assign({}, state), { loading: false, topTVs: __spreadArrays(action.payload) });
+            }
+            break;
+        case actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_TVS_SUCCESS:
+            if (action.payload instanceof Array) {
+                return __assign(__assign({}, state), { loading: false, topTVsWithImages: __spreadArrays(action.payload) });
             }
             break;
         case actionTypes_1.GET_TOP_HEADPHONE_SUCCESS:
@@ -54,9 +74,19 @@ var topProductsReducer = function (state, action) {
                 return __assign(__assign({}, state), { loading: false, topHeadphones: __spreadArrays(action.payload) });
             }
             break;
+        case actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_HEADPHONE_SUCCESS:
+            if (action.payload instanceof Array) {
+                return __assign(__assign({}, state), { loading: false, topHeadphonesWithImages: __spreadArrays(action.payload) });
+            }
+            break;
         case actionTypes_1.GET_TOP_GAMES_SUCCESS:
             if (action.payload instanceof Array) {
                 return __assign(__assign({}, state), { loading: false, topGames: __spreadArrays(action.payload) });
+            }
+            break;
+        case actionTypes_1.GET_TOP_PRODUCTS_WITH_IMAGES_GAME_SUCCESS:
+            if (action.payload instanceof Array) {
+                return __assign(__assign({}, state), { loading: false, topGamesWithImages: __spreadArrays(action.payload) });
             }
             break;
         case actionTypes_1.GET_TOP_PRODUCTS_FAIL:
