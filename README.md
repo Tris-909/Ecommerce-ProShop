@@ -4,6 +4,9 @@
       - Account : sb-uj3sb3898726@personal.example.com 
       - Password : ZRy:}9n+
 
+## Can you clone this project ? 
+- Sorry but I don't have a plan on sharing this project even thou it's on Github as public mode. Even if you download the source code, You won't be able to run this project correctly because you don't have access to many different env variables like Paypal, SendGrid, Databases keys... and more.
+
 ## What is this project about ?
 - This is an e-commerce websites to sell electronics that I have built to demonstrate my skills as a developer. I got inspired by E-commerce websites like JB-Hifi so I decided to build an e-commerce websites that looks similar to them.
 
